@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, LightbulbIcon, BadgeDollarSign, BarChart3, Upload, Shield, Calculator } from "lucide-react";
+import { ArrowRight, LightbulbIcon, BadgeDollarSign, BarChart3, Upload, Shield, Calculator, Linkedin, Mail } from "lucide-react";
 
 const Index = () => {
   return (
@@ -153,6 +153,10 @@ const Index = () => {
               <p className="max-w-md">
                 AI-powered energy management system that helps you understand and optimize your energy usage.
               </p>
+              <p className="mt-2 text-[#C3FF44] flex items-center gap-2">
+                <Mail className="h-5 w-5" />
+                info@kwattz.com
+              </p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
               <div>
@@ -184,8 +188,17 @@ const Index = () => {
             <p>&copy; {new Date().getFullYear()} kWattz. All rights reserved.</p>
             <div className="mt-4 md:mt-0">
               <ul className="flex justify-center md:justify-end space-x-6">
+                <li>
+                  <a 
+                    href="https://www.linkedin.com/kwattz" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="hover:text-[#C3FF44] flex items-center gap-2"
+                  >
+                    <Linkedin className="h-5 w-5" /> LinkedIn
+                  </a>
+                </li>
                 <li><a href="#" className="hover:text-[#C3FF44]">Twitter</a></li>
-                <li><a href="#" className="hover:text-[#C3FF44]">LinkedIn</a></li>
                 <li><a href="#" className="hover:text-[#C3FF44]">Facebook</a></li>
               </ul>
             </div>
