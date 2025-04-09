@@ -1,0 +1,12 @@
+
+{
+  "name": "bill-analyzer",
+  "version": "1.0.0",
+  "description": "Analyzes electricity bills using Azure's Computer Vision API",
+  "main": "index.js",
+  "dependencies": {
+    "@azure/cognitiveservices-computervision": "^8.2.0",
+    "@azure/ms-rest-js": "^2.6.0",
+    "parse-multipart": "^1.0.4"
+  }
+}

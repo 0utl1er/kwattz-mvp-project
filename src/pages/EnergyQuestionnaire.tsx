@@ -36,8 +36,11 @@ import {
   Zap, 
   MessageSquare, 
   User,
-  Upload 
+  Upload,
+  Loader2
 } from "lucide-react";
+import FileUpload from "@/components/FileUpload";
+import { useAnalyzeBill } from "@/hooks/use-analyze-bill";
 
 const formSchema = z.object({
   // Personal Info
@@ -138,6 +141,8 @@ const EnergyQuestionnaire = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeTab, setActiveTab] = useState("personal");
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const { analyzeBill, isAnalyzing, analysisResult, error } = useAnalyzeBill();
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -148,6 +153,25 @@ const EnergyQuestionnaire = () => {
       }
     };
   }, [formSubmitted]);
+
+  useEffect(() => {
+    if (analysisResult) {
+      toast({
+        title: "Bill analysis complete",
+        description: "We've successfully analyzed your bill and saved the information.",
+      });
+      
+      navigate("/dashboard", { replace: true });
+    }
+    
+    if (error) {
+      toast({
+        title: "Bill analysis failed",
+        description: error,
+        variant: "destructive",
+      });
+    }
+  }, [analysisResult, error, navigate]);
   
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -171,16 +195,19 @@ const EnergyQuestionnaire = () => {
     try {
       console.log("Form submitted with values:", values);
       
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      setFormSubmitted(true);
-      
-      toast({
-        title: "Questionnaire submitted",
-        description: "Thanks for sharing your energy usage information!",
-      });
-      
-      navigate("/dashboard", { replace: true });
+      if (uploadedFile) {
+        await analyzeBill(uploadedFile, values);
+      } else {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        setFormSubmitted(true);
+        
+        toast({
+          title: "Questionnaire submitted",
+          description: "Thanks for sharing your energy usage information!",
+        });
+        
+        navigate("/dashboard", { replace: true });
+      }
     } catch (error) {
       console.error("Error submitting questionnaire:", error);
       toast({
@@ -191,6 +218,14 @@ const EnergyQuestionnaire = () => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleFileUpload = (file: File) => {
+    setUploadedFile(file);
+    toast({
+      title: "File uploaded",
+      description: `${file.name} is ready for submission.`,
+    });
   };
 
   const nextTab = (tab: string) => {
@@ -1043,6 +1078,27 @@ const EnergyQuestionnaire = () => {
                       </FormItem>
                     )}
                   />
+
+                  <div className="space-y-4 mt-6">
+                    <div className="border border-dashed border-white/20 rounded-lg p-6">
+                      <h3 className="text-lg font-medium text-white mb-4">Upload Your Electricity Bill</h3>
+                      <p className="text-gray-300 mb-4">
+                        Our AI will analyze your bill to provide personalized insights and savings recommendations.
+                      </p>
+                      
+                      <FileUpload 
+                        onFileSelected={handleFileUpload} 
+                        acceptedFileTypes=".pdf,.jpg,.jpeg,.png"
+                        maxSizeMB={5}
+                      />
+                      
+                      {uploadedFile && (
+                        <div className="mt-3 flex items-center text-sm text-green-400">
+                          <p>File ready: {uploadedFile.name}</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                   
                   <div className="flex justify-between mt-4">
                     <Button 
@@ -1055,11 +1111,20 @@ const EnergyQuestionnaire = () => {
                     </Button>
                     <Button 
                       type="submit"
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || isAnalyzing}
                       className="bg-[#C3FF44] text-[#111F54] hover:bg-[#C3FF44]/90"
                     >
-                      <Upload className="mr-2 h-4 w-4" />
-                      Upload your Electricity bill
+                      {isSubmitting || isAnalyzing ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          {uploadedFile ? "Analyzing Bill" : "Submitting"}
+                        </>
+                      ) : (
+                        <>
+                          <Upload className="mr-2 h-4 w-4" />
+                          {uploadedFile ? "Submit with Bill Analysis" : "Submit Questionnaire"}
+                        </>
+                      )}
                     </Button>
                   </div>
                 </TabsContent>
