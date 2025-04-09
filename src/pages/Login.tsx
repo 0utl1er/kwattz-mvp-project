@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -17,6 +16,7 @@ import {
 import { toast } from "@/hooks/use-toast";
 import { ArrowLeft } from "lucide-react";
 import Logo from "@/assets/logo.png";
+import { getUserByEmail } from "@/services/userService";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
@@ -41,24 +41,26 @@ const Login = () => {
     setIsLoading(true);
     
     try {
-      // This is where you would integrate with your Azure auth service
-      console.log("Login form submitted with values:", values);
+      const user = await getUserByEmail(values.email);
       
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      toast({
-        title: "Login successful",
-        description: "Welcome back to kWattz!",
-      });
-      
-      // In the future, you'd navigate to the dashboard or questionnaire
-      navigate("/");
+      if (user) {
+        toast({
+          title: "Login successful",
+          description: "Welcome back to kWattz!",
+        });
+        navigate("/");
+      } else {
+        toast({
+          title: "Login failed",
+          description: "Invalid email or password. Please try again.",
+          variant: "destructive",
+        });
+      }
     } catch (error) {
       console.error("Error during login:", error);
       toast({
         title: "Login failed",
-        description: "Invalid email or password. Please try again.",
+        description: "Something went wrong. Please try again.",
         variant: "destructive",
       });
     } finally {
