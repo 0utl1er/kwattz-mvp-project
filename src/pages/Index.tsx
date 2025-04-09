@@ -1,6 +1,7 @@
+
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, LightbulbIcon, BadgeDollarSign, BarChart3, Upload, Shield, Calculator } from "lucide-react";
+import { ArrowRight, LightbulbIcon, BadgeDollarSign, BarChart3, Upload, Shield, Calculator, Image } from "lucide-react";
 import Logo from "@/assets/logo.png";
 
 const Index = () => {
@@ -140,9 +141,17 @@ const Index = () => {
           <p className="text-xl mb-8 max-w-2xl mx-auto text-white">
             Join thousands of users who have reduced their energy bills with kWattz.
           </p>
-          <Button className="text-[#111F54] hover:bg-[#C3FF44]/90 text-lg py-6 px-8" style={{ backgroundColor: '#C3FF44' }} asChild>
-            <Link to="/signup">Create Your Account</Link>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button className="text-[#111F54] hover:bg-[#C3FF44]/90 text-lg py-6 px-8" style={{ backgroundColor: '#C3FF44' }} asChild>
+              <Link to="/signup">Create Your Account</Link>
+            </Button>
+            <Button variant="outline" className="border-[#C3FF44] text-[#C3FF44] hover:bg-[#C3FF44]/10 text-lg py-6 px-8" asChild>
+              <Link to="/image-generator">
+                <Image className="mr-2 h-5 w-5" />
+                Generate Images
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
