@@ -1,4 +1,4 @@
-# Welcome to your Lovable project
+# Front End Kwattz - lovable + my editions 
 
 ## Project info
 
