@@ -415,8 +415,7 @@ const EnergyQuestionnaire = () => {
                     <Button 
                       type="button" 
                       onClick={() => nextTab("personal")}
-                      variant="outline"
-                      className="border-white/20 text-white hover:bg-white/10"
+                      className="bg-[#C3FF44] text-[#111F54] hover:bg-[#C3FF44]/90"
                     >
                       <ArrowLeft className="mr-2 h-4 w-4" />
                       Previous
@@ -566,8 +565,7 @@ const EnergyQuestionnaire = () => {
                     <Button 
                       type="button" 
                       onClick={() => nextTab("frustrations")}
-                      variant="outline"
-                      className="border-white/20 text-white hover:bg-white/10"
+                      className="bg-[#C3FF44] text-[#111F54] hover:bg-[#C3FF44]/90"
                     >
                       <ArrowLeft className="mr-2 h-4 w-4" />
                       Previous
@@ -687,8 +685,7 @@ const EnergyQuestionnaire = () => {
                     <Button 
                       type="button" 
                       onClick={() => nextTab("home")}
-                      variant="outline"
-                      className="border-white/20 text-white hover:bg-white/10"
+                      className="bg-[#C3FF44] text-[#111F54] hover:bg-[#C3FF44]/90"
                     >
                       <ArrowLeft className="mr-2 h-4 w-4" />
                       Previous
@@ -863,169 +860,4 @@ const EnergyQuestionnaire = () => {
                     <Button 
                       type="button" 
                       onClick={() => nextTab("appliances")}
-                      variant="outline"
-                      className="border-white/20 text-white hover:bg-white/10"
-                    >
-                      <ArrowLeft className="mr-2 h-4 w-4" />
-                      Previous
-                    </Button>
-                    <Button 
-                      type="button" 
-                      onClick={() => nextTab("feedback")}
-                      className="bg-[#C3FF44] text-[#111F54] hover:bg-[#C3FF44]/90"
-                    >
-                      Next
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </div>
-                </TabsContent>
-
-                <TabsContent value="feedback" className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="aiAdvisor"
-                    render={({ field }) => (
-                      <FormItem className="space-y-3">
-                        <FormLabel className="text-white">Would you use an AI-powered energy advisor that helps you track and optimize your electricity usage?</FormLabel>
-                        <FormControl>
-                          <RadioGroup
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                            className="flex flex-col space-y-3"
-                          >
-                            <FormItem className="flex items-center space-x-3 space-y-0">
-                              <FormControl>
-                                <RadioGroupItem value="STRONGLY_DISAGREE" />
-                              </FormControl>
-                              <FormLabel className="font-normal text-white">
-                                Strongly Disagree
-                              </FormLabel>
-                            </FormItem>
-                            <FormItem className="flex items-center space-x-3 space-y-0">
-                              <FormControl>
-                                <RadioGroupItem value="DISAGREE" />
-                              </FormControl>
-                              <FormLabel className="font-normal text-white">
-                                Disagree
-                              </FormLabel>
-                            </FormItem>
-                            <FormItem className="flex items-center space-x-3 space-y-0">
-                              <FormControl>
-                                <RadioGroupItem value="NEUTRAL" />
-                              </FormControl>
-                              <FormLabel className="font-normal text-white">
-                                Neutral
-                              </FormLabel>
-                            </FormItem>
-                            <FormItem className="flex items-center space-x-3 space-y-0">
-                              <FormControl>
-                                <RadioGroupItem value="AGREE" />
-                              </FormControl>
-                              <FormLabel className="font-normal text-white">
-                                Agree
-                              </FormLabel>
-                            </FormItem>
-                            <FormItem className="flex items-center space-x-3 space-y-0">
-                              <FormControl>
-                                <RadioGroupItem value="STRONGLY_AGREE" />
-                              </FormControl>
-                              <FormLabel className="font-normal text-white">
-                                Strongly Agree
-                              </FormLabel>
-                            </FormItem>
-                          </RadioGroup>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="testGroup"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                        <FormControl>
-                          <Checkbox
-                            checked={field.value}
-                            onCheckedChange={field.onChange}
-                          />
-                        </FormControl>
-                        <div className="space-y-1 leading-none">
-                          <FormLabel className="text-white">
-                            Would you like to be part of our test group?
-                          </FormLabel>
-                          <FormDescription className="text-gray-300">
-                            You'll get early access to new features
-                          </FormDescription>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="changeOne"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-white">If you could change one thing about your electricity bill, what would it be?</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="Share your thoughts..."
-                            className="resize-none"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="comments"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-white">Any other comments for the Kwattz team?</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="Share any additional thoughts or suggestions..."
-                            className="resize-none"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <div className="flex justify-between mt-4">
-                    <Button 
-                      type="button" 
-                      onClick={() => nextTab("habits")}
-                      variant="outline"
-                      className="border-white/20 text-white hover:bg-white/10"
-                    >
-                      <ArrowLeft className="mr-2 h-4 w-4" />
-                      Previous
-                    </Button>
-                    <Button 
-                      type="submit" 
-                      className="bg-[#C3FF44] text-[#111F54] hover:bg-[#C3FF44]/90"
-                      disabled={isSubmitting}
-                    >
-                      <Upload className="mr-2 h-4 w-4" />
-                      Upload your Electricity bill
-                    </Button>
-                  </div>
-                </TabsContent>
-              </Tabs>
-            </form>
-          </Form>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default EnergyQuestionnaire;
+                      className="bg-[#C3FF44] text-[#111F5
