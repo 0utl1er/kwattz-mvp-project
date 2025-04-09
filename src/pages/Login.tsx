@@ -66,19 +66,19 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 to-blue-50 flex flex-col justify-center items-center p-4">
+    <div className="min-h-screen bg-[#111F54] flex flex-col justify-center items-center p-4">
       <div className="w-full max-w-md">
         <div className="mb-8">
-          <Link to="/" className="inline-flex items-center text-teal-600 hover:text-teal-800">
+          <Link to="/" className="inline-flex items-center text-[#C3FF44] hover:text-[#C3FF44]/80">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Home
           </Link>
         </div>
         
-        <div className="bg-white shadow-lg rounded-xl p-8">
+        <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 border border-white/20">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-blue-950">Welcome back</h1>
-            <p className="text-gray-600 mt-2">Log in to your <span className="text-teal-600">kWattz</span> account</p>
+            <h1 className="text-3xl font-bold text-[#C3FF44]">Welcome back</h1>
+            <p className="text-white mt-2">Log in to your <span className="text-[#C3FF44]">kWattz</span> account</p>
           </div>
           
           <Form {...form}>
@@ -112,21 +112,26 @@ const Login = () => {
               />
               
               <div className="flex justify-end">
-                <Link to="/forgot-password" className="text-sm text-teal-600 hover:text-teal-800">
+                <Link to="/forgot-password" className="text-sm text-[#C3FF44] hover:text-[#C3FF44]/80">
                   Forgot password?
                 </Link>
               </div>
               
-              <Button type="submit" className="w-full bg-teal-600 hover:bg-teal-700" disabled={isLoading}>
+              <Button 
+                type="submit" 
+                className="w-full text-[#111F54] hover:bg-[#C3FF44]/90" 
+                style={{ backgroundColor: '#C3FF44' }} 
+                disabled={isLoading}
+              >
                 {isLoading ? "Logging in..." : "Log in"}
               </Button>
             </form>
           </Form>
           
           <div className="mt-6 text-center">
-            <p className="text-gray-600">
+            <p className="text-white">
               Don't have an account?{" "}
-              <Link to="/signup" className="text-teal-600 hover:text-teal-800 font-medium">
+              <Link to="/signup" className="text-[#C3FF44] hover:text-[#C3FF44]/80 font-medium">
                 Sign up
               </Link>
             </p>
