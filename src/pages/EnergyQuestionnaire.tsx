@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -860,4 +861,157 @@ const EnergyQuestionnaire = () => {
                     <Button 
                       type="button" 
                       onClick={() => nextTab("appliances")}
-                      className="bg-[#C3FF44] text-[#111F5
+                      className="bg-[#C3FF44] text-[#111F54] hover:bg-[#C3FF44]/90"
+                    >
+                      <ArrowLeft className="mr-2 h-4 w-4" />
+                      Previous
+                    </Button>
+                    <Button 
+                      type="button" 
+                      onClick={() => nextTab("feedback")}
+                      className="bg-[#C3FF44] text-[#111F54] hover:bg-[#C3FF44]/90"
+                    >
+                      Next
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="feedback" className="space-y-6">
+                  <FormField
+                    control={form.control}
+                    name="aiAdvisor"
+                    render={({ field }) => (
+                      <FormItem className="space-y-3">
+                        <FormLabel className="text-white">I would like an AI advisor to help me save energy:</FormLabel>
+                        <FormControl>
+                          <RadioGroup
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                            className="flex flex-col space-y-3"
+                          >
+                            <FormItem className="flex items-center space-x-3 space-y-0">
+                              <FormControl>
+                                <RadioGroupItem value="STRONGLY_DISAGREE" />
+                              </FormControl>
+                              <FormLabel className="font-normal text-white">Strongly disagree</FormLabel>
+                            </FormItem>
+                            <FormItem className="flex items-center space-x-3 space-y-0">
+                              <FormControl>
+                                <RadioGroupItem value="DISAGREE" />
+                              </FormControl>
+                              <FormLabel className="font-normal text-white">Disagree</FormLabel>
+                            </FormItem>
+                            <FormItem className="flex items-center space-x-3 space-y-0">
+                              <FormControl>
+                                <RadioGroupItem value="NEUTRAL" />
+                              </FormControl>
+                              <FormLabel className="font-normal text-white">Neutral</FormLabel>
+                            </FormItem>
+                            <FormItem className="flex items-center space-x-3 space-y-0">
+                              <FormControl>
+                                <RadioGroupItem value="AGREE" />
+                              </FormControl>
+                              <FormLabel className="font-normal text-white">Agree</FormLabel>
+                            </FormItem>
+                            <FormItem className="flex items-center space-x-3 space-y-0">
+                              <FormControl>
+                                <RadioGroupItem value="STRONGLY_AGREE" />
+                              </FormControl>
+                              <FormLabel className="font-normal text-white">Strongly agree</FormLabel>
+                            </FormItem>
+                          </RadioGroup>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="changeOne"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-white">If you could change one thing about your energy consumption, what would it be?</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="I wish I could understand my bill better..."
+                            className="resize-none bg-white/5 border-white/10 text-white"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="comments"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-white">Any additional comments?</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Tell us more about your energy needs..."
+                            className="resize-none bg-white/5 border-white/10 text-white"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="testGroup"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border border-white/10 p-4">
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <div className="space-y-1 leading-none">
+                          <FormLabel className="text-white">
+                            Join our beta tester group
+                          </FormLabel>
+                          <FormDescription className="text-gray-300">
+                            Get early access to new features and help us improve the service.
+                          </FormDescription>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <div className="flex justify-between mt-4">
+                    <Button 
+                      type="button" 
+                      onClick={() => nextTab("habits")}
+                      className="bg-[#C3FF44] text-[#111F54] hover:bg-[#C3FF44]/90"
+                    >
+                      <ArrowLeft className="mr-2 h-4 w-4" />
+                      Previous
+                    </Button>
+                    <Button 
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="bg-[#C3FF44] text-[#111F54] hover:bg-[#C3FF44]/90"
+                    >
+                      <Upload className="mr-2 h-4 w-4" />
+                      Upload your Electricity bill
+                    </Button>
+                  </div>
+                </TabsContent>
+              </Tabs>
+            </form>
+          </Form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default EnergyQuestionnaire;
