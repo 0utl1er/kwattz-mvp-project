@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
+import { FileUp, Sparkles, DollarSign } from "lucide-react";
 
 const Index = () => {
   return (
@@ -9,9 +10,9 @@ const Index = () => {
       {/* Hero Section */}
       <header className="container mx-auto px-4 py-16 md:py-24">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Kwattz Energy Consumption Intelligence</h1>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Kwattz Energy Bill Analysis</h1>
           <p className="text-xl md:text-2xl mb-8">
-            Monitor, analyze, and optimize your energy usage in real-time with our smart AI-powered platform.
+            Upload your energy bill, get AI-powered insights, and save money on your next bill.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button className="bg-indigo-500 hover:bg-indigo-600 text-white px-8 py-6 text-lg">
@@ -24,45 +25,6 @@ const Index = () => {
         </div>
       </header>
 
-      {/* Features Section */}
-      <section className="bg-white/10 backdrop-blur-sm py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Smart Energy Monitoring Features</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="bg-white/5 border-0 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="text-xl text-white">Real-Time Monitoring</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-white/80">
-                  Track your energy consumption in real-time with detailed analytics and intuitive dashboards.
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="bg-white/5 border-0 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="text-xl text-white">AI-Powered Predictions</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-white/80">
-                  Leverage advanced AI to predict energy usage patterns and receive smart optimization recommendations.
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="bg-white/5 border-0 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="text-xl text-white">Cost Optimization</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-white/80">
-                  Save on energy bills with intelligent suggestions for reducing consumption during peak hours.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
       {/* How It Works */}
       <section className="py-16">
         <div className="container mx-auto px-4">
@@ -70,25 +32,64 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div className="text-center">
               <div className="bg-indigo-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold">1</span>
+                <FileUp className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Connect</h3>
-              <p className="text-white/80">Connect your home's energy meters to our secure platform</p>
+              <h3 className="text-xl font-semibold mb-2">Upload</h3>
+              <p className="text-white/80">Upload your energy bill securely to our platform</p>
             </div>
             <div className="text-center">
               <div className="bg-indigo-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold">2</span>
+                <Sparkles className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Monitor</h3>
-              <p className="text-white/80">View your consumption patterns with detailed analytics</p>
+              <h3 className="text-xl font-semibold mb-2">Analyze</h3>
+              <p className="text-white/80">Our AI analyzes your bill and usage patterns</p>
             </div>
             <div className="text-center">
               <div className="bg-indigo-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold">3</span>
+                <DollarSign className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Save</h3>
-              <p className="text-white/80">Implement AI-powered suggestions to reduce energy costs</p>
+              <p className="text-white/80">Get actionable insights to reduce your next energy bill</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="bg-white/10 backdrop-blur-sm py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Key Benefits</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="bg-white/5 border-0 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="text-xl text-white">Bill Analysis</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-white/80">
+                  Get a clear breakdown of your energy usage and charges with detailed explanations.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="bg-white/5 border-0 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="text-xl text-white">Cost-Saving Tips</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-white/80">
+                  Receive personalized recommendations to reduce your energy consumption and costs.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="bg-white/5 border-0 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="text-xl text-white">Simple & Secure</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-white/80">
+                  Upload your bill easily and securely. We respect your privacy and protect your data.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -101,17 +102,17 @@ const Index = () => {
             <Card className="bg-white/5 border-0 backdrop-blur-sm">
               <CardContent className="pt-6">
                 <p className="italic mb-4">
-                  "Kwattz helped us reduce our energy bill by 30% in just three months. The insights were eye-opening!"
+                  "Kwattz helped me understand my electricity bill for the first time. I saved $40 on my next bill by following their recommendations!"
                 </p>
-                <p className="font-semibold">- Sarah Johnson, Homeowner</p>
+                <p className="font-semibold">- Sarah J., Homeowner</p>
               </CardContent>
             </Card>
             <Card className="bg-white/5 border-0 backdrop-blur-sm">
               <CardContent className="pt-6">
                 <p className="italic mb-4">
-                  "The predictive analytics have transformed how we manage energy consumption in our office building."
+                  "I had no idea I was being charged extra fees until Kwattz analyzed my bill. Their insights were eye-opening."
                 </p>
-                <p className="font-semibold">- Mark Davis, Business Owner</p>
+                <p className="font-semibold">- Mark D., Small Business Owner</p>
               </CardContent>
             </Card>
           </div>
@@ -121,12 +122,12 @@ const Index = () => {
       {/* CTA Section */}
       <section className="py-16">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Take Control of Your Energy?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Save on Your Energy Bill?</h2>
           <p className="text-xl max-w-2xl mx-auto mb-8">
-            Join thousands of smart homeowners and businesses who are saving energy and reducing costs with Kwattz.
+            Upload your bill today and discover how much you could save on your next energy payment.
           </p>
           <Button className="bg-indigo-500 hover:bg-indigo-600 text-white px-8 py-6 text-lg">
-            Start Your Free Trial
+            Upload Your Bill Now
           </Button>
         </div>
       </section>
@@ -134,36 +135,16 @@ const Index = () => {
       {/* Footer */}
       <footer className="bg-indigo-950 py-12">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
               <h3 className="text-xl font-bold mb-4">Kwattz</h3>
               <p className="text-white/70">
-                Smart Energy Monitoring for a Sustainable Future
+                AI-Powered Energy Bill Analysis for Smart Savings
               </p>
             </div>
-            <div>
-              <h4 className="font-semibold mb-4">Product</h4>
-              <ul className="space-y-2">
-                <li><a href="#" className="text-white/70 hover:text-white">Features</a></li>
-                <li><a href="#" className="text-white/70 hover:text-white">Pricing</a></li>
-                <li><a href="#" className="text-white/70 hover:text-white">Case Studies</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Resources</h4>
-              <ul className="space-y-2">
-                <li><a href="#" className="text-white/70 hover:text-white">Blog</a></li>
-                <li><a href="#" className="text-white/70 hover:text-white">Documentation</a></li>
-                <li><a href="#" className="text-white/70 hover:text-white">Support</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-2">
-                <li><a href="#" className="text-white/70 hover:text-white">About Us</a></li>
-                <li><a href="#" className="text-white/70 hover:text-white">Careers</a></li>
-                <li><a href="#" className="text-white/70 hover:text-white">Contact</a></li>
-              </ul>
+            <div className="md:text-right">
+              <h4 className="font-semibold mb-4">Contact</h4>
+              <p className="text-white/70">info@kwattz.com</p>
             </div>
           </div>
           <div className="border-t border-white/20 mt-8 pt-8 text-center text-white/60">
