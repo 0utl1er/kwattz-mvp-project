@@ -1,9 +1,25 @@
+
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+// Enhanced input with additional security attributes
 const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
   ({ className, type, ...props }, ref) => {
+    // Apply security attributes based on input type
+    const securityProps: Record<string, string> = {};
+    
+    // Add autocomplete="off" for sensitive fields 
+    if (type === "password" || type === "email") {
+      securityProps.autoComplete = type === "password" ? "new-password" : "email";
+    }
+    
+    // Add additional security attributes
+    if (type === "text" || type === "email") {
+      securityProps.spellCheck = "false";
+      securityProps.autoCorrect = "off";
+    }
+    
     return (
       <input
         type={type}
@@ -12,6 +28,7 @@ const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
           className
         )}
         ref={ref}
+        {...securityProps}
         {...props}
       />
     )

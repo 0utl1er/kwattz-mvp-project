@@ -13,7 +13,25 @@ import {
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
 
-const Form = FormProvider
+interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
+  nonce?: string;
+}
+
+const Form = React.forwardRef<HTMLFormElement, FormProps>(({ nonce, ...props }, ref) => {
+  const securityProps = {
+    "data-lpignore": "true",
+    "data-form-type": "other",
+    "autoComplete": "off",
+    ...(nonce ? { nonce } : {}),
+  };
+  
+  return (
+    <FormProvider {...props.formState}>
+      <form ref={ref} {...securityProps} {...props} />
+    </FormProvider>
+  );
+});
+Form.displayName = "Form";
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,

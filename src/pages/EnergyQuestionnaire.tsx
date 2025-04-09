@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -38,35 +37,46 @@ import {
   User,
   Upload 
 } from "lucide-react";
+import { DOMPurify } from 'dompurify';
 
 const formSchema = z.object({
   // Personal Info
-  firstName: z.string().min(2, {
-    message: "First name must be at least 2 characters.",
-  }),
-  lastName: z.string().min(2, {
-    message: "Last name must be at least 2 characters.",
-  }),
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
+  firstName: z.string()
+    .min(2, { message: "First name must be at least 2 characters." })
+    .max(50, { message: "First name cannot exceed 50 characters." })
+    .refine(val => /^[a-zA-Z\s\-']+$/.test(val), { 
+      message: "First name can only contain letters, spaces, hyphens, and apostrophes." 
+    }),
+  lastName: z.string()
+    .min(2, { message: "Last name must be at least 2 characters." })
+    .max(50, { message: "Last name cannot exceed 50 characters." })
+    .refine(val => /^[a-zA-Z\s\-']+$/.test(val), { 
+      message: "Last name can only contain letters, spaces, hyphens, and apostrophes." 
+    }),
+  email: z.string()
+    .email({ message: "Please enter a valid email address." })
+    .max(100, { message: "Email cannot exceed 100 characters." }),
   
   // Energy Frustration
   frustration: z.enum(["HIGH_BILL", "RATES", "USAGE_TIMING"], {
     required_error: "Please select your biggest frustration.",
   }),
   
-  // Monthly Spend
+  // Monthly Spend - keep enum validation
   monthlySpend: z.enum(["UNDER_50", "50_100", "100_200", "OVER_200"], {
     required_error: "Please select your monthly electricity spending.",
   }),
   
-  // Features
-  features: z.array(z.string()).min(1, {
+  // Features - validate array contents
+  features: z.array(
+    z.string().refine(val => ["real-time", "ai-tips", "device-insights", "usage-reports", "alerts"].includes(val), {
+      message: "Invalid feature selection."
+    })
+  ).min(1, {
     message: "Please select at least one feature.",
   }),
   
-  // AI Advisor Opinion
+  // AI Advisor Opinion - keep enum validation
   aiAdvisor: z.enum(["STRONGLY_DISAGREE", "DISAGREE", "NEUTRAL", "AGREE", "STRONGLY_AGREE"], {
     required_error: "Please provide your opinion on the AI advisor.",
   }),
@@ -74,7 +84,7 @@ const formSchema = z.object({
   // Test Group
   testGroup: z.boolean().default(false),
   
-  // Home Profile
+  // Home Profile - keep enum validations
   householdSize: z.enum(["ONE", "TWO", "THREE_FOUR", "FIVE_PLUS"], {
     required_error: "Please select the number of people in your household.",
   }),
@@ -85,13 +95,17 @@ const formSchema = z.object({
     required_error: "Please select your home type.",
   }),
   
-  // Electrical Equipment
-  appliances: z.array(z.string()).optional(),
+  // Electrical Equipment - validate appliances array
+  appliances: z.array(
+    z.string().refine(val => ["ac", "heater", "washer", "extra-fridge", "ev", "solar", "gaming", "industrial"].includes(val), {
+      message: "Invalid appliance selection."
+    })
+  ).optional(),
   energyGeneration: z.enum(["NONE", "SOLAR", "GENERATOR", "OTHER"], {
     required_error: "Please select your energy generation system.",
   }),
   
-  // Usage Habits
+  // Usage Habits - keep enum validations
   usageTime: z.enum(["DAY", "NIGHT", "VARIED"], {
     required_error: "Please select when you typically use more energy.",
   }),
@@ -99,7 +113,7 @@ const formSchema = z.object({
     required_error: "Please select your tariff plan.",
   }),
   
-  // Interest Level
+  // Interest Level - keep enum validations
   smartMeterConnect: z.enum(["YES", "NO", "DEPENDS"], {
     required_error: "Please select your willingness to connect a smart meter.",
   }),
@@ -107,9 +121,15 @@ const formSchema = z.object({
     required_error: "Please select your attitude toward technology.",
   }),
   
-  // Feedback
-  changeOne: z.string().optional(),
-  comments: z.string().optional(),
+  // Feedback - with content validation and sanitization
+  changeOne: z.string()
+    .max(500, { message: "Response cannot exceed 500 characters." })
+    .optional()
+    .transform(val => val ? DOMPurify.sanitize(val.trim()) : val),
+  comments: z.string()
+    .max(1000, { message: "Comments cannot exceed 1000 characters." })
+    .optional()
+    .transform(val => val ? DOMPurify.sanitize(val.trim()) : val),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -117,7 +137,17 @@ type FormValues = z.infer<typeof formSchema>;
 const EnergyQuestionnaire = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeTab, setActiveTab] = useState("personal");
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    return () => {
+      if (formSubmitted) {
+        form.reset();
+        setFormSubmitted(false);
+      }
+    };
+  }, [formSubmitted]);
   
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -134,6 +164,8 @@ const EnergyQuestionnaire = () => {
   });
 
   const onSubmit = async (values: FormValues) => {
+    if (isSubmitting) return; // Prevent double submission
+    
     setIsSubmitting(true);
     
     try {
@@ -141,12 +173,14 @@ const EnergyQuestionnaire = () => {
       
       await new Promise(resolve => setTimeout(resolve, 1000));
       
+      setFormSubmitted(true);
+      
       toast({
         title: "Questionnaire submitted",
         description: "Thanks for sharing your energy usage information!",
       });
       
-      navigate("/dashboard");
+      navigate("/dashboard", { replace: true });
     } catch (error) {
       console.error("Error submitting questionnaire:", error);
       toast({
@@ -160,8 +194,32 @@ const EnergyQuestionnaire = () => {
   };
 
   const nextTab = (tab: string) => {
+    switch (activeTab) {
+      case "personal":
+        form.trigger(["firstName", "lastName", "email"]);
+        break;
+      case "frustrations":
+        form.trigger(["frustration", "monthlySpend", "features"]);
+        break;
+      // Add validation for other tabs as needed
+    }
+    
     setActiveTab(tab);
     window.scrollTo(0, 0);
+  };
+
+  const hasTabErrors = (tabName: string) => {
+    const formState = form.formState;
+    
+    switch (tabName) {
+      case "personal":
+        return !!formState.errors.firstName || !!formState.errors.lastName || !!formState.errors.email;
+      case "frustrations":
+        return !!formState.errors.frustration || !!formState.errors.monthlySpend || !!formState.errors.features;
+      // Add error detection for other tabs
+      default:
+        return false;
+    }
   };
 
   return (
