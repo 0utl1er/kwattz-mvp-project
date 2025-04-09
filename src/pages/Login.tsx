@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -15,8 +16,6 @@ import {
 } from "@/components/ui/form";
 import { toast } from "@/hooks/use-toast";
 import { ArrowLeft } from "lucide-react";
-import Logo from "@/assets/logo.png";
-import { getUserByEmail } from "@/services/userService";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
@@ -41,26 +40,24 @@ const Login = () => {
     setIsLoading(true);
     
     try {
-      const user = await getUserByEmail(values.email);
+      // This is where you would integrate with your Azure auth service
+      console.log("Login form submitted with values:", values);
       
-      if (user) {
-        toast({
-          title: "Login successful",
-          description: "Welcome back to kWattz!",
-        });
-        navigate("/");
-      } else {
-        toast({
-          title: "Login failed",
-          description: "Invalid email or password. Please try again.",
-          variant: "destructive",
-        });
-      }
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      toast({
+        title: "Login successful",
+        description: "Welcome back to kWattz!",
+      });
+      
+      // In the future, you'd navigate to the dashboard or questionnaire
+      navigate("/");
     } catch (error) {
       console.error("Error during login:", error);
       toast({
         title: "Login failed",
-        description: "Something went wrong. Please try again.",
+        description: "Invalid email or password. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -69,20 +66,19 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#111F54] flex flex-col justify-center items-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-teal-50 to-blue-50 flex flex-col justify-center items-center p-4">
       <div className="w-full max-w-md">
         <div className="mb-8">
-          <Link to="/" className="inline-flex items-center text-[#C3FF44] hover:text-[#C3FF44]/80">
+          <Link to="/" className="inline-flex items-center text-teal-600 hover:text-teal-800">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Home
           </Link>
         </div>
         
-        <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 border border-white/20">
-          <div className="text-center mb-8 flex flex-col items-center">
-            <img src={Logo} alt="kWattz Logo" className="h-16 w-auto mb-4" />
-            <h1 className="text-3xl font-bold" style={{ color: '#C3FF44' }}>Welcome back</h1>
-            <p className="text-white mt-2">Log in to your <span style={{ color: '#C3FF44' }}>kWattz</span> account</p>
+        <div className="bg-white shadow-lg rounded-xl p-8">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-blue-950">Welcome back</h1>
+            <p className="text-gray-600 mt-2">Log in to your <span className="text-teal-600">kWattz</span> account</p>
           </div>
           
           <Form {...form}>
@@ -92,7 +88,7 @@ const Login = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-white">Email</FormLabel>
+                    <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input placeholder="john.doe@example.com" {...field} />
                     </FormControl>
@@ -106,7 +102,7 @@ const Login = () => {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-white">Password</FormLabel>
+                    <FormLabel>Password</FormLabel>
                     <FormControl>
                       <Input type="password" placeholder="••••••••" {...field} />
                     </FormControl>
@@ -116,26 +112,21 @@ const Login = () => {
               />
               
               <div className="flex justify-end">
-                <Link to="/forgot-password" className="text-sm text-[#C3FF44] hover:text-[#C3FF44]/80">
+                <Link to="/forgot-password" className="text-sm text-teal-600 hover:text-teal-800">
                   Forgot password?
                 </Link>
               </div>
               
-              <Button 
-                type="submit" 
-                className="w-full" 
-                style={{ backgroundColor: '#C3FF44', color: '#111F54' }} 
-                disabled={isLoading}
-              >
+              <Button type="submit" className="w-full bg-teal-600 hover:bg-teal-700" disabled={isLoading}>
                 {isLoading ? "Logging in..." : "Log in"}
               </Button>
             </form>
           </Form>
           
           <div className="mt-6 text-center">
-            <p className="text-white">
+            <p className="text-gray-600">
               Don't have an account?{" "}
-              <Link to="/signup" className="text-[#C3FF44] hover:text-[#C3FF44]/80 font-medium">
+              <Link to="/signup" className="text-teal-600 hover:text-teal-800 font-medium">
                 Sign up
               </Link>
             </p>
