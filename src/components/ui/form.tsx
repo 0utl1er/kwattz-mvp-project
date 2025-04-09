@@ -59,13 +59,25 @@ const FormField = <
 const useFormField = () => {
   const fieldContext = React.useContext(FormFieldContext)
   const itemContext = React.useContext(FormItemContext)
-  const { getFieldState, formState } = useFormContext()
-
-  const fieldState = getFieldState(fieldContext.name, formState)
-
-  if (!fieldContext) {
-    throw new Error("useFormField should be used within <FormField>")
+  
+  // Check if we're within a form context before destructuring
+  const formContext = useFormContext();
+  
+  // If there's no form context or no field context, provide fallback values
+  if (!fieldContext || !formContext) {
+    // Return fallback values that won't cause runtime errors
+    return {
+      id: itemContext?.id || "",
+      name: "",
+      formItemId: "",
+      formDescriptionId: "",
+      formMessageId: "",
+      error: undefined,
+    }
   }
+  
+  const { getFieldState, formState } = formContext
+  const fieldState = getFieldState(fieldContext.name, formState)
 
   const { id } = itemContext
 
@@ -83,8 +95,8 @@ type FormItemContextValue = {
   id: string
 }
 
-const FormItemContext = React.createContext<FormItemContextValue>(
-  {} as FormItemContextValue
+const FormItemContext = React.createContext<FormItemContextValue | undefined>(
+  undefined
 )
 
 const FormItem = React.forwardRef<
