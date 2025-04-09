@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, LightbulbIcon, BadgeDollarSign, BarChart3, Upload, Shield, Calculator } from "lucide-react";
@@ -19,7 +20,11 @@ const Index = () => {
               <Button className="text-[#111F54] text-lg py-6 px-8" style={{ backgroundColor: '#C3FF44' }} asChild>
                 <Link to="/signup">Get Started <ArrowRight className="ml-2" /></Link>
               </Button>
-              <Button variant="outline" className="text-lg py-6 px-8 border-[#C3FF44] text-[#C3FF44] hover:bg-[#C3FF44]/10" asChild>
+              <Button 
+                className="text-[#111F54] text-lg py-6 px-8 hover:bg-[#C3FF44]/90" 
+                style={{ backgroundColor: '#C3FF44' }} 
+                asChild
+              >
                 <Link to="/login">Login</Link>
               </Button>
             </div>
