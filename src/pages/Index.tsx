@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, LightbulbIcon, BadgeDollarSign, BarChart3, Upload, Shield, Calculator } from "lucide-react";
+import Logo from "@/assets/logo.png";
 
 const Index = () => {
   return (
@@ -9,9 +10,12 @@ const Index = () => {
       <header className="container mx-auto px-4 py-16 md:py-24">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           <div className="flex-1 space-y-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold" style={{ color: '#C3FF44' }}>
-              Smart Energy Management with <span>kWattz</span>
-            </h1>
+            <div className="flex items-center gap-4">
+              <img src={Logo} alt="kWattz Logo" className="h-12 w-auto" />
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold" style={{ color: '#C3FF44' }}>
+                kWattz
+              </h1>
+            </div>
             <p className="text-xl text-white md:pr-12">
               Our AI-powered advisor helps you understand your electric bills, save money, and make smarter energy decisions.
             </p>
@@ -19,7 +23,12 @@ const Index = () => {
               <Button className="text-[#111F54] text-lg py-6 px-8" style={{ backgroundColor: '#C3FF44' }} asChild>
                 <Link to="/signup">Get Started <ArrowRight className="ml-2" /></Link>
               </Button>
-              <Button variant="outline" className="text-lg py-6 px-8 border-[#C3FF44] text-[#C3FF44] hover:bg-[#C3FF44]/10" asChild>
+              <Button 
+                variant="outline" 
+                className="text-lg py-6 px-8 border-[#C3FF44] text-[#C3FF44] hover:bg-[#C3FF44]/10" 
+                style={{ backgroundColor: '#C3FF44', color: '#111F54' }} 
+                asChild
+              >
                 <Link to="/login">Login</Link>
               </Button>
             </div>
