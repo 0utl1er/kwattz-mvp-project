@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -35,10 +34,10 @@ import {
   Home, 
   Zap, 
   MessageSquare, 
-  User 
+  User,
+  Upload 
 } from "lucide-react";
 
-// Extended form schema to include new questions
 const formSchema = z.object({
   // Personal Info
   firstName: z.string().min(2, {
@@ -137,10 +136,8 @@ const EnergyQuestionnaire = () => {
     setIsSubmitting(true);
     
     try {
-      // This is where you would send the data to your backend
       console.log("Form submitted with values:", values);
       
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       toast({
@@ -148,7 +145,6 @@ const EnergyQuestionnaire = () => {
         description: "Thanks for sharing your energy usage information!",
       });
       
-      // Navigate to dashboard
       navigate("/dashboard");
     } catch (error) {
       console.error("Error submitting questionnaire:", error);
@@ -164,7 +160,6 @@ const EnergyQuestionnaire = () => {
 
   const nextTab = (tab: string) => {
     setActiveTab(tab);
-    // Scroll to top when changing tabs
     window.scrollTo(0, 0);
   };
 
@@ -207,7 +202,6 @@ const EnergyQuestionnaire = () => {
                   </TabsTrigger>
                 </TabsList>
 
-                {/* Personal Information Tab */}
                 <TabsContent value="personal" className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <FormField
@@ -268,7 +262,6 @@ const EnergyQuestionnaire = () => {
                   </div>
                 </TabsContent>
 
-                {/* Frustrations Tab */}
                 <TabsContent value="frustrations" className="space-y-6">
                   <FormField
                     control={form.control}
@@ -439,7 +432,6 @@ const EnergyQuestionnaire = () => {
                   </div>
                 </TabsContent>
 
-                {/* Home Profile Tab */}
                 <TabsContent value="home" className="space-y-6">
                   <FormField
                     control={form.control}
@@ -591,7 +583,6 @@ const EnergyQuestionnaire = () => {
                   </div>
                 </TabsContent>
 
-                {/* Appliances Tab */}
                 <TabsContent value="appliances" className="space-y-6">
                   <FormField
                     control={form.control}
@@ -713,7 +704,6 @@ const EnergyQuestionnaire = () => {
                   </div>
                 </TabsContent>
 
-                {/* Habits Tab */}
                 <TabsContent value="habits" className="space-y-6">
                   <FormField
                     control={form.control}
@@ -890,7 +880,6 @@ const EnergyQuestionnaire = () => {
                   </div>
                 </TabsContent>
 
-                {/* Feedback Tab */}
                 <TabsContent value="feedback" className="space-y-6">
                   <FormField
                     control={form.control}
@@ -1025,7 +1014,8 @@ const EnergyQuestionnaire = () => {
                       className="bg-[#C3FF44] text-[#111F54] hover:bg-[#C3FF44]/90"
                       disabled={isSubmitting}
                     >
-                      {isSubmitting ? "Submitting..." : "Submit Questionnaire"}
+                      <Upload className="mr-2 h-4 w-4" />
+                      Upload your Electricity bill
                     </Button>
                   </div>
                 </TabsContent>
