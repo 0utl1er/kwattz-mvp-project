@@ -1,7 +1,18 @@
-
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, LightbulbIcon, BadgeDollarSign, BarChart3, Upload, Shield, Calculator, Linkedin, Mail } from "lucide-react";
+import { 
+  ArrowRight, 
+  LightbulbIcon, 
+  BadgeDollarSign, 
+  BarChart3, 
+  Upload, 
+  Shield, 
+  Calculator, 
+  Linkedin, 
+  Mail, 
+  Instagram, 
+  Threads 
+} from "lucide-react";
 
 const Index = () => {
   return (
@@ -198,8 +209,26 @@ const Index = () => {
                     <Linkedin className="h-5 w-5" /> LinkedIn
                   </a>
                 </li>
-                <li><a href="#" className="hover:text-[#C3FF44]">Twitter</a></li>
-                <li><a href="#" className="hover:text-[#C3FF44]">Facebook</a></li>
+                <li>
+                  <a 
+                    href="https://www.instagram.com/kwattz" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="hover:text-[#C3FF44] flex items-center gap-2"
+                  >
+                    <Instagram className="h-5 w-5" /> Instagram
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://www.threads.net/@kwattz" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="hover:text-[#C3FF44] flex items-center gap-2"
+                  >
+                    <Threads className="h-5 w-5" /> Threads
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
