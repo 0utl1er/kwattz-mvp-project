@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import DOMPurify from 'dompurify';
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -37,7 +38,6 @@ import {
   User,
   Upload 
 } from "lucide-react";
-import { DOMPurify } from 'dompurify';
 
 const formSchema = z.object({
   // Personal Info

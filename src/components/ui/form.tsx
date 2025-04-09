@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import * as LabelPrimitive from "@radix-ui/react-label"
 import { Slot } from "@radix-ui/react-slot"
@@ -26,9 +27,7 @@ const Form = React.forwardRef<HTMLFormElement, FormProps>(({ nonce, ...props }, 
   };
   
   return (
-    <FormProvider {...props.formState}>
-      <form ref={ref} {...securityProps} {...props} />
-    </FormProvider>
+    <form ref={ref} {...securityProps} {...props} />
   );
 });
 Form.displayName = "Form";
