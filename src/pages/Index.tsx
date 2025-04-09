@@ -159,9 +159,7 @@ const Index = () => {
           <div className="flex flex-col md:flex-row justify-between">
             <div className="mb-8 md:mb-0">
               <h3 className="text-2xl font-bold mb-4">
-                <span style={{ color: '#C3FF44' }}>K</span>
-                <span className="text-white">Wattz</span> 
-                <Bolt className="inline h-5 w-5" style={{ color: '#C3FF44' }} />
+                <span style={{ color: '#C3FF44' }}>kWattz</span>⚡
               </h3>
               <p className="max-w-md">
                 AI-powered energy management system that helps you understand and optimize your energy usage.
