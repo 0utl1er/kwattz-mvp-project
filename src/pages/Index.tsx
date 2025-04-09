@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { 
@@ -217,16 +218,6 @@ const Index = () => {
                     className="hover:text-[#C3FF44] flex items-center gap-2"
                   >
                     <Instagram className="h-5 w-5" /> Instagram
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://www.threads.net/@kwattz" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="hover:text-[#C3FF44] flex items-center gap-2"
-                  >
-                    <Threads className="h-5 w-5" /> Threads
                   </a>
                 </li>
               </ul>
