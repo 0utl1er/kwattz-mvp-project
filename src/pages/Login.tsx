@@ -48,11 +48,11 @@ const Login = () => {
       
       toast({
         title: "Login successful",
-        description: "Welcome back to kWattz!",
+        description: "Welcome back to kWattz⚡!",
       });
       
-      // In the future, you'd navigate to the dashboard or questionnaire
-      navigate("/");
+      // Navigate to the questionnaire after successful login
+      navigate("/questionnaire");
     } catch (error) {
       console.error("Error during login:", error);
       toast({
