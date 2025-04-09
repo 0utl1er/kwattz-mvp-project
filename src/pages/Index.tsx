@@ -21,10 +21,8 @@ const Index = () => {
       <header className="container mx-auto px-4 py-16 md:py-24">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           <div className="flex-1 space-y-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-              <span style={{ color: '#C3FF44' }}>K</span>
-              <span className="text-white">Wattz</span> 
-              <span style={{ color: 'yellow' }}>⚡</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold" style={{ color: '#C3FF44' }}>
+              Take Control of your Electric Bill with kWattz⚡
             </h1>
             <p className="text-xl text-white md:pr-12">
               Our AI-powered advisor helps you understand your electric bills, save money, and make smarter energy decisions.
