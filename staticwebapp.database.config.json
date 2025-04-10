@@ -45,6 +45,9 @@
     }
   ],
   "database": {
-    "connectionString": "https://kwattz-db.documents.azure.com:443/"
+    "cosmosdb": {
+      "connectionString": "@COSMOS_DB_CONNECTION_STRING",
+      "databaseName": "energy-data",
+      "containerName": "bills" 
   }
 }
