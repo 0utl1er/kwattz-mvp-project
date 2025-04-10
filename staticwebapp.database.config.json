@@ -43,5 +43,8 @@
       "allowedHttpMethods": ["GET", "POST"],
       "allowedRoles": ["anonymous"]
     }
-  ]
+  ],
+  "database": {
+    "connectionString": "https://kwattz-db.documents.azure.com:443/"
+  }
 }

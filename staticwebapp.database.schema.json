@@ -2,6 +2,9 @@
 {
   "$schema": "https://staticwebapps.blob.core.windows.net/database/schema/v1.0.0.json",
   "databaseId": "kwattz-db",
+  "database": {
+    "connectionString": "https://kwattz-db.documents.azure.com:443/"
+  },
   "collections": {
     "users": {
       "fields": {
