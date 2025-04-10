@@ -1,4 +1,3 @@
-
 import { FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -143,7 +142,7 @@ const FeedbackTab = ({
         <div className="border border-dashed border-white/20 rounded-lg p-6">
           <h3 className="text-lg font-medium text-white mb-4">Upload Your Electricity Bill</h3>
           <p className="text-gray-300 mb-4">
-            Our AI with Azure Document Intelligence will analyze your bill to provide personalized insights and savings recommendations.
+            kWatt, our AI-powered energy advisor will analyze your electric bill to provide personalized insights and savings recommendations.
           </p>
           
           <FileUpload 
