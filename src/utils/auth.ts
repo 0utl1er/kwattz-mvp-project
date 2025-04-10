@@ -39,11 +39,40 @@ const mockOAuthFlow = (provider: OAuthProvider) => {
       
     console.log(`Mock ${provider} OAuth login successful for ${userEmail}`);
     
-    // Store auth token in localStorage (in real app, handle this securely)
+    // Store auth token and user info in localStorage (in real app, handle this securely)
     localStorage.setItem('authToken', `mock-token-${provider}-${Date.now()}`);
     localStorage.setItem('userEmail', userEmail);
+    localStorage.setItem('authProvider', provider);
     
     // Redirect to questionnaire
     window.location.href = '/questionnaire';
   }, 1000);
+};
+
+// Check if user is authenticated
+export const isAuthenticated = (): boolean => {
+  return !!localStorage.getItem('authToken');
+};
+
+// Get current user info
+export const getCurrentUser = () => {
+  const email = localStorage.getItem('userEmail');
+  const provider = localStorage.getItem('authProvider') as OAuthProvider | null;
+  
+  if (!email) return null;
+  
+  return {
+    email,
+    provider
+  };
+};
+
+// Logout function
+export const logout = () => {
+  localStorage.removeItem('authToken');
+  localStorage.removeItem('userEmail');
+  localStorage.removeItem('authProvider');
+  
+  // Redirect to home page
+  window.location.href = '/';
 };

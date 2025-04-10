@@ -3,9 +3,10 @@ import { FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessa
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Upload, Loader2 } from "lucide-react";
+import { ArrowLeft, Upload, Loader2, FileText } from "lucide-react";
 import { UseFormReturn } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
+import { Progress } from "@/components/ui/progress";
 import FileUpload from "@/components/FileUpload";
 import { FormValues } from "@/types/questionnaire";
 
@@ -16,6 +17,7 @@ interface FeedbackTabProps {
   handleFileUpload: (file: File) => void;
   isSubmitting: boolean;
   isAnalyzing: boolean;
+  analysisProgress?: number;
 }
 
 const FeedbackTab = ({ 
@@ -24,7 +26,8 @@ const FeedbackTab = ({
   uploadedFile, 
   handleFileUpload,
   isSubmitting,
-  isAnalyzing
+  isAnalyzing,
+  analysisProgress = 0
 }: FeedbackTabProps) => {
   return (
     <div className="space-y-6">
@@ -140,7 +143,7 @@ const FeedbackTab = ({
         <div className="border border-dashed border-white/20 rounded-lg p-6">
           <h3 className="text-lg font-medium text-white mb-4">Upload Your Electricity Bill</h3>
           <p className="text-gray-300 mb-4">
-            Our AI will analyze your bill to provide personalized insights and savings recommendations.
+            Our AI with Azure Document Intelligence will analyze your bill to provide personalized insights and savings recommendations.
           </p>
           
           <FileUpload 
@@ -150,8 +153,22 @@ const FeedbackTab = ({
           />
           
           {uploadedFile && (
-            <div className="mt-3 flex items-center text-sm text-green-400">
-              <p>File ready: {uploadedFile.name}</p>
+            <div className="mt-3 flex items-center text-sm">
+              <FileText className="h-4 w-4 mr-2 text-green-400" />
+              <p className="text-green-400">File ready: {uploadedFile.name}</p>
+            </div>
+          )}
+          
+          {isAnalyzing && (
+            <div className="mt-4 space-y-2">
+              <div className="flex justify-between text-xs text-white/70">
+                <span>Analyzing document</span>
+                <span>{Math.round(analysisProgress)}%</span>
+              </div>
+              <Progress value={analysisProgress} className="h-2 bg-white/10" />
+              <p className="text-xs text-white/60 mt-2">
+                Azure Document Intelligence is extracting data from your bill...
+              </p>
             </div>
           )}
         </div>
@@ -174,7 +191,7 @@ const FeedbackTab = ({
           {isSubmitting || isAnalyzing ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              {uploadedFile ? "Analyzing Bill" : "Submitting"}
+              {uploadedFile ? "Analyzing with Azure AI" : "Submitting"}
             </>
           ) : (
             <>

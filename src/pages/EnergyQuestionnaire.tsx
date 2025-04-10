@@ -116,7 +116,7 @@ const EnergyQuestionnaire = () => {
   const [activeTab, setActiveTab] = useState("personal");
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
-  const { analyzeBill, isAnalyzing, analysisResult, error } = useAnalyzeBill();
+  const { analyzeBill, isAnalyzing, analysisResult, error, progress } = useAnalyzeBill();
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -259,6 +259,7 @@ const EnergyQuestionnaire = () => {
                     handleFileUpload={handleFileUpload}
                     isSubmitting={isSubmitting}
                     isAnalyzing={isAnalyzing}
+                    analysisProgress={progress}
                   />
                 </TabsContent>
               </Tabs>
