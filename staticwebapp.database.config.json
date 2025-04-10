@@ -1,0 +1,27 @@
+// In: ./swa-db-connections/staticwebapp.database.config.json
+{
+  "$schema": "https://github.com/Azure/static-web-apps-cli/raw/main/schema/swa-db-config.schema.json",
+  "connections": [
+    {
+      "databaseType": "cosmosdb_nosql", // Assuming you use the Core (SQL) API for Cosmos DB
+      "connectionStringSettingName": "COSMOS_DB_CONNECTION_STRING", // EXACT name of App Setting in Azure Portal
+      "schema": "./schema.graphql",         // Path to your GraphQL schema file (relative to this file)
+      "cosmosDb": {
+         "database": "kwattz-db"          // Your Cosmos DB database name
+         // The specific containers are typically mapped via the schema.graphql file below
+      },
+      "permissions": [ // Define who can access the data - BE CAREFUL WITH ANONYMOUS WRITE ACCESS
+        {
+          "role": "anonymous", // Allows anyone (unauthenticated users)
+          // Choose actions carefully. "*" allows read, create, update, delete.
+          // Consider just "read" for anonymous if applicable.
+          "actions": ["read", "create"] // Example: Allow anonymous read and create
+        },
+        {
+           "role": "authenticated", // Allows users logged in via SWA auth providers
+           "actions": ["*"]         // Example: Allow logged-in users full access
+        }
+      ]
+    }
+  ]
+}
