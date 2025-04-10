@@ -1,0 +1,12 @@
+{
+  "collections": {
+    "bills": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" }
+        }
+      }
+    }
+  }
+}
