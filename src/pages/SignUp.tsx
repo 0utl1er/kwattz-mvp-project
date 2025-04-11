@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -10,7 +9,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { toast } from "@/hooks/use-toast";
-import { initiateOAuthLogin } from "@/utils/auth";
+import { initiateOAuthLogin, signUpWithEmail } from "@/utils/auth";
 
 const signUpSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
@@ -44,9 +43,7 @@ const SignUp = () => {
     setIsLoading(true);
     
     try {
-      console.log("Form submitted with values:", values);
-      
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await signUpWithEmail(values.email, values.password);
       
       toast({
         title: "Account created",
@@ -69,21 +66,41 @@ const SignUp = () => {
   const handleGoogleLogin = () => {
     setIsGoogleLoading(true);
     toast({
-      title: "Redirecting to Google",
-      description: "You will be redirected to Google for authentication",
+      title: "Authenticating with Google",
+      description: "Connecting to Google Authentication",
     });
     
-    initiateOAuthLogin('google');
+    initiateOAuthLogin('google')
+      .catch(error => {
+        toast({
+          title: "Google authentication failed",
+          description: "Could not authenticate with Google. Please try again.",
+          variant: "destructive",
+        });
+      })
+      .finally(() => {
+        setIsGoogleLoading(false);
+      });
   };
 
   const handleAppleLogin = () => {
     setIsAppleLoading(true);
     toast({
-      title: "Redirecting to Apple",
-      description: "You will be redirected to Apple for authentication",
+      title: "Authenticating with Apple",
+      description: "Connecting to Apple Authentication",
     });
     
-    initiateOAuthLogin('apple');
+    initiateOAuthLogin('apple')
+      .catch(error => {
+        toast({
+          title: "Apple authentication failed",
+          description: "Could not authenticate with Apple. Please try again.",
+          variant: "destructive",
+        });
+      })
+      .finally(() => {
+        setIsAppleLoading(false);
+      });
   };
 
   return (
