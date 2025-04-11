@@ -1,0 +1,6 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" fill="none">
+  <path d="M20 10L10 30H30L20 50" stroke="#C3FF44" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="50" y="35" font-family="Arial, sans-serif" font-weight="bold" font-size="24" fill="#C3FF44">kWattz</text>
+  <text x="140" y="35" font-family="Arial, sans-serif" font-weight="bold" font-size="24" fill="#C3FF44">⚡</text>
+</svg>
