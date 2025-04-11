@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -43,7 +44,7 @@ const Login = () => {
         description: "Welcome back to kWattz⚡!",
       });
       
-      navigate("/questionnaire");
+      navigate("/dashboard");
     } catch (error) {
       console.error("Error during login:", error);
       toast({
@@ -56,44 +57,50 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLogin = () => {
+  const handleGoogleLogin = async () => {
     setIsGoogleLoading(true);
-    toast({
-      title: "Authenticating with Google",
-      description: "Connecting to Google Authentication",
-    });
     
-    initiateOAuthLogin('google')
-      .catch(error => {
-        toast({
-          title: "Google authentication failed",
-          description: "Could not authenticate with Google. Please try again.",
-          variant: "destructive",
-        });
-      })
-      .finally(() => {
-        setIsGoogleLoading(false);
+    try {
+      await initiateOAuthLogin('google');
+      
+      // Note: The redirect to questionnaire happens in the initiateOAuthLogin function
+      toast({
+        title: "Login successful",
+        description: "Welcome to kWattz⚡!",
       });
+    } catch (error) {
+      console.error("Error during Google login:", error);
+      toast({
+        title: "Google authentication failed",
+        description: "Could not authenticate with Google. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsGoogleLoading(false);
+    }
   };
 
-  const handleAppleLogin = () => {
+  const handleAppleLogin = async () => {
     setIsAppleLoading(true);
-    toast({
-      title: "Authenticating with Apple",
-      description: "Connecting to Apple Authentication",
-    });
     
-    initiateOAuthLogin('apple')
-      .catch(error => {
-        toast({
-          title: "Apple authentication failed",
-          description: "Could not authenticate with Apple. Please try again.",
-          variant: "destructive",
-        });
-      })
-      .finally(() => {
-        setIsAppleLoading(false);
+    try {
+      await initiateOAuthLogin('apple');
+      
+      // Note: The redirect to questionnaire happens in the initiateOAuthLogin function
+      toast({
+        title: "Login successful",
+        description: "Welcome to kWattz⚡!",
       });
+    } catch (error) {
+      console.error("Error during Apple login:", error);
+      toast({
+        title: "Apple authentication failed",
+        description: "Could not authenticate with Apple. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsAppleLoading(false);
+    }
   };
 
   return (

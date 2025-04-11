@@ -15,14 +15,14 @@ import {
 export type OAuthProvider = 'google' | 'apple';
 
 // Firebase configuration
-// Replace these with your actual Firebase project configuration
+// For production, these values should be replaced with your actual Firebase project configuration
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "YOUR_API_KEY",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "YOUR_AUTH_DOMAIN",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "YOUR_PROJECT_ID",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "YOUR_STORAGE_BUCKET",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "YOUR_MESSAGING_SENDER_ID",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "YOUR_APP_ID"
 };
 
 // Initialize Firebase
@@ -116,7 +116,7 @@ export const getCurrentUser = () => {
 
 // Logout function
 export const logout = () => {
-  signOut(auth).then(() => {
+  return signOut(auth).then(() => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userEmail');
     localStorage.removeItem('authProvider');
@@ -125,5 +125,6 @@ export const logout = () => {
     window.location.href = '/';
   }).catch((error) => {
     console.error("Sign out error:", error);
+    throw error;
   });
 };

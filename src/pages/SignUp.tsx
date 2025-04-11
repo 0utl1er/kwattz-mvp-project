@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -46,16 +47,26 @@ const SignUp = () => {
       await signUpWithEmail(values.email, values.password);
       
       toast({
-        title: "Account created",
-        description: "You can now log in to your account",
+        title: "Account created successfully",
+        description: "You can now proceed to the questionnaire.",
       });
       
-      navigate("/login");
-    } catch (error) {
+      navigate("/questionnaire");
+    } catch (error: any) {
       console.error("Error during signup:", error);
+      
+      let errorMessage = "There was an error creating your account. Please try again.";
+      
+      // Handle Firebase specific errors
+      if (error.code === "auth/email-already-in-use") {
+        errorMessage = "This email is already registered. Please try logging in instead.";
+      } else if (error.code === "auth/weak-password") {
+        errorMessage = "Password is too weak. Please choose a stronger password.";
+      }
+      
       toast({
-        title: "Error",
-        description: "There was an error creating your account. Please try again.",
+        title: "Sign up failed",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
@@ -63,44 +74,50 @@ const SignUp = () => {
     }
   };
 
-  const handleGoogleLogin = () => {
+  const handleGoogleLogin = async () => {
     setIsGoogleLoading(true);
-    toast({
-      title: "Authenticating with Google",
-      description: "Connecting to Google Authentication",
-    });
     
-    initiateOAuthLogin('google')
-      .catch(error => {
-        toast({
-          title: "Google authentication failed",
-          description: "Could not authenticate with Google. Please try again.",
-          variant: "destructive",
-        });
-      })
-      .finally(() => {
-        setIsGoogleLoading(false);
+    try {
+      await initiateOAuthLogin('google');
+      
+      // Note: The redirect to questionnaire happens in the initiateOAuthLogin function
+      toast({
+        title: "Account created successfully",
+        description: "Welcome to kWattz⚡!",
       });
+    } catch (error) {
+      console.error("Error during Google signup:", error);
+      toast({
+        title: "Google authentication failed",
+        description: "Could not authenticate with Google. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsGoogleLoading(false);
+    }
   };
 
-  const handleAppleLogin = () => {
+  const handleAppleLogin = async () => {
     setIsAppleLoading(true);
-    toast({
-      title: "Authenticating with Apple",
-      description: "Connecting to Apple Authentication",
-    });
     
-    initiateOAuthLogin('apple')
-      .catch(error => {
-        toast({
-          title: "Apple authentication failed",
-          description: "Could not authenticate with Apple. Please try again.",
-          variant: "destructive",
-        });
-      })
-      .finally(() => {
-        setIsAppleLoading(false);
+    try {
+      await initiateOAuthLogin('apple');
+      
+      // Note: The redirect to questionnaire happens in the initiateOAuthLogin function
+      toast({
+        title: "Account created successfully",
+        description: "Welcome to kWattz⚡!",
       });
+    } catch (error) {
+      console.error("Error during Apple signup:", error);
+      toast({
+        title: "Apple authentication failed",
+        description: "Could not authenticate with Apple. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsAppleLoading(false);
+    }
   };
 
   return (
