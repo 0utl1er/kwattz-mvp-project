@@ -1,3 +1,4 @@
+
 # Front End Kwattz - lovable + my editions 
 
 ## Project info
@@ -59,6 +60,11 @@ This project is built with:
 - React
 - shadcn-ui
 - Tailwind CSS
+- Firebase Authentication
+
+## Firebase Troubleshooting
+
+For issues related to Firebase Authentication, please check the [Firebase Troubleshooting Documentation](./src/docs/FIREBASE_TROUBLESHOOTING.md).
 
 ## How can I deploy this project?
 
@@ -71,3 +77,4 @@ Yes it is!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+
