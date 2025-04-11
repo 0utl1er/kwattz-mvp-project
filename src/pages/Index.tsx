@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { 
@@ -9,9 +10,7 @@ import {
   Shield, 
   Calculator, 
   Linkedin, 
-  Mail, 
-  Instagram, 
-  Bolt 
+  Mail 
 } from "lucide-react";
 
 const Index = () => {
@@ -207,16 +206,6 @@ const Index = () => {
                     className="hover:text-[#C3FF44] flex items-center gap-2"
                   >
                     <Linkedin className="h-5 w-5" /> LinkedIn
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://www.instagram.com/kwattz" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="hover:text-[#C3FF44] flex items-center gap-2"
-                  >
-                    <Instagram className="h-5 w-5" /> Instagram
                   </a>
                 </li>
               </ul>
