@@ -67,7 +67,7 @@ const Investors = () => {
               >
                 <Link to="mailto:investors@kwattz.com">
                   <Mailbox className="mr-2 h-5 w-5" />
-                  Contact for Investment
+                  Say Hi
                 </Link>
               </Button>
             </div>
@@ -82,3 +82,4 @@ const Investors = () => {
 };
 
 export default Investors;
+
