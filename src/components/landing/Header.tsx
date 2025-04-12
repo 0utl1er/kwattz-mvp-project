@@ -13,7 +13,7 @@ const Header = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold flex items-center gap-2" style={{ color: '#C3FF44' }}>
               Take control of your Electric Bill with kWattz⚡
               <span 
-                className="ml-2 animate-pulse transform hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_20px_rgba(255,206,1,0.7)] pulse-glow inline-block" 
+                className="ml-[-0.5rem] animate-pulse transform hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_25px_rgba(255,206,1,0.8)] pulse-glow inline-block" 
                 style={{ color: '#FFCE01' }}
               >
                 ⚡
