@@ -9,14 +9,14 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="mb-6 md:mb-0">
-            <h3 className="mb-2">
+            <h3 className="mb-1">
               <img 
                 src="/logo-final-transparent.png" 
                 alt="kWattz Logo" 
                 className="h-20 w-auto"
               />
             </h3>
-            <p className="max-w-md mt-2">
+            <p className="max-w-md mt-1 text-sm">
               AI-powered energy management system that helps you understand and optimize your energy usage.
             </p>
             <p className="mt-1 text-[#C3FF44]">
