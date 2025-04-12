@@ -10,11 +10,12 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between">
           <div className="mb-6 md:mb-0">
             <h3 className="text-2xl font-bold mb-2 relative">
-              <span className="relative z-10 text-[#C3FF44] drop-shadow-[0_0_8px_rgba(195,255,68,0.8)]" 
+              <span 
+                className="relative z-10 text-[#C3FF44] neon-text"
                 style={{ 
                   textShadow: "0 0 10px rgba(195, 255, 68, 0.8), 0 0 20px rgba(195, 255, 68, 0.4)"
                 }}
-                className="neon-text">
+              >
                 kWattz⚡
               </span>
             </h3>
