@@ -1,4 +1,5 @@
 
+// This is a large file, so we'll only update the part that links to the privacy policy
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -296,7 +297,7 @@ const KWattzSignup = () => {
             <p className="mt-1">
               <Link to="/terms" className="text-[#C3FF44]/80 hover:text-[#C3FF44] mr-2">Terms of Service</Link>
               and
-              <Link to="/privacy" className="text-[#C3FF44]/80 hover:text-[#C3FF44] ml-2">Privacy Policy</Link>
+              <Link to="/privacy-policy" className="text-[#C3FF44]/80 hover:text-[#C3FF44] ml-2">Privacy Policy</Link>
             </p>
           </div>
         </div>

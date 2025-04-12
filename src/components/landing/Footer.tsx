@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Mail, Linkedin } from "lucide-react";
@@ -44,7 +45,7 @@ const Footer = () => {
               <h4 className="text-lg font-semibold mb-4" style={{ color: '#C3FF44' }}>Legal</h4>
               <ul className="space-y-2">
                 <li><Link to="/terms" className="hover:text-[#C3FF44]">Terms</Link></li>
-                <li><Link to="/privacy" className="hover:text-[#C3FF44]">Privacy</Link></li>
+                <li><Link to="/privacy-policy" className="hover:text-[#C3FF44]">Privacy</Link></li>
               </ul>
             </div>
           </div>
@@ -80,7 +81,7 @@ const Footer = () => {
             <ul className="flex justify-center md:justify-end space-x-6">
               <li>
                 <a 
-                  href="https://www.linkedin.com/kwattz" 
+                  href="https://www.linkedin.com/company/kwattz" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="hover:text-[#C3FF44] flex items-center gap-2"
