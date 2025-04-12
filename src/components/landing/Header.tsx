@@ -10,7 +10,7 @@ const Header = () => {
         <div className="flex-1">
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold" style={{ color: '#C3FF44' }}>
-              Take control of your Electric Bill with kWattz ⚡</h1>
+              Take control of your Electric Bill with kWattz⚡</h1>
             <p className="text-xl text-white md:pr-12 -mt-4">
               Our AI-powered energy advisor helps you understand your electric bills, save money, and make smarter energy decisions.
             </p>
