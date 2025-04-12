@@ -112,7 +112,7 @@ const BlogCard = ({ post }: { post: typeof blogPosts[0] }) => {
         <p className="text-white/80 text-sm mb-4">{post.excerpt}</p>
         <Button 
           variant="outline" 
-          className="text-[#111F54] bg-[#1EAEDB] hover:bg-[#1EAEDB]/90 border-[#1EAEDB] text-white"
+          className="text-[#C3FF44] bg-[#111F54] hover:bg-[#111F54]/90 border-[#C3FF44]/30 hover:border-[#C3FF44]/50"
           asChild
         >
           <Link to={`/blog/${post.slug}`}>
@@ -131,14 +131,9 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-[#111F54] text-white">
-      <header className="container mx-auto px-4 py-8">
-        <div className="flex justify-end items-center">
-        </div>
-      </header>
-
       <div className="container mx-auto px-4 mb-6">
         <Button 
-          className="bg-[#111F54] text-[#C3FF44] hover:bg-[#1EAEDB]/10"
+          className="bg-[#111F54] text-[#C3FF44] hover:bg-[#C3FF44]/10"
           variant="outline"
           asChild
         >
