@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Mail, Linkedin } from "lucide-react";
@@ -13,7 +12,7 @@ const Footer = () => {
               <img 
                 src="/logo-final-transparent.png" 
                 alt="kWattz Logo" 
-                className="h-20 w-auto" // Increased height from h-12 to h-20
+                className="h-20 w-auto"
               />
             </h3>
             <p className="max-w-md">
@@ -51,7 +50,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Sponsors Section */}
         <div className="mt-12 border-t border-white/20 pt-8">
           <h4 className="text-lg font-semibold mb-6 text-center" style={{ color: '#C3FF44' }}>Proudly Supported By</h4>
           <div className="flex flex-col md:flex-row justify-center items-center gap-8">
@@ -60,7 +58,7 @@ const Footer = () => {
                 <img 
                   src="/google-for-startups-banner.png" 
                   alt="Google for Startups" 
-                  className="h-12 md:h-16 w-auto"
+                  className="h-10 md:h-12 w-auto"
                 />
               </a>
             </div>
@@ -69,7 +67,7 @@ const Footer = () => {
                 <img 
                   src="/microsoft-for-startups-founders-hub-banner.png" 
                   alt="Microsoft for Startups Founders Hub" 
-                  className="h-12 md:h-16 w-auto"
+                  className="h-10 md:h-12 w-auto"
                 />
               </a>
             </div>
