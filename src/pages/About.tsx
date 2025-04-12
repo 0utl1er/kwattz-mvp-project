@@ -1,11 +1,9 @@
-
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, Mail } from "lucide-react";
 import Footer from '../components/landing/Footer';
 import { useIsMobile } from '../hooks/use-mobile';
-import { Card, CardContent } from '@/components/ui/card';
 
 const About = () => {
   const isMobile = useIsMobile();
