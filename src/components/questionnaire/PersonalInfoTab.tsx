@@ -2,9 +2,10 @@
 import { FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowLeft } from "lucide-react";
 import { UseFormReturn } from "react-hook-form";
 import { FormValues } from "@/types/questionnaire";
+import { useNavigate } from "react-router-dom";
 
 interface PersonalInfoTabProps {
   form: UseFormReturn<FormValues>;
@@ -12,8 +13,26 @@ interface PersonalInfoTabProps {
 }
 
 const PersonalInfoTab = ({ form, onNext }: PersonalInfoTabProps) => {
+  const navigate = useNavigate();
+
+  const handleBackToHome = () => {
+    navigate('/');
+  };
+
   return (
     <div className="space-y-6">
+      <div className="flex justify-start mb-4">
+        <Button 
+          type="button" 
+          variant="outline"
+          onClick={handleBackToHome}
+          className="text-sm"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Home
+        </Button>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <FormField
           control={form.control}
