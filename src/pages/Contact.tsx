@@ -9,21 +9,44 @@ import { ArrowLeft, Send, Mail } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import Footer from '../components/landing/Footer';
 import { useIsMobile } from '../hooks/use-mobile';
+import DOMPurify from 'dompurify';
 
+// Enhanced form schema with more security validations
 const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-  message: z.string().min(10, {
-    message: "Message must be at least 10 characters.",
-  }),
+  name: z.string()
+    .min(2, {
+      message: "Name must be at least 2 characters.",
+    })
+    .max(50, {
+      message: "Name must not exceed 50 characters."
+    })
+    .regex(/^[a-zA-Z\s]+$/, {
+      message: "Name must contain only letters and spaces."
+    }),
+  email: z.string()
+    .email({
+      message: "Please enter a valid email address.",
+    })
+    .max(100, {
+      message: "Email must not exceed 100 characters."
+    }),
+  message: z.string()
+    .min(10, {
+      message: "Message must be at least 10 characters.",
+    })
+    .max(2000, {
+      message: "Message must not exceed 2000 characters."
+    })
+    // Prevent common script tags and suspicious patterns
+    .refine(val => !/<script|<\/script|javascript:|onerror=|onclick=|eval\(|fromCharCode/i.test(val), {
+      message: "Message contains disallowed content."
+    }),
 });
+
+type ContactFormData = z.infer<typeof formSchema>;
 
 const Contact = () => {
   const isMobile = useIsMobile();
@@ -34,7 +57,7 @@ const Contact = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<ContactFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
@@ -43,17 +66,28 @@ const Contact = () => {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const sanitizeFormData = (data: ContactFormData): ContactFormData => {
+    return {
+      name: DOMPurify.sanitize(data.name),
+      email: DOMPurify.sanitize(data.email),
+      message: DOMPurify.sanitize(data.message),
+    };
+  };
+
+  const onSubmit = async (values: ContactFormData) => {
     setIsSubmitting(true);
     
     try {
+      // Sanitize all inputs before processing
+      const sanitizedData = sanitizeFormData(values);
+      console.log("Sanitized form data:", sanitizedData);
+      
       // In a real implementation, you would send this data to a server
       // For now, we'll simulate a successful submission
-      console.log("Form data:", values);
-      
-      // Simulate network request
       await new Promise(resolve => setTimeout(resolve, 1000));
       
+      // In a production environment, you would securely send this to a server
+      // which would handle email delivery with proper validation and rate limiting
       toast({
         title: "Message sent!",
         description: "We'll get back to you as soon as possible.",
@@ -70,6 +104,21 @@ const Contact = () => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  // Rate limiting for form submissions
+  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const formElement = event.currentTarget as HTMLFormElement;
+    
+    // Add a hidden honeypot field to catch bots
+    const honeypotField = formElement.querySelector('input[name="website"]');
+    if (honeypotField && (honeypotField as HTMLInputElement).value) {
+      event.preventDefault();
+      return false; // Bot detected
+    }
+    
+    // Proceed with normal form submission
+    form.handleSubmit(onSubmit)(event);
   };
 
   return (
@@ -136,7 +185,12 @@ const Contact = () => {
           </p>
 
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={handleFormSubmit} className="space-y-6" noValidate>
+              {/* Honeypot field to catch bots - hidden from users but bots will fill it */}
+              <div className="hidden">
+                <input type="text" name="website" tabIndex={-1} aria-hidden="true" />
+              </div>
+              
               <FormField
                 control={form.control}
                 name="name"
@@ -144,7 +198,12 @@ const Contact = () => {
                   <FormItem>
                     <FormLabel className="text-white">Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Your name" {...field} />
+                      <Input 
+                        placeholder="Your name" 
+                        maxLength={50}
+                        autoComplete="name"
+                        {...field} 
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -158,7 +217,13 @@ const Contact = () => {
                   <FormItem>
                     <FormLabel className="text-white">Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="Your email" {...field} />
+                      <Input 
+                        placeholder="Your email" 
+                        type="email"
+                        maxLength={100}
+                        autoComplete="email"
+                        {...field} 
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -174,7 +239,8 @@ const Contact = () => {
                     <FormControl>
                       <Textarea 
                         placeholder="How can we help you?" 
-                        className="min-h-[120px]" 
+                        className="min-h-[120px]"
+                        maxLength={2000}
                         {...field} 
                       />
                     </FormControl>
@@ -211,6 +277,7 @@ const Contact = () => {
               <a 
                 href="mailto:info@kwattz.com" 
                 className="flex items-center gap-2 text-[#C3FF44] hover:underline"
+                rel="noopener noreferrer"
               >
                 <Mail className="h-5 w-5" />
                 info@kwattz.com

@@ -1,4 +1,3 @@
-
 import * as React from "react"
 import * as LabelPrimitive from "@radix-ui/react-label"
 import { Slot } from "@radix-ui/react-slot"
@@ -14,23 +13,28 @@ import {
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
 
-interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
-  nonce?: string;
-}
+const Form = React.forwardRef<
+  HTMLFormElement,
+  React.HTMLAttributes<HTMLFormElement>
+>(({ className, ...props }, ref) => {
+  // Filter out react-hook-form props that shouldn't be passed to DOM elements
+  const { 
+    // These are the props we need to filter out
+    // @ts-ignore - These properties might exist in props but we filter them out
+    getFieldState, formState, trigger, register, 
+    // @ts-ignore
+    watch, reset, unregister, ...domProps 
+  } = props;
 
-const Form = React.forwardRef<HTMLFormElement, FormProps>(({ nonce, ...props }, ref) => {
-  const securityProps = {
-    "data-lpignore": "true",
-    "data-form-type": "other",
-    "autoComplete": "off",
-    ...(nonce ? { nonce } : {}),
-  };
-  
   return (
-    <form ref={ref} {...securityProps} {...props} />
-  );
-});
-Form.displayName = "Form";
+    <form
+      ref={ref}
+      className={cn(className)}
+      {...domProps}
+    />
+  )
+})
+Form.displayName = "Form"
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
