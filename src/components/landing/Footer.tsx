@@ -13,7 +13,7 @@ const Footer = () => {
               <span className="relative z-10 text-[#C3FF44] drop-shadow-[0_0_8px_rgba(195,255,68,0.8)]" 
                 style={{ 
                   textShadow: "0 0 10px rgba(195, 255, 68, 0.8), 0 0 20px rgba(195, 255, 68, 0.4)",
-                  animation: "neonPulse 3s infinite ease-in-out"
+                  animation: "neonPulse 4s infinite ease-in-out"
                 }}>
                 kWattz⚡
               </span>
@@ -61,14 +61,18 @@ const Footer = () => {
 
         <style jsx>{`
           @keyframes neonPulse {
-            0% {
-              text-shadow: 0 0 10px rgba(195, 255, 68, 0.8), 0 0 20px rgba(195, 255, 68, 0.4);
+            0%, 100% {
+              text-shadow: 
+                0 0 10px rgba(195, 255, 68, 0.6), 
+                0 0 20px rgba(195, 255, 68, 0.3);
+              opacity: 0.7;
             }
             50% {
-              text-shadow: 0 0 15px rgba(195, 255, 68, 1), 0 0 30px rgba(195, 255, 68, 0.8), 0 0 40px rgba(195, 255, 68, 0.4);
-            }
-            100% {
-              text-shadow: 0 0 10px rgba(195, 255, 68, 0.8), 0 0 20px rgba(195, 255, 68, 0.4);
+              text-shadow: 
+                0 0 20px rgba(195, 255, 68, 1), 
+                0 0 40px rgba(195, 255, 68, 0.8), 
+                0 0 60px rgba(195, 255, 68, 0.4);
+              opacity: 1;
             }
           }
         `}</style>
