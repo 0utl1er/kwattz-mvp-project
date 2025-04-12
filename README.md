@@ -61,18 +61,13 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 - Firebase Authentication
+- Azure (Azure AI, Azure Static App, Cosmo DB)
+- Google Cloud
 
 ## Firebase Troubleshooting
 
 For issues related to Firebase Authentication, please check the [Firebase Troubleshooting Documentation](./src/docs/FIREBASE_TROUBLESHOOTING.md).
 
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/53e3f0b4-789d-49e4-9ba6-a2bd99506ad2) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes it is!
 
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
