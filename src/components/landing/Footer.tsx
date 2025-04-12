@@ -50,6 +50,32 @@ const Footer = () => {
             </div>
           </div>
         </div>
+
+        {/* Sponsors Section */}
+        <div className="mt-12 border-t border-white/20 pt-8">
+          <h4 className="text-lg font-semibold mb-6 text-center" style={{ color: '#C3FF44' }}>Proudly Supported By</h4>
+          <div className="flex flex-col md:flex-row justify-center items-center gap-8">
+            <div className="bg-white/10 backdrop-blur-lg p-4 rounded-xl border border-white/20 hover:border-[#C3FF44]/50 transition-colors">
+              <a href="https://startup.google.com" target="_blank" rel="noopener noreferrer">
+                <img 
+                  src="/google-for-startups-banner.png" 
+                  alt="Google for Startups" 
+                  className="h-12 md:h-16 w-auto"
+                />
+              </a>
+            </div>
+            <div className="bg-white/10 backdrop-blur-lg p-4 rounded-xl border border-white/20 hover:border-[#C3FF44]/50 transition-colors">
+              <a href="https://foundershub.startups.microsoft.com" target="_blank" rel="noopener noreferrer">
+                <img 
+                  src="/microsoft-for-startups-founders-hub-banner.png" 
+                  alt="Microsoft for Startups Founders Hub" 
+                  className="h-12 md:h-16 w-auto"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+
         <div className="border-t border-white/20 mt-8 pt-8 text-center md:text-left md:flex justify-between items-center">
           <p>&copy; {new Date().getFullYear()} kWattz. All rights reserved.</p>
           <div className="mt-4 md:mt-0">
