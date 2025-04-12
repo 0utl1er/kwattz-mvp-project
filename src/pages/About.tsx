@@ -2,9 +2,10 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowLeft, ArrowRight, Mail } from "lucide-react";
 import Footer from '../components/landing/Footer';
 import { useIsMobile } from '../hooks/use-mobile';
+import { Card, CardContent } from '@/components/ui/card';
 
 const About = () => {
   const isMobile = useIsMobile();
@@ -46,8 +47,21 @@ const About = () => {
         </div>
       </header>
 
+      {/* Back to Home Button */}
+      <div className="container mx-auto px-4 mb-6">
+        <Button 
+          variant="outline" 
+          className="border-[#C3FF44] text-[#C3FF44] hover:bg-[#C3FF44]/10"
+          asChild
+        >
+          <Link to="/">
+            <ArrowLeft className="mr-2 h-4 w-4" /> Back to Home
+          </Link>
+        </Button>
+      </div>
+
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-12">
+      <main className="container mx-auto px-4 py-6">
         {/* Company Story Section */}
         <section className="mb-20 bg-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/10">
           <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#C3FF44' }}>
@@ -56,19 +70,46 @@ const About = () => {
           <div className="flex flex-col md:flex-row gap-8 items-center">
             <div className="flex-1">
               <p className="text-lg mb-4">
-                Founded in 2023, kWattz emerged from a simple observation: people are overwhelmed by their energy bills and don't know how to reduce them.
+                Founded in 2025 in San Diego, California, kWattz emerged from a simple observation: people are overwhelmed by their energy bills and don't know how to reduce them.
               </p>
               <p className="text-lg mb-4">
-                Our founder, a former energy industry consultant, noticed that despite the push for energy efficiency, most consumers lacked the tools to understand their consumption patterns in an actionable way.
+                Our founder, a former PG&E and SDG&E contractor, witnessed firsthand the frustration customers experienced with their utility bills. Despite the push for energy efficiency, most consumers lacked the tools to understand their consumption patterns in an actionable way.
               </p>
               <p className="text-lg mb-4">
-                What began as a small project to help friends and family optimize their energy usage quickly evolved into a mission to democratize energy intelligence for everyone.
+                Spending countless nights developing the prototype, our founder famously mapped out the entire kWattz infrastructure on their apartment wall — a moment now immortalized in our company lore.
               </p>
             </div>
             <div className="flex-1 flex justify-center">
               <img 
-                src="/happycustomer.jpg" 
-                alt="Satisfied kWattz customer" 
+                src="/images/content/the-wall.jpeg" 
+                alt="The Wall - kWattz infrastructure planning" 
+                className="rounded-xl shadow-lg max-w-full md:max-w-md"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Founder Section */}
+        <section className="mb-20">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#C3FF44' }}>
+            Meet Our Founder
+          </h2>
+          <div className="flex flex-col md:flex-row-reverse gap-8 items-center">
+            <div className="flex-1">
+              <p className="text-xl mb-6">
+                "What started as scribbles on my apartment wall has grown into a mission to democratize energy intelligence for everyone. I saw how people struggled with their utility bills, and I knew there had to be a better way."
+              </p>
+              <p className="text-lg mb-4">
+                After years in the energy industry consulting for California's largest utilities, our founder identified a critical gap in consumer education and tools. What began as a small project to help friends and family optimize their energy usage quickly evolved into kWattz.
+              </p>
+              <p className="text-lg">
+                Today, our founder leads a growing team dedicated to making energy management accessible, affordable, and actionable for households across America.
+              </p>
+            </div>
+            <div className="flex-1 flex justify-center">
+              <img 
+                src="/images/content/IMG_5164 Small.jpeg" 
+                alt="kWattz Founder" 
                 className="rounded-xl shadow-lg max-w-full md:max-w-md"
               />
             </div>
@@ -119,7 +160,7 @@ const About = () => {
                 We're a passionate team of energy experts, data scientists, and developers dedicated to making energy intelligence accessible to everyone.
               </p>
               <p>
-                Based in California, our team combines deep industry knowledge with cutting-edge AI technology to deliver a service that truly makes a difference in people's lives and on our planet.
+                Based in San Diego, California, our team combines deep industry knowledge with cutting-edge AI technology to deliver a service that truly makes a difference in people's lives and on our planet.
               </p>
             </div>
           </div>
@@ -147,11 +188,15 @@ const About = () => {
               </blockquote>
             </div>
             <div className="flex-1 flex justify-center">
-              <img 
-                src="/happycustomer.jpg" 
-                alt="Frustrated customer with high energy bill" 
-                className="rounded-xl shadow-lg max-w-full md:max-w-md"
-              />
+              <Card className="bg-white/10 border-white/20 max-w-md overflow-hidden">
+                <CardContent className="p-0">
+                  <img 
+                    src="/happycustomer.jpg" 
+                    alt="Frustrated customer with high energy bill" 
+                    className="w-full h-auto"
+                  />
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
@@ -162,7 +207,7 @@ const About = () => {
             The Solution: kWattz⚡ AI Energy Assistant
           </h2>
           <p className="text-lg mb-8">
-            That's when I created kWattz, your AI energy savings app — designed to help you:
+            That's when kWattz was born – your AI energy savings app designed to help you:
           </p>
           <ul className="space-y-4 text-lg mb-12 max-w-2xl">
             <li className="flex items-start gap-3">
