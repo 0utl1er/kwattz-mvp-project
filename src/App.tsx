@@ -16,6 +16,7 @@ import About from "./pages/About";
 import Pricing from "./pages/Pricing";
 import WhyKWattz from "./pages/WhyKWattz";
 import Contact from "./pages/Contact";
+import Blog from "./pages/Blog";
 import FAQ from "./pages/FAQ";
 import Terms from "./pages/Terms";
 
@@ -40,6 +41,7 @@ const App = () => (
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/why-kwattz" element={<WhyKWattz />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/blog" element={<Blog />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/terms" element={<Terms />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

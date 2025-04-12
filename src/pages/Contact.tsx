@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -14,7 +13,6 @@ import Footer from '../components/landing/Footer';
 import { useIsMobile } from '../hooks/use-mobile';
 import DOMPurify from 'dompurify';
 
-// Enhanced form schema with more security validations
 const formSchema = z.object({
   name: z.string()
     .min(2, {
@@ -40,7 +38,6 @@ const formSchema = z.object({
     .max(2000, {
       message: "Message must not exceed 2000 characters."
     })
-    // Prevent common script tags and suspicious patterns
     .refine(val => !/<script|<\/script|javascript:|onerror=|onclick=|eval\(|fromCharCode/i.test(val), {
       message: "Message contains disallowed content."
     }),
@@ -78,16 +75,11 @@ const Contact = () => {
     setIsSubmitting(true);
     
     try {
-      // Sanitize all inputs before processing
       const sanitizedData = sanitizeFormData(values);
       console.log("Sanitized form data:", sanitizedData);
       
-      // In a real implementation, you would send this data to a server
-      // For now, we'll simulate a successful submission
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      // In a production environment, you would securely send this to a server
-      // which would handle email delivery with proper validation and rate limiting
       toast({
         title: "Message sent!",
         description: "We'll get back to you as soon as possible.",
@@ -106,26 +98,22 @@ const Contact = () => {
     }
   };
 
-  // Rate limiting for form submissions
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const formElement = event.currentTarget as HTMLFormElement;
     
-    // Add a hidden honeypot field to catch bots
     const honeypotField = formElement.querySelector('input[name="website"]');
     if (honeypotField && (honeypotField as HTMLInputElement).value) {
       event.preventDefault();
-      return false; // Bot detected
+      return false;
     }
     
-    // Proceed with normal form submission
     form.handleSubmit(onSubmit)(event);
   };
 
   return (
     <div className="min-h-screen bg-[#111F54] text-white">
-      {/* Header */}
       <header className="container mx-auto px-4 py-8">
-        <div className="flex flex-col md:flex-row justify-between items-center">
+        <div className="flex justify-between items-center">
           <Link to="/">
             <img 
               src="/logo-final-transparent.png" 
@@ -133,28 +121,9 @@ const Contact = () => {
               className="h-28 w-auto" 
             />
           </Link>
-          <div className="flex gap-3 mt-6 md:mt-0">
-            <Button 
-              className="text-[#111F54] hover:bg-[#C3FF44]/90"
-              style={{ backgroundColor: '#C3FF44' }}
-              size={isMobile ? "sm" : "default"}
-              asChild
-            >
-              <Link to="/login">Login</Link>
-            </Button>
-            <Button 
-              className="text-[#111F54] hover:bg-[#C3FF44]/90"
-              style={{ backgroundColor: '#C3FF44' }}
-              size={isMobile ? "sm" : "default"}
-              asChild
-            >
-              <Link to="/kwattz-signup">Sign Up</Link>
-            </Button>
-          </div>
         </div>
       </header>
 
-      {/* Back to Home Button */}
       <div className="container mx-auto px-4 mb-6">
         <Button 
           className="bg-[#111F54] text-[#C3FF44] hover:bg-[#1EAEDB]/10"
@@ -167,7 +136,6 @@ const Contact = () => {
         </Button>
       </div>
 
-      {/* Main Content */}
       <main className="container mx-auto px-4 py-6">
         <section className="max-w-3xl mx-auto mb-20 bg-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/10">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center" style={{ color: '#C3FF44' }}>
@@ -186,7 +154,6 @@ const Contact = () => {
 
           <Form {...form}>
             <form onSubmit={handleFormSubmit} className="space-y-6" noValidate>
-              {/* Honeypot field to catch bots - hidden from users but bots will fill it */}
               <div className="hidden">
                 <input type="text" name="website" tabIndex={-1} aria-hidden="true" />
               </div>
@@ -292,7 +259,6 @@ const Contact = () => {
         </section>
       </main>
 
-      {/* Footer */}
       <Footer />
     </div>
   );
