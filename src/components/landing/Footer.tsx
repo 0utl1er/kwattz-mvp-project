@@ -46,6 +46,7 @@ const Footer = () => {
               <h4 className="text-lg font-semibold mb-4" style={{ color: '#C3FF44' }}>Company</h4>
               <ul className="space-y-2">
                 <li><Link to="/about" className="hover:text-[#C3FF44]">About</Link></li>
+                <li><Link to="/investors" className="hover:text-[#C3FF44]">Investors</Link></li>
                 <li><Link to="/contact" className="hover:text-[#C3FF44]">Contact</Link></li>
                 <li><Link to="/blog" className="hover:text-[#C3FF44]">Blog</Link></li>
               </ul>
