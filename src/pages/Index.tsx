@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -157,11 +158,11 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between">
             <div className="mb-8 md:mb-0">
-              <h3 className="text-2xl font-bold mb-4">
+              <h3 className="mb-4">
                 <img 
                   src="/logo-final-transparent.png" 
                   alt="kWattz Logo" 
-                  className="h-25 w-auto" 
+                  className="h-12 w-auto" 
                 />
               </h3>
               <p className="max-w-md">
