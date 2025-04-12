@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -12,7 +13,7 @@ const Header = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold flex items-center gap-2" style={{ color: '#C3FF44' }}>
               Take control of your Electric Bill with kWattz
               <Bolt 
-                className="text-[#FFCE01] animate-pulse transform hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_10px_rgba(255,206,1,0.5)]" 
+                className="text-[#FFCE01] animate-pulse transform hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_20px_rgba(255,206,1,0.7)] pulse-glow" 
                 size={48} 
                 fill="#E4DD85" 
                 strokeWidth={2} 
