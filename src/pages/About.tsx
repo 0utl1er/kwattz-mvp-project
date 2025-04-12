@@ -2,10 +2,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 import Footer from '../components/landing/Footer';
+import { useIsMobile } from '../hooks/use-mobile';
 
 const About = () => {
+  const isMobile = useIsMobile();
+
   return (
     <div className="min-h-screen bg-[#111F54] text-white">
       {/* Header */}
@@ -15,13 +18,14 @@ const About = () => {
             <img 
               src="/brain2.png" 
               alt="kWattz Logo" 
-              className="h-24 w-auto"
+              className="h-28 w-auto" 
             />
           </Link>
-          <div className="flex gap-4 mt-6 md:mt-0">
+          <div className="flex gap-3 mt-6 md:mt-0">
             <Button 
               className="text-[#111F54] hover:bg-[#C3FF44]/90"
               style={{ backgroundColor: '#C3FF44' }}
+              size={isMobile ? "sm" : "default"}
               asChild
             >
               <Link to="/login">Login</Link>
@@ -29,6 +33,7 @@ const About = () => {
             <Button 
               className="text-[#111F54] hover:bg-[#C3FF44]/90"
               style={{ backgroundColor: '#C3FF44' }}
+              size={isMobile ? "sm" : "default"}
               asChild
             >
               <Link to="/kwattz-signup">Sign Up</Link>
@@ -39,27 +44,7 @@ const About = () => {
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-12">
-        {/* Hero Section */}
-        <section className="mb-20">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6" style={{ color: '#C3FF44' }}>
-            Take Control of Your Electric Bill with AI ⚡️
-          </h1>
-          <p className="text-xl mb-6 max-w-4xl">
-            Tired of high energy bills? You're not alone.
-          </p>
-          <p className="text-xl mb-12 max-w-4xl">
-            kWattz is an AI-powered personal energy advisor that helps you understand your electric bill, 
-            lower your energy costs, and make smarter home energy decisions — fast.
-          </p>
-
-          <Button 
-            className="text-[#111F54] text-lg py-6 px-8 hover:bg-[#C3FF44]/90" 
-            style={{ backgroundColor: '#C3FF44' }} 
-            asChild
-          >
-            <Link to="/kwattz-signup">Start Saving Today <ArrowRight className="ml-2" /></Link>
-          </Button>
-        </section>
+        {/* Hero Section - Removed as requested */}
 
         {/* Problem Section */}
         <section className="mb-20 bg-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/10">
@@ -194,21 +179,21 @@ const About = () => {
             Trusted By Industry Leaders
           </h2>
           <div className="flex flex-col md:flex-row justify-center items-center gap-8">
-            <div className="bg-white/10 backdrop-blur-lg p-6 rounded-xl border border-white/20 hover:border-[#C3FF44]/50 transition-colors">
+            <div className="bg-white/10 backdrop-blur-lg p-4 rounded-xl border border-white/20 hover:border-[#C3FF44]/50 transition-colors">
               <a href="https://startup.google.com" target="_blank" rel="noopener noreferrer">
                 <img 
                   src="/google-for-startups-banner.png" 
                   alt="Google for Startups" 
-                  className="h-12 md:h-16 w-auto"
+                  className="h-8 md:h-10 w-auto"
                 />
               </a>
             </div>
-            <div className="bg-white/10 backdrop-blur-lg p-6 rounded-xl border border-white/20 hover:border-[#C3FF44]/50 transition-colors">
+            <div className="bg-white/10 backdrop-blur-lg p-4 rounded-xl border border-white/20 hover:border-[#C3FF44]/50 transition-colors">
               <a href="https://foundershub.startups.microsoft.com" target="_blank" rel="noopener noreferrer">
                 <img 
                   src="/microsoft-for-startups-founders-hub-banner.png" 
                   alt="Microsoft for Startups Founders Hub" 
-                  className="h-12 md:h-16 w-auto"
+                  className="h-8 md:h-10 w-auto"
                 />
               </a>
             </div>

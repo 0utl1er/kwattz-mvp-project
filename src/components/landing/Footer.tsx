@@ -19,9 +19,14 @@ const Footer = () => {
             <p className="max-w-md">
               AI-powered energy management system that helps you understand and optimize your energy usage.
             </p>
-            <p className="mt-2 text-[#C3FF44] flex items-center gap-2">
-              <Mail className="h-5 w-5" />
-              info@kwattz.com
+            <p className="mt-2 text-[#C3FF44]">
+              <a 
+                href="mailto:info@kwattz.com" 
+                className="flex items-center gap-2 hover:underline"
+              >
+                <Mail className="h-5 w-5" />
+                info@kwattz.com
+              </a>
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
