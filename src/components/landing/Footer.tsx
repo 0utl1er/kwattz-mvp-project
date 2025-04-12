@@ -5,21 +5,21 @@ import { Mail, Linkedin } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#111F54] text-white py-12">
+    <footer className="bg-[#111F54] text-white py-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between">
-          <div className="mb-8 md:mb-0">
-            <h3 className="mb-4">
+          <div className="mb-6 md:mb-0">
+            <h3 className="mb-2">
               <img 
                 src="/logo-final-transparent.png" 
                 alt="kWattz Logo" 
                 className="h-20 w-auto"
               />
             </h3>
-            <p className="max-w-md">
+            <p className="max-w-md mt-2">
               AI-powered energy management system that helps you understand and optimize your energy usage.
             </p>
-            <p className="mt-2 text-[#C3FF44]">
+            <p className="mt-1 text-[#C3FF44]">
               <a 
                 href="mailto:info@kwattz.com" 
                 className="flex items-center gap-2 hover:underline"
