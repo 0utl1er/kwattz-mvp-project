@@ -73,11 +73,11 @@ const About = () => {
 
         {/* Founder Section */}
         <section className="mb-20">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#C3FF44]" style={{ textShadow: '0 0 10px rgba(195,255,68,0.5)' }}>
-          Who is building it — or at least trying to?
-          </h2>
           <div className="flex flex-col md:flex-row-reverse gap-8 items-center">
             <div className="flex-1">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#C3FF44]" style={{ textShadow: '0 0 10px rgba(195,255,68,0.5)' }}>
+                Who is building it — or at least trying to?
+              </h2>
               <p className="text-xl mb-6 bg-white/5 p-4 rounded-lg backdrop-blur-sm border border-white/10 shadow-[0_0_15px_rgba(30,174,219,0.2)]">
                 "What started as scribbles on my apartment wall has grown into a mission to democratize energy intelligence for everyone. I saw how people struggled with their utility bills, and I knew there had to be a better way."
               </p>
