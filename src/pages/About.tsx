@@ -14,42 +14,21 @@ const About = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#111F54] text-white">
-      {/* Header */}
+    <div className="min-h-screen bg-[#111F54] text-white relative overflow-hidden">
+      {/* Energizing glow effects */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#C3FF44]/20 rounded-full blur-[100px] -z-10 animate-pulse"></div>
+      <div className="absolute bottom-1/4 right-1/3 w-80 h-80 bg-[#1EAEDB]/30 rounded-full blur-[120px] -z-10 animate-pulse" style={{animationDelay: "1.5s"}}></div>
+      <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-[#D946EF]/20 rounded-full blur-[80px] -z-10 animate-pulse" style={{animationDelay: "0.7s"}}></div>
+
+      {/* Header - removed logo and login/signup buttons */}
       <header className="container mx-auto px-4 py-8">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <Link to="/">
-            <img 
-              src="/logo-final-transparent.png" 
-              alt="kWattz Logo" 
-              className="h-28 w-auto" 
-            />
-          </Link>
-          <div className="flex gap-3 mt-6 md:mt-0">
-            <Button 
-              className="text-[#111F54] hover:bg-[#C3FF44]/90"
-              style={{ backgroundColor: '#C3FF44' }}
-              size={isMobile ? "sm" : "default"}
-              asChild
-            >
-              <Link to="/login">Login</Link>
-            </Button>
-            <Button 
-              className="text-[#111F54] hover:bg-[#C3FF44]/90"
-              style={{ backgroundColor: '#C3FF44' }}
-              size={isMobile ? "sm" : "default"}
-              asChild
-            >
-              <Link to="/kwattz-signup">Sign Up</Link>
-            </Button>
-          </div>
-        </div>
+        {/* Empty header - logo and buttons removed */}
       </header>
 
       {/* Back to Home Button */}
       <div className="container mx-auto px-4 mb-6">
         <Button 
-          className="bg-[#111F54] text-[#C3FF44] hover:bg-[#1EAEDB]/10"
+          className="bg-[#111F54] text-[#C3FF44] hover:bg-[#1EAEDB]/10 border border-[#C3FF44]/50 shadow-[0_0_15px_rgba(195,255,68,0.3)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(195,255,68,0.5)]"
           variant="outline"
           asChild
         >
@@ -62,8 +41,8 @@ const About = () => {
       {/* Main Content */}
       <main className="container mx-auto px-4 py-6">
         {/* Company Story Section */}
-        <section className="mb-20 bg-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#C3FF44' }}>
+        <section className="mb-20 bg-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/10 shadow-[0_0_30px_rgba(195,255,68,0.15)] hover:shadow-[0_0_40px_rgba(195,255,68,0.25)] transition-all duration-500">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#C3FF44] glow-text" style={{ textShadow: '0 0 10px rgba(195,255,68,0.5)' }}>
             Our Story
           </h2>
           <div className="flex flex-col md:flex-row gap-8 items-center">
@@ -79,13 +58,14 @@ const About = () => {
               </p>
             </div>
             <div className="flex-1 flex justify-center">
-              <div className="relative">
+              <div className="relative overflow-hidden rounded-xl transition-transform duration-500 hover:scale-105">
                 <img 
                   src="/images/content/the-wall.jpeg" 
                   alt="The Wall - kWattz infrastructure planning" 
                   className="rounded-xl shadow-lg max-w-full md:max-w-md"
                 />
                 <div className="absolute inset-0 bg-[#111F54]/40 rounded-xl" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#C3FF44]/10 to-transparent opacity-60 rounded-xl"></div>
               </div>
             </div>
           </div>
@@ -93,12 +73,12 @@ const About = () => {
 
         {/* Founder Section */}
         <section className="mb-20">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#C3FF44' }}>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#C3FF44]" style={{ textShadow: '0 0 10px rgba(195,255,68,0.5)' }}>
             Meet Our Founder
           </h2>
           <div className="flex flex-col md:flex-row-reverse gap-8 items-center">
             <div className="flex-1">
-              <p className="text-xl mb-6">
+              <p className="text-xl mb-6 bg-white/5 p-4 rounded-lg backdrop-blur-sm border border-white/10 shadow-[0_0_15px_rgba(30,174,219,0.2)]">
                 "What started as scribbles on my apartment wall has grown into a mission to democratize energy intelligence for everyone. I saw how people struggled with their utility bills, and I knew there had to be a better way."
               </p>
               <p className="text-lg mb-4">
@@ -109,13 +89,14 @@ const About = () => {
               </p>
             </div>
             <div className="flex-1 flex justify-center">
-              <div className="relative">
+              <div className="relative overflow-hidden rounded-xl transition-transform duration-500 hover:scale-105">
                 <img 
                   src="/images/content/IMG_5164 Small.jpeg" 
                   alt="kWattz Founder" 
                   className="rounded-xl shadow-lg max-w-full md:max-w-md"
                 />
                 <div className="absolute inset-0 bg-[#111F54]/40 rounded-xl" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1EAEDB]/20 to-transparent opacity-70 rounded-xl"></div>
               </div>
             </div>
           </div>
@@ -123,18 +104,18 @@ const About = () => {
 
         {/* Our Mission Section */}
         <section className="mb-20">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#C3FF44' }}>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#C3FF44]" style={{ textShadow: '0 0 10px rgba(195,255,68,0.5)' }}>
             Our Mission
           </h2>
           <p className="text-xl mb-8 max-w-3xl">
             At kWattz, we're on a mission to empower households with AI-driven insights that make energy management simple, accessible, and effective.
           </p>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl">
-            <div className="bg-white/10 p-6 rounded-xl border border-white/20">
-              <h3 className="text-xl font-bold mb-4" style={{ color: '#C3FF44' }}>Our Values</h3>
+            <div className="bg-white/10 p-6 rounded-xl border border-white/20 shadow-[0_0_20px_rgba(195,255,68,0.15)] hover:shadow-[0_0_30px_rgba(195,255,68,0.3)] transition-all duration-300">
+              <h3 className="text-xl font-bold mb-4 text-[#C3FF44]">Our Values</h3>
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
-                  <div className="bg-[#C3FF44]/20 p-2 rounded-full mt-0.5">
+                  <div className="bg-[#C3FF44]/20 p-2 rounded-full mt-0.5 shadow-[0_0_10px_rgba(195,255,68,0.4)]">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C3FF44" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12"></polyline>
                     </svg>
@@ -142,7 +123,7 @@ const About = () => {
                   <span><strong>Simplicity:</strong> We turn complex energy data into easy-to-understand insights.</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <div className="bg-[#C3FF44]/20 p-2 rounded-full mt-0.5">
+                  <div className="bg-[#C3FF44]/20 p-2 rounded-full mt-0.5 shadow-[0_0_10px_rgba(195,255,68,0.4)]">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C3FF44" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12"></polyline>
                     </svg>
@@ -150,7 +131,7 @@ const About = () => {
                   <span><strong>Transparency:</strong> We believe in clear communication and honest advice.</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <div className="bg-[#C3FF44]/20 p-2 rounded-full mt-0.5">
+                  <div className="bg-[#C3FF44]/20 p-2 rounded-full mt-0.5 shadow-[0_0_10px_rgba(195,255,68,0.4)]">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C3FF44" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12"></polyline>
                     </svg>
@@ -159,8 +140,8 @@ const About = () => {
                 </li>
               </ul>
             </div>
-            <div className="bg-white/10 p-6 rounded-xl border border-white/20">
-              <h3 className="text-xl font-bold mb-4" style={{ color: '#C3FF44' }}>Our Team</h3>
+            <div className="bg-white/10 p-6 rounded-xl border border-white/20 shadow-[0_0_20px_rgba(30,174,219,0.15)] hover:shadow-[0_0_30px_rgba(30,174,219,0.3)] transition-all duration-300">
+              <h3 className="text-xl font-bold mb-4 text-[#C3FF44]">Our Team</h3>
               <p className="mb-4">
                 We're a passionate team of energy experts, data scientists, and developers dedicated to making energy intelligence accessible to everyone.
               </p>
@@ -172,25 +153,25 @@ const About = () => {
         </section>
 
         {/* Benefits Section */}
-        <section className="mb-20 bg-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/10">
-          <h2 className="text-3xl font-bold mb-8 text-center" style={{ color: '#C3FF44' }}>
+        <section className="mb-20 bg-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/10 shadow-[0_0_30px_rgba(217,70,239,0.15)] hover:shadow-[0_0_40px_rgba(217,70,239,0.25)] transition-all duration-500">
+          <h2 className="text-3xl font-bold mb-8 text-center text-[#C3FF44]" style={{ textShadow: '0 0 10px rgba(195,255,68,0.5)' }}>
             A Win for You, the Grid, and the Planet
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white/10 p-6 rounded-xl border border-white/20">
-              <h3 className="text-xl font-bold mb-4" style={{ color: '#C3FF44' }}>For You</h3>
+            <div className="bg-white/10 p-6 rounded-xl border border-white/20 shadow-[0_0_15px_rgba(195,255,68,0.2)] hover:shadow-[0_0_25px_rgba(195,255,68,0.35)] hover:-translate-y-1 transition-all duration-300">
+              <h3 className="text-xl font-bold mb-4 text-[#C3FF44]">For You</h3>
               <p className="text-lg">
                 Understand your electric bill. Cut monthly costs.
               </p>
             </div>
-            <div className="bg-white/10 p-6 rounded-xl border border-white/20">
-              <h3 className="text-xl font-bold mb-4" style={{ color: '#C3FF44' }}>For Power Companies</h3>
+            <div className="bg-white/10 p-6 rounded-xl border border-white/20 shadow-[0_0_15px_rgba(30,174,219,0.2)] hover:shadow-[0_0_25px_rgba(30,174,219,0.35)] hover:-translate-y-1 transition-all duration-300">
+              <h3 className="text-xl font-bold mb-4 text-[#C3FF44]">For Power Companies</h3>
               <p className="text-lg">
                 Improve grid efficiency, avoid overloads.
               </p>
             </div>
-            <div className="bg-white/10 p-6 rounded-xl border border-white/20">
-              <h3 className="text-xl font-bold mb-4" style={{ color: '#C3FF44' }}>For the Planet</h3>
+            <div className="bg-white/10 p-6 rounded-xl border border-white/20 shadow-[0_0_15px_rgba(217,70,239,0.2)] hover:shadow-[0_0_25px_rgba(217,70,239,0.35)] hover:-translate-y-1 transition-all duration-300">
+              <h3 className="text-xl font-bold mb-4 text-[#C3FF44]">For the Planet</h3>
               <p className="text-lg">
                 Reduce energy waste, shrink your carbon impact.
               </p>
@@ -200,11 +181,11 @@ const About = () => {
 
         {/* CTA Section */}
         <section className="mb-20 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8" style={{ color: '#C3FF44' }}>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-[#C3FF44]" style={{ textShadow: '0 0 10px rgba(195,255,68,0.5)' }}>
             Ready to Take Control of Your Energy?
           </h2>
           <Button 
-            className="text-[#111F54] text-lg py-6 px-8 hover:bg-[#C3FF44]/90" 
+            className="text-[#111F54] text-lg py-6 px-8 hover:bg-[#C3FF44]/90 shadow-[0_0_20px_rgba(195,255,68,0.4)] hover:shadow-[0_0_30px_rgba(195,255,68,0.6)] transition-all duration-300" 
             style={{ backgroundColor: '#C3FF44' }} 
             asChild
           >
