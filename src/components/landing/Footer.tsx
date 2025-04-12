@@ -13,11 +13,11 @@ const Footer = () => {
               <img 
                 src="/logo-final-transparent.png" 
                 alt="kWattz Logo" 
-                className="h-20 w-auto"
+                className="h-16 w-auto inline-block mr-2"
               />
             </h3>
-            <p className="max-w-md mt-1 text-sm">
-              AI-powered energy management system that helps you understand and optimize your energy usage.
+            <p className="max-w-md mt-0 text-sm">
+              Your personal AI-powered energy advisor that helps you to understand and optimize your energy usage.
             </p>
             <p className="mt-1 text-[#C3FF44]">
               <a 
