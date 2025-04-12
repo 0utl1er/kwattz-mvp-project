@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Mail, Linkedin } from "lucide-react";
@@ -8,8 +9,14 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="mb-6 md:mb-0">
-            <h3 className="text-2xl font-bold mb-2" style={{ color: '#C3FF44' }}>
-              kWattz⚡
+            <h3 className="text-2xl font-bold mb-2 relative">
+              <span className="relative z-10 text-[#C3FF44] drop-shadow-[0_0_8px_rgba(195,255,68,0.8)]" 
+                style={{ 
+                  textShadow: "0 0 10px rgba(195, 255, 68, 0.8), 0 0 20px rgba(195, 255, 68, 0.4)",
+                  animation: "neonPulse 3s infinite ease-in-out"
+                }}>
+                kWattz⚡
+              </span>
             </h3>
             <p className="max-w-md mt-0 text-sm">
               Your personal AI-powered energy advisor that helps you to understand and optimize your energy usage.
@@ -51,6 +58,20 @@ const Footer = () => {
             </div>
           </div>
         </div>
+
+        <style jsx>{`
+          @keyframes neonPulse {
+            0% {
+              text-shadow: 0 0 10px rgba(195, 255, 68, 0.8), 0 0 20px rgba(195, 255, 68, 0.4);
+            }
+            50% {
+              text-shadow: 0 0 15px rgba(195, 255, 68, 1), 0 0 30px rgba(195, 255, 68, 0.8), 0 0 40px rgba(195, 255, 68, 0.4);
+            }
+            100% {
+              text-shadow: 0 0 10px rgba(195, 255, 68, 0.8), 0 0 20px rgba(195, 255, 68, 0.4);
+            }
+          }
+        `}</style>
 
         <div className="mt-12 border-t border-white/20 pt-8">
           <h4 className="text-lg font-semibold mb-6 text-center" style={{ color: '#C3FF44' }}>Proudly Supported By</h4>
