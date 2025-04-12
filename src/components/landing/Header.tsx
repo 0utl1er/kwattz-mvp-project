@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -13,13 +12,6 @@ const Header = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold" style={{ color: '#C3FF44' }}>
               Take control of your Electric Bill with
             </h1>
-            <div className="flex justify-start items-center -mt-2">
-              <img 
-                src="/logo-final-transparent.png" 
-                alt="kWattz Logo" 
-                className="h-52 md:h-60 lg:h-72 w-auto" 
-              />
-            </div>
             <p className="text-xl text-white md:pr-12 -mt-4">
               Our AI-powered energy advisor helps you understand your electric bills, save money, and make smarter energy decisions.
             </p>

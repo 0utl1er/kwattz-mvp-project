@@ -114,13 +114,7 @@ const Contact = () => {
     <div className="min-h-screen bg-[#111F54] text-white">
       <header className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-center">
-          <Link to="/">
-            <img 
-              src="/logo-final-transparent.png" 
-              alt="kWattz Logo" 
-              className="h-28 w-auto" 
-            />
-          </Link>
+          {/* Removed logo */}
         </div>
       </header>
 
