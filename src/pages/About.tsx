@@ -43,7 +43,7 @@ const About = () => {
         {/* Company Story Section */}
         <section className="mb-20 bg-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/10 shadow-[0_0_30px_rgba(195,255,68,0.15)] hover:shadow-[0_0_40px_rgba(195,255,68,0.25)] transition-all duration-500">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#C3FF44] glow-text" style={{ textShadow: '0 0 10px rgba(195,255,68,0.5)' }}>
-            Our Story
+            kWattz Story
           </h2>
           <div className="flex flex-col md:flex-row gap-8 items-center">
             <div className="flex-1">
@@ -74,7 +74,7 @@ const About = () => {
         {/* Founder Section */}
         <section className="mb-20">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#C3FF44]" style={{ textShadow: '0 0 10px rgba(195,255,68,0.5)' }}>
-            Meet Our Founder
+          Who is building it — or at least trying to?
           </h2>
           <div className="flex flex-col md:flex-row-reverse gap-8 items-center">
             <div className="flex-1">
@@ -105,7 +105,7 @@ const About = () => {
         {/* Our Mission Section */}
         <section className="mb-20">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#C3FF44]" style={{ textShadow: '0 0 10px rgba(195,255,68,0.5)' }}>
-            Our Mission
+            kWattz Mission
           </h2>
           <p className="text-xl mb-8 max-w-3xl">
             At kWattz, we're on a mission to empower households with AI-driven insights that make energy management simple, accessible, and effective.
