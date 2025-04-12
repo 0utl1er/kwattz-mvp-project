@@ -79,11 +79,14 @@ const About = () => {
               </p>
             </div>
             <div className="flex-1 flex justify-center">
-              <img 
-                src="/images/content/the-wall.jpeg" 
-                alt="The Wall - kWattz infrastructure planning" 
-                className="rounded-xl shadow-lg max-w-full md:max-w-md"
-              />
+              <div className="relative">
+                <img 
+                  src="/images/content/the-wall.jpeg" 
+                  alt="The Wall - kWattz infrastructure planning" 
+                  className="rounded-xl shadow-lg max-w-full md:max-w-md"
+                />
+                <div className="absolute inset-0 bg-[#111F54]/40 rounded-xl" />
+              </div>
             </div>
           </div>
         </section>
@@ -106,11 +109,14 @@ const About = () => {
               </p>
             </div>
             <div className="flex-1 flex justify-center">
-              <img 
-                src="/images/content/IMG_5164 Small.jpeg" 
-                alt="kWattz Founder" 
-                className="rounded-xl shadow-lg max-w-full md:max-w-md"
-              />
+              <div className="relative">
+                <img 
+                  src="/images/content/IMG_5164 Small.jpeg" 
+                  alt="kWattz Founder" 
+                  className="rounded-xl shadow-lg max-w-full md:max-w-md"
+                />
+                <div className="absolute inset-0 bg-[#111F54]/40 rounded-xl" />
+              </div>
             </div>
           </div>
         </section>
@@ -214,4 +220,3 @@ const About = () => {
 };
 
 export default About;
-
