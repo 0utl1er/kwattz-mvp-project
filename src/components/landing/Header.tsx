@@ -12,12 +12,6 @@ const Header = () => {
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold flex items-center gap-2" style={{ color: '#C3FF44' }}>
               Take control of your Electric Bill with kWattz⚡
-              <span 
-                className="ml-[-0.5rem] animate-pulse transform hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_25px_rgba(255,206,1,0.8)] pulse-glow inline-block" 
-                style={{ color: '#FFCE01' }}
-              >
-                ⚡
-              </span>
             </h1>
             <p className="text-xl text-white md:pr-12 -mt-4">
               Our AI-powered energy advisor helps you understand your electric bills, save money, and make smarter energy decisions.
