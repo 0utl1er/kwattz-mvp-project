@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Calendar } from 'lucide-react';
@@ -93,7 +92,7 @@ const blogPosts = [
 
 const BlogCard = ({ post }: { post: typeof blogPosts[0] }) => {
   return (
-    <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/20 overflow-hidden transition-all duration-300 hover:border-[#C3FF44]/30 hover:translate-y-[-5px]">
+    <div className="bg-[#C3FF44]/10 backdrop-blur-sm rounded-xl border border-[#C3FF44]/30 overflow-hidden transition-all duration-300 hover:border-[#C3FF44]/50 hover:translate-y-[-5px] card-glow">
       <div className="relative h-48 overflow-hidden">
         <img 
           src={post.image} 
@@ -132,20 +131,11 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-[#111F54] text-white">
-      {/* Header */}
       <header className="container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center">
-          <Link to="/">
-            <img 
-              src="/logo-final-transparent.png" 
-              alt="kWattz Logo" 
-              className="h-28 w-auto" 
-            />
-          </Link>
+        <div className="flex justify-end items-center">
         </div>
       </header>
 
-      {/* Back to Home Button */}
       <div className="container mx-auto px-4 mb-6">
         <Button 
           className="bg-[#111F54] text-[#C3FF44] hover:bg-[#1EAEDB]/10"
@@ -158,10 +148,9 @@ const Blog = () => {
         </Button>
       </div>
 
-      {/* Main Content */}
       <main className="container mx-auto px-4 py-6">
         <section className="max-w-7xl mx-auto mb-20">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center" style={{ color: '#C3FF44' }}>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-glow" style={{ color: '#C3FF44' }}>
             Latest Articles
           </h2>
           
@@ -173,7 +162,6 @@ const Blog = () => {
         </section>
       </main>
 
-      {/* Footer */}
       <Footer />
     </div>
   );
