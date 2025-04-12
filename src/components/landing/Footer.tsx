@@ -12,9 +12,9 @@ const Footer = () => {
             <h3 className="text-2xl font-bold mb-2 relative">
               <span className="relative z-10 text-[#C3FF44] drop-shadow-[0_0_8px_rgba(195,255,68,0.8)]" 
                 style={{ 
-                  textShadow: "0 0 10px rgba(195, 255, 68, 0.8), 0 0 20px rgba(195, 255, 68, 0.4)",
-                  animation: "neonPulse 4s infinite ease-in-out"
-                }}>
+                  textShadow: "0 0 10px rgba(195, 255, 68, 0.8), 0 0 20px rgba(195, 255, 68, 0.4)"
+                }}
+                className="neon-text">
                 kWattz⚡
               </span>
             </h3>
@@ -59,7 +59,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <style jsx>{`
+        {/* Add the keyframes animation to the document */}
+        <style dangerouslySetInnerHTML={{ __html: `
           @keyframes neonPulse {
             0%, 100% {
               text-shadow: 
@@ -75,7 +76,10 @@ const Footer = () => {
               opacity: 1;
             }
           }
-        `}</style>
+          .neon-text {
+            animation: neonPulse 4s infinite ease-in-out;
+          }
+        `}} />
 
         <div className="mt-12 border-t border-white/20 pt-8">
           <h4 className="text-lg font-semibold mb-6 text-center" style={{ color: '#C3FF44' }}>Proudly Supported By</h4>
