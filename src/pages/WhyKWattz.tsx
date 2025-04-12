@@ -1,11 +1,15 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Footer from "@/components/landing/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Zap, PiggyBank, Leaf } from "lucide-react";
 
 const WhyKWattz = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col bg-[#111F54] text-white">
       <div className="container mx-auto px-4 py-6">
