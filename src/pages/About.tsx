@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Mail } from "lucide-react";
@@ -8,6 +8,10 @@ import { useIsMobile } from '../hooks/use-mobile';
 
 const About = () => {
   const isMobile = useIsMobile();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#111F54] text-white">
@@ -16,7 +20,7 @@ const About = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <Link to="/">
             <img 
-              src="/brain2.png" 
+              src="/logo-final-transparent.png" 
               alt="kWattz Logo" 
               className="h-28 w-auto" 
             />
@@ -44,7 +48,82 @@ const About = () => {
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-12">
-        {/* Hero Section - Removed as requested */}
+        {/* Company Story Section */}
+        <section className="mb-20 bg-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/10">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#C3FF44' }}>
+            Our Story
+          </h2>
+          <div className="flex flex-col md:flex-row gap-8 items-center">
+            <div className="flex-1">
+              <p className="text-lg mb-4">
+                Founded in 2023, kWattz emerged from a simple observation: people are overwhelmed by their energy bills and don't know how to reduce them.
+              </p>
+              <p className="text-lg mb-4">
+                Our founder, a former energy industry consultant, noticed that despite the push for energy efficiency, most consumers lacked the tools to understand their consumption patterns in an actionable way.
+              </p>
+              <p className="text-lg mb-4">
+                What began as a small project to help friends and family optimize their energy usage quickly evolved into a mission to democratize energy intelligence for everyone.
+              </p>
+            </div>
+            <div className="flex-1 flex justify-center">
+              <img 
+                src="/happycustomer.jpg" 
+                alt="Satisfied kWattz customer" 
+                className="rounded-xl shadow-lg max-w-full md:max-w-md"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Our Mission Section */}
+        <section className="mb-20">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#C3FF44' }}>
+            Our Mission
+          </h2>
+          <p className="text-xl mb-8 max-w-3xl">
+            At kWattz, we're on a mission to empower households with AI-driven insights that make energy management simple, accessible, and effective.
+          </p>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl">
+            <div className="bg-white/10 p-6 rounded-xl border border-white/20">
+              <h3 className="text-xl font-bold mb-4" style={{ color: '#C3FF44' }}>Our Values</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <div className="bg-[#C3FF44]/20 p-2 rounded-full mt-0.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C3FF44" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <span><strong>Simplicity:</strong> We turn complex energy data into easy-to-understand insights.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="bg-[#C3FF44]/20 p-2 rounded-full mt-0.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C3FF44" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <span><strong>Transparency:</strong> We believe in clear communication and honest advice.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="bg-[#C3FF44]/20 p-2 rounded-full mt-0.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C3FF44" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <span><strong>Impact:</strong> We measure our success by the money we save our users and the carbon emissions we help prevent.</span>
+                </li>
+              </ul>
+            </div>
+            <div className="bg-white/10 p-6 rounded-xl border border-white/20">
+              <h3 className="text-xl font-bold mb-4" style={{ color: '#C3FF44' }}>Our Team</h3>
+              <p className="mb-4">
+                We're a passionate team of energy experts, data scientists, and developers dedicated to making energy intelligence accessible to everyone.
+              </p>
+              <p>
+                Based in California, our team combines deep industry knowledge with cutting-edge AI technology to deliver a service that truly makes a difference in people's lives and on our planet.
+              </p>
+            </div>
+          </div>
+        </section>
 
         {/* Problem Section */}
         <section className="mb-20 bg-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/10">
@@ -171,33 +250,6 @@ const About = () => {
           >
             <Link to="/kwattz-signup">Start Saving Today <ArrowRight className="ml-2" /></Link>
           </Button>
-        </section>
-
-        {/* Partners Section */}
-        <section className="mb-20">
-          <h2 className="text-3xl font-bold mb-8 text-center" style={{ color: '#C3FF44' }}>
-            Trusted By Industry Leaders
-          </h2>
-          <div className="flex flex-col md:flex-row justify-center items-center gap-8">
-            <div className="bg-white/10 backdrop-blur-lg p-4 rounded-xl border border-white/20 hover:border-[#C3FF44]/50 transition-colors">
-              <a href="https://startup.google.com" target="_blank" rel="noopener noreferrer">
-                <img 
-                  src="/google-for-startups-banner.png" 
-                  alt="Google for Startups" 
-                  className="h-8 md:h-10 w-auto"
-                />
-              </a>
-            </div>
-            <div className="bg-white/10 backdrop-blur-lg p-4 rounded-xl border border-white/20 hover:border-[#C3FF44]/50 transition-colors">
-              <a href="https://foundershub.startups.microsoft.com" target="_blank" rel="noopener noreferrer">
-                <img 
-                  src="/microsoft-for-startups-founders-hub-banner.png" 
-                  alt="Microsoft for Startups Founders Hub" 
-                  className="h-8 md:h-10 w-auto"
-                />
-              </a>
-            </div>
-          </div>
         </section>
       </main>
 
