@@ -33,7 +33,8 @@ const Footer = () => {
             <div>
               <h4 className="text-lg font-semibold mb-4" style={{ color: '#C3FF44' }}>Product</h4>
               <ul className="space-y-2">
-                <li><Link to="/about" className="hover:text-[#C3FF44]">About</Link></li>
+                <li><Link to="/" className="hover:text-[#C3FF44]">Home</Link></li>
+                <li><Link to="/about" className="hover:text-[#C3FF44]">Why kWattz?</Link></li>
                 <li><Link to="/pricing" className="hover:text-[#C3FF44]">Pricing</Link></li>
                 <li><Link to="/faq" className="hover:text-[#C3FF44]">FAQ</Link></li>
               </ul>
