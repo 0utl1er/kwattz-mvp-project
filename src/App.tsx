@@ -12,6 +12,7 @@ import EnergyQuestionnaire from "./pages/EnergyQuestionnaire";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import About from "./pages/About";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/questionnaire" element={<EnergyQuestionnaire />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/about" element={<About />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
