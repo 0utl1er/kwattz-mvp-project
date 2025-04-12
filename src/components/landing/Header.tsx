@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -12,11 +11,11 @@ const Header = () => {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold" style={{ color: '#C3FF44' }}>
             Take control of your Electric Bill with
           </h1>
-          <div className="flex justify-start">
+          <div className="flex justify-start items-center -mt-2 mb-4">
             <img 
               src="/logo-final-transparent.png" 
               alt="kWattz Logo" 
-              className="h-16 md:h-20 lg:h-24 w-auto" 
+              className="h-24 md:h-32 lg:h-40 w-auto" 
             />
           </div>
           <p className="text-xl text-white md:pr-12">
