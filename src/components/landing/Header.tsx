@@ -25,7 +25,7 @@ const Header = () => {
             </p>
             <div className="pt-4 flex flex-col sm:flex-row gap-4">
               <Button className="text-[#111F54] text-lg py-6 px-8" style={{ backgroundColor: '#C3FF44' }} asChild>
-                <Link to="/signup">Get Started <ArrowRight className="ml-2" /></Link>
+                <Link to="/kwattz-signup">Get Started <ArrowRight className="ml-2" /></Link>
               </Button>
               <Button 
                 className="text-[#111F54] text-lg py-6 px-8 hover:bg-[#C3FF44]/90" 
