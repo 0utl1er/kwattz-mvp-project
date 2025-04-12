@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -9,6 +9,8 @@ import { toast } from "@/hooks/use-toast";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { useAnalyzeBill } from "@/hooks/use-analyze-bill";
 import { FormValues } from "@/types/questionnaire";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 
 import QuestionnaireNavigation from "@/components/questionnaire/QuestionnaireNavigation";
 import PersonalInfoTab from "@/components/questionnaire/PersonalInfoTab";
@@ -220,6 +222,15 @@ const EnergyQuestionnaire = () => {
   return (
     <div className="min-h-screen bg-[#111F54] flex flex-col items-center p-4">
       <div className="w-full max-w-4xl">
+        <div className="container mx-auto px-4 py-6 absolute top-0 left-0 right-0">
+          <Link to="/">
+            <Button variant="outline" className="bg-transparent border-[#C3FF44] text-[#C3FF44] hover:bg-[#C3FF44]/10">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Home
+            </Button>
+          </Link>
+        </div>
+
         <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 md:p-8 border border-white/20 mt-8">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-[#C3FF44]">Energy Usage Questionnaire</h1>
