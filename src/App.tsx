@@ -16,6 +16,7 @@ import About from "./pages/About";
 import Pricing from "./pages/Pricing";
 import WhyKWattz from "./pages/WhyKWattz";
 import Contact from "./pages/Contact";
+import FAQ from "./pages/FAQ";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,7 @@ const App = () => (
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/why-kwattz" element={<WhyKWattz />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/faq" element={<FAQ />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
