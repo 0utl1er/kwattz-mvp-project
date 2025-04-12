@@ -6,33 +6,35 @@ import { ArrowRight, LightbulbIcon, BadgeDollarSign, BarChart3 } from "lucide-re
 
 const Header = () => {
   return (
-    <header className="container mx-auto px-4 py-16 md:py-24">
-      <div className="flex flex-col lg:flex-row items-center gap-12">
-        <div className="flex-1 space-y-0">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2" style={{ color: '#C3FF44' }}>
-            Take control of your Electric Bill with
-          </h1>
-          <div className="flex justify-start items-center -mt-2 mb-2">
-            <img 
-              src="/logo-final-transparent.png" 
-              alt="kWattz Logo" 
-              className="h-48 md:h-56 lg:h-64 w-auto" 
-            />
-          </div>
-          <p className="text-xl text-white md:pr-12 -mt-2">
-            Our AI-powered advisor helps you understand your electric bills, save money, and make smarter energy decisions.
-          </p>
-          <div className="pt-4 flex flex-col sm:flex-row gap-4">
-            <Button className="text-[#111F54] text-lg py-6 px-8" style={{ backgroundColor: '#C3FF44' }} asChild>
-              <Link to="/signup">Get Started <ArrowRight className="ml-2" /></Link>
-            </Button>
-            <Button 
-              className="text-[#111F54] text-lg py-6 px-8 hover:bg-[#C3FF44]/90" 
-              style={{ backgroundColor: '#C3FF44' }} 
-              asChild
-            >
-              <Link to="/login">Login</Link>
-            </Button>
+    <header className="container mx-auto px-4 py-12 md:py-20">
+      <div className="flex flex-col lg:flex-row items-center gap-8">
+        <div className="flex-1">
+          <div className="space-y-4">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold" style={{ color: '#C3FF44' }}>
+              Take control of your Electric Bill with
+            </h1>
+            <div className="flex justify-start items-center -mt-6">
+              <img 
+                src="/logo-final-transparent.png" 
+                alt="kWattz Logo" 
+                className="h-52 md:h-60 lg:h-72 w-auto transform -translate-y-1" 
+              />
+            </div>
+            <p className="text-xl text-white md:pr-12 -mt-8">
+              Our AI-powered advisor helps you understand your electric bills, save money, and make smarter energy decisions.
+            </p>
+            <div className="pt-4 flex flex-col sm:flex-row gap-4">
+              <Button className="text-[#111F54] text-lg py-6 px-8" style={{ backgroundColor: '#C3FF44' }} asChild>
+                <Link to="/signup">Get Started <ArrowRight className="ml-2" /></Link>
+              </Button>
+              <Button 
+                className="text-[#111F54] text-lg py-6 px-8 hover:bg-[#C3FF44]/90" 
+                style={{ backgroundColor: '#C3FF44' }} 
+                asChild
+              >
+                <Link to="/login">Login</Link>
+              </Button>
+            </div>
           </div>
         </div>
         <div className="flex-1 flex justify-center">
