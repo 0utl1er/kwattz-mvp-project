@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Mail, Linkedin } from "lucide-react";
@@ -9,12 +8,8 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="mb-6 md:mb-0">
-            <h3 className="mb-1">
-              <img 
-                src="/logo-final-transparent.png" 
-                alt="kWattz Logo" 
-                className="h-16 w-auto inline-block mr-2"
-              />
+            <h3 className="text-2xl font-bold mb-2" style={{ color: '#C3FF44' }}>
+              kWattz⚡
             </h3>
             <p className="max-w-md mt-0 text-sm">
               Your personal AI-powered energy advisor that helps you to understand and optimize your energy usage.
