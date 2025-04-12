@@ -13,7 +13,7 @@ const Footer = () => {
               <img 
                 src="/logo-final-transparent.png" 
                 alt="kWattz Logo" 
-                className="h-12 w-auto" 
+                className="h-20 w-auto" // Increased height from h-12 to h-20
               />
             </h3>
             <p className="max-w-md">
