@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -48,7 +49,7 @@ const About = () => {
       {/* Back to Home Button */}
       <div className="container mx-auto px-4 mb-6">
         <Button 
-          className="text-[#C3FF44] border-[#C3FF44] hover:bg-[#C3FF44]/10"
+          className="bg-[#111F54] text-[#C3FF44] hover:bg-[#1EAEDB]/10"
           variant="outline"
           asChild
         >
@@ -213,3 +214,4 @@ const About = () => {
 };
 
 export default About;
+
