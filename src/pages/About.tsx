@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight, Mail } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import Footer from '../components/landing/Footer';
 import { useIsMobile } from '../hooks/use-mobile';
 
@@ -20,9 +20,9 @@ const About = () => {
       <div className="absolute bottom-1/4 right-1/3 w-80 h-80 bg-[#1EAEDB]/30 rounded-full blur-[120px] -z-10 animate-pulse" style={{animationDelay: "1.5s"}}></div>
       <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-[#D946EF]/20 rounded-full blur-[80px] -z-10 animate-pulse" style={{animationDelay: "0.7s"}}></div>
 
-      {/* Header - removed logo and login/signup buttons */}
+      {/* Header - empty placeholder */}
       <header className="container mx-auto px-4 py-8">
-        {/* Empty header - logo and buttons removed */}
+        {/* Empty header */}
       </header>
 
       {/* Back to Home Button */}
