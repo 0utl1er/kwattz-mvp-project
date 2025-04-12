@@ -13,7 +13,7 @@ const PrivacyPolicy = () => {
           <img 
             src="/brain2.png" 
             alt="kWattz Logo" 
-            className="h-20 w-auto" 
+            className="h-40 w-auto" // Changed from h-20 to h-40 to make it 2x bigger
           />
         </Link>
       </div>
