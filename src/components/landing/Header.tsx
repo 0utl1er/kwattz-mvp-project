@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, LightbulbIcon, BadgeDollarSign, BarChart3 } from "lucide-react";
+import { ArrowRight, LightbulbIcon, BadgeDollarSign, BarChart3, Bolt } from "lucide-react";
 
 const Header = () => {
   return (
@@ -9,8 +9,15 @@ const Header = () => {
       <div className="flex flex-col lg:flex-row items-center gap-8">
         <div className="flex-1">
           <div className="space-y-4">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold" style={{ color: '#C3FF44' }}>
-              Take control of your Electric Bill with kWattz⚡</h1>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold flex items-center gap-2" style={{ color: '#C3FF44' }}>
+              Take control of your Electric Bill with kWattz
+              <Bolt 
+                className="text-[#FFCE01] animate-pulse transform hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_10px_rgba(255,206,1,0.5)]" 
+                size={48} 
+                fill="#E4DD85" 
+                strokeWidth={2} 
+              />
+            </h1>
             <p className="text-xl text-white md:pr-12 -mt-4">
               Our AI-powered energy advisor helps you understand your electric bills, save money, and make smarter energy decisions.
             </p>
