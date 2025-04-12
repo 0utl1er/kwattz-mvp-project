@@ -113,7 +113,7 @@ const BlogCard = ({ post }: { post: typeof blogPosts[0] }) => {
         <p className="text-white/80 text-sm mb-4">{post.excerpt}</p>
         <Button 
           variant="outline" 
-          className="text-[#C3FF44] bg-[#111F54] hover:bg-[#111F54]/90 border-[#C3FF44]/20 hover:border-[#C3FF44]/30 shadow-none"
+          className="text-[#C3FF44] bg-[#111F54] hover:bg-[#111F54]/80 border-[#C3FF44]/10 hover:border-[#C3FF44]/20 shadow-sm hover:shadow-none"
           asChild
         >
           <Link to={`/blog/${post.slug}`}>
