@@ -30,7 +30,7 @@ const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
           "disabled:cursor-not-allowed disabled:opacity-50",
           "transition-all duration-200 ease-in-out",
           "shadow-sm hover:shadow-md hover:border-[#C3FF44]/50",
-          "md:text-sm",
+          "md:text-sm input-glow",
           className
         )}
         ref={ref}

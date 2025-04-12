@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -97,5 +98,39 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Subtle Glow Effects */
+@layer utilities {
+  /* Button glow effect */
+  .btn-glow {
+    @apply shadow-[0_0_15px_rgba(195,255,68,0.3)] hover:shadow-[0_0_25px_rgba(195,255,68,0.5)] transition-all duration-300;
+  }
+  
+  /* Text glow effect */
+  .text-glow {
+    text-shadow: 0 0 8px rgba(195, 255, 68, 0.3);
+  }
+  
+  /* Card glow effect */
+  .card-glow {
+    @apply shadow-[0_0_20px_rgba(30,174,219,0.15)] hover:shadow-[0_0_30px_rgba(30,174,219,0.25)] transition-all duration-300;
+  }
+  
+  /* Input glow effect */
+  .input-glow:focus {
+    @apply shadow-[0_0_15px_rgba(195,255,68,0.2)] outline-none border-[#C3FF44]/30;
+  }
+  
+  /* Energizing pulse animation */
+  @keyframes subtle-pulse {
+    0% { box-shadow: 0 0 10px rgba(195, 255, 68, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(195, 255, 68, 0.3); }
+    100% { box-shadow: 0 0 10px rgba(195, 255, 68, 0.2); }
+  }
+  
+  .pulse-glow {
+    animation: subtle-pulse 3s infinite ease-in-out;
   }
 }
