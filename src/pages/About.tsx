@@ -50,8 +50,8 @@ const About = () => {
       {/* Back to Home Button */}
       <div className="container mx-auto px-4 mb-6">
         <Button 
-          variant="outline" 
-          className="border-[#C3FF44] text-[#C3FF44] hover:bg-[#C3FF44]/10"
+          className="text-[#C3FF44] border-[#C3FF44] hover:bg-[#C3FF44]/10"
+          variant="outline"
           asChild
         >
           <Link to="/">
@@ -164,96 +164,6 @@ const About = () => {
               </p>
             </div>
           </div>
-        </section>
-
-        {/* Problem Section */}
-        <section className="mb-20 bg-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#C3FF44' }}>
-            The Problem: Electric Bills Are Too High, Too Confusing
-          </h2>
-          <div className="flex flex-col md:flex-row gap-8 items-center">
-            <div className="flex-1">
-              <p className="text-lg mb-4">
-                Working with California's largest utilities — PG&E and SDG&E — I kept hearing the same frustration:
-              </p>
-              <blockquote className="border-l-4 pl-4 italic my-6" style={{ borderColor: '#C3FF44' }}>
-                "My electric bill is too high, and I don't understand why."
-              </blockquote>
-              <p className="text-lg mb-6">
-                Between peak/off-peak charges, rate plans, EV charging, and solar panel credits, people feel lost. 
-                Utility apps don't explain. Dashboards are too technical. Most people just keep overpaying — every month.
-              </p>
-              <blockquote className="border-l-4 pl-4 italic my-6" style={{ borderColor: '#C3FF44' }}>
-                "What if we used AI to help people understand how energy works — just like AI is helping people learn language?"
-              </blockquote>
-            </div>
-            <div className="flex-1 flex justify-center">
-              <Card className="bg-white/10 border-white/20 max-w-md overflow-hidden">
-                <CardContent className="p-0">
-                  <img 
-                    src="/happycustomer.jpg" 
-                    alt="Frustrated customer with high energy bill" 
-                    className="w-full h-auto"
-                  />
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
-
-        {/* Solution Section */}
-        <section className="mb-20">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#C3FF44' }}>
-            The Solution: kWattz⚡ AI Energy Assistant
-          </h2>
-          <p className="text-lg mb-8">
-            That's when kWattz was born – your AI energy savings app designed to help you:
-          </p>
-          <ul className="space-y-4 text-lg mb-12 max-w-2xl">
-            <li className="flex items-start gap-3">
-              <div className="bg-[#C3FF44]/20 p-2 rounded-full mt-0.5">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C3FF44" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-              </div>
-              <span>Lower your electric bill</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <div className="bg-[#C3FF44]/20 p-2 rounded-full mt-0.5">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C3FF44" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-              </div>
-              <span>Save on energy costs at home</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <div className="bg-[#C3FF44]/20 p-2 rounded-full mt-0.5">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C3FF44" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-              </div>
-              <span>Reduce your carbon footprint</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <div className="bg-[#C3FF44]/20 p-2 rounded-full mt-0.5">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C3FF44" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-              </div>
-              <span>Optimize EV charging times</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <div className="bg-[#C3FF44]/20 p-2 rounded-full mt-0.5">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C3FF44" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-              </div>
-              <span>Understand what's driving your power bill</span>
-            </li>
-          </ul>
-          <p className="text-lg mb-12">
-            You don't need special devices. No smart meter required. Just upload a bill, enter your details, and let kWattz do the rest.
-          </p>
         </section>
 
         {/* Benefits Section */}
