@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import TopMenu from '../components/layout/TopMenu';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -36,7 +37,7 @@ const formSchema = z.object({
       message: "Message must be at least 10 characters.",
     })
     .max(2000, {
-      message: "Message must not exceed 2000 characters."
+      message: "Message must not exceed 2000 characters"
     })
     .refine(val => !/<script|<\/script|javascript:|onerror=|onclick=|eval\(|fromCharCode/i.test(val), {
       message: "Message contains disallowed content."
@@ -112,25 +113,9 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-[#111F54] text-white">
-      <header className="container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center">
-          {/* Removed logo */}
-        </div>
-      </header>
+      <TopMenu />
 
-      <div className="container mx-auto px-4 mb-6">
-        <Button 
-          className="bg-[#111F54] text-[#C3FF44] hover:bg-[#1EAEDB]/10"
-          variant="outline"
-          asChild
-        >
-          <Link to="/">
-            <ArrowLeft className="mr-2 h-4 w-4" /> Back to Home
-          </Link>
-        </Button>
-      </div>
-
-      <main className="container mx-auto px-4 py-6">
+      <main className="container mx-auto px-4 py-6 pt-24">
         <section className="max-w-3xl mx-auto mb-20 bg-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/10">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center" style={{ color: '#C3FF44' }}>
             Contact Us
