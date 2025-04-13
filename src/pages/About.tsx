@@ -1,9 +1,6 @@
-
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import Footer from '../components/landing/Footer';
+import TopMenu from '../components/layout/TopMenu';
 import { useIsMobile } from '../hooks/use-mobile';
 
 const About = () => {
@@ -20,26 +17,11 @@ const About = () => {
       <div className="absolute bottom-1/4 right-1/3 w-80 h-80 bg-[#1EAEDB]/30 rounded-full blur-[120px] -z-10 animate-pulse" style={{animationDelay: "1.5s"}}></div>
       <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-[#D946EF]/20 rounded-full blur-[80px] -z-10 animate-pulse" style={{animationDelay: "0.7s"}}></div>
 
-      {/* Header - empty placeholder */}
-      <header className="container mx-auto px-4 py-8">
-        {/* Empty header */}
-      </header>
+      {/* Fixed TopMenu */}
+      <TopMenu />
 
-      {/* Back to Home Button */}
-      <div className="container mx-auto px-4 mb-6">
-        <Button 
-          className="bg-[#111F54] text-[#C3FF44] hover:bg-[#1EAEDB]/10 border border-[#C3FF44]/50 shadow-[0_0_15px_rgba(195,255,68,0.3)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(195,255,68,0.5)]"
-          variant="outline"
-          asChild
-        >
-          <Link to="/">
-            <ArrowLeft className="mr-2 h-4 w-4" /> Back to Home
-          </Link>
-        </Button>
-      </div>
-
-      {/* Main Content */}
-      <main className="container mx-auto px-4 py-6">
+      {/* Main Content - adjusted top padding to account for fixed menu */}
+      <main className="container mx-auto px-4 py-6 pt-24">
         {/* Company Story Section */}
         <section className="mb-20 bg-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/10 shadow-[0_0_30px_rgba(195,255,68,0.15)] hover:shadow-[0_0_40px_rgba(195,255,68,0.25)] transition-all duration-500">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#C3FF44] glow-text" style={{ textShadow: '0 0 10px rgba(195,255,68,0.5)' }}>
