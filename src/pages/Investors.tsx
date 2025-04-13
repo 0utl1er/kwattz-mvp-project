@@ -203,7 +203,8 @@ const Investors = () => {
       </div>
       
       {/* Custom CSS for animations */}
-      <style jsx>{`
+      <style>
+        {`
         @keyframes flowDown {
           0% { transform: translateY(-100%); }
           100% { transform: translateY(400%); }
@@ -212,7 +213,8 @@ const Investors = () => {
         .glow-text {
           text-shadow: 0 0 10px rgba(195, 255, 68, 0.7);
         }
-      `}</style>
+        `}
+      </style>
     </div>
   );
 };
