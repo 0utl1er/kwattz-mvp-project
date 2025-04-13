@@ -205,15 +205,16 @@ const Investors = () => {
           <div className="relative">
             {/* Vertical Energy Line */}
             <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-800 z-0">
-              {/* Animated Energy Flow */}
+              {/* Animated Energy Flow - Enhanced glow effect */}
               <div className="absolute top-0 left-0 right-0 bottom-0 overflow-hidden">
                 <div 
                   className="absolute top-0 left-0 right-0 h-full energy-flow" 
                   style={{
                     background: 'linear-gradient(180deg, rgba(195,255,68,0) 0%, rgba(195,255,68,1) 50%, rgba(195,255,68,0) 100%)',
                     height: '30%',
-                    opacity: logoReached ? 1 : 0.3,
-                    transition: 'opacity 0.5s ease-out'
+                    opacity: 1, // Always visible and glowing
+                    boxShadow: '0 0 20px rgba(195,255,68,0.8), 0 0 40px rgba(195,255,68,0.4), 0 0 60px rgba(195,255,68,0.2)',
+                    transition: 'opacity 0.5s ease-out, box-shadow 0.5s ease-out'
                   }}
                 />
               </div>
@@ -256,9 +257,15 @@ const Investors = () => {
                     </Collapsible>
                   </div>
                   
-                  {/* Center Circle with Zap Icon */}
+                  {/* Center Circle with Zap Icon - Updated to change background color when page lights up */}
                   <div className={`${isMobile ? 'mb-0 mt-0' : 'w-2/12'} flex justify-center`}>
-                    <div className={`h-12 w-12 rounded-full flex items-center justify-center bg-black border-2 relative transition-all duration-300 ${activeTimelineItems[index] ? 'border-[#C3FF44] shadow-[0_0_15px_rgba(195,255,68,0.5)]' : 'border-gray-700'}`}>
+                    <div 
+                      className={`h-12 w-12 rounded-full flex items-center justify-center border-2 relative transition-all duration-300 ${activeTimelineItems[index] ? 'border-[#C3FF44] shadow-[0_0_15px_rgba(195,255,68,0.5)]' : 'border-gray-700'}`}
+                      style={{
+                        backgroundColor: pageReveal ? '#111F54' : 'black',
+                        transition: 'background-color 0.5s ease-out'
+                      }}
+                    >
                       <Zap className={`h-6 w-6 ${activeTimelineItems[index] ? 'text-[#C3FF44]' : 'text-gray-500'} transition-all duration-500`} />
                     </div>
                   </div>
@@ -303,6 +310,7 @@ const Investors = () => {
         
         .energy-flow {
           animation: flowDown 3s infinite linear;
+          filter: drop-shadow(0 0 8px rgba(195, 255, 68, 0.8));
         }
         
         .glow-text {
