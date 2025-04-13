@@ -68,18 +68,8 @@ const Investors = () => {
               Meanwhile, let's keep in touch! I'm a brain full of ideas (Not kWattz, me, Pedro!).
             </p>
             
-            {/* Back to Home Button moved under the text block */}
+            {/* Say Hi Button inside the box */}
             <div className="flex flex-col items-center space-y-6 mt-6">
-              <Button 
-                className="bg-black text-[#C3FF44] hover:bg-[#1EAEDB]/10 border border-[#C3FF44]/50 shadow-[0_0_15px_rgba(195,255,68,0.3)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(195,255,68,0.5)]"
-                variant="outline"
-                asChild
-              >
-                <Link to="/">
-                  <ArrowLeft className="mr-2 h-4 w-4" /> Back to Home
-                </Link>
-              </Button>
-              
               <Button 
                 className="text-black text-lg py-6 px-8 hover:bg-[#C3FF44]/90 shadow-[0_0_20px_rgba(195,255,68,0.4)] hover:shadow-[0_0_30px_rgba(195,255,68,0.6)] transition-all duration-300 flex items-center" 
                 style={{ backgroundColor: '#C3FF44' }} 
@@ -91,6 +81,19 @@ const Investors = () => {
                 </Link>
               </Button>
             </div>
+          </div>
+          
+          {/* Back to Home Button moved outside the box */}
+          <div className="mt-6">
+            <Button 
+              className="bg-black text-[#C3FF44] hover:bg-[#1EAEDB]/10 border border-[#C3FF44]/50 shadow-[0_0_15px_rgba(195,255,68,0.3)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(195,255,68,0.5)]"
+              variant="outline"
+              asChild
+            >
+              <Link to="/">
+                <ArrowLeft className="mr-2 h-4 w-4" /> Back to Home
+              </Link>
+            </Button>
           </div>
         </section>
       </main>
