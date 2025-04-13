@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Mailbox, Zap, ChevronDown } from "lucide-react";
@@ -107,7 +108,8 @@ const Investors = () => {
     return () => clearTimeout(timer);
   };
 
-  const animationStyles = {
+  // Using proper type assertions for React.CSSProperties
+  const animationStyles: React.CSSProperties = {
     opacity: energized ? 1 : (blinkCount % 2 === 0 ? 1 : 0.2), // More pronounced blink
     transition: energized 
       ? 'opacity 0.5s ease-out, box-shadow 0.5s ease-out' 
@@ -115,12 +117,12 @@ const Investors = () => {
     boxShadow: energized ? '0 0 50px rgba(195, 255, 68, 0.4)' : 'none'
   };
 
-  const initialDarkStyles = {
+  const initialDarkStyles: React.CSSProperties = {
     filter: logoReached ? (energized ? 'brightness(1)' : `brightness(${0.2 + (blinkCount * 0.04)})`) : 'brightness(0.2)',
     transition: 'filter 0.5s ease-out'
   };
 
-  const hiddenElementStyles = {
+  const hiddenElementStyles: React.CSSProperties = {
     opacity: pageReveal ? 1 : 0,
     visibility: pageReveal ? 'visible' as const : 'hidden' as const,
     transition: 'opacity 0.8s ease-out, visibility 0.8s ease-out',
@@ -157,7 +159,7 @@ const Investors = () => {
 
   return (
     <div 
-      className="min-h-screen bg-black text-white relative overflow-hidden"
+      className={`min-h-screen ${pageReveal ? 'bg-[#111F54]' : 'bg-black'} text-white relative overflow-hidden`}
       style={initialDarkStyles}
     >
       {/* Top Menu - Hidden until animation completes */}
@@ -168,8 +170,8 @@ const Investors = () => {
       {/* Main Content */}
       <main className="container mx-auto px-4 py-6 pt-24" style={animationStyles}>
         
-        {/* Investors Message Section - Hidden until animation completes */}
-        <section className="mb-20 flex flex-col items-center justify-center text-center" style={hiddenElementStyles}>
+        {/* Investors Message Section - Initially visible */}
+        <section className="mb-20 flex flex-col items-center justify-center text-center">
           <div className="max-w-3xl mx-auto bg-black/80 p-8 rounded-2xl backdrop-blur-sm border border-white/10 shadow-[0_0_30px_rgba(195,255,68,0.15)] hover:shadow-[0_0_40px_rgba(195,255,68,0.25)] transition-all duration-500">
             <p className="text-xl md:text-2xl mb-6">
               While I'm busy hustling to validate my concept, take a look at what I've accomplished so far. Meanwhile, let's keep in touch! I'm a brain full of ideas.
@@ -235,7 +237,7 @@ const Investors = () => {
                       onOpenChange={() => toggleTimelineItem(index)}
                       className={`w-full ${openTimelineItems[index] ? 'shadow-[0_0_30px_rgba(195,255,68,0.4)]' : ''} transition-all duration-500`}
                     >
-                      <Card className={`bg-black/40 border-[#C3FF44]/20 overflow-hidden ${openTimelineItems[index] ? 'shadow-[0_0_25px_rgba(195,255,68,0.3)]' : ''} transition-all duration-500 cursor-pointer hover:border-[#C3FF44]/40`}>
+                      <Card className={`${pageReveal ? 'bg-[#111F54]/40' : 'bg-black/40'} border-[#C3FF44]/20 overflow-hidden ${openTimelineItems[index] ? 'shadow-[0_0_25px_rgba(195,255,68,0.3)]' : ''} transition-all duration-500 cursor-pointer hover:border-[#C3FF44]/40`}>
                         <CardContent className="p-6">
                           <CollapsibleTrigger className="w-full flex items-center justify-between">
                             <div>
