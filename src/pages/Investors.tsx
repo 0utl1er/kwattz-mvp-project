@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Mailbox, Zap } from "lucide-react";
@@ -98,20 +99,28 @@ const Investors = () => {
       
       {/* Main Content */}
       <main className="container mx-auto px-4 py-6 pt-24" style={animationStyles}>
-        {/* Investors Title Section */}
-        <section 
-          className="mb-20 flex flex-col items-center justify-center text-center"
-        >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#C3FF44] glow-text">
-            Investors
-          </h1>
-          
-          <img 
-            src="/brain2.png" 
-            alt="Brain Visualization" 
-            className="mb-10 w-full max-w-2xl mx-auto"
-            style={{ maxHeight: '400px', objectFit: 'contain' }}
-          />
+        
+        {/* Investors Message Section - Moved to the top */}
+        <section className="mb-20 flex flex-col items-center justify-center text-center">
+          <div className="max-w-3xl mx-auto bg-black/80 p-8 rounded-2xl backdrop-blur-sm border border-white/10 shadow-[0_0_30px_rgba(195,255,68,0.15)] hover:shadow-[0_0_40px_rgba(195,255,68,0.25)] transition-all duration-500">
+            <p className="text-xl md:text-2xl mb-6">
+              While I'm busy hustling to validate my concept, take a look at what I've accomplished so far. Meanwhile, let's keep in touch! I'm a brain full of ideas.
+            </p>
+            
+            {/* Say Hi Button inside the box */}
+            <div className="flex flex-col items-center space-y-6 mt-6">
+              <Button 
+                className="text-black text-lg py-6 px-8 hover:bg-[#C3FF44]/90 shadow-[0_0_20px_rgba(195,255,68,0.4)] hover:shadow-[0_0_30px_rgba(195,255,68,0.6)] transition-all duration-300 flex items-center" 
+                style={{ backgroundColor: '#C3FF44' }} 
+                asChild
+              >
+                <a href="mailto:investors@kwattz.com">
+                  <Mailbox className="mr-2 h-5 w-5" />
+                  Let's connect!
+                </a>
+              </Button>
+            </div>
+          </div>
         </section>
         
         {/* Timeline Section */}
@@ -175,27 +184,14 @@ const Investors = () => {
           </div>
         </section>
 
-        {/* Investors Message Section - Moved to after the timeline */}
-        <section className="mb-20 flex flex-col items-center justify-center text-center">
-          <div className="max-w-3xl mx-auto bg-black/80 p-8 rounded-2xl backdrop-blur-sm border border-white/10 shadow-[0_0_30px_rgba(195,255,68,0.15)] hover:shadow-[0_0_40px_rgba(195,255,68,0.25)] transition-all duration-500">
-            <p className="text-xl md:text-2xl mb-6">
-              While I'm busy hustling to validate my concept, take a look at what I've accomplished so far. Meanwhile, let's keep in touch! I'm a brain full of ideas.
-            </p>
-            
-            {/* Say Hi Button inside the box */}
-            <div className="flex flex-col items-center space-y-6 mt-6">
-              <Button 
-                className="text-black text-lg py-6 px-8 hover:bg-[#C3FF44]/90 shadow-[0_0_20px_rgba(195,255,68,0.4)] hover:shadow-[0_0_30px_rgba(195,255,68,0.6)] transition-all duration-300 flex items-center" 
-                style={{ backgroundColor: '#C3FF44' }} 
-                asChild
-              >
-                <a href="mailto:investors@kwattz.com">
-                  <Mailbox className="mr-2 h-5 w-5" />
-                  Let's connect!
-                </a>
-              </Button>
-            </div>
-          </div>
+        {/* Logo Section - Moved to the end */}
+        <section className="mt-10 mb-20 flex flex-col items-center justify-center text-center">
+          <img 
+            src="/brain2.png" 
+            alt="Brain Visualization" 
+            className="w-full max-w-2xl mx-auto"
+            style={{ maxHeight: '400px', objectFit: 'contain' }}
+          />
         </section>
       </main>
 
