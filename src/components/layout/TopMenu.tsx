@@ -6,11 +6,9 @@ import { ArrowRight } from "lucide-react";
 
 const TopMenu = () => {
   const location = useLocation();
-  const isInvestorsPage = location.pathname === '/investors';
-  const isLandingPage = location.pathname === '/';
   
-  // Dynamic styling based on current page
-  const menuBgColor = 'bg-[#111F54]'; // Always use dark blue background for consistency
+  // Always use dark blue background for consistency
+  const menuBgColor = 'bg-[#111F54]'; 
   
   // Use the same logo for all pages
   const logoSrc = '/logo-kwattz-final-final-transparent.svg';
@@ -28,7 +26,7 @@ const TopMenu = () => {
         
         <div className="flex items-center gap-4">
           <Button 
-            className="text-[#111F54] text-base md:text-lg py-4 md:py-6 px-5 md:px-8" 
+            className="text-[#111F54] text-base md:text-lg py-4 md:py-6 px-5 md:px-8 shadow-[0_0_15px_rgba(195,255,68,0.2)] hover:shadow-[0_0_25px_rgba(195,255,68,0.4)]" 
             style={{ backgroundColor: '#C3FF44' }} 
             asChild
           >

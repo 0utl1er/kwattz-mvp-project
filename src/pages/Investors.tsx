@@ -15,7 +15,7 @@ const Investors = () => {
   const [blinkInterval, setBlinkInterval] = useState(800);
   const timelineRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLImageElement>(null);
-  const [activeTimelineItems, setActiveTimelineItems] = useState<boolean[]>([false, false, false, false]);
+  const [activeTimelineItems, setActiveTimelineItems] = useState<boolean[]>([true, true, true, true]); // All items active initially
   const [openTimelineItems, setOpenTimelineItems] = useState<boolean[]>([false, false, false, false]);
   const [isBlinking, setIsBlinking] = useState(false);
   const [pageReveal, setPageReveal] = useState(false);
@@ -33,23 +33,7 @@ const Investors = () => {
         setInitialScroll(true);
       }
       
-      if (!timelineRef.current || !logoRef.current) return;
-      
-      const items = timelineRef.current.querySelectorAll('.timeline-item');
-      const newActiveItems = [...activeTimelineItems];
-      
-      items.forEach((item, index) => {
-        const rect = item.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight * 0.8;
-        
-        if (isVisible) {
-          newActiveItems[index] = true;
-        }
-      });
-      
-      if (JSON.stringify(newActiveItems) !== JSON.stringify(activeTimelineItems)) {
-        setActiveTimelineItems(newActiveItems);
-      }
+      if (!logoRef.current) return;
       
       // Check if logo is visible
       const logoRect = logoRef.current.getBoundingClientRect();
@@ -68,7 +52,7 @@ const Investors = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [activeTimelineItems, logoReached, initialScroll]);
+  }, [logoReached, initialScroll]);
 
   const handleLogoClick = () => {
     if (!logoClicked && logoReached) {
@@ -181,7 +165,7 @@ const Investors = () => {
 
   return (
     <div 
-      className={`min-h-screen ${pageReveal ? 'bg-[#111F54]' : 'bg-black'} text-white relative overflow-hidden`}
+      className={`min-h-screen bg-black text-white relative overflow-hidden`}
       style={initialDarkStyles}
     >
       {/* Top Menu - Hidden until animation completes and page reveals */}
@@ -192,7 +176,7 @@ const Investors = () => {
       {/* Main Content */}
       <main className="container mx-auto px-4 py-6 pt-24">
         
-        {/* Investors Message Section - Initially hidden until scroll */}
+        {/* Investors Message Section - Initially hidden until page reveals */}
         <section className="mb-20 flex flex-col items-center justify-center text-center" style={hiddenElementStyles}>
           <div className={`max-w-3xl mx-auto ${pageReveal ? 'bg-[#111F54]/80' : 'bg-black/80'} p-8 rounded-2xl backdrop-blur-sm border border-white/10 shadow-[0_0_30px_rgba(195,255,68,0.15)] hover:shadow-[0_0_40px_rgba(195,255,68,0.25)] transition-all duration-500`}>
             <p className="text-xl md:text-2xl mb-6">
@@ -215,12 +199,15 @@ const Investors = () => {
           </div>
         </section>
         
-        {/* Timeline Section - Always visible but with glowing effect in dark mode */}
+        {/* Timeline Section - Always visible with glowing effect */}
         <section 
           className="mt-20 mb-32 max-w-4xl mx-auto"
           ref={timelineRef}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center text-[#C3FF44] neon-text">
+          <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center text-[#C3FF44] neon-text" 
+              style={{ 
+                textShadow: '0 0 15px rgba(195, 255, 68, 0.8), 0 0 25px rgba(195, 255, 68, 0.6), 0 0 35px rgba(195, 255, 68, 0.4)'
+              }}>
             Our Journey So Far
           </h2>
           
@@ -236,27 +223,22 @@ const Investors = () => {
                     height: '30%',
                     opacity: 1, // Always visible and glowing
                     boxShadow: '0 0 20px rgba(195,255,68,0.8), 0 0 40px rgba(195,255,68,0.4), 0 0 60px rgba(195,255,68,0.2)',
-                    transition: 'opacity 0.5s ease-out, box-shadow 0.5s ease-out'
                   }}
                 />
               </div>
             </div>
             
-            {/* Timeline Items */}
+            {/* Timeline Items - Initially only nodes visible */}
             <div className="relative z-10">
               {timelineItems.map((item, index) => (
                 <div 
                   key={index}
-                  className={`timeline-item mb-20 flex ${isMobile ? 'flex-col items-center' : (index % 2 === 0 ? 'flex-row' : 'flex-row-reverse')} items-center transition-all duration-500`}
-                  style={{ 
-                    opacity: activeTimelineItems[index] ? 1 : 0,
-                    transform: activeTimelineItems[index] ? 'translateY(0)' : 'translateY(20px)'
-                  }}
+                  className={`timeline-item mb-20 flex ${isMobile ? 'flex-col items-center' : (index % 2 === 0 ? 'flex-row' : 'flex-row-reverse')} items-center`}
                 >
-                  {/* Content - Initially hidden until scroll */}
+                  {/* Content - Initially hidden until page reveals */}
                   <div 
                     className={`${isMobile ? 'w-full mt-4' : 'w-5/12'} ${!isMobile && (index % 2 === 0 ? 'pr-10 text-right' : 'pl-10 text-left')}`} 
-                    style={pageReveal ? {} : { opacity: 0, visibility: 'hidden' }}
+                    style={hiddenElementStyles}
                   >
                     <Collapsible
                       open={openTimelineItems[index]}
@@ -285,13 +267,14 @@ const Investors = () => {
                   {/* Center Circle with Zap Icon - Always glowing in dark mode */}
                   <div className={`${isMobile ? 'mb-0 mt-0' : 'w-2/12'} flex justify-center`}>
                     <div 
-                      className={`h-12 w-12 rounded-full flex items-center justify-center border-2 relative transition-all duration-300 ${activeTimelineItems[index] ? 'border-[#C3FF44] node-glow' : 'border-gray-700'}`}
+                      className="h-12 w-12 rounded-full flex items-center justify-center border-2 border-[#C3FF44] relative"
                       style={{
                         backgroundColor: pageReveal ? '#111F54' : 'black',
-                        transition: 'background-color 0.5s ease-out',
+                        boxShadow: '0 0 15px rgba(195, 255, 68, 0.8), 0 0 25px rgba(195, 255, 68, 0.4)',
+                        animation: 'glow-pulse 2s ease-in-out infinite alternate',
                       }}
                     >
-                      <Zap className={`h-6 w-6 ${activeTimelineItems[index] ? 'text-[#C3FF44]' : 'text-[#C3FF44]/50'} transition-all duration-500`} />
+                      <Zap className="h-6 w-6 text-[#C3FF44]" />
                     </div>
                   </div>
                   
@@ -313,13 +296,17 @@ const Investors = () => {
             style={{ 
               maxHeight: '600px', 
               objectFit: 'contain',
-              opacity: logoReached ? 1 : 0.5, // Keep logo visible without filter
-              transition: 'opacity 0.8s ease-out'
+              opacity: logoReached ? 1 : 0.3,
+              transition: 'opacity 0.8s ease-out',
+              filter: 'drop-shadow(0 0 10px rgba(195, 255, 68, 0.4))'
             }}
             onClick={handleLogoClick}
           />
           {logoReached && !logoClicked && (
-            <div className="mt-4 text-[#C3FF44] animate-pulse neon-text">
+            <div className="mt-4 text-[#C3FF44] animate-pulse" 
+                style={{ 
+                  textShadow: '0 0 10px rgba(195, 255, 68, 0.7), 0 0 20px rgba(195, 255, 68, 0.5), 0 0 30px rgba(195, 255, 68, 0.3)'
+                }}>
               Click the brain to energize the system
             </div>
           )}
@@ -347,11 +334,6 @@ const Investors = () => {
         .neon-text {
           text-shadow: 0 0 10px rgba(195, 255, 68, 0.7), 0 0 20px rgba(195, 255, 68, 0.5), 0 0 30px rgba(195, 255, 68, 0.3);
           animation: neon-pulse 1.5s ease-in-out infinite alternate;
-        }
-        
-        .node-glow {
-          box-shadow: 0 0 15px rgba(195, 255, 68, 0.8), 0 0 25px rgba(195, 255, 68, 0.4);
-          animation: glow-pulse 2s ease-in-out infinite alternate;
         }
         
         @keyframes glow {
