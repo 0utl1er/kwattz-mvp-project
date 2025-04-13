@@ -11,10 +11,8 @@ const TopMenu = () => {
   // Dynamic styling based on current page
   const menuBgColor = isInvestorsPage ? 'bg-black' : 'bg-[#111F54]';
   
-  // Choose logo based on page
-  const logoSrc = isInvestorsPage 
-    ? '/logo-kwattz-final-final-transparent.svg' 
-    : '/logo-kwattz-final-svg.svg';
+  // Use the same logo for all pages
+  const logoSrc = '/logo-kwattz-final-final-transparent.svg';
   
   return (
     <div className={`fixed top-0 left-0 right-0 ${menuBgColor} shadow-md z-50`}>
