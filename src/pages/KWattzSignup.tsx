@@ -1,5 +1,4 @@
 
-// This is a large file, so we'll only update the part that links to the privacy policy
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -144,7 +143,7 @@ const KWattzSignup = () => {
           
           <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 border border-white/20">
             <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold text-[#C3FF44]">Join kWattz</h1>
+              <h1 className="text-3xl font-bold neon-text">Join kWattz</h1>
               <p className="text-white mt-2">Create your account and start saving on energy today</p>
             </div>
             
@@ -302,6 +301,29 @@ const KWattzSignup = () => {
           </div>
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes neon-flash {
+          0%, 100% {
+            text-shadow: 
+              0 0 10px rgba(195, 255, 68, 0.6), 
+              0 0 20px rgba(255, 255, 0, 0.4);
+            color: #C3FF44;
+          }
+          50% {
+            text-shadow: 
+              0 0 20px rgba(195, 255, 68, 1), 
+              0 0 40px rgba(255, 255, 0, 0.8), 
+              0 0 60px rgba(195, 255, 68, 0.6);
+            color: #FFFF00;
+          }
+        }
+
+        .neon-text {
+          animation: neon-flash 4s infinite ease-in-out;
+          font-weight: bold;
+        }
+      `}} />
     </div>
   );
 };
