@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, CheckCircle2, Mail, Lock, Loader2, AlertCircle } from "lucide-react";
@@ -11,7 +10,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { toast } from "@/hooks/use-toast";
 import { initiateOAuthLogin, signUpWithEmail } from "@/utils/auth";
 import { saveUserToAzureDB } from "@/utils/azure-db";
-import { Motion, AnimatePresence, motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const signUpSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
@@ -111,7 +110,7 @@ const SignUp = () => {
       // Note: The redirect to questionnaire happens in the initiateOAuthLogin function
       toast({
         title: "Account created successfully",
-        description: "Welcome to kWattz⚡!",
+        description: "Welcome to kWattz��!",
       });
     } catch (error) {
       console.error("Error during Google signup:", error);
