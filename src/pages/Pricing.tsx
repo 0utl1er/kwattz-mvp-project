@@ -1,23 +1,15 @@
 
 import React from "react";
-import { Link } from "react-router-dom";
 import Footer from "@/components/landing/Footer";
+import TopMenu from "@/components/layout/TopMenu";
 import { Button } from "@/components/ui/button";
-import { Home, ArrowLeft } from "lucide-react";
 
 const Pricing = () => {
   return (
     <div className="min-h-screen flex flex-col bg-[#111F54] text-white">
-      <div className="container mx-auto px-4 py-6">
-        <Link to="/">
-          <Button variant="outline" className="bg-transparent border-[#C3FF44] text-[#C3FF44] hover:bg-[#C3FF44]/10">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Home
-          </Button>
-        </Link>
-      </div>
+      <TopMenu />
       
-      <main className="flex-grow">
+      <main className="flex-grow pt-24">
         <section className="py-12">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-8 text-[#C3FF44]">
@@ -43,12 +35,9 @@ const Pricing = () => {
               </div>
               
               <div className="flex justify-center">
-                <Link to="/questionnaire">
-                  <Button className="px-6 py-6 bg-[#C3FF44] text-[#111F54] font-medium rounded-lg hover:bg-[#d4ff6f] transition-colors">
-                    <Home className="mr-2 h-5 w-5" />
-                    Get Started for Free
-                  </Button>
-                </Link>
+                <Button className="px-6 py-6 bg-[#C3FF44] text-[#111F54] font-medium rounded-lg hover:bg-[#d4ff6f] transition-colors">
+                  Get Started for Free
+                </Button>
               </div>
             </div>
             
