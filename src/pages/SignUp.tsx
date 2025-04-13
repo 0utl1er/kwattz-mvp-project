@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, CheckCircle2, Mail, Lock, Loader2, AlertCircle } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Mail, Lock, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -9,8 +9,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { toast } from "@/hooks/use-toast";
 import { initiateOAuthLogin, signUpWithEmail } from "@/utils/auth";
-import { saveUserToAzureDB } from "@/utils/azure-db";
-import { motion, AnimatePresence } from 'framer-motion';
 
 const signUpSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
@@ -45,21 +43,10 @@ const SignUp = () => {
     setIsLoading(true);
     
     try {
-      const userCredential = await signUpWithEmail(values.email, values.password);
+      await signUpWithEmail(values.email, values.password);
       
-      // Save user to Azure DB
-      const userData = {
-        email: values.email,
-        createdAt: Date.now(),
-        lastLogin: Date.now(),
-      };
-      
-      await saveUserToAzureDB(userData);
-      
-      // Show success animation before redirecting
       setShowSuccess(true);
       
-      // Delay navigation to show success animation
       setTimeout(() => {
         toast({
           title: "Account created successfully",
@@ -73,7 +60,6 @@ const SignUp = () => {
       
       let errorMessage = "There was an error creating your account. Please try again.";
       
-      // Handle Firebase specific errors
       if (error.code === "auth/email-already-in-use") {
         errorMessage = "This email is already registered. Please try logging in instead.";
       } else if (error.code === "auth/weak-password") {
@@ -94,23 +80,11 @@ const SignUp = () => {
     setIsGoogleLoading(true);
     
     try {
-      const result = await initiateOAuthLogin('google');
+      await initiateOAuthLogin('google');
       
-      // Save user to Azure DB if login was successful
-      if (result?.user) {
-        const userData = {
-          email: result.user.email || '',
-          createdAt: Date.now(),
-          lastLogin: Date.now(),
-        };
-        
-        await saveUserToAzureDB(userData);
-      }
-      
-      // Note: The redirect to questionnaire happens in the initiateOAuthLogin function
       toast({
         title: "Account created successfully",
-        description: "Welcome to kWattz��!",
+        description: "Welcome to kWattz⚡!",
       });
     } catch (error) {
       console.error("Error during Google signup:", error);
@@ -128,20 +102,8 @@ const SignUp = () => {
     setIsAppleLoading(true);
     
     try {
-      const result = await initiateOAuthLogin('apple');
+      await initiateOAuthLogin('apple');
       
-      // Save user to Azure DB if login was successful
-      if (result?.user) {
-        const userData = {
-          email: result.user.email || '',
-          createdAt: Date.now(),
-          lastLogin: Date.now(),
-        };
-        
-        await saveUserToAzureDB(userData);
-      }
-      
-      // Note: The redirect to questionnaire happens in the initiateOAuthLogin function
       toast({
         title: "Account created successfully",
         description: "Welcome to kWattz⚡!",
@@ -160,7 +122,6 @@ const SignUp = () => {
 
   return (
     <div className="min-h-screen bg-[#111F54] flex flex-col justify-center items-center p-4 relative overflow-hidden">
-      {/* Energizing background effects */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#C3FF44]/10 rounded-full blur-[120px] -z-10 animate-pulse"></div>
       <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-[#1EAEDB]/20 rounded-full blur-[100px] -z-10 animate-pulse" style={{animationDelay: "1s"}}></div>
       
@@ -336,7 +297,6 @@ const SignUp = () => {
         </div>
       </div>
 
-      {/* Add neon text and button animation styles */}
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes neon-flash {
           0%, 100% {

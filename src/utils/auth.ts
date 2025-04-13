@@ -1,3 +1,4 @@
+
 // Import Firebase modules
 import { initializeApp } from 'firebase/app';
 import { 
@@ -7,8 +8,10 @@ import {
   OAuthProvider as FirebaseOAuthProvider,
   signOut,
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
+  UserCredential
 } from 'firebase/auth';
+import { saveUserToAzureDB, getUserByFirebaseUidFromAzureDB, getUserByEmailFromAzureDB } from './azure-db';
 
 // Define the supported OAuth providers
 export type OAuthProvider = 'google' | 'apple';
@@ -29,10 +32,12 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 /**
- * Saves user data to the database after successful authentication
+ * Saves user data to the Azure database after successful authentication
  */
-export const saveUserToDatabase = async (user: any): Promise<boolean> => {
+export const saveUserToDatabase = async (userCredential: UserCredential): Promise<boolean> => {
   try {
+    const { user } = userCredential;
+    
     if (!user || !user.email) {
       console.error('Cannot save user to database: Missing user or email');
       return false;
@@ -40,90 +45,39 @@ export const saveUserToDatabase = async (user: any): Promise<boolean> => {
 
     const userData = {
       email: user.email,
-      displayName: user.displayName || '',
-      uid: user.uid,
+      name: user.displayName || '',
+      firebaseUid: user.uid,
       createdAt: Date.now(),
       lastLogin: Date.now(),
+      provider: user.providerData[0]?.providerId || 'email',
     };
 
-    // Use Azure Static Web Apps Data API
-    const response = await fetch('/data-api/rest/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      console.error('Error saving user to database:', errorData);
-      return false;
+    // Save to Azure DB
+    const result = await saveUserToAzureDB(userData);
+    
+    if (result) {
+      // Store minimal information in local storage for client-side auth state
+      localStorage.setItem('authToken', await user.getIdToken());
+      localStorage.setItem('userEmail', user.email);
+      localStorage.setItem('userId', user.uid);
+      localStorage.setItem('authProvider', userData.provider);
     }
 
-    return true;
+    return result;
   } catch (error) {
     console.error('Error saving user to database:', error);
     return false;
   }
 };
 
-// Function to get user data from Cosmos DB by userId
+// Function to get user data from Azure DB by Firebase userId
 export const getUserFromDatabase = async (userId: string) => {
   try {
-    const response = await fetch(`/data-api/rest/users?userId=${userId}`);
-    
-    if (!response.ok) {
-      console.error('Failed to fetch user data:', await response.text());
-      return null;
-    }
-    
-    const data = await response.json();
-    return data.value && data.value.length > 0 ? data.value[0] : null;
+    return await getUserByFirebaseUidFromAzureDB(userId);
   } catch (error) {
     console.error('Error fetching user from database:', error);
     return null;
   }
-};
-
-// Function to update user data in Cosmos DB
-export const updateUserInDatabase = async (id: string, userData: any) => {
-  try {
-    const response = await fetch(`/data-api/rest/users/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData),
-    });
-    
-    if (!response.ok) {
-      console.error('Failed to update user data:', await response.text());
-      return null;
-    }
-    
-    return await response.json();
-  } catch (error) {
-    console.error('Error updating user in database:', error);
-    return null;
-  }
-};
-
-// Function to save questionnaire answers
-export const saveQuestionnaireAnswers = async (userId: string, answers: any) => {
-  // First get the user to get their ID
-  const user = await getUserFromDatabase(userId);
-  
-  if (!user) {
-    console.error('User not found in database');
-    return null;
-  }
-  
-  // Update the user with questionnaire answers
-  return await updateUserInDatabase(user.id, {
-    ...user,
-    questionnaireAnswers: answers,
-  });
 };
 
 // Function to initiate OAuth login
@@ -132,24 +86,17 @@ export const initiateOAuthLogin = (provider: OAuthProvider) => {
     const googleProvider = new GoogleAuthProvider();
     return signInWithPopup(auth, googleProvider)
       .then(async (result) => {
-        // Handle successful login
-        localStorage.setItem('authToken', result.user.refreshToken);
-        localStorage.setItem('userEmail', result.user.email || '');
-        localStorage.setItem('authProvider', provider);
+        // Handle successful login by saving to Azure DB
+        await saveUserToDatabase(result);
         
-        // Save user to database
-        const userData = {
-          userId: result.user.uid,
-          email: result.user.email,
-          name: result.user.displayName,
-          provider: provider,
-          createdAt: new Date().toISOString(),
-        };
+        // Redirect to questionnaire if new user, otherwise to dashboard
+        const existingUser = await getUserByEmailFromAzureDB(result.user.email || '');
+        if (existingUser && existingUser.questionnaire) {
+          window.location.href = '/dashboard';
+        } else {
+          window.location.href = '/questionnaire';
+        }
         
-        await saveUserToDatabase(userData);
-        
-        // Redirect to questionnaire
-        window.location.href = '/questionnaire';
         return result;
       })
       .catch((error) => {
@@ -160,24 +107,17 @@ export const initiateOAuthLogin = (provider: OAuthProvider) => {
     const appleProvider = new FirebaseOAuthProvider('apple.com');
     return signInWithPopup(auth, appleProvider)
       .then(async (result) => {
-        // Handle successful login
-        localStorage.setItem('authToken', result.user.refreshToken);
-        localStorage.setItem('userEmail', result.user.email || '');
-        localStorage.setItem('authProvider', provider);
+        // Handle successful login by saving to Azure DB
+        await saveUserToDatabase(result);
         
-        // Save user to database
-        const userData = {
-          userId: result.user.uid,
-          email: result.user.email,
-          name: result.user.displayName,
-          provider: provider,
-          createdAt: new Date().toISOString(),
-        };
+        // Redirect to questionnaire if new user, otherwise to dashboard
+        const existingUser = await getUserByEmailFromAzureDB(result.user.email || '');
+        if (existingUser && existingUser.questionnaire) {
+          window.location.href = '/dashboard';
+        } else {
+          window.location.href = '/questionnaire';
+        }
         
-        await saveUserToDatabase(userData);
-        
-        // Redirect to questionnaire
-        window.location.href = '/questionnaire';
         return result;
       })
       .catch((error) => {
@@ -193,25 +133,8 @@ export const initiateOAuthLogin = (provider: OAuthProvider) => {
 export const signInWithEmail = (email: string, password: string) => {
   return signInWithEmailAndPassword(auth, email, password)
     .then(async (result) => {
-      // Handle successful login
-      localStorage.setItem('authToken', result.user.refreshToken);
-      localStorage.setItem('userEmail', result.user.email || '');
-      localStorage.setItem('authProvider', 'email');
-      
-      // Check if user exists in database
-      const existingUser = await getUserFromDatabase(result.user.uid);
-      
-      if (!existingUser) {
-        // Save user to database if they don't exist yet
-        const userData = {
-          userId: result.user.uid,
-          email: result.user.email,
-          provider: 'email',
-          createdAt: new Date().toISOString(),
-        };
-        
-        await saveUserToDatabase(userData);
-      }
+      // Save or update user in Azure DB
+      await saveUserToDatabase(result);
       
       return result;
     });
@@ -221,20 +144,8 @@ export const signInWithEmail = (email: string, password: string) => {
 export const signUpWithEmail = (email: string, password: string) => {
   return createUserWithEmailAndPassword(auth, email, password)
     .then(async (result) => {
-      // Handle successful signup
-      localStorage.setItem('authToken', result.user.refreshToken);
-      localStorage.setItem('userEmail', result.user.email || '');
-      localStorage.setItem('authProvider', 'email');
-      
-      // Save user to database
-      const userData = {
-        userId: result.user.uid,
-        email: result.user.email,
-        provider: 'email',
-        createdAt: new Date().toISOString(),
-      };
-      
-      await saveUserToDatabase(userData);
+      // Save new user to Azure DB
+      await saveUserToDatabase(result);
       
       return result;
     });
@@ -248,12 +159,14 @@ export const isAuthenticated = (): boolean => {
 // Get current user info
 export const getCurrentUser = () => {
   const email = localStorage.getItem('userEmail');
-  const provider = localStorage.getItem('authProvider') as OAuthProvider | null;
+  const userId = localStorage.getItem('userId');
+  const provider = localStorage.getItem('authProvider') as string | null;
   
-  if (!email) return null;
+  if (!email || !userId) return null;
   
   return {
     email,
+    userId,
     provider
   };
 };
@@ -263,6 +176,7 @@ export const logout = () => {
   return signOut(auth).then(() => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userEmail');
+    localStorage.removeItem('userId');
     localStorage.removeItem('authProvider');
     
     // Redirect to home page
