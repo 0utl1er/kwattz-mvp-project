@@ -10,6 +10,7 @@ interface CardProps {
   iconClassName?: string;
   titleClassName?: string;
   descriptionClassName?: string;
+  key?: number; // Added key property to interface
 }
 
 const Card = ({
