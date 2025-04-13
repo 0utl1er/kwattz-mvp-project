@@ -1,24 +1,15 @@
-
 import React from 'react';
 import { Link } from "react-router-dom";
 import { ArrowLeft, Shield } from "lucide-react";
 import Footer from "../components/landing/Footer";
+import TopMenu from "../components/layout/TopMenu";
 
 const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen bg-[#111F54] text-white">
-      {/* Header with Logo */}
-      <div className="w-full py-6 px-4 flex justify-center">
-        <Link to="/">
-          <img 
-            src="/brain2.png" 
-            alt="kWattz Logo" 
-            className="h-40 w-auto" // Changed from h-20 to h-40 to make it 2x bigger
-          />
-        </Link>
-      </div>
+      <TopMenu />
       
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 pt-24">
         <div className="mb-8">
           <Link to="/" className="inline-flex items-center text-[#C3FF44] hover:text-[#C3FF44]/80">
             <ArrowLeft className="mr-2 h-4 w-4" />
