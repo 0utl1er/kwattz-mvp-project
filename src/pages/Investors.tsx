@@ -14,7 +14,7 @@ const Investors = () => {
     
     // Gradually increase brightness effect
     const maxBrightness = 100;
-    const duration = 3000; // 3 seconds
+    const duration = 6000; // 6 seconds
     const interval = 50; // update every 50ms
     const steps = duration / interval;
     const increment = maxBrightness / steps;
@@ -77,7 +77,7 @@ const Investors = () => {
               >
                 <a href="mailto:investors@kwattz.com">
                   <Mailbox className="mr-2 h-5 w-5" />
-                  Say Hi
+                  Let's connect!
                 </a>
               </Button>
             </div>
