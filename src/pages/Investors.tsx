@@ -49,7 +49,9 @@ const Investors = () => {
         }
       });
       
-      setActiveTimelineItems(newActiveItems);
+      if (JSON.stringify(newActiveItems) !== JSON.stringify(activeTimelineItems)) {
+        setActiveTimelineItems(newActiveItems);
+      }
     };
     
     window.addEventListener('scroll', handleScroll);
@@ -149,11 +151,10 @@ const Investors = () => {
               {/* Animated Energy Flow */}
               <div className="absolute top-0 left-0 right-0 bottom-0 overflow-hidden">
                 <div 
-                  className="absolute top-0 left-0 right-0 h-full" 
+                  className="absolute top-0 left-0 right-0 h-full energy-flow" 
                   style={{
                     background: 'linear-gradient(180deg, rgba(195,255,68,0) 0%, rgba(195,255,68,1) 50%, rgba(195,255,68,0) 100%)',
                     height: '30%',
-                    animation: 'flowDown 3s infinite',
                   }}
                 />
               </div>
@@ -208,6 +209,10 @@ const Investors = () => {
         @keyframes flowDown {
           0% { transform: translateY(-100%); }
           100% { transform: translateY(400%); }
+        }
+        
+        .energy-flow {
+          animation: flowDown 3s infinite linear;
         }
         
         .glow-text {
