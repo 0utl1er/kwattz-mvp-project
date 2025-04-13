@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Mailbox, Zap, ChevronDown } from "lucide-react";
@@ -115,8 +116,7 @@ const Investors = () => {
 
   const initialDarkStyles: React.CSSProperties = {
     filter: logoReached && logoClicked ? (energized ? 'brightness(1)' : `brightness(${0.2 + (blinkCount * 0.04)})`) : 'brightness(0.05)',
-    transition: 'filter 0.5s ease-out',
-    backgroundColor: energized ? '#111F54' : 'black'
+    transition: 'filter 0.5s ease-out'
   };
 
   const hiddenElementStyles: React.CSSProperties = {
@@ -165,11 +165,13 @@ const Investors = () => {
 
   return (
     <div 
-      className={`min-h-screen text-white relative overflow-hidden`}
+      className={`min-h-screen bg-black text-white relative overflow-hidden`}
       style={initialDarkStyles}
     >
-      {/* Top Menu - Always visible but only logo is glowing initially */}
-      <TopMenu />
+      {/* Top Menu - Hidden until animation completes and page reveals */}
+      <div style={hiddenElementStyles}>
+        <TopMenu />
+      </div>
       
       {/* Main Content */}
       <main className="container mx-auto px-4 py-6 pt-24">
@@ -288,13 +290,15 @@ const Investors = () => {
         <section className="mt-10 mb-20 flex flex-col items-center justify-center text-center">
           <img 
             ref={logoRef}
-            src="/images/logos/kwattz-logo.svg" 
-            alt="kWattz Logo" 
-            className="w-full max-w-md mx-auto cursor-pointer"
+            src="/brain2.png" 
+            alt="Brain Visualization" 
+            className="w-full max-w-4xl mx-auto cursor-pointer"
             style={{ 
-              filter: 'drop-shadow(0 0 20px rgba(195, 255, 68, 0.9)) drop-shadow(0 0 40px rgba(195, 255, 68, 0.7))',
-              animation: 'pulse-subtle 2s ease-in-out infinite',
-              transition: 'all 0.8s ease-out',
+              maxHeight: '600px', 
+              objectFit: 'contain',
+              opacity: logoReached ? 1 : 0.3,
+              transition: 'opacity 0.8s ease-out',
+              filter: 'drop-shadow(0 0 10px rgba(195, 255, 68, 0.4))'
             }}
             onClick={handleLogoClick}
           />
@@ -303,7 +307,7 @@ const Investors = () => {
                 style={{ 
                   textShadow: '0 0 10px rgba(195, 255, 68, 0.7), 0 0 20px rgba(195, 255, 68, 0.5), 0 0 30px rgba(195, 255, 68, 0.3)'
                 }}>
-              Click the logo to energize the system
+              Click the brain to energize the system
             </div>
           )}
         </section>

@@ -8,13 +8,10 @@ const TopMenu = () => {
   const location = useLocation();
   
   // Always use dark blue background for consistency
-  const menuBgColor = location.pathname === '/investors' ? 'bg-transparent' : 'bg-[#111F54]'; 
+  const menuBgColor = 'bg-[#111F54]'; 
   
   // Use the same logo for all pages
   const logoSrc = '/logo-kwattz-final-final-transparent.svg';
-
-  // Special styling for the Investors page
-  const isInvestorsPage = location.pathname === '/investors';
   
   return (
     <div className={`fixed top-0 left-0 right-0 ${menuBgColor} shadow-md z-50`}>
@@ -23,14 +20,11 @@ const TopMenu = () => {
           <img 
             src={logoSrc}
             alt="kWattz" 
-            className={`h-16 md:h-20 ${isInvestorsPage ? 'filter-none animate-pulse-subtle' : ''}`}
-            style={isInvestorsPage ? {
-              filter: 'drop-shadow(0 0 10px rgba(195, 255, 68, 0.8)) drop-shadow(0 0 20px rgba(195, 255, 68, 0.5))',
-            } : {}}
+            className="h-16 md:h-20" 
           />
         </Link>
         
-        <div className={`flex items-center gap-4 ${isInvestorsPage ? 'opacity-0 invisible' : ''}`}>
+        <div className="flex items-center gap-4">
           <Button 
             className="text-[#111F54] text-base md:text-lg py-4 md:py-6 px-5 md:px-8 shadow-[0_0_15px_rgba(195,255,68,0.2)] hover:shadow-[0_0_25px_rgba(195,255,68,0.4)]" 
             style={{ backgroundColor: '#C3FF44' }} 
