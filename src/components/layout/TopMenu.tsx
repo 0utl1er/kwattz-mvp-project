@@ -11,12 +11,17 @@ const TopMenu = () => {
   // Dynamic styling based on current page
   const menuBgColor = isInvestorsPage ? 'bg-black' : 'bg-[#111F54]';
   
+  // Choose logo based on page
+  const logoSrc = isInvestorsPage 
+    ? '/logo-final-transparent.png' 
+    : '/logo-kwattz-final-svg.svg';
+  
   return (
     <div className={`fixed top-0 left-0 right-0 ${menuBgColor} shadow-md z-50`}>
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <Link to="/" className="flex items-center">
           <img 
-            src="/logo-kwattz-final-svg.svg" 
+            src={logoSrc}
             alt="kWattz" 
             className={`${isInvestorsPage ? 'h-16 md:h-20' : 'h-14 md:h-16'}`} 
           />
@@ -36,3 +41,4 @@ const TopMenu = () => {
 };
 
 export default TopMenu;
+
