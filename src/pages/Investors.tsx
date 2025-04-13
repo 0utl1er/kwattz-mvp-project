@@ -12,28 +12,17 @@ const Investors = () => {
   const isMobile = useIsMobile();
   const [energized, setEnergized] = useState(false);
   const [blinkCount, setBlinkCount] = useState(0);
+  const [blinkInterval, setBlinkInterval] = useState(800); // Start with slow blinks
   const timelineRef = useRef<HTMLDivElement>(null);
   const [activeTimelineItems, setActiveTimelineItems] = useState<boolean[]>([false, false, false, false]);
   const [openTimelineItems, setOpenTimelineItems] = useState<boolean[]>([false, false, false, false]);
+  const [isBlinking, setIsBlinking] = useState(false);
   
   useEffect(() => {
     window.scrollTo(0, 0);
     
-    // Extended blinking animation effect
-    const maxBlinks = 10; // Increased number of blinks
-    const blinkInterval = 300; // Slightly faster blink
-    
-    // Start blinking effect
-    const timer = setInterval(() => {
-      setBlinkCount(prev => {
-        if (prev >= maxBlinks) {
-          clearInterval(timer);
-          setEnergized(true);
-          return prev;
-        }
-        return prev + 1;
-      });
-    }, blinkInterval);
+    // Initial animation on page load
+    startBlinkingSequence();
     
     // Handle scroll animation for timeline
     const handleScroll = () => {
@@ -62,14 +51,57 @@ const Investors = () => {
     setTimeout(handleScroll, 500);
     
     return () => {
-      clearInterval(timer);
       window.removeEventListener('scroll', handleScroll);
     };
   }, [activeTimelineItems]);
 
+  const startBlinkingSequence = () => {
+    if (isBlinking) return; // Prevent multiple sequences running simultaneously
+    
+    setIsBlinking(true);
+    setEnergized(false);
+    setBlinkCount(0);
+    setBlinkInterval(800); // Reset to slow blinks
+    
+    let currentCount = 0;
+    let currentInterval = 800;
+    const maxBlinks = 15; // Increased for a more dramatic effect
+    
+    const executeBlinkSequence = () => {
+      const blinkTimer = setTimeout(() => {
+        currentCount++;
+        setBlinkCount(currentCount);
+        
+        if (currentCount >= maxBlinks) {
+          // Animation complete
+          setEnergized(true);
+          setIsBlinking(false);
+          return;
+        }
+        
+        // Gradually decrease interval (speed up) and set a minimum speed
+        const newInterval = Math.max(currentInterval * 0.85, 100);
+        currentInterval = newInterval;
+        setBlinkInterval(newInterval);
+        
+        // Continue sequence
+        executeBlinkSequence();
+      }, currentInterval);
+      
+      return blinkTimer;
+    };
+    
+    const timer = executeBlinkSequence();
+    
+    return () => clearTimeout(timer);
+  };
+
   const animationStyles = {
     opacity: energized ? 1 : (blinkCount % 2 === 0 ? 1 : 0.2), // More pronounced blink
-    transition: energized ? 'opacity 0.5s ease-out' : 'opacity 0.1s ease-in-out' // Faster initial blinks
+    transition: energized 
+      ? 'opacity 0.5s ease-out, box-shadow 0.5s ease-out' 
+      : `opacity ${blinkInterval/1000}s ease-in-out`,
+    boxShadow: energized ? '0 0 50px rgba(195, 255, 68, 0.4)' : 'none'
   };
 
   const toggleTimelineItem = (index: number) => {
@@ -102,7 +134,10 @@ const Investors = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+    <div 
+      className="min-h-screen bg-black text-white relative overflow-hidden"
+      onClick={() => !isBlinking && startBlinkingSequence()} // Allow clicking anywhere to restart animation
+    >
       <TopMenu />
       
       {/* Main Content */}
@@ -121,6 +156,10 @@ const Investors = () => {
                 className="text-black text-lg py-6 px-8 hover:bg-[#C3FF44]/90 shadow-[0_0_20px_rgba(195,255,68,0.4)] hover:shadow-[0_0_30px_rgba(195,255,68,0.6)] transition-all duration-300 flex items-center" 
                 style={{ backgroundColor: '#C3FF44' }} 
                 asChild
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent triggering the page blink
+                  startBlinkingSequence(); // But still start the blink sequence separately
+                }}
               >
                 <a href="mailto:investors@kwattz.com">
                   <Mailbox className="mr-2 h-5 w-5" />
@@ -212,8 +251,8 @@ const Investors = () => {
           <img 
             src="/brain2.png" 
             alt="Brain Visualization" 
-            className="w-full max-w-3xl mx-auto" /* Increased from max-w-2xl to max-w-3xl */
-            style={{ maxHeight: '500px', objectFit: 'contain' }} /* Increased from 400px to 500px */
+            className="w-full max-w-4xl mx-auto" /* Increased from max-w-3xl to max-w-4xl */
+            style={{ maxHeight: '600px', objectFit: 'contain' }} /* Increased from 500px to 600px */
           />
         </section>
       </main>
@@ -243,6 +282,11 @@ const Investors = () => {
           0% { box-shadow: 0 0 10px rgba(195, 255, 68, 0.3); }
           50% { box-shadow: 0 0 20px rgba(195, 255, 68, 0.7); }
           100% { box-shadow: 0 0 10px rgba(195, 255, 68, 0.3); }
+        }
+        
+        @keyframes powerUp {
+          0% { filter: brightness(0.3); }
+          100% { filter: brightness(1); }
         }
         `}
       </style>
