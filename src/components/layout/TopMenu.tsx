@@ -13,7 +13,7 @@ const TopMenu = () => {
   
   // Choose logo based on page
   const logoSrc = isInvestorsPage 
-    ? '/logo-final-transparent.png' 
+    ? '/logo-kwazzt-final-black-svg.svg' 
     : '/logo-kwattz-final-svg.svg';
   
   return (
@@ -41,4 +41,3 @@ const TopMenu = () => {
 };
 
 export default TopMenu;
-
