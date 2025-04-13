@@ -163,15 +163,6 @@ const Investors = () => {
     }
   ];
 
-  // Using proper type assertions for React.CSSProperties
-  const animationStyles: React.CSSProperties = {
-    opacity: energized ? 1 : (blinkCount % 2 === 0 ? 1 : 0.2),
-    transition: energized 
-      ? 'opacity 0.5s ease-out, box-shadow 0.5s ease-out' 
-      : `opacity ${blinkInterval/1000}s ease-in-out`,
-    boxShadow: energized ? '0 0 50px rgba(195, 255, 68, 0.4)' : 'none'
-  };
-
   return (
     <div 
       className={`min-h-screen text-white relative overflow-hidden`}
