@@ -10,7 +10,7 @@ const TopMenu = () => {
   const isLandingPage = location.pathname === '/';
   
   // Dynamic styling based on current page
-  const menuBgColor = isInvestorsPage ? 'bg-black' : 'bg-[#111F54]';
+  const menuBgColor = 'bg-[#111F54]'; // Always use dark blue background for consistency
   
   // Use the same logo for all pages
   const logoSrc = '/logo-kwattz-final-final-transparent.svg';
