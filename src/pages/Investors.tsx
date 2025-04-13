@@ -12,21 +12,21 @@ const Investors = () => {
   const isMobile = useIsMobile();
   const [energized, setEnergized] = useState(false);
   const [blinkCount, setBlinkCount] = useState(0);
-  const [blinkInterval, setBlinkInterval] = useState(800); // Start with slow blinks
+  const [blinkInterval, setBlinkInterval] = useState(800);
   const timelineRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLImageElement>(null);
   const [activeTimelineItems, setActiveTimelineItems] = useState<boolean[]>([false, false, false, false]);
   const [openTimelineItems, setOpenTimelineItems] = useState<boolean[]>([false, false, false, false]);
   const [isBlinking, setIsBlinking] = useState(false);
+  const [pageReveal, setPageReveal] = useState(false);
+  const [logoReached, setLogoReached] = useState(false);
   
   useEffect(() => {
     window.scrollTo(0, 0);
     
-    // Initial animation on page load
-    startBlinkingSequence();
-    
-    // Handle scroll animation for timeline
+    // Handle scroll animation for timeline and logo reveal
     const handleScroll = () => {
-      if (!timelineRef.current) return;
+      if (!timelineRef.current || !logoRef.current) return;
       
       const items = timelineRef.current.querySelectorAll('.timeline-item');
       const newActiveItems = [...activeTimelineItems];
@@ -43,6 +43,15 @@ const Investors = () => {
       if (JSON.stringify(newActiveItems) !== JSON.stringify(activeTimelineItems)) {
         setActiveTimelineItems(newActiveItems);
       }
+      
+      // Check if logo is visible
+      const logoRect = logoRef.current.getBoundingClientRect();
+      const isLogoVisible = logoRect.top < window.innerHeight * 0.8;
+      
+      if (isLogoVisible && !logoReached) {
+        setLogoReached(true);
+        startBlinkingSequence();
+      }
     };
     
     window.addEventListener('scroll', handleScroll);
@@ -53,7 +62,7 @@ const Investors = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [activeTimelineItems]);
+  }, [activeTimelineItems, logoReached]);
 
   const startBlinkingSequence = () => {
     if (isBlinking) return; // Prevent multiple sequences running simultaneously
@@ -76,6 +85,7 @@ const Investors = () => {
           // Animation complete
           setEnergized(true);
           setIsBlinking(false);
+          setPageReveal(true); // Reveal the rest of the page
           return;
         }
         
@@ -104,6 +114,17 @@ const Investors = () => {
       ? 'opacity 0.5s ease-out, box-shadow 0.5s ease-out' 
       : `opacity ${blinkInterval/1000}s ease-in-out`,
     boxShadow: energized ? '0 0 50px rgba(195, 255, 68, 0.4)' : 'none'
+  };
+
+  const initialDarkStyles = {
+    filter: logoReached ? (energized ? 'brightness(1)' : `brightness(${0.2 + (blinkCount * 0.04)})`) : 'brightness(0.2)',
+    transition: 'filter 0.5s ease-out'
+  };
+
+  const hiddenElementStyles = {
+    opacity: pageReveal ? 1 : 0,
+    visibility: pageReveal ? 'visible' : 'hidden',
+    transition: 'opacity 0.8s ease-out, visibility 0.8s ease-out',
   };
 
   const toggleTimelineItem = (index: number) => {
@@ -138,15 +159,18 @@ const Investors = () => {
   return (
     <div 
       className="min-h-screen bg-black text-white relative overflow-hidden"
-      onClick={() => !isBlinking && startBlinkingSequence()} // Allow clicking anywhere to restart animation
+      style={initialDarkStyles}
     >
-      <TopMenu />
+      {/* Top Menu - Hidden until animation completes */}
+      <div style={hiddenElementStyles}>
+        <TopMenu />
+      </div>
       
       {/* Main Content */}
       <main className="container mx-auto px-4 py-6 pt-24" style={animationStyles}>
         
-        {/* Investors Message Section - Moved to the top */}
-        <section className="mb-20 flex flex-col items-center justify-center text-center">
+        {/* Investors Message Section - Hidden until animation completes */}
+        <section className="mb-20 flex flex-col items-center justify-center text-center" style={hiddenElementStyles}>
           <div className="max-w-3xl mx-auto bg-black/80 p-8 rounded-2xl backdrop-blur-sm border border-white/10 shadow-[0_0_30px_rgba(195,255,68,0.15)] hover:shadow-[0_0_40px_rgba(195,255,68,0.25)] transition-all duration-500">
             <p className="text-xl md:text-2xl mb-6">
               While I'm busy hustling to validate my concept, take a look at what I've accomplished so far. Meanwhile, let's keep in touch! I'm a brain full of ideas.
@@ -158,10 +182,6 @@ const Investors = () => {
                 className="text-black text-lg py-6 px-8 hover:bg-[#C3FF44]/90 shadow-[0_0_20px_rgba(195,255,68,0.4)] hover:shadow-[0_0_30px_rgba(195,255,68,0.6)] transition-all duration-300 flex items-center" 
                 style={{ backgroundColor: '#C3FF44' }} 
                 asChild
-                onClick={(e) => {
-                  e.stopPropagation(); // Prevent triggering the page blink
-                  startBlinkingSequence(); // But still start the blink sequence separately
-                }}
               >
                 <a href="mailto:investors@kwattz.com">
                   <Mailbox className="mr-2 h-5 w-5" />
@@ -172,7 +192,7 @@ const Investors = () => {
           </div>
         </section>
         
-        {/* Timeline Section */}
+        {/* Timeline Section - Always visible */}
         <section 
           className="mt-20 mb-32 max-w-4xl mx-auto"
           ref={timelineRef}
@@ -191,6 +211,8 @@ const Investors = () => {
                   style={{
                     background: 'linear-gradient(180deg, rgba(195,255,68,0) 0%, rgba(195,255,68,1) 50%, rgba(195,255,68,0) 100%)',
                     height: '30%',
+                    opacity: logoReached ? 1 : 0.3,
+                    transition: 'opacity 0.5s ease-out'
                   }}
                 />
               </div>
@@ -248,19 +270,26 @@ const Investors = () => {
           </div>
         </section>
 
-        {/* Logo Section - Moved to the end and made larger */}
+        {/* Logo Section - Trigger for animation */}
         <section className="mt-10 mb-20 flex flex-col items-center justify-center text-center">
           <img 
+            ref={logoRef}
             src="/brain2.png" 
             alt="Brain Visualization" 
-            className="w-full max-w-4xl mx-auto" /* Increased from max-w-3xl to max-w-4xl */
-            style={{ maxHeight: '600px', objectFit: 'contain' }} /* Increased from 500px to 600px */
+            className="w-full max-w-4xl mx-auto"
+            style={{ 
+              maxHeight: '600px', 
+              objectFit: 'contain',
+              opacity: 0.5, // Start with darker logo
+              filter: logoReached ? 'brightness(1)' : 'brightness(0.5)',
+              transition: 'opacity 0.8s ease-out, filter 0.8s ease-out'
+            }}
           />
         </section>
       </main>
 
-      {/* Footer with energizing effect */}
-      <div style={animationStyles}>
+      {/* Footer with energizing effect - Hidden until animation completes */}
+      <div style={{...animationStyles, ...hiddenElementStyles}}>
         <Footer />
       </div>
       
