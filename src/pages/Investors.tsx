@@ -61,11 +61,11 @@ const Investors = () => {
     setIsBlinking(true);
     setEnergized(false);
     setBlinkCount(0);
-    setBlinkInterval(800); // Reset to slow blinks
+    setBlinkInterval(1000); // Start with an even slower initial blink
     
     let currentCount = 0;
-    let currentInterval = 800;
-    const maxBlinks = 15; // Increased for a more dramatic effect
+    let currentInterval = 1000;
+    const maxBlinks = 20; // Increased number of blinks for more dramatic effect
     
     const executeBlinkSequence = () => {
       const blinkTimer = setTimeout(() => {
@@ -79,8 +79,10 @@ const Investors = () => {
           return;
         }
         
-        // Gradually decrease interval (speed up) and set a minimum speed
-        const newInterval = Math.max(currentInterval * 0.85, 100);
+        // Even more aggressive interval reduction
+        // Exponential decrease to create a rapid acceleration
+        const reductionFactor = 0.75; // Faster reduction
+        const newInterval = Math.max(currentInterval * reductionFactor, 50);
         currentInterval = newInterval;
         setBlinkInterval(newInterval);
         
