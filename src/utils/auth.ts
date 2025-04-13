@@ -1,4 +1,3 @@
-
 // Import Firebase modules
 import { initializeApp } from 'firebase/app';
 import { 
@@ -29,9 +28,25 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// Function to save user data to Cosmos DB
-const saveUserToDatabase = async (userData: any) => {
+/**
+ * Saves user data to the database after successful authentication
+ */
+export const saveUserToDatabase = async (user: any): Promise<boolean> => {
   try {
+    if (!user || !user.email) {
+      console.error('Cannot save user to database: Missing user or email');
+      return false;
+    }
+
+    const userData = {
+      email: user.email,
+      displayName: user.displayName || '',
+      uid: user.uid,
+      createdAt: Date.now(),
+      lastLogin: Date.now(),
+    };
+
+    // Use Azure Static Web Apps Data API
     const response = await fetch('/data-api/rest/users', {
       method: 'POST',
       headers: {
@@ -39,16 +54,17 @@ const saveUserToDatabase = async (userData: any) => {
       },
       body: JSON.stringify(userData),
     });
-    
+
     if (!response.ok) {
-      console.error('Failed to save user data:', await response.text());
-      return null;
+      const errorData = await response.json().catch(() => ({}));
+      console.error('Error saving user to database:', errorData);
+      return false;
     }
-    
-    return await response.json();
+
+    return true;
   } catch (error) {
     console.error('Error saving user to database:', error);
-    return null;
+    return false;
   }
 };
 
