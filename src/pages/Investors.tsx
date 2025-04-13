@@ -20,12 +20,18 @@ const Investors = () => {
   const [isBlinking, setIsBlinking] = useState(false);
   const [pageReveal, setPageReveal] = useState(false);
   const [logoReached, setLogoReached] = useState(false);
+  const [initialScroll, setInitialScroll] = useState(false);
   
   useEffect(() => {
     window.scrollTo(0, 0);
     
     // Handle scroll animation for timeline and logo reveal
     const handleScroll = () => {
+      // Allow interactions only after initial scroll
+      if (!initialScroll && window.scrollY > 50) {
+        setInitialScroll(true);
+      }
+      
       if (!timelineRef.current || !logoRef.current) return;
       
       const items = timelineRef.current.querySelectorAll('.timeline-item');
@@ -62,7 +68,7 @@ const Investors = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [activeTimelineItems, logoReached]);
+  }, [activeTimelineItems, logoReached, initialScroll]);
 
   const startBlinkingSequence = () => {
     if (isBlinking) return; // Prevent multiple sequences running simultaneously
@@ -128,7 +134,16 @@ const Investors = () => {
     transition: 'opacity 0.8s ease-out, visibility 0.8s ease-out',
   };
 
+  // Completely hidden until initial scroll
+  const initialHiddenStyles: React.CSSProperties = {
+    opacity: initialScroll ? 1 : 0,
+    pointerEvents: initialScroll ? 'auto' as const : 'none' as const,
+    transition: 'opacity 1s ease-out',
+  };
+
   const toggleTimelineItem = (index: number) => {
+    if (!initialScroll) return; // Prevent interaction until scroll
+    
     const newOpenItems = [...openTimelineItems];
     newOpenItems[index] = !newOpenItems[index];
     setOpenTimelineItems(newOpenItems);
@@ -162,16 +177,16 @@ const Investors = () => {
       className={`min-h-screen ${pageReveal ? 'bg-[#111F54]' : 'bg-black'} text-white relative overflow-hidden`}
       style={initialDarkStyles}
     >
-      {/* Top Menu - Hidden until animation completes */}
+      {/* Top Menu - Hidden until animation completes and page reveals */}
       <div style={hiddenElementStyles}>
         <TopMenu />
       </div>
       
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-6 pt-24" style={animationStyles}>
+      <main className="container mx-auto px-4 py-6 pt-24">
         
-        {/* Investors Message Section - Initially visible */}
-        <section className="mb-20 flex flex-col items-center justify-center text-center">
+        {/* Investors Message Section - Initially hidden until scroll */}
+        <section className="mb-20 flex flex-col items-center justify-center text-center" style={initialHiddenStyles}>
           <div className={`max-w-3xl mx-auto ${pageReveal ? 'bg-[#111F54]/80' : 'bg-black/80'} p-8 rounded-2xl backdrop-blur-sm border border-white/10 shadow-[0_0_30px_rgba(195,255,68,0.15)] hover:shadow-[0_0_40px_rgba(195,255,68,0.25)] transition-all duration-500`}>
             <p className="text-xl md:text-2xl mb-6">
               While I'm busy hustling to validate my concept, take a look at what I've accomplished so far. Meanwhile, let's keep in touch! I'm a brain full of ideas.
@@ -193,17 +208,17 @@ const Investors = () => {
           </div>
         </section>
         
-        {/* Timeline Section - Always visible */}
+        {/* Timeline Section - Always visible but with glowing effect in dark mode */}
         <section 
           className="mt-20 mb-32 max-w-4xl mx-auto"
           ref={timelineRef}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center text-[#C3FF44]">
+          <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center text-[#C3FF44] animate-pulse-subtle">
             Our Journey So Far
           </h2>
           
           <div className="relative">
-            {/* Vertical Energy Line */}
+            {/* Vertical Energy Line - Always glowing */}
             <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-800 z-0">
               {/* Animated Energy Flow - Enhanced glow effect */}
               <div className="absolute top-0 left-0 right-0 bottom-0 overflow-hidden">
@@ -231,8 +246,11 @@ const Investors = () => {
                     transform: activeTimelineItems[index] ? 'translateY(0)' : 'translateY(20px)'
                   }}
                 >
-                  {/* Content */}
-                  <div className={`${isMobile ? 'w-full mt-4' : 'w-5/12'} ${!isMobile && (index % 2 === 0 ? 'pr-10 text-right' : 'pl-10 text-left')}`}>
+                  {/* Content - Initially hidden until scroll */}
+                  <div 
+                    className={`${isMobile ? 'w-full mt-4' : 'w-5/12'} ${!isMobile && (index % 2 === 0 ? 'pr-10 text-right' : 'pl-10 text-left')}`} 
+                    style={initialHiddenStyles}
+                  >
                     <Collapsible
                       open={openTimelineItems[index]}
                       onOpenChange={() => toggleTimelineItem(index)}
@@ -257,16 +275,17 @@ const Investors = () => {
                     </Collapsible>
                   </div>
                   
-                  {/* Center Circle with Zap Icon - Updated to change background color when page lights up */}
+                  {/* Center Circle with Zap Icon - Always glowing in dark mode */}
                   <div className={`${isMobile ? 'mb-0 mt-0' : 'w-2/12'} flex justify-center`}>
                     <div 
                       className={`h-12 w-12 rounded-full flex items-center justify-center border-2 relative transition-all duration-300 ${activeTimelineItems[index] ? 'border-[#C3FF44] shadow-[0_0_15px_rgba(195,255,68,0.5)]' : 'border-gray-700'}`}
                       style={{
                         backgroundColor: pageReveal ? '#111F54' : 'black',
-                        transition: 'background-color 0.5s ease-out'
+                        transition: 'background-color 0.5s ease-out',
+                        boxShadow: '0 0 15px rgba(195, 255, 68, 0.4)'
                       }}
                     >
-                      <Zap className={`h-6 w-6 ${activeTimelineItems[index] ? 'text-[#C3FF44]' : 'text-gray-500'} transition-all duration-500`} />
+                      <Zap className={`h-6 w-6 ${activeTimelineItems[index] ? 'text-[#C3FF44]' : 'text-[#C3FF44]/50'} transition-all duration-500`} />
                     </div>
                   </div>
                   
@@ -323,9 +342,24 @@ const Investors = () => {
           100% { box-shadow: 0 0 10px rgba(195, 255, 68, 0.3); }
         }
         
+        @keyframes pulse-subtle {
+          0% { opacity: 0.7; }
+          50% { opacity: 1; }
+          100% { opacity: 0.7; }
+        }
+        
+        .animate-pulse-subtle {
+          animation: pulse-subtle 2s ease-in-out infinite;
+        }
+        
         @keyframes powerUp {
           0% { filter: brightness(0.3); }
           100% { filter: brightness(1); }
+        }
+        
+        /* Prevent all interactions initially */
+        .prevent-interactions {
+          pointer-events: none !important;
         }
         `}
       </style>
