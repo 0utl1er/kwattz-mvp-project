@@ -18,7 +18,7 @@ const TopMenu = () => {
           <img 
             src="/idea-kwattz-logo-2.svg" 
             alt="kWattz" 
-            className={`${isInvestorsPage ? 'h-12 md:h-14' : 'h-10'}`} 
+            className={`${isInvestorsPage ? 'h-16 md:h-20' : 'h-14 md:h-16'}`} 
           />
         </Link>
         <Button 
@@ -36,3 +36,4 @@ const TopMenu = () => {
 };
 
 export default TopMenu;
+
