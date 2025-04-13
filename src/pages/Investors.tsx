@@ -15,8 +15,6 @@ const Investors = () => {
 
   return (
     <div className="min-h-screen bg-[#111F54] text-white relative overflow-hidden">
-      {/* Removed glow effects and drawing-related divs */}
-
       {/* Back to Home Button */}
       <div className="container mx-auto px-4 mb-6">
         <Button 
@@ -37,6 +35,14 @@ const Investors = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-10 text-[#C3FF44] glow-text">
             Investors
           </h1>
+          
+          {/* Added kWattz Logo */}
+          <img 
+            src="/images/logos/kwattz-logo.svg" 
+            alt="kWattz Logo" 
+            className="mb-10"
+            style={{ width: '35px', height: '35px' }}
+          />
           
           <div className="max-w-3xl mx-auto bg-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/10 shadow-[0_0_30px_rgba(195,255,68,0.15)] hover:shadow-[0_0_40px_rgba(195,255,68,0.25)] transition-all duration-500">
             <p className="text-xl md:text-2xl mb-6">
@@ -70,4 +76,3 @@ const Investors = () => {
 };
 
 export default Investors;
-
