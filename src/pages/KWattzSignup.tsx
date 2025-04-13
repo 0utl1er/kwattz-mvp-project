@@ -121,16 +121,7 @@ const KWattzSignup = () => {
 
   return (
     <div className="min-h-screen bg-[#111F54] flex flex-col">
-      {/* Header with Logo */}
-      <div className="w-full py-6 px-4 flex justify-center">
-        <Link to="/">
-          <img 
-            src="/logo-final-transparent.png" 
-            alt="kWattz Logo" 
-            className="h-20 w-auto" 
-          />
-        </Link>
-      </div>
+      {/* Removed the logo header section */}
       
       <div className="flex-1 flex justify-center items-center p-4">
         <div className="w-full max-w-md">
