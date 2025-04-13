@@ -1,9 +1,6 @@
-
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import Footer from "@/components/landing/Footer";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import TopMenu from "@/components/layout/TopMenu";
 import {
   Accordion,
   AccordionContent,
@@ -49,16 +46,9 @@ const FAQ = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#111F54] text-white">
-      <div className="container mx-auto px-4 py-6">
-        <Link to="/">
-          <Button variant="outline" className="bg-transparent border-[#C3FF44] text-[#C3FF44] hover:bg-[#C3FF44]/10">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Home
-          </Button>
-        </Link>
-      </div>
+      <TopMenu />
       
-      <main className="flex-grow">
+      <main className="flex-grow pt-24">
         <section className="py-12">
           <div className="container mx-auto px-4">
             <h1 className="text-4xl md:text-5xl font-bold mb-12 text-[#C3FF44] text-center">
@@ -86,11 +76,9 @@ const FAQ = () => {
             
             <div className="mt-12 text-center">
               <p className="text-white/80 mb-6">Still have questions?</p>
-              <Link to="/contact">
-                <Button className="bg-[#C3FF44] text-[#111F54] hover:bg-[#d4ff6f]">
-                  Contact Us
-                </Button>
-              </Link>
+              <Button className="bg-[#C3FF44] text-[#111F54] hover:bg-[#d4ff6f]">
+                Contact Us
+              </Button>
             </div>
           </div>
         </section>
