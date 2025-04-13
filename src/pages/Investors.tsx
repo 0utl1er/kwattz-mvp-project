@@ -1,11 +1,12 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
-import { Mailbox, Zap } from "lucide-react";
+import { Mailbox, Zap, ChevronDown } from "lucide-react";
 import Footer from '../components/landing/Footer';
 import { useIsMobile } from '../hooks/use-mobile';
 import TopMenu from '../components/layout/TopMenu';
 import { Card, CardContent } from "@/components/ui/card";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 const Investors = () => {
   const isMobile = useIsMobile();
@@ -13,6 +14,7 @@ const Investors = () => {
   const [blinkCount, setBlinkCount] = useState(0);
   const timelineRef = useRef<HTMLDivElement>(null);
   const [activeTimelineItems, setActiveTimelineItems] = useState<boolean[]>([false, false, false, false]);
+  const [openTimelineItems, setOpenTimelineItems] = useState<boolean[]>([false, false, false, false]);
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -68,6 +70,12 @@ const Investors = () => {
   const animationStyles = {
     opacity: energized ? 1 : (blinkCount % 2 === 0 ? 1 : 0.2), // More pronounced blink
     transition: energized ? 'opacity 0.5s ease-out' : 'opacity 0.1s ease-in-out' // Faster initial blinks
+  };
+
+  const toggleTimelineItem = (index: number) => {
+    const newOpenItems = [...openTimelineItems];
+    newOpenItems[index] = !newOpenItems[index];
+    setOpenTimelineItems(newOpenItems);
   };
 
   const timelineItems = [
@@ -152,45 +160,60 @@ const Investors = () => {
               {timelineItems.map((item, index) => (
                 <div 
                   key={index}
-                  className={`timeline-item mb-20 flex ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'} items-center transition-all duration-500`}
+                  className={`timeline-item mb-20 flex ${isMobile ? 'flex-col items-center' : (index % 2 === 0 ? 'flex-row' : 'flex-row-reverse')} items-center transition-all duration-500`}
                   style={{ 
                     opacity: activeTimelineItems[index] ? 1 : 0,
                     transform: activeTimelineItems[index] ? 'translateY(0)' : 'translateY(20px)'
                   }}
                 >
                   {/* Content */}
-                  <div className={`w-5/12 ${index % 2 === 0 ? 'pr-10 text-right' : 'pl-10 text-left'}`}>
-                    <Card className="bg-black/40 border-[#C3FF44]/20 overflow-hidden hover:shadow-[0_0_25px_rgba(195,255,68,0.3)] transition-all duration-500">
-                      <CardContent className="p-6">
-                        <p className="text-[#C3FF44] text-sm font-semibold mb-2">{item.date}</p>
-                        <h3 className="text-xl font-bold mb-2 text-white">{item.title}</h3>
-                        <p className="text-gray-300">{item.description}</p>
-                      </CardContent>
-                    </Card>
+                  <div className={`${isMobile ? 'w-full mt-4' : 'w-5/12'} ${!isMobile && (index % 2 === 0 ? 'pr-10 text-right' : 'pl-10 text-left')}`}>
+                    <Collapsible
+                      open={openTimelineItems[index]}
+                      onOpenChange={() => toggleTimelineItem(index)}
+                      className={`w-full ${openTimelineItems[index] ? 'shadow-[0_0_30px_rgba(195,255,68,0.4)]' : ''} transition-all duration-500`}
+                    >
+                      <Card className={`bg-black/40 border-[#C3FF44]/20 overflow-hidden ${openTimelineItems[index] ? 'shadow-[0_0_25px_rgba(195,255,68,0.3)]' : ''} transition-all duration-500 cursor-pointer hover:border-[#C3FF44]/40`}>
+                        <CardContent className="p-6">
+                          <CollapsibleTrigger className="w-full flex items-center justify-between">
+                            <div>
+                              <p className="text-[#C3FF44] text-sm font-semibold mb-2">{item.date}</p>
+                              <h3 className="text-xl font-bold mb-2 text-white">{item.title}</h3>
+                            </div>
+                            <ChevronDown className={`h-5 w-5 text-[#C3FF44] transition-transform duration-300 ${openTimelineItems[index] ? 'rotate-180' : ''}`} />
+                          </CollapsibleTrigger>
+                          <CollapsibleContent className="pt-4 text-gray-300">
+                            <div className={`overflow-hidden transition-all duration-500 ${openTimelineItems[index] ? 'max-h-40' : 'max-h-0'}`}>
+                              {item.description}
+                            </div>
+                          </CollapsibleContent>
+                        </CardContent>
+                      </Card>
+                    </Collapsible>
                   </div>
                   
                   {/* Center Circle with Zap Icon */}
-                  <div className="w-2/12 flex justify-center">
+                  <div className={`${isMobile ? 'mb-0 mt-0' : 'w-2/12'} flex justify-center`}>
                     <div className={`h-12 w-12 rounded-full flex items-center justify-center bg-black border-2 relative transition-all duration-300 ${activeTimelineItems[index] ? 'border-[#C3FF44] shadow-[0_0_15px_rgba(195,255,68,0.5)]' : 'border-gray-700'}`}>
                       <Zap className={`h-6 w-6 ${activeTimelineItems[index] ? 'text-[#C3FF44]' : 'text-gray-500'} transition-all duration-500`} />
                     </div>
                   </div>
                   
                   {/* Empty Space for Alternate Layout */}
-                  <div className="w-5/12"></div>
+                  {!isMobile && <div className="w-5/12"></div>}
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Logo Section - Moved to the end */}
+        {/* Logo Section - Moved to the end and made larger */}
         <section className="mt-10 mb-20 flex flex-col items-center justify-center text-center">
           <img 
             src="/brain2.png" 
             alt="Brain Visualization" 
-            className="w-full max-w-2xl mx-auto"
-            style={{ maxHeight: '400px', objectFit: 'contain' }}
+            className="w-full max-w-3xl mx-auto" /* Increased from max-w-2xl to max-w-3xl */
+            style={{ maxHeight: '500px', objectFit: 'contain' }} /* Increased from 400px to 500px */
           />
         </section>
       </main>
@@ -214,6 +237,12 @@ const Investors = () => {
         
         .glow-text {
           text-shadow: 0 0 10px rgba(195, 255, 68, 0.7);
+        }
+        
+        @keyframes glow {
+          0% { box-shadow: 0 0 10px rgba(195, 255, 68, 0.3); }
+          50% { box-shadow: 0 0 20px rgba(195, 255, 68, 0.7); }
+          100% { box-shadow: 0 0 10px rgba(195, 255, 68, 0.3); }
         }
         `}
       </style>
