@@ -21,7 +21,7 @@ const TopMenu = () => {
           <img 
             src={logoSrc}
             alt="kWattz" 
-            className={`${isInvestorsPage ? 'h-16 md:h-20' : 'h-14 md:h-16'}`} 
+            className="h-16 md:h-20" 
           />
         </Link>
         <Button 
