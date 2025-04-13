@@ -1,11 +1,12 @@
 
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Home } from "lucide-react";
 
 const NotFound = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [brightness, setBrightness] = useState(10);
 
   useEffect(() => {
@@ -27,6 +28,10 @@ const NotFound = () => {
 
     return () => clearInterval(interval);
   }, [location.pathname]);
+
+  const handleGoBack = () => {
+    navigate(-1); // This uses React Router's history to go back
+  };
 
   return (
     <div 
@@ -51,10 +56,11 @@ const NotFound = () => {
               <Home size={18} /> Return Home
             </Link>
           </Button>
-          <Button asChild variant="outline" className="border-yellow-400 text-yellow-400 hover:bg-yellow-400/10">
-            <Link to="javascript:history.back()" className="flex items-center gap-2">
-              <ArrowLeft size={18} /> Go Back
-            </Link>
+          <Button variant="outline" 
+            className="border-yellow-400 text-yellow-400 hover:bg-yellow-400/10 flex items-center gap-2"
+            onClick={handleGoBack}
+          >
+            <ArrowLeft size={18} /> Go Back
           </Button>
         </div>
       </div>
