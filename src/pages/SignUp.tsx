@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, CheckCircle2, Mail, Lock, Loader2, AlertCircle } from "lucide-react";
@@ -174,8 +175,8 @@ const SignUp = () => {
         
         <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 border border-white/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_30px_rgba(195,255,68,0.1)] transition-all duration-300">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-[#C3FF44] to-[#1EAEDB] bg-clip-text text-transparent">Create your account</h1>
-            <p className="text-white mt-2">Join <span className="text-[#C3FF44]">kWattz</span> to start saving on energy</p>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-[#C3FF44] to-[#1EAEDB] bg-clip-text text-transparent animate-pulse">Join kWattz</h1>
+            <p className="text-white mt-2">Create your account to start saving on energy</p>
           </div>
           
           {showSuccess ? (
