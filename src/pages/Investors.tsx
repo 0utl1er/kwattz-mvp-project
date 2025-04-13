@@ -116,7 +116,8 @@ const Investors = () => {
 
   const initialDarkStyles: React.CSSProperties = {
     filter: logoReached && logoClicked ? (energized ? 'brightness(1)' : `brightness(${0.2 + (blinkCount * 0.04)})`) : 'brightness(0.05)',
-    transition: 'filter 0.5s ease-out'
+    transition: 'filter 0.5s ease-out',
+    backgroundColor: energized ? '#111F54' : 'black'
   };
 
   const hiddenElementStyles: React.CSSProperties = {
