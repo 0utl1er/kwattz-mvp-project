@@ -290,8 +290,8 @@ const Investors = () => {
         <section className="mt-10 mb-20 flex flex-col items-center justify-center text-center">
           <img 
             ref={logoRef}
-            src="/brain2.png" 
-            alt="Brain Visualization" 
+            src="/logo-kwattz-final-final-transparent.svg" 
+            alt="kWattz Logo" 
             className="w-full max-w-4xl mx-auto cursor-pointer"
             style={{ 
               maxHeight: '600px', 
@@ -307,7 +307,7 @@ const Investors = () => {
                 style={{ 
                   textShadow: '0 0 10px rgba(195, 255, 68, 0.7), 0 0 20px rgba(195, 255, 68, 0.5), 0 0 30px rgba(195, 255, 68, 0.3)'
                 }}>
-              Click the brain to energize the system
+              Click the logo to energize the system
             </div>
           )}
         </section>
