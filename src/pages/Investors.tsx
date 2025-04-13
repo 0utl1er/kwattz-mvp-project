@@ -142,6 +142,13 @@ const Investors = () => {
     setOpenTimelineItems(newOpenItems);
   };
 
+  // Always visible timeline content - separate from the "hidden until energized" content
+  const timelineGlowingStyles: React.CSSProperties = {
+    opacity: 1,
+    filter: 'brightness(1)',
+    zIndex: 10,
+  };
+
   const timelineItems = [
     {
       date: "February 2025",
@@ -201,10 +208,11 @@ const Investors = () => {
           </div>
         </section>
         
-        {/* Timeline Section - Always visible with glowing effect */}
+        {/* Timeline Section - Always visible with glowing effect even in dark mode */}
         <section 
-          className="mt-20 mb-32 max-w-4xl mx-auto"
+          className="mt-20 mb-32 max-w-4xl mx-auto relative z-50"
           ref={timelineRef}
+          style={timelineGlowingStyles}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center text-[#C3FF44] neon-text" 
               style={{ 
@@ -214,7 +222,7 @@ const Investors = () => {
           </h2>
           
           <div className="relative">
-            {/* Vertical Energy Line - Always glowing */}
+            {/* Vertical Energy Line - Always glowing regardless of page state */}
             <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-800 z-0">
               {/* Animated Energy Flow - Enhanced glow effect */}
               <div className="absolute top-0 left-0 right-0 bottom-0 overflow-hidden">
@@ -230,7 +238,7 @@ const Investors = () => {
               </div>
             </div>
             
-            {/* Timeline Items - Initially only nodes visible */}
+            {/* Timeline Items - Only show the glowing circles until reveal */}
             <div className="relative z-10">
               {timelineItems.map((item, index) => (
                 <div 
@@ -269,9 +277,9 @@ const Investors = () => {
                   {/* Center Circle with Zap Icon - Always glowing in dark mode */}
                   <div className={`${isMobile ? 'mb-0 mt-0' : 'w-2/12'} flex justify-center`}>
                     <div 
-                      className="h-12 w-12 rounded-full flex items-center justify-center border-2 border-[#C3FF44] relative"
+                      className="h-12 w-12 rounded-full flex items-center justify-center border-2 border-[#C3FF44] relative cursor-pointer"
                       style={{
-                        backgroundColor: pageReveal ? '#111F54' : 'black',
+                        backgroundColor: 'black',
                         boxShadow: '0 0 15px rgba(195, 255, 68, 0.8), 0 0 25px rgba(195, 255, 68, 0.4)',
                         animation: 'glow-pulse 2s ease-in-out infinite alternate',
                       }}
@@ -286,6 +294,16 @@ const Investors = () => {
               ))}
             </div>
           </div>
+          
+          {/* Added guide text under timeline to direct users to the logo */}
+          {!logoClicked && (
+            <div className="text-center mt-4 text-[#C3FF44] animate-pulse" 
+                style={{ 
+                  textShadow: '0 0 10px rgba(195, 255, 68, 0.7), 0 0 20px rgba(195, 255, 68, 0.5), 0 0 30px rgba(195, 255, 68, 0.3)'
+                }}>
+              Scroll down to energize the system
+            </div>
+          )}
         </section>
 
         {/* Logo Section - Trigger for animation */}
