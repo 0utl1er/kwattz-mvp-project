@@ -1,8 +1,6 @@
-
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Mailbox } from "lucide-react";
+import { Mailbox } from "lucide-react";
 import Footer from '../components/landing/Footer';
 import { useIsMobile } from '../hooks/use-mobile';
 import TopMenu from '../components/layout/TopMenu';
@@ -50,11 +48,10 @@ const Investors = () => {
           className="mb-20 flex flex-col items-center justify-center text-center"
           style={lightingStyle}
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-[#C3FF44] glow-text">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#C3FF44] glow-text">
             Investors
           </h1>
           
-          {/* Brain2 image positioned between heading and text block */}
           <img 
             src="/brain2.png" 
             alt="Brain Visualization" 
@@ -78,25 +75,12 @@ const Investors = () => {
                 style={{ backgroundColor: '#C3FF44' }} 
                 asChild
               >
-                <Link to="mailto:investors@kwattz.com">
+                <a href="mailto:investors@kwattz.com">
                   <Mailbox className="mr-2 h-5 w-5" />
                   Say Hi
-                </Link>
+                </a>
               </Button>
             </div>
-          </div>
-          
-          {/* Back to Home Button moved outside the box */}
-          <div className="mt-6">
-            <Button 
-              className="bg-black text-[#C3FF44] hover:bg-[#1EAEDB]/10 border border-[#C3FF44]/50 shadow-[0_0_15px_rgba(195,255,68,0.3)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(195,255,68,0.5)]"
-              variant="outline"
-              asChild
-            >
-              <Link to="/">
-                <ArrowLeft className="mr-2 h-4 w-4" /> Back to Home
-              </Link>
-            </Button>
           </div>
         </section>
       </main>
