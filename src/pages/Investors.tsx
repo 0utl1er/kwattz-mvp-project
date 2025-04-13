@@ -67,11 +67,11 @@ const Investors = () => {
     setIsBlinking(true);
     setEnergized(false);
     setBlinkCount(0);
-    setBlinkInterval(1000); // Start with an even slower initial blink
+    setBlinkInterval(1000); // Start with a slower initial blink
     
     let currentCount = 0;
     let currentInterval = 1000;
-    const maxBlinks = 20; // Increased number of blinks for more dramatic effect
+    const maxBlinks = 10; // Number of blinks before fully energized
     
     const executeBlinkSequence = () => {
       const blinkTimer = setTimeout(() => {
@@ -86,9 +86,8 @@ const Investors = () => {
           return;
         }
         
-        // Even more aggressive interval reduction
-        // Exponential decrease to create a rapid acceleration
-        const reductionFactor = 0.75; // Faster reduction
+        // Exponential interval reduction to create acceleration effect
+        const reductionFactor = 0.75;
         const newInterval = Math.max(currentInterval * reductionFactor, 50);
         currentInterval = newInterval;
         setBlinkInterval(newInterval);
@@ -107,16 +106,18 @@ const Investors = () => {
 
   // Using proper type assertions for React.CSSProperties
   const animationStyles: React.CSSProperties = {
-    opacity: energized ? 1 : (blinkCount % 2 === 0 ? 1 : 0.2), // More pronounced blink
-    transition: energized 
-      ? 'opacity 0.5s ease-out, box-shadow 0.5s ease-out' 
-      : `opacity ${blinkInterval/1000}s ease-in-out`,
+    opacity: isBlinking ? (blinkCount % 2 === 0 ? 1 : 0) : (energized ? 1 : 0.2), 
+    transition: `opacity ${blinkInterval/1000}s ease-in-out`,
     boxShadow: energized ? '0 0 50px rgba(195, 255, 68, 0.4)' : 'none'
   };
 
   const initialDarkStyles: React.CSSProperties = {
-    filter: logoReached && logoClicked ? (energized ? 'brightness(1)' : `brightness(${0.2 + (blinkCount * 0.04)})`) : 'brightness(0.05)',
-    transition: 'filter 0.5s ease-out',
+    filter: logoReached && logoClicked 
+      ? (isBlinking 
+          ? (blinkCount % 2 === 0 ? 'brightness(0.4)' : 'brightness(0.05)') 
+          : (energized ? 'brightness(1)' : 'brightness(0.05)'))
+      : 'brightness(0.05)',
+    transition: `filter ${blinkInterval/1000}s ease-in-out`,
     backgroundColor: energized ? '#111F54' : 'black'
   };
 
