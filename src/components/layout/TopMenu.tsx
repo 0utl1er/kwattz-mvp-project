@@ -16,7 +16,7 @@ const TopMenu = () => {
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <Link to="/" className="flex items-center">
           <img 
-            src="/idea-kwattz-logo-2.svg" 
+            src="/logo-kwattz-final-svg.svg" 
             alt="kWattz" 
             className={`${isInvestorsPage ? 'h-16 md:h-20' : 'h-14 md:h-16'}`} 
           />
@@ -36,4 +36,3 @@ const TopMenu = () => {
 };
 
 export default TopMenu;
-
