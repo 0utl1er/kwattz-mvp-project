@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import Footer from '../components/landing/Footer';
+import TopMenu from '../components/layout/TopMenu';
 
 const Blog = () => {
   useEffect(() => {
@@ -12,7 +13,9 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-[#111F54] text-white">
-      <div className="container mx-auto px-4 mb-6">
+      <TopMenu />
+      
+      <div className="container mx-auto px-4 mb-6 pt-24">
         <Button 
           className="bg-[#111F54] text-[#C3FF44] hover:bg-[#C3FF44]/10"
           variant="outline"

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Mailbox } from "lucide-react";
 import Footer from '../components/landing/Footer';
 import { useIsMobile } from '../hooks/use-mobile';
+import TopMenu from '../components/layout/TopMenu';
 
 const Investors = () => {
   const isMobile = useIsMobile();
@@ -40,8 +41,10 @@ const Investors = () => {
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      <TopMenu />
+      
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-6">
+      <main className="container mx-auto px-4 py-6 pt-24">
         {/* Investors Message Section */}
         <section 
           className="mb-20 flex flex-col items-center justify-center text-center"
