@@ -61,11 +61,7 @@ const Investors = () => {
           
           <div className="max-w-3xl mx-auto bg-black/80 p-8 rounded-2xl backdrop-blur-sm border border-white/10 shadow-[0_0_30px_rgba(195,255,68,0.15)] hover:shadow-[0_0_40px_rgba(195,255,68,0.25)] transition-all duration-500">
             <p className="text-xl md:text-2xl mb-6">
-              While I’m busy hustling to validate my concept, take a look at what I’ve accomplished so far.
-            </p>
-            
-            <p className="text-xl md:text-2xl mb-8">
-              Meanwhile, let's keep in touch! I'm a brain full of ideas.
+              While I’m busy hustling to validate my concept, take a look at what I’ve accomplished so far. Meanwhile, let's keep in touch! I'm a brain full of ideas.
             </p>
             
             {/* Say Hi Button inside the box */}
