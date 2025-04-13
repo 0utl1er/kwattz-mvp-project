@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Mailbox, Zap, ChevronDown } from "lucide-react";
@@ -123,7 +122,7 @@ const Investors = () => {
 
   const hiddenElementStyles = {
     opacity: pageReveal ? 1 : 0,
-    visibility: pageReveal ? 'visible' : 'hidden',
+    visibility: pageReveal ? 'visible' as const : 'hidden' as const,
     transition: 'opacity 0.8s ease-out, visibility 0.8s ease-out',
   };
 
