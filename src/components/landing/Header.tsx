@@ -7,6 +7,15 @@ import { ArrowRight, LightbulbIcon, BadgeDollarSign, BarChart3, Bolt } from "luc
 const Header = () => {
   return (
     <header className="container mx-auto px-4 py-12 md:py-20">
+      {/* New Investors Link */}
+      <div className="text-center mb-4">
+        <Button asChild variant="link">
+          <Link to="/investors" className="text-[#C3FF44] hover:underline">
+            Investors
+          </Link>
+        </Button>
+      </div>
+
       <div className="flex flex-col lg:flex-row items-center gap-8">
         <div className="flex-1">
           <div className="space-y-4">
