@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -11,7 +10,22 @@ const Header = () => {
         <div className="flex-1">
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold flex items-center gap-2" style={{ color: '#C3FF44' }}>
-              Take control of your Electric Bill with kWattz⚡
+              Take control of your Electric Bill with kWattz
+              <span className="relative inline-block ml-2 animate-pulse">
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="48" 
+                  height="48" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  className="text-[#C3FF44] drop-shadow-[0_0_10px_rgba(195,255,68,0.5)] transform transition-transform hover:scale-110"
+                >
+                  <path d="M11 11V5l-5 7h4v6l5-7z" fill="currentColor" />
+                </svg>
+                <span className="absolute inset-0 bg-[#C3FF44]/20 rounded-full animate-ping opacity-75"></span>
+              </span>
             </h1>
             <p className="text-xl text-white md:pr-12 -mt-4">
               Our AI-powered energy advisor helps you understand your electric bills, save money, and make smarter energy decisions.
