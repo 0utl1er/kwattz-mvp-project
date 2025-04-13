@@ -1,6 +1,8 @@
+
 import React, { useEffect } from "react";
 import Footer from "@/components/landing/Footer";
 import TopMenu from "@/components/layout/TopMenu";
+import { Button } from "@/components/ui/button";
 import {
   Accordion,
   AccordionContent,
