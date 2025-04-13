@@ -105,7 +105,7 @@ const Investors = () => {
     return () => clearTimeout(timer);
   };
 
-  // Using proper type assertions for React.CSSProperties
+  // Animation styles for the blinking effect
   const animationStyles: React.CSSProperties = {
     opacity: energized ? 1 : (blinkCount % 2 === 0 ? 1 : 0.2), // More pronounced blink
     transition: energized 
@@ -290,16 +290,9 @@ const Investors = () => {
         <section className="mt-10 mb-20 flex flex-col items-center justify-center text-center">
           <img 
             ref={logoRef}
-            src="/brain2.png" 
-            alt="Brain Visualization" 
-            className="w-full max-w-4xl mx-auto cursor-pointer"
-            style={{ 
-              maxHeight: '600px', 
-              objectFit: 'contain',
-              opacity: logoReached ? 1 : 0.3,
-              transition: 'opacity 0.8s ease-out',
-              filter: 'drop-shadow(0 0 10px rgba(195, 255, 68, 0.4))'
-            }}
+            src="/logo-kwattz-final-final-transparent.svg" 
+            alt="kWattz Logo" 
+            className="w-full max-w-md mx-auto cursor-pointer lightning-bolt-logo"
             onClick={handleLogoClick}
           />
           {logoReached && !logoClicked && (
@@ -307,7 +300,7 @@ const Investors = () => {
                 style={{ 
                   textShadow: '0 0 10px rgba(195, 255, 68, 0.7), 0 0 20px rgba(195, 255, 68, 0.5), 0 0 30px rgba(195, 255, 68, 0.3)'
                 }}>
-              Click the brain to energize the system
+              Click the lightning bolt to energize the system
             </div>
           )}
         </section>
@@ -365,6 +358,35 @@ const Investors = () => {
         @keyframes powerUp {
           0% { filter: brightness(0.3); }
           100% { filter: brightness(1); }
+        }
+        
+        /* Lightning bolt animation */
+        @keyframes lightning-flash {
+          0%, 100% { 
+            filter: drop-shadow(0 0 15px rgba(195, 255, 68, 0.8)) 
+                   drop-shadow(0 0 30px rgba(195, 255, 68, 0.6)); 
+            transform: scale(1);
+          }
+          50% { 
+            filter: drop-shadow(0 0 25px rgba(195, 255, 68, 1)) 
+                   drop-shadow(0 0 50px rgba(195, 255, 68, 0.8))
+                   drop-shadow(0 0 75px rgba(195, 255, 68, 0.6)); 
+            transform: scale(1.05);
+          }
+        }
+        
+        .lightning-bolt-logo {
+          animation: lightning-flash 2s ease-in-out infinite;
+          filter: drop-shadow(0 0 20px rgba(195, 255, 68, 0.9)) 
+                 drop-shadow(0 0 40px rgba(195, 255, 68, 0.7));
+          transition: all 0.3s ease;
+        }
+        
+        .lightning-bolt-logo:hover {
+          filter: drop-shadow(0 0 30px rgba(195, 255, 68, 1)) 
+                 drop-shadow(0 0 60px rgba(195, 255, 68, 0.8))
+                 drop-shadow(0 0 90px rgba(195, 255, 68, 0.6));
+          transform: scale(1.1);
         }
         
         /* Prevent all interactions initially */
