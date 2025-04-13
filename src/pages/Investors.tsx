@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Mailbox, Zap } from "lucide-react";
@@ -17,9 +16,9 @@ const Investors = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     
-    // Blinking animation effect
-    const maxBlinks = 5;
-    const blinkInterval = 400; // ms
+    // Extended blinking animation effect
+    const maxBlinks = 10; // Increased number of blinks
+    const blinkInterval = 300; // Slightly faster blink
     
     // Start blinking effect
     const timer = setInterval(() => {
@@ -66,8 +65,8 @@ const Investors = () => {
   }, [activeTimelineItems]);
 
   const animationStyles = {
-    opacity: energized ? 1 : (blinkCount % 2 === 0 ? 1 : 0.3),
-    transition: energized ? 'opacity 0.5s ease-out' : 'opacity 0.2s ease-in-out'
+    opacity: energized ? 1 : (blinkCount % 2 === 0 ? 1 : 0.2), // More pronounced blink
+    transition: energized ? 'opacity 0.5s ease-out' : 'opacity 0.1s ease-in-out' // Faster initial blinks
   };
 
   const timelineItems = [
@@ -219,11 +218,6 @@ const Investors = () => {
         
         .glow-text {
           text-shadow: 0 0 10px rgba(195, 255, 68, 0.7);
-        }
-        
-        @keyframes energize-blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.3; }
         }
         `}
       </style>
