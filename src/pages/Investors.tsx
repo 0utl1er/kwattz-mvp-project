@@ -21,6 +21,7 @@ const Investors = () => {
   const [pageReveal, setPageReveal] = useState(false);
   const [logoReached, setLogoReached] = useState(false);
   const [initialScroll, setInitialScroll] = useState(false);
+  const [logoClicked, setLogoClicked] = useState(false);
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -56,7 +57,6 @@ const Investors = () => {
       
       if (isLogoVisible && !logoReached) {
         setLogoReached(true);
-        startBlinkingSequence();
       }
     };
     
@@ -69,6 +69,13 @@ const Investors = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [activeTimelineItems, logoReached, initialScroll]);
+
+  const handleLogoClick = () => {
+    if (!logoClicked && logoReached) {
+      setLogoClicked(true);
+      startBlinkingSequence();
+    }
+  };
 
   const startBlinkingSequence = () => {
     if (isBlinking) return; // Prevent multiple sequences running simultaneously
@@ -124,7 +131,7 @@ const Investors = () => {
   };
 
   const initialDarkStyles: React.CSSProperties = {
-    filter: logoReached ? (energized ? 'brightness(1)' : `brightness(${0.2 + (blinkCount * 0.04)})`) : 'brightness(0.2)',
+    filter: logoReached && logoClicked ? (energized ? 'brightness(1)' : `brightness(${0.2 + (blinkCount * 0.04)})`) : 'brightness(0.05)',
     transition: 'filter 0.5s ease-out'
   };
 
@@ -186,7 +193,7 @@ const Investors = () => {
       <main className="container mx-auto px-4 py-6 pt-24">
         
         {/* Investors Message Section - Initially hidden until scroll */}
-        <section className="mb-20 flex flex-col items-center justify-center text-center" style={initialHiddenStyles}>
+        <section className="mb-20 flex flex-col items-center justify-center text-center" style={hiddenElementStyles}>
           <div className={`max-w-3xl mx-auto ${pageReveal ? 'bg-[#111F54]/80' : 'bg-black/80'} p-8 rounded-2xl backdrop-blur-sm border border-white/10 shadow-[0_0_30px_rgba(195,255,68,0.15)] hover:shadow-[0_0_40px_rgba(195,255,68,0.25)] transition-all duration-500`}>
             <p className="text-xl md:text-2xl mb-6">
               While I'm busy hustling to validate my concept, take a look at what I've accomplished so far. Meanwhile, let's keep in touch! I'm a brain full of ideas.
@@ -213,7 +220,7 @@ const Investors = () => {
           className="mt-20 mb-32 max-w-4xl mx-auto"
           ref={timelineRef}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center text-[#C3FF44] animate-pulse-subtle">
+          <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center text-[#C3FF44] neon-text">
             Our Journey So Far
           </h2>
           
@@ -249,7 +256,7 @@ const Investors = () => {
                   {/* Content - Initially hidden until scroll */}
                   <div 
                     className={`${isMobile ? 'w-full mt-4' : 'w-5/12'} ${!isMobile && (index % 2 === 0 ? 'pr-10 text-right' : 'pl-10 text-left')}`} 
-                    style={initialHiddenStyles}
+                    style={pageReveal ? {} : { opacity: 0, visibility: 'hidden' }}
                   >
                     <Collapsible
                       open={openTimelineItems[index]}
@@ -278,11 +285,10 @@ const Investors = () => {
                   {/* Center Circle with Zap Icon - Always glowing in dark mode */}
                   <div className={`${isMobile ? 'mb-0 mt-0' : 'w-2/12'} flex justify-center`}>
                     <div 
-                      className={`h-12 w-12 rounded-full flex items-center justify-center border-2 relative transition-all duration-300 ${activeTimelineItems[index] ? 'border-[#C3FF44] shadow-[0_0_15px_rgba(195,255,68,0.5)]' : 'border-gray-700'}`}
+                      className={`h-12 w-12 rounded-full flex items-center justify-center border-2 relative transition-all duration-300 ${activeTimelineItems[index] ? 'border-[#C3FF44] node-glow' : 'border-gray-700'}`}
                       style={{
                         backgroundColor: pageReveal ? '#111F54' : 'black',
                         transition: 'background-color 0.5s ease-out',
-                        boxShadow: '0 0 15px rgba(195, 255, 68, 0.4)'
                       }}
                     >
                       <Zap className={`h-6 w-6 ${activeTimelineItems[index] ? 'text-[#C3FF44]' : 'text-[#C3FF44]/50'} transition-all duration-500`} />
@@ -303,14 +309,20 @@ const Investors = () => {
             ref={logoRef}
             src="/brain2.png" 
             alt="Brain Visualization" 
-            className="w-full max-w-4xl mx-auto"
+            className="w-full max-w-4xl mx-auto cursor-pointer"
             style={{ 
               maxHeight: '600px', 
               objectFit: 'contain',
               opacity: logoReached ? 1 : 0.5, // Keep logo visible without filter
               transition: 'opacity 0.8s ease-out'
             }}
+            onClick={handleLogoClick}
           />
+          {logoReached && !logoClicked && (
+            <div className="mt-4 text-[#C3FF44] animate-pulse neon-text">
+              Click the brain to energize the system
+            </div>
+          )}
         </section>
       </main>
 
@@ -332,14 +344,30 @@ const Investors = () => {
           filter: drop-shadow(0 0 8px rgba(195, 255, 68, 0.8));
         }
         
-        .glow-text {
-          text-shadow: 0 0 10px rgba(195, 255, 68, 0.7);
+        .neon-text {
+          text-shadow: 0 0 10px rgba(195, 255, 68, 0.7), 0 0 20px rgba(195, 255, 68, 0.5), 0 0 30px rgba(195, 255, 68, 0.3);
+          animation: neon-pulse 1.5s ease-in-out infinite alternate;
+        }
+        
+        .node-glow {
+          box-shadow: 0 0 15px rgba(195, 255, 68, 0.8), 0 0 25px rgba(195, 255, 68, 0.4);
+          animation: glow-pulse 2s ease-in-out infinite alternate;
         }
         
         @keyframes glow {
           0% { box-shadow: 0 0 10px rgba(195, 255, 68, 0.3); }
           50% { box-shadow: 0 0 20px rgba(195, 255, 68, 0.7); }
           100% { box-shadow: 0 0 10px rgba(195, 255, 68, 0.3); }
+        }
+        
+        @keyframes neon-pulse {
+          from { text-shadow: 0 0 10px rgba(195, 255, 68, 0.7), 0 0 20px rgba(195, 255, 68, 0.5), 0 0 30px rgba(195, 255, 68, 0.3); }
+          to { text-shadow: 0 0 15px rgba(195, 255, 68, 0.9), 0 0 25px rgba(195, 255, 68, 0.7), 0 0 35px rgba(195, 255, 68, 0.5); }
+        }
+        
+        @keyframes glow-pulse {
+          from { box-shadow: 0 0 15px rgba(195, 255, 68, 0.8), 0 0 25px rgba(195, 255, 68, 0.4); }
+          to { box-shadow: 0 0 20px rgba(195, 255, 68, 1), 0 0 30px rgba(195, 255, 68, 0.6); }
         }
         
         @keyframes pulse-subtle {
