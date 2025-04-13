@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { ArrowLeft, Shield } from "lucide-react";
+import { Shield } from "lucide-react";
 import Footer from "../components/landing/Footer";
 import TopMenu from "../components/layout/TopMenu";
 
@@ -10,13 +10,6 @@ const PrivacyPolicy = () => {
       <TopMenu />
       
       <div className="container mx-auto px-4 py-8 pt-24">
-        <div className="mb-8">
-          <Link to="/" className="inline-flex items-center text-[#C3FF44] hover:text-[#C3FF44]/80">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Home
-          </Link>
-        </div>
-        
         <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 border border-white/20 mb-12">
           <div className="flex items-center gap-3 mb-6">
             <div className="bg-[#C3FF44]/20 p-3 rounded-full">
