@@ -3,7 +3,6 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import LanguageSelector from './LanguageSelector';
 
 const TopMenu = () => {
   const location = useLocation();
@@ -28,8 +27,6 @@ const TopMenu = () => {
         </Link>
         
         <div className="flex items-center gap-4">
-          {isLandingPage && <LanguageSelector />}
-          
           <Button 
             className="text-[#111F54] text-base md:text-lg py-4 md:py-6 px-5 md:px-8" 
             style={{ backgroundColor: '#C3FF44' }} 
