@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, CheckCircle2, Mail, Lock, Loader2, AlertCircle } from "lucide-react";
@@ -255,7 +254,7 @@ const SignUp = () => {
                 
                 <Button 
                   type="submit" 
-                  className="w-full text-[#111F54] hover:bg-[#C3FF44]/90 transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-[0_4px_14px_rgba(195,255,68,0.4)]" 
+                  className="w-full text-[#111F54] hover:bg-[#C3FF44]/90 transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-[0_4px_14px_rgba(195,255,68,0.4)] neon-button" 
                   style={{ backgroundColor: '#C3FF44' }}
                   disabled={isLoading}
                 >
@@ -337,7 +336,7 @@ const SignUp = () => {
         </div>
       </div>
 
-      {/* Add neon text animation styles */}
+      {/* Add neon text and button animation styles */}
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes neon-flash {
           0%, 100% {
@@ -358,6 +357,36 @@ const SignUp = () => {
         .neon-text {
           animation: neon-flash 4s infinite ease-in-out;
           font-weight: bold;
+        }
+
+        .neon-button {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .neon-button::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: radial-gradient(
+            circle at center, 
+            rgba(195, 255, 68, 0.3) 0%, 
+            transparent 70%
+          );
+          animation: neon-button-pulse 3s infinite ease-in-out;
+          opacity: 0;
+        }
+
+        .neon-button:hover::before {
+          opacity: 1;
+        }
+
+        @keyframes neon-button-pulse {
+          0%, 100% { transform: scale(1); opacity: 0; }
+          50% { transform: scale(1.1); opacity: 0.5; }
         }
       `}} />
     </div>
