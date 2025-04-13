@@ -1,6 +1,9 @@
+
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import Footer from "@/components/landing/Footer";
 import TopMenu from "@/components/layout/TopMenu";
+import { Button } from "@/components/ui/button";
 
 const Terms = () => {
   useEffect(() => {
