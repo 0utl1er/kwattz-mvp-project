@@ -8,22 +8,19 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { useLanguage, Language } from "@/context/LanguageContext";
 
 const languages = [
-  { code: 'en' as Language, name: 'English' },
-  { code: 'es' as Language, name: 'Español' },
-  { code: 'fr' as Language, name: 'Français' },
-  { code: 'pt' as Language, name: 'Português' },
+  { code: 'en', name: 'English' },
+  { code: 'es', name: 'Español' },
+  { code: 'fr', name: 'Français' },
 ];
 
 const LanguageSelector = () => {
-  const { language, setLanguage } = useLanguage();
-  
-  const selectedLanguage = languages.find(lang => lang.code === language) || languages[0];
+  const [selectedLanguage, setSelectedLanguage] = React.useState(languages[0]);
 
-  const handleLanguageChange = (lang: typeof languages[0]) => {
-    setLanguage(lang.code);
+  const handleLanguageChange = (language: typeof languages[0]) => {
+    setSelectedLanguage(language);
+    // Here you would implement actual language change logic
   };
 
   return (
@@ -35,13 +32,13 @@ const LanguageSelector = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="bg-white">
-        {languages.map((lang) => (
+        {languages.map((language) => (
           <DropdownMenuItem
-            key={lang.code}
-            onClick={() => handleLanguageChange(lang)}
-            className={`cursor-pointer ${lang.code === language ? 'font-bold' : ''}`}
+            key={language.code}
+            onClick={() => handleLanguageChange(language)}
+            className="cursor-pointer"
           >
-            {lang.name}
+            {language.name}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
