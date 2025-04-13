@@ -1,3 +1,9 @@
+
+import React from 'react';
+import { Link } from "react-router-dom";
+import { ArrowRight, LightbulbIcon, BadgeDollarSign, BarChart3 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
 const Header = () => {
   return (
     <header className="container mx-auto px-4 py-12 md:py-20">
