@@ -9,29 +9,29 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const Investors = () => {
   const isMobile = useIsMobile();
-  const [brightness, setBrightness] = useState(0);
+  const [energized, setEnergized] = useState(false);
+  const [blinkCount, setBlinkCount] = useState(0);
   const timelineRef = useRef<HTMLDivElement>(null);
   const [activeTimelineItems, setActiveTimelineItems] = useState<boolean[]>([false, false, false, false]);
   
   useEffect(() => {
     window.scrollTo(0, 0);
     
-    // Gradually increase brightness effect
-    const maxBrightness = 100;
-    const duration = 6000; // 6 seconds
-    const interval = 50; // update every 50ms
-    const steps = duration / interval;
-    const increment = maxBrightness / steps;
+    // Blinking animation effect
+    const maxBlinks = 5;
+    const blinkInterval = 400; // ms
     
-    let currentBrightness = 0;
+    // Start blinking effect
     const timer = setInterval(() => {
-      currentBrightness += increment;
-      if (currentBrightness >= maxBrightness) {
-        currentBrightness = maxBrightness;
-        clearInterval(timer);
-      }
-      setBrightness(currentBrightness);
-    }, interval);
+      setBlinkCount(prev => {
+        if (prev >= maxBlinks) {
+          clearInterval(timer);
+          setEnergized(true);
+          return prev;
+        }
+        return prev + 1;
+      });
+    }, blinkInterval);
     
     // Handle scroll animation for timeline
     const handleScroll = () => {
@@ -65,9 +65,9 @@ const Investors = () => {
     };
   }, [activeTimelineItems]);
 
-  const lightingStyle = {
-    opacity: brightness / 100,
-    transition: 'opacity 0.05s ease-out'
+  const animationStyles = {
+    opacity: energized ? 1 : (blinkCount % 2 === 0 ? 1 : 0.3),
+    transition: energized ? 'opacity 0.5s ease-out' : 'opacity 0.2s ease-in-out'
   };
 
   const timelineItems = [
@@ -98,11 +98,10 @@ const Investors = () => {
       <TopMenu />
       
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-6 pt-24">
-        {/* Investors Message Section */}
+      <main className="container mx-auto px-4 py-6 pt-24" style={animationStyles}>
+        {/* Investors Title Section */}
         <section 
           className="mb-20 flex flex-col items-center justify-center text-center"
-          style={lightingStyle}
         >
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#C3FF44] glow-text">
             Investors
@@ -114,26 +113,6 @@ const Investors = () => {
             className="mb-10 w-full max-w-2xl mx-auto"
             style={{ maxHeight: '400px', objectFit: 'contain' }}
           />
-          
-          <div className="max-w-3xl mx-auto bg-black/80 p-8 rounded-2xl backdrop-blur-sm border border-white/10 shadow-[0_0_30px_rgba(195,255,68,0.15)] hover:shadow-[0_0_40px_rgba(195,255,68,0.25)] transition-all duration-500">
-            <p className="text-xl md:text-2xl mb-6">
-              While I'm busy hustling to validate my concept, take a look at what I've accomplished so far. Meanwhile, let's keep in touch! I'm a brain full of ideas.
-            </p>
-            
-            {/* Say Hi Button inside the box */}
-            <div className="flex flex-col items-center space-y-6 mt-6">
-              <Button 
-                className="text-black text-lg py-6 px-8 hover:bg-[#C3FF44]/90 shadow-[0_0_20px_rgba(195,255,68,0.4)] hover:shadow-[0_0_30px_rgba(195,255,68,0.6)] transition-all duration-300 flex items-center" 
-                style={{ backgroundColor: '#C3FF44' }} 
-                asChild
-              >
-                <a href="mailto:investors@kwattz.com">
-                  <Mailbox className="mr-2 h-5 w-5" />
-                  Let's connect!
-                </a>
-              </Button>
-            </div>
-          </div>
         </section>
         
         {/* Timeline Section */}
@@ -196,10 +175,33 @@ const Investors = () => {
             </div>
           </div>
         </section>
+
+        {/* Investors Message Section - Moved to after the timeline */}
+        <section className="mb-20 flex flex-col items-center justify-center text-center">
+          <div className="max-w-3xl mx-auto bg-black/80 p-8 rounded-2xl backdrop-blur-sm border border-white/10 shadow-[0_0_30px_rgba(195,255,68,0.15)] hover:shadow-[0_0_40px_rgba(195,255,68,0.25)] transition-all duration-500">
+            <p className="text-xl md:text-2xl mb-6">
+              While I'm busy hustling to validate my concept, take a look at what I've accomplished so far. Meanwhile, let's keep in touch! I'm a brain full of ideas.
+            </p>
+            
+            {/* Say Hi Button inside the box */}
+            <div className="flex flex-col items-center space-y-6 mt-6">
+              <Button 
+                className="text-black text-lg py-6 px-8 hover:bg-[#C3FF44]/90 shadow-[0_0_20px_rgba(195,255,68,0.4)] hover:shadow-[0_0_30px_rgba(195,255,68,0.6)] transition-all duration-300 flex items-center" 
+                style={{ backgroundColor: '#C3FF44' }} 
+                asChild
+              >
+                <a href="mailto:investors@kwattz.com">
+                  <Mailbox className="mr-2 h-5 w-5" />
+                  Let's connect!
+                </a>
+              </Button>
+            </div>
+          </div>
+        </section>
       </main>
 
-      {/* Footer with lighting effect */}
-      <div style={lightingStyle}>
+      {/* Footer with energizing effect */}
+      <div style={animationStyles}>
         <Footer />
       </div>
       
@@ -217,6 +219,11 @@ const Investors = () => {
         
         .glow-text {
           text-shadow: 0 0 10px rgba(195, 255, 68, 0.7);
+        }
+        
+        @keyframes energize-blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.3; }
         }
         `}
       </style>
