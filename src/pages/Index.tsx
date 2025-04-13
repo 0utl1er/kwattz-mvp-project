@@ -8,7 +8,7 @@ import Footer from '../components/landing/Footer';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-[#111F54]">
+    <div className="min-h-screen bg-[#111F54] pt-24">
       {/* Hero Section */}
       <Header />
 

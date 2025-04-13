@@ -3,10 +3,12 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import LanguageSelector from './LanguageSelector';
 
 const TopMenu = () => {
   const location = useLocation();
   const isInvestorsPage = location.pathname === '/investors';
+  const isLandingPage = location.pathname === '/';
   
   // Dynamic styling based on current page
   const menuBgColor = isInvestorsPage ? 'bg-black' : 'bg-[#111F54]';
@@ -24,15 +26,20 @@ const TopMenu = () => {
             className="h-16 md:h-20" 
           />
         </Link>
-        <Button 
-          className="text-[#111F54] text-base md:text-lg py-4 md:py-6 px-5 md:px-8" 
-          style={{ backgroundColor: '#C3FF44' }} 
-          asChild
-        >
-          <Link to="/kwattz-signup">
-            Get Started <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </Button>
+        
+        <div className="flex items-center gap-4">
+          {isLandingPage && <LanguageSelector />}
+          
+          <Button 
+            className="text-[#111F54] text-base md:text-lg py-4 md:py-6 px-5 md:px-8" 
+            style={{ backgroundColor: '#C3FF44' }} 
+            asChild
+          >
+            <Link to="/kwattz-signup">
+              Get Started <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
       </div>
     </div>
   );
