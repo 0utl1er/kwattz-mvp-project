@@ -23,6 +23,10 @@ const Investors = () => {
   const [initialScroll, setInitialScroll] = useState(false);
   const [logoClicked, setLogoClicked] = useState(false);
   
+  // Controls the whole page blinking (independent of individual elements)
+  const [wholePageBlinking, setWholePageBlinking] = useState(false);
+  const [wholePageVisible, setWholePageVisible] = useState(false);
+  
   useEffect(() => {
     window.scrollTo(0, 0);
     
@@ -57,15 +61,16 @@ const Investors = () => {
   const handleLogoClick = () => {
     if (!logoClicked && logoReached) {
       setLogoClicked(true);
-      startBlinkingSequence();
+      startWholePageBlinking();
     }
   };
 
-  const startBlinkingSequence = () => {
+  // New function to handle whole page blinking
+  const startWholePageBlinking = () => {
     if (isBlinking) return; // Prevent multiple sequences running simultaneously
     
     setIsBlinking(true);
-    setEnergized(false);
+    setWholePageBlinking(true);
     setBlinkCount(0);
     setBlinkInterval(1000); // Start with a slower initial blink
     
@@ -80,6 +85,8 @@ const Investors = () => {
         
         if (currentCount >= maxBlinks) {
           // Animation complete
+          setWholePageBlinking(false);
+          setWholePageVisible(true);
           setEnergized(true);
           setIsBlinking(false);
           setPageReveal(true); // Reveal the rest of the page
@@ -104,23 +111,23 @@ const Investors = () => {
     return () => clearTimeout(timer);
   };
 
-  // Using proper type assertions for React.CSSProperties
+  // Standard element animation styles
   const animationStyles: React.CSSProperties = {
     opacity: isBlinking ? (blinkCount % 2 === 0 ? 1 : 0) : (energized ? 1 : 0.2), 
     transition: `opacity ${blinkInterval/1000}s ease-in-out`,
     boxShadow: energized ? '0 0 50px rgba(195, 255, 68, 0.4)' : 'none'
   };
 
-  const initialDarkStyles: React.CSSProperties = {
-    filter: logoReached && logoClicked 
-      ? (isBlinking 
-          ? (blinkCount % 2 === 0 ? 'brightness(0.4)' : 'brightness(0.05)') 
-          : (energized ? 'brightness(1)' : 'brightness(0.05)'))
-      : 'brightness(0.05)',
-    transition: `filter ${blinkInterval/1000}s ease-in-out`,
-    backgroundColor: energized ? '#111F54' : 'black'
+  // Whole page blinking effect
+  const wholePageStyles: React.CSSProperties = {
+    filter: wholePageBlinking 
+      ? (blinkCount % 2 === 0 ? 'brightness(0.2)' : 'brightness(0)')
+      : (wholePageVisible ? 'brightness(1)' : 'brightness(0.05)'),
+    backgroundColor: energized ? '#111F54' : 'black',
+    transition: `filter ${blinkInterval/1000}s ease-in-out, background-color 1s ease-in-out`,
   };
 
+  // Hidden elements until page fully revealed
   const hiddenElementStyles: React.CSSProperties = {
     opacity: pageReveal ? 1 : 0,
     visibility: pageReveal ? 'visible' as const : 'hidden' as const,
@@ -175,7 +182,7 @@ const Investors = () => {
   return (
     <div 
       className={`min-h-screen bg-black text-white relative overflow-hidden`}
-      style={initialDarkStyles}
+      style={wholePageStyles}
     >
       {/* Top Menu - Hidden until animation completes and page reveals */}
       <div style={hiddenElementStyles}>
@@ -307,7 +314,7 @@ const Investors = () => {
         </section>
 
         {/* Logo Section - Trigger for animation */}
-        <section className="mt-10 mb-20 flex flex-col items-center justify-center text-center">
+        <section className="mt-10 mb-20 flex flex-col items-center justify-center text-center relative z-20">
           <img 
             ref={logoRef}
             src="/logo-kwattz-final-final-transparent.svg" 
