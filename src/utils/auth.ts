@@ -11,24 +11,26 @@ import {
   createUserWithEmailAndPassword,
   UserCredential
 } from 'firebase/auth';
+import { getAnalytics } from "firebase/analytics";
 import { saveUserToAzureDB, getUserByFirebaseUidFromAzureDB, getUserByEmailFromAzureDB } from './azure-db';
 
 // Define the supported OAuth providers
 export type OAuthProvider = 'google' | 'apple';
 
 // Firebase configuration
-// For production, these values should be replaced with your actual Firebase project configuration
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "YOUR_API_KEY",
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "YOUR_AUTH_DOMAIN",
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "YOUR_PROJECT_ID",
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "YOUR_STORAGE_BUCKET",
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "YOUR_MESSAGING_SENDER_ID",
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || "YOUR_APP_ID"
+  apiKey: "AIzaSyBl0J04D0ncDNdMu3cV6QR9uTzp3VTgduI",
+  authDomain: "kwattz-ai.firebaseapp.com",
+  projectId: "kwattz-ai",
+  storageBucket: "kwattz-ai.firebasestorage.app",
+  messagingSenderId: "1096282636985",
+  appId: "1:1096282636985:web:34be43fa96ee72fd66d168",
+  measurementId: "G-Q8Y8VG6TDH"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 const auth = getAuth(app);
 
 /**
