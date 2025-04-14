@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, CheckCircle2, Mail, Lock, Loader2 } from "lucide-react";
@@ -46,12 +47,15 @@ const SignUp = () => {
       console.log("Form submitted, signing up with:", values.email);
       await signUpWithEmail(values.email, values.password);
       
+      // Show success message
       setShowSuccess(true);
       
       toast({
         title: "Account created successfully",
         description: "You can now proceed to the questionnaire.",
       });
+      
+      // The redirect is now handled in the signUpWithEmail function
     } catch (error: any) {
       console.error("Error during signup:", error);
       
@@ -61,6 +65,10 @@ const SignUp = () => {
         errorMessage = "This email is already registered. Please try logging in instead.";
       } else if (error.code === "auth/weak-password") {
         errorMessage = "Password is too weak. Please choose a stronger password.";
+      } else if (error.code === "auth/invalid-email") {
+        errorMessage = "The email address is not valid.";
+      } else if (error.code === "auth/network-request-failed") {
+        errorMessage = "Network error. Please check your connection and try again.";
       }
       
       toast({
@@ -80,15 +88,26 @@ const SignUp = () => {
       console.log("Initiating Google OAuth login");
       await initiateOAuthLogin('google');
       
+      // The redirect is now handled in the initiateOAuthLogin function
+      
       toast({
-        title: "Account created successfully",
+        title: "Google authentication successful",
         description: "Welcome to kWattz⚡!",
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error during Google signup:", error);
+      
+      let errorMessage = "Could not authenticate with Google. Please try again.";
+      
+      if (error.code === "auth/popup-closed-by-user") {
+        errorMessage = "You closed the Google login popup. Please try again.";
+      } else if (error.code === "auth/popup-blocked") {
+        errorMessage = "Popup was blocked by your browser. Please allow popups for this site.";
+      }
+      
       toast({
         title: "Google authentication failed",
-        description: "Could not authenticate with Google. Please try again.",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
@@ -103,15 +122,26 @@ const SignUp = () => {
       console.log("Initiating Apple OAuth login");
       await initiateOAuthLogin('apple');
       
+      // The redirect is now handled in the initiateOAuthLogin function
+      
       toast({
-        title: "Account created successfully",
+        title: "Apple authentication successful",
         description: "Welcome to kWattz⚡!",
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error during Apple signup:", error);
+      
+      let errorMessage = "Could not authenticate with Apple. Please try again.";
+      
+      if (error.code === "auth/popup-closed-by-user") {
+        errorMessage = "You closed the Apple login popup. Please try again.";
+      } else if (error.code === "auth/popup-blocked") {
+        errorMessage = "Popup was blocked by your browser. Please allow popups for this site.";
+      }
+      
       toast({
         title: "Apple authentication failed",
-        description: "Could not authenticate with Apple. Please try again.",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
