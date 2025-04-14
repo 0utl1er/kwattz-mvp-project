@@ -190,7 +190,6 @@ const Investors = () => {
           alignItems: 'center',
           backgroundColor: 'black',
           zIndex: 9000,
-          flexDirection: 'column' 
         }}
       >
         <div 
@@ -206,11 +205,6 @@ const Investors = () => {
             }}
           />
         </div>
-        {isMobile && (
-          <p className="text-[#C3FF44] text-sm mt-2 animate-pulse">
-            Tap to power up!
-          </p>
-        )}
       </div>
       
       {/* Main Page Content - Hidden until power button is clicked */}
@@ -268,33 +262,32 @@ const Investors = () => {
                 ref={timelineRef}
                 style={timelineGlowingStyles}
               >
-                <h2 className="text-2xl md:text-4xl font-bold mb-10 md:mb-16 text-center text-[#C3FF44] neon-text" 
-                    style={{ 
-                      textShadow: '0 0 15px rgba(195, 255, 68, 0.8), 0 0 25px rgba(195, 255, 68, 0.6), 0 0 35px rgba(195, 255, 68, 0.4)'
-                    }}>
+                <h2 className="text-2xl md:text-4xl font-bold mb-10 md:mb-16 text-center text-[#C3FF44] neon-text">
                   Our Journey So Far
                 </h2>
                 
                 <div className="relative">
-                  <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-800 z-0">
+                  <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 md:w-1.5 bg-gray-800 z-0">
                     <div className="absolute top-0 left-0 right-0 bottom-0 overflow-hidden">
                       <div 
-                        className="absolute top-0 left-0 right-0 h-full energy-flow" 
+                        className="absolute top-0 left-0 right-0 h-full energy-flow"
                         style={{
                           background: 'linear-gradient(180deg, rgba(195,255,68,0) 0%, rgba(195,255,68,1) 50%, rgba(195,255,68,0) 100%)',
-                          height: '30%',
+                          height: '40%',
                           opacity: 1,
                           boxShadow: '0 0 20px rgba(195,255,68,0.8), 0 0 40px rgba(195,255,68,0.4), 0 0 60px rgba(195,255,68,0.2)',
                         }}
                       />
                     </div>
+                    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full bg-[#C3FF44] shadow-glow" />
+                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full bg-[#C3FF44] shadow-glow" />
                   </div>
                   
                   <div className="relative z-10">
                     {timelineItems.map((item, index) => (
                       <div 
                         key={index}
-                        className={`timeline-item mb-12 md:mb-20 flex ${isMobile ? 'flex-col items-center' : (index % 2 === 0 ? 'flex-row' : 'flex-row-reverse')} items-center`}
+                        className={`timeline-item mb-8 md:mb-16 ${isMobile ? 'flex flex-col items-center' : index % 2 === 0 ? 'flex flex-row' : 'flex flex-row-reverse'} items-center`}
                       >
                         <div 
                           className={`${isMobile ? 'w-full mt-4' : 'w-5/12'} ${!isMobile && (index % 2 === 0 ? 'pr-10 text-right' : 'pl-10 text-left')}`} 
@@ -371,6 +364,11 @@ const Investors = () => {
           animation: neon-pulse 1.5s ease-in-out infinite alternate;
         }
         
+        .shadow-glow {
+          box-shadow: 0 0 15px rgba(195, 255, 68, 0.8), 0 0 25px rgba(195, 255, 68, 0.4);
+          animation: glow-pulse 2s ease-in-out infinite alternate;
+        }
+
         @keyframes glow {
           0% { box-shadow: 0 0 10px rgba(195, 255, 68, 0.3); }
           50% { box-shadow: 0 0 20px rgba(195, 255, 68, 0.7); }
@@ -386,7 +384,7 @@ const Investors = () => {
           from { box-shadow: 0 0 15px rgba(195, 255, 68, 0.8), 0 0 25px rgba(195, 255, 68, 0.4); }
           to { box-shadow: 0 0 20px rgba(195, 255, 68, 1), 0 0 30px rgba(195, 255, 68, 0.6); }
         }
-        
+
         @keyframes pulse-subtle {
           0% { opacity: 0.7; }
           50% { opacity: 1; }
@@ -410,6 +408,7 @@ const Investors = () => {
         @media (max-width: 767px) {
           .timeline-item {
             margin-bottom: 2rem;
+            padding: 0 1rem;
           }
           
           .energy-flow {
