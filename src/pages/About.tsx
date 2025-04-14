@@ -81,9 +81,10 @@ const About = () => {
                   alt="kWattz Founder" 
                   className="rounded-xl shadow-lg max-w-full md:max-w-md"
                 />
-                {/* Dark blue filter overlay for increased contrast */}
-                <div className="absolute inset-0 bg-[#1A1F2C]/70 mix-blend-multiply rounded-xl" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0EA5E9]/30 to-transparent opacity-70 rounded-xl"></div>
+                {/* Black and white filter with contrast enhancement */}
+                <div className="absolute inset-0 bg-[#222]/80 mix-blend-multiply rounded-xl" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60 rounded-xl"></div>
+                <div className="absolute inset-0 rounded-xl" style={{ filter: 'grayscale(100%) contrast(1.2)' }}></div>
               </div>
             </div>
           </div>
