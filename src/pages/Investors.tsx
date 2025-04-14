@@ -297,7 +297,7 @@ const Investors = () => {
             ref={logoRef}
             src="/brain2.png" 
             alt="kWattz Brain Logo" 
-            className="w-full max-w-2xl mx-auto"
+            className="w-full max-w-4xl mx-auto"
             style={{ 
               objectFit: 'contain',
               opacity: logoReached ? 1 : 0.3,
