@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Mailbox, Zap, ChevronDown, Power } from "lucide-react";
@@ -298,7 +297,7 @@ const Investors = () => {
             ref={logoRef}
             src="/brain2.png" 
             alt="kWattz Brain Logo" 
-            className="w-full max-w-md mx-auto"
+            className="w-full max-w-2xl mx-auto"
             style={{ 
               objectFit: 'contain',
               opacity: logoReached ? 1 : 0.3,
