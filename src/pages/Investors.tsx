@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Mailbox, Zap, ChevronDown, Power, Menu } from "lucide-react";
@@ -148,8 +149,8 @@ const Investors = () => {
     width: 'fit-content',
     position: 'absolute',
     left: '50%',
-    transform: 'translateX(-50%)',
     top: '50%',
+    transform: 'translate(-50%, -50%)',
     zIndex: 9999,
   };
 
@@ -231,19 +232,18 @@ const Investors = () => {
         <main className="container mx-auto px-4 py-6 pt-24">
           {!showOnlyPowerButton && (
             <>
-              {/* Brain2 logo at the top of the page, now 2x larger */}
+              {/* Brain2 logo at the top of the page, now smaller */}
               <section className="mb-10 md:mb-16 flex flex-col items-center justify-center">
                 <img 
                   ref={logoRef}
                   src="/brain2.png" 
                   alt="kWattz Brain Logo" 
-                  className="w-full md:max-w-2xl mx-auto px-2 md:px-0" 
+                  className="w-full md:max-w-xl mx-auto px-2 md:px-0" 
                   style={{ 
                     objectFit: 'contain',
                     opacity: logoReached ? 1 : 0.3,
                     transition: 'opacity 0.8s ease-out',
                     filter: 'drop-shadow(0 0 10px rgba(195, 255, 68, 0.4))',
-                    transform: 'scale(2)',
                     maxWidth: '100%',
                     height: 'auto',
                     marginBottom: '2rem'
