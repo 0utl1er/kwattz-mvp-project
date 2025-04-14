@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Mailbox, Zap, ChevronDown, Power, Menu } from "lucide-react";
@@ -147,10 +146,9 @@ const Investors = () => {
     justifyContent: 'center',
     alignItems: 'center',
     width: 'fit-content',
-    position: 'fixed',
-    top: '50%',
+    position: 'absolute',
     left: '50%',
-    transform: 'translate(-50%, -50%)',
+    transform: 'translateX(-50%)',
     zIndex: 9999,
   };
 
@@ -197,7 +195,10 @@ const Investors = () => {
       >
         <div 
           className="inline-flex items-center justify-center rounded-full animate-pulse"
-          style={powerButtonStyles}
+          style={{
+            ...powerButtonStyles,
+            top: '70%',
+          }}
           onClick={handlePowerButtonClick}
         >
           <Power 
