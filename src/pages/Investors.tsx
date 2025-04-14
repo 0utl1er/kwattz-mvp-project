@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Mailbox, Zap, ChevronDown, Power } from "lucide-react";
@@ -52,15 +53,8 @@ const Investors = () => {
     };
   }, [logoReached, initialScroll]);
 
-  const handleLogoClick = () => {
-    if (!logoClicked && logoReached) {
-      setLogoClicked(true);
-      startWholePageBlinking();
-    }
-  };
-
   const handlePowerButtonClick = () => {
-    if (!logoClicked) {
+    if (!logoClicked && logoReached) {
       setLogoClicked(true);
       startWholePageBlinking();
     }
@@ -118,7 +112,7 @@ const Investors = () => {
     filter: wholePageBlinking 
       ? (blinkCount % 2 === 0 ? 'brightness(0.2)' : 'brightness(0)')
       : (wholePageVisible ? 'brightness(1)' : 'brightness(0.05)'),
-    backgroundColor: energized ? '#111F54' : '#111F54',
+    backgroundColor: '#111F54',
   };
 
   const hiddenElementStyles: React.CSSProperties = {
@@ -320,7 +314,7 @@ const Investors = () => {
               style={{ zIndex: 9999 }}
             >
               <div 
-                className="inline-flex items-center justify-center rounded-full animate-pulse cursor-pointer"
+                className="inline-flex items-center justify-center rounded-full animate-pulse"
                 style={powerButtonStyles}
                 onClick={handlePowerButtonClick}
               >
