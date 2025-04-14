@@ -1,7 +1,6 @@
-
 import React from 'react';
-import { TopMenu } from '../components/layout/TopMenu';
-import { Footer } from '../components/landing/Footer';
+import TopMenu from '../components/layout/TopMenu';
+import Footer from '../components/landing/Footer';
 
 const About = () => {
   return (
