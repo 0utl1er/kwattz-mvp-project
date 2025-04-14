@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -77,7 +76,7 @@ const About = () => {
             <div className="flex-1 flex justify-center">
               <div className="relative overflow-hidden rounded-xl transition-transform duration-500 hover:scale-105">
                 <img 
-                  src="/images/content/IMG_5164 Small.jpeg" 
+                  src="/kwattz-brain Medium.jpeg" 
                   alt="kWattz Founder" 
                   className="rounded-xl shadow-lg max-w-full md:max-w-md"
                 />
