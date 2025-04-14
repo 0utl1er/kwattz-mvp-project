@@ -1,6 +1,7 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
-import { Mailbox, Zap, ChevronDown, Power } from "lucide-react";
+import { Mailbox, Zap, ChevronDown, Power, Menu } from "lucide-react";
 import Footer from '../components/landing/Footer';
 import { useIsMobile } from '../hooks/use-mobile';
 import TopMenu from '../components/layout/TopMenu';
@@ -51,6 +52,30 @@ const Investors = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [logoReached, initialScroll]);
+
+  // Use IntersectionObserver for better mobile performance
+  useEffect(() => {
+    if (!logoRef.current) return;
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !logoReached) {
+            setLogoReached(true);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    
+    observer.observe(logoRef.current);
+    
+    return () => {
+      if (logoRef.current) {
+        observer.unobserve(logoRef.current);
+      }
+    };
+  }, [logoReached]);
 
   const handlePowerButtonClick = () => {
     if (!logoClicked && logoReached) {
@@ -147,7 +172,7 @@ const Investors = () => {
     transition: 'all 0.6s ease-in-out',
     cursor: 'pointer',
     border: '2px solid rgba(195, 255, 68, 0.5)',
-    padding: '1rem',
+    padding: isMobile ? '0.75rem' : '1rem',
     borderRadius: '9999px',
     margin: '2rem auto 0',
     display: 'flex',
@@ -190,15 +215,15 @@ const Investors = () => {
       
       <main className="container mx-auto px-4 py-6 pt-24">
         
-        <section className="mb-20 flex flex-col items-center justify-center text-center" style={hiddenElementStyles}>
-          <div className={`max-w-3xl mx-auto ${pageReveal ? 'bg-[#111F54]/80' : 'bg-black/80'} p-8 rounded-2xl backdrop-blur-sm border border-white/10 shadow-[0_0_30px_rgba(195,255,68,0.15)] hover:shadow-[0_0_40px_rgba(195,255,68,0.25)] transition-all duration-500`}>
-            <p className="text-xl md:text-2xl mb-6">
+        <section className="mb-12 md:mb-20 flex flex-col items-center justify-center text-center" style={hiddenElementStyles}>
+          <div className={`max-w-3xl mx-auto ${pageReveal ? 'bg-[#111F54]/80' : 'bg-black/80'} p-4 md:p-8 rounded-2xl backdrop-blur-sm border border-white/10 shadow-[0_0_30px_rgba(195,255,68,0.15)] hover:shadow-[0_0_40px_rgba(195,255,68,0.25)] transition-all duration-500`}>
+            <p className="text-lg md:text-2xl mb-6">
               While I'm busy hustling to validate my concept, take a look at what I've accomplished so far. Meanwhile, let's keep in touch! I'm a brain full of ideas.
             </p>
             
             <div className="flex flex-col items-center space-y-6 mt-6">
               <Button 
-                className="text-black text-lg py-6 px-8 hover:bg-[#C3FF44]/90 shadow-[0_0_20px_rgba(195,255,68,0.4)] hover:shadow-[0_0_30px_rgba(195,255,68,0.6)] transition-all duration-300 flex items-center" 
+                className="text-black text-lg py-5 px-6 md:py-6 md:px-8 hover:bg-[#C3FF44]/90 shadow-[0_0_20px_rgba(195,255,68,0.4)] hover:shadow-[0_0_30px_rgba(195,255,68,0.6)] transition-all duration-300 flex items-center w-full md:w-auto" 
                 style={{ backgroundColor: '#C3FF44' }} 
                 asChild
               >
@@ -212,11 +237,11 @@ const Investors = () => {
         </section>
         
         <section 
-          className="mt-20 mb-32 max-w-4xl mx-auto relative z-50"
+          className="mt-10 md:mt-20 mb-16 md:mb-32 max-w-4xl mx-auto relative z-50"
           ref={timelineRef}
           style={timelineGlowingStyles}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center text-[#C3FF44] neon-text" 
+          <h2 className="text-2xl md:text-4xl font-bold mb-10 md:mb-16 text-center text-[#C3FF44] neon-text" 
               style={{ 
                 textShadow: '0 0 15px rgba(195, 255, 68, 0.8), 0 0 25px rgba(195, 255, 68, 0.6), 0 0 35px rgba(195, 255, 68, 0.4)'
               }}>
@@ -242,7 +267,7 @@ const Investors = () => {
               {timelineItems.map((item, index) => (
                 <div 
                   key={index}
-                  className={`timeline-item mb-20 flex ${isMobile ? 'flex-col items-center' : (index % 2 === 0 ? 'flex-row' : 'flex-row-reverse')} items-center`}
+                  className={`timeline-item mb-12 md:mb-20 flex ${isMobile ? 'flex-col items-center' : (index % 2 === 0 ? 'flex-row' : 'flex-row-reverse')} items-center`}
                 >
                   <div 
                     className={`${isMobile ? 'w-full mt-4' : 'w-5/12'} ${!isMobile && (index % 2 === 0 ? 'pr-10 text-right' : 'pl-10 text-left')}`} 
@@ -254,15 +279,15 @@ const Investors = () => {
                       className={`w-full ${openTimelineItems[index] ? 'shadow-[0_0_30px_rgba(195,255,68,0.4)]' : ''} transition-all duration-500`}
                     >
                       <Card className={`${pageReveal ? 'bg-[#111F54]/40' : 'bg-black/40'} border-[#C3FF44]/20 overflow-hidden ${openTimelineItems[index] ? 'shadow-[0_0_25px_rgba(195,255,68,0.3)]' : ''} transition-all duration-500 cursor-pointer hover:border-[#C3FF44]/40`}>
-                        <CardContent className="p-6">
+                        <CardContent className="p-4 md:p-6">
                           <CollapsibleTrigger className="w-full flex items-center justify-between">
                             <div>
-                              <p className="text-[#C3FF44] text-sm font-semibold mb-2">{item.date}</p>
-                              <h3 className="text-xl font-bold mb-2 text-white">{item.title}</h3>
+                              <p className="text-[#C3FF44] text-xs md:text-sm font-semibold mb-1 md:mb-2">{item.date}</p>
+                              <h3 className="text-lg md:text-xl font-bold mb-1 md:mb-2 text-white">{item.title}</h3>
                             </div>
                             <ChevronDown className={`h-5 w-5 text-[#C3FF44] transition-transform duration-300 ${openTimelineItems[index] ? 'rotate-180' : ''}`} />
                           </CollapsibleTrigger>
-                          <CollapsibleContent className="pt-4 text-gray-300">
+                          <CollapsibleContent className="pt-3 md:pt-4 text-gray-300">
                             <div className={`overflow-hidden transition-all duration-500 ${openTimelineItems[index] ? 'max-h-40' : 'max-h-0'}`}>
                               {item.description}
                             </div>
@@ -274,14 +299,14 @@ const Investors = () => {
                   
                   <div className={`${isMobile ? 'mb-0 mt-0' : 'w-2/12'} flex justify-center`}>
                     <div 
-                      className="h-12 w-12 rounded-full flex items-center justify-center border-2 border-[#C3FF44] relative cursor-pointer"
+                      className="h-10 w-10 md:h-12 md:w-12 rounded-full flex items-center justify-center border-2 border-[#C3FF44] relative cursor-pointer"
                       style={{
                         backgroundColor: 'black',
                         boxShadow: '0 0 15px rgba(195, 255, 68, 0.8), 0 0 25px rgba(195, 255, 68, 0.4)',
                         animation: 'glow-pulse 2s ease-in-out infinite alternate',
                       }}
                     >
-                      <Zap className="h-6 w-6 text-[#C3FF44]" />
+                      <Zap className="h-5 w-5 md:h-6 md:w-6 text-[#C3FF44]" />
                     </div>
                   </div>
                   
@@ -292,12 +317,12 @@ const Investors = () => {
           </div>
         </section>
 
-        <section className="mt-10 mb-20 flex flex-col items-center justify-center text-center relative z-50">
+        <section className="mt-6 md:mt-10 mb-12 md:mb-20 flex flex-col items-center justify-center text-center relative z-50">
           <img 
             ref={logoRef}
             src="/brain2.png" 
             alt="kWattz Brain Logo" 
-            className="w-full max-w-6xl mx-auto"
+            className="w-full md:max-w-[12xl] mx-auto px-2 md:px-0"
             style={{ 
               objectFit: 'contain',
               opacity: logoReached ? 1 : 0.3,
@@ -308,7 +333,7 @@ const Investors = () => {
           
           {logoReached && !logoClicked && (
             <div 
-              className="power-button-container mt-8"
+              className="power-button-container mt-4 md:mt-8"
               style={{ zIndex: 999 }}
             >
               <div 
@@ -317,13 +342,18 @@ const Investors = () => {
                 onClick={handlePowerButtonClick}
               >
                 <Power 
-                  size={48} 
+                  size={isMobile ? 36 : 48} 
                   className="text-black" 
                   style={{
                     filter: 'drop-shadow(0 0 20px rgba(195, 255, 68, 0.8))',
                   }}
                 />
               </div>
+              {isMobile && (
+                <p className="text-[#C3FF44] text-sm mt-2 animate-pulse">
+                  Tap to power up!
+                </p>
+              )}
             </div>
           )}
         </section>
@@ -383,6 +413,17 @@ const Investors = () => {
         
         .prevent-interactions {
           pointer-events: none !important;
+        }
+        
+        /* Mobile-specific improvements */
+        @media (max-width: 767px) {
+          .timeline-item {
+            margin-bottom: 2rem;
+          }
+          
+          .energy-flow {
+            height: 40% !important;
+          }
         }
         `}
       </style>
