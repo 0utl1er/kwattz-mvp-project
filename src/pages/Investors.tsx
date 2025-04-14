@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Mailbox, Zap, ChevronDown, Power } from "lucide-react";
@@ -153,7 +154,6 @@ const Investors = () => {
     boxShadow: '0 0 50px #C3FF44, 0 0 80px rgba(195, 255, 68, 0.6)',
     opacity: logoReached && !logoClicked ? 1 : 0,
     transition: 'all 0.6s ease-in-out',
-    transform: 'scale(1)',
     cursor: 'pointer',
     border: '2px solid rgba(195, 255, 68, 0.5)',
     position: 'fixed',
