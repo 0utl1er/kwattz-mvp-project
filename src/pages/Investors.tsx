@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Mailbox, Zap, ChevronDown, Power, Menu } from "lucide-react";
@@ -19,10 +18,11 @@ const Investors = () => {
   const [openTimelineItems, setOpenTimelineItems] = useState<boolean[]>([false, false, false, false]);
   const [isBlinking, setIsBlinking] = useState(false);
   const [pageReveal, setPageReveal] = useState(false);
-  const [logoReached, setLogoReached] = useState(false);
+  const [logoReached, setLogoReached] = useState(true);
   const [initialScroll, setInitialScroll] = useState(false);
   const [logoClicked, setLogoClicked] = useState(false);
-  
+  const [showOnlyPowerButton, setShowOnlyPowerButton] = useState(true);
+
   const [wholePageBlinking, setWholePageBlinking] = useState(false);
   const [wholePageVisible, setWholePageVisible] = useState(false);
   
@@ -33,15 +33,6 @@ const Investors = () => {
       if (!initialScroll && window.scrollY > 50) {
         setInitialScroll(true);
       }
-      
-      if (!logoRef.current) return;
-      
-      const logoRect = logoRef.current.getBoundingClientRect();
-      const isLogoVisible = logoRect.top < window.innerHeight * 0.8;
-      
-      if (isLogoVisible && !logoReached) {
-        setLogoReached(true);
-      }
     };
     
     window.addEventListener('scroll', handleScroll);
@@ -51,37 +42,15 @@ const Investors = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [logoReached, initialScroll]);
+  }, [initialScroll]);
 
-  // Use IntersectionObserver for better mobile performance
   useEffect(() => {
-    if (!logoRef.current) return;
-    
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && !logoReached) {
-            setLogoReached(true);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-    
-    observer.observe(logoRef.current);
-    
-    return () => {
-      if (logoRef.current) {
-        observer.unobserve(logoRef.current);
-      }
-    };
-  }, [logoReached]);
+  }, []);
 
   const handlePowerButtonClick = () => {
-    if (!logoClicked && logoReached) {
-      setLogoClicked(true);
-      startWholePageBlinking();
-    }
+    setLogoClicked(true);
+    setShowOnlyPowerButton(false);
+    startWholePageBlinking();
   };
 
   const startWholePageBlinking = () => {
@@ -137,6 +106,7 @@ const Investors = () => {
       ? (blinkCount % 2 === 0 ? 'brightness(0.2)' : 'brightness(0)')
       : (wholePageVisible ? 'brightness(1)' : 'brightness(0.05)'),
     backgroundColor: energized ? '#111F54' : '#111F54',
+    display: showOnlyPowerButton ? 'none' : 'block',
   };
 
   const hiddenElementStyles: React.CSSProperties = {
@@ -168,17 +138,22 @@ const Investors = () => {
   const powerButtonStyles: React.CSSProperties = {
     backgroundColor: '#C3FF44',
     boxShadow: '0 0 50px #C3FF44, 0 0 80px rgba(195, 255, 68, 0.6)',
-    opacity: logoReached && !logoClicked ? 1 : 0,
+    opacity: 1,
     transition: 'all 0.6s ease-in-out',
     cursor: 'pointer',
     border: '2px solid rgba(195, 255, 68, 0.5)',
     padding: isMobile ? '0.75rem' : '1rem',
     borderRadius: '9999px',
-    margin: '2rem auto 0',
+    margin: '0 auto',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     width: 'fit-content',
+    position: showOnlyPowerButton ? 'fixed' : 'relative',
+    top: showOnlyPowerButton ? '50%' : 'auto',
+    left: showOnlyPowerButton ? '50%' : 'auto',
+    transform: showOnlyPowerButton ? 'translate(-50%, -50%)' : 'none',
+    zIndex: 9999,
   };
 
   const timelineItems = [
@@ -209,159 +184,203 @@ const Investors = () => {
       className={`min-h-screen bg-black text-white relative overflow-hidden`}
       style={wholePageStyles}
     >
-      <div style={hiddenElementStyles}>
-        <TopMenu />
-      </div>
+      {!showOnlyPowerButton && (
+        <div style={hiddenElementStyles}>
+          <TopMenu />
+        </div>
+      )}
       
       <main className="container mx-auto px-4 py-6 pt-24">
-        
-        <section className="mb-12 md:mb-20 flex flex-col items-center justify-center text-center" style={hiddenElementStyles}>
-          <div className={`max-w-3xl mx-auto ${pageReveal ? 'bg-[#111F54]/80' : 'bg-black/80'} p-4 md:p-8 rounded-2xl backdrop-blur-sm border border-white/10 shadow-[0_0_30px_rgba(195,255,68,0.15)] hover:shadow-[0_0_40px_rgba(195,255,68,0.25)] transition-all duration-500`}>
-            <p className="text-lg md:text-2xl mb-6">
-              While I'm busy hustling to validate my concept, take a look at what I've accomplished so far. Meanwhile, let's keep in touch! I'm a brain full of ideas.
-            </p>
-            
-            <div className="flex flex-col items-center space-y-6 mt-6">
-              <Button 
-                className="text-black text-lg py-5 px-6 md:py-6 md:px-8 hover:bg-[#C3FF44]/90 shadow-[0_0_20px_rgba(195,255,68,0.4)] hover:shadow-[0_0_30px_rgba(195,255,68,0.6)] transition-all duration-300 flex items-center w-full md:w-auto" 
-                style={{ backgroundColor: '#C3FF44' }} 
-                asChild
-              >
-                <a href="mailto:investors@kwattz.com">
-                  <Mailbox className="mr-2 h-5 w-5" />
-                  Let's connect!
-                </a>
-              </Button>
+        {showOnlyPowerButton && (
+          <div 
+            className="power-button-container"
+            style={{ 
+              position: 'fixed', 
+              top: 0, 
+              left: 0, 
+              right: 0, 
+              bottom: 0, 
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems: 'center',
+              backgroundColor: 'black',
+              zIndex: 9000 
+            }}
+          >
+            <div 
+              className="inline-flex items-center justify-center rounded-full animate-pulse"
+              style={powerButtonStyles}
+              onClick={handlePowerButtonClick}
+            >
+              <Power 
+                size={isMobile ? 36 : 48} 
+                className="text-black" 
+                style={{
+                  filter: 'drop-shadow(0 0 20px rgba(195, 255, 68, 0.8))',
+                }}
+              />
             </div>
+            {isMobile && (
+              <p className="text-[#C3FF44] text-sm mt-2 animate-pulse fixed bottom-1/4">
+                Tap to power up!
+              </p>
+            )}
           </div>
-        </section>
+        )}
         
-        <section 
-          className="mt-10 md:mt-20 mb-16 md:mb-32 max-w-4xl mx-auto relative z-50"
-          ref={timelineRef}
-          style={timelineGlowingStyles}
-        >
-          <h2 className="text-2xl md:text-4xl font-bold mb-10 md:mb-16 text-center text-[#C3FF44] neon-text" 
-              style={{ 
-                textShadow: '0 0 15px rgba(195, 255, 68, 0.8), 0 0 25px rgba(195, 255, 68, 0.6), 0 0 35px rgba(195, 255, 68, 0.4)'
-              }}>
-            Our Journey So Far
-          </h2>
-          
-          <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-800 z-0">
-              <div className="absolute top-0 left-0 right-0 bottom-0 overflow-hidden">
-                <div 
-                  className="absolute top-0 left-0 right-0 h-full energy-flow" 
-                  style={{
-                    background: 'linear-gradient(180deg, rgba(195,255,68,0) 0%, rgba(195,255,68,1) 50%, rgba(195,255,68,0) 100%)',
-                    height: '30%',
-                    opacity: 1,
-                    boxShadow: '0 0 20px rgba(195,255,68,0.8), 0 0 40px rgba(195,255,68,0.4), 0 0 60px rgba(195,255,68,0.2)',
-                  }}
-                />
+        {!showOnlyPowerButton && (
+          <>
+            <section className="mb-12 md:mb-20 flex flex-col items-center justify-center text-center" style={hiddenElementStyles}>
+              <div className={`max-w-3xl mx-auto ${pageReveal ? 'bg-[#111F54]/80' : 'bg-black/80'} p-4 md:p-8 rounded-2xl backdrop-blur-sm border border-white/10 shadow-[0_0_30px_rgba(195,255,68,0.15)] hover:shadow-[0_0_40px_rgba(195,255,68,0.25)] transition-all duration-500`}>
+                <p className="text-lg md:text-2xl mb-6">
+                  While I'm busy hustling to validate my concept, take a look at what I've accomplished so far. Meanwhile, let's keep in touch! I'm a brain full of ideas.
+                </p>
+                
+                <div className="flex flex-col items-center space-y-6 mt-6">
+                  <Button 
+                    className="text-black text-lg py-5 px-6 md:py-6 md:px-8 hover:bg-[#C3FF44]/90 shadow-[0_0_20px_rgba(195,255,68,0.4)] hover:shadow-[0_0_30px_rgba(195,255,68,0.6)] transition-all duration-300 flex items-center w-full md:w-auto" 
+                    style={{ backgroundColor: '#C3FF44' }} 
+                    asChild
+                  >
+                    <a href="mailto:investors@kwattz.com">
+                      <Mailbox className="mr-2 h-5 w-5" />
+                      Let's connect!
+                    </a>
+                  </Button>
+                </div>
               </div>
-            </div>
+            </section>
             
-            <div className="relative z-10">
-              {timelineItems.map((item, index) => (
+            <section 
+              className="mt-10 md:mt-20 mb-16 md:mb-32 max-w-4xl mx-auto relative z-50"
+              ref={timelineRef}
+              style={timelineGlowingStyles}
+            >
+              <h2 className="text-2xl md:text-4xl font-bold mb-10 md:mb-16 text-center text-[#C3FF44] neon-text" 
+                  style={{ 
+                    textShadow: '0 0 15px rgba(195, 255, 68, 0.8), 0 0 25px rgba(195, 255, 68, 0.6), 0 0 35px rgba(195, 255, 68, 0.4)'
+                  }}>
+                Our Journey So Far
+              </h2>
+              
+              <div className="relative">
+                <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-800 z-0">
+                  <div className="absolute top-0 left-0 right-0 bottom-0 overflow-hidden">
+                    <div 
+                      className="absolute top-0 left-0 right-0 h-full energy-flow" 
+                      style={{
+                        background: 'linear-gradient(180deg, rgba(195,255,68,0) 0%, rgba(195,255,68,1) 50%, rgba(195,255,68,0) 100%)',
+                        height: '30%',
+                        opacity: 1,
+                        boxShadow: '0 0 20px rgba(195,255,68,0.8), 0 0 40px rgba(195,255,68,0.4), 0 0 60px rgba(195,255,68,0.2)',
+                      }}
+                    />
+                  </div>
+                </div>
+                
+                <div className="relative z-10">
+                  {timelineItems.map((item, index) => (
+                    <div 
+                      key={index}
+                      className={`timeline-item mb-12 md:mb-20 flex ${isMobile ? 'flex-col items-center' : (index % 2 === 0 ? 'flex-row' : 'flex-row-reverse')} items-center`}
+                    >
+                      <div 
+                        className={`${isMobile ? 'w-full mt-4' : 'w-5/12'} ${!isMobile && (index % 2 === 0 ? 'pr-10 text-right' : 'pl-10 text-left')}`} 
+                        style={hiddenElementStyles}
+                      >
+                        <Collapsible
+                          open={openTimelineItems[index]}
+                          onOpenChange={() => toggleTimelineItem(index)}
+                          className={`w-full ${openTimelineItems[index] ? 'shadow-[0_0_30px_rgba(195,255,68,0.4)]' : ''} transition-all duration-500`}
+                        >
+                          <Card className={`${pageReveal ? 'bg-[#111F54]/40' : 'bg-black/40'} border-[#C3FF44]/20 overflow-hidden ${openTimelineItems[index] ? 'shadow-[0_0_25px_rgba(195,255,68,0.3)]' : ''} transition-all duration-500 cursor-pointer hover:border-[#C3FF44]/40`}>
+                            <CardContent className="p-4 md:p-6">
+                              <CollapsibleTrigger className="w-full flex items-center justify-between">
+                                <div>
+                                  <p className="text-[#C3FF44] text-xs md:text-sm font-semibold mb-1 md:mb-2">{item.date}</p>
+                                  <h3 className="text-lg md:text-xl font-bold mb-1 md:mb-2 text-white">{item.title}</h3>
+                                </div>
+                                <ChevronDown className={`h-5 w-5 text-[#C3FF44] transition-transform duration-300 ${openTimelineItems[index] ? 'rotate-180' : ''}`} />
+                              </CollapsibleTrigger>
+                              <CollapsibleContent className="pt-3 md:pt-4 text-gray-300">
+                                <div className={`overflow-hidden transition-all duration-500 ${openTimelineItems[index] ? 'max-h-40' : 'max-h-0'}`}>
+                                  {item.description}
+                                </div>
+                              </CollapsibleContent>
+                            </CardContent>
+                          </Card>
+                        </Collapsible>
+                      </div>
+                      
+                      <div className={`${isMobile ? 'mb-0 mt-0' : 'w-2/12'} flex justify-center`}>
+                        <div 
+                          className="h-10 w-10 md:h-12 md:w-12 rounded-full flex items-center justify-center border-2 border-[#C3FF44] relative cursor-pointer"
+                          style={{
+                            backgroundColor: 'black',
+                            boxShadow: '0 0 15px rgba(195, 255, 68, 0.8), 0 0 25px rgba(195, 255, 68, 0.4)',
+                            animation: 'glow-pulse 2s ease-in-out infinite alternate',
+                          }}
+                        >
+                          <Zap className="h-5 w-5 md:h-6 md:w-6 text-[#C3FF44]" />
+                        </div>
+                      </div>
+                      
+                      {!isMobile && <div className="w-5/12"></div>}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="mt-6 md:mt-10 mb-12 md:mb-20 flex flex-col items-center justify-center text-center relative z-50">
+              <img 
+                ref={logoRef}
+                src="/brain2.png" 
+                alt="kWattz Brain Logo" 
+                className="w-full md:max-w-[12xl] mx-auto px-2 md:px-0"
+                style={{ 
+                  objectFit: 'contain',
+                  opacity: logoReached ? 1 : 0.3,
+                  transition: 'opacity 0.8s ease-out',
+                  filter: 'drop-shadow(0 0 10px rgba(195, 255, 68, 0.4))'
+                }}
+              />
+              
+              {(!logoClicked && !showOnlyPowerButton) && (
                 <div 
-                  key={index}
-                  className={`timeline-item mb-12 md:mb-20 flex ${isMobile ? 'flex-col items-center' : (index % 2 === 0 ? 'flex-row' : 'flex-row-reverse')} items-center`}
+                  className="power-button-container mt-4 md:mt-8"
+                  style={{ zIndex: 999 }}
                 >
                   <div 
-                    className={`${isMobile ? 'w-full mt-4' : 'w-5/12'} ${!isMobile && (index % 2 === 0 ? 'pr-10 text-right' : 'pl-10 text-left')}`} 
-                    style={hiddenElementStyles}
+                    className="inline-flex items-center justify-center rounded-full animate-pulse"
+                    style={powerButtonStyles}
+                    onClick={handlePowerButtonClick}
                   >
-                    <Collapsible
-                      open={openTimelineItems[index]}
-                      onOpenChange={() => toggleTimelineItem(index)}
-                      className={`w-full ${openTimelineItems[index] ? 'shadow-[0_0_30px_rgba(195,255,68,0.4)]' : ''} transition-all duration-500`}
-                    >
-                      <Card className={`${pageReveal ? 'bg-[#111F54]/40' : 'bg-black/40'} border-[#C3FF44]/20 overflow-hidden ${openTimelineItems[index] ? 'shadow-[0_0_25px_rgba(195,255,68,0.3)]' : ''} transition-all duration-500 cursor-pointer hover:border-[#C3FF44]/40`}>
-                        <CardContent className="p-4 md:p-6">
-                          <CollapsibleTrigger className="w-full flex items-center justify-between">
-                            <div>
-                              <p className="text-[#C3FF44] text-xs md:text-sm font-semibold mb-1 md:mb-2">{item.date}</p>
-                              <h3 className="text-lg md:text-xl font-bold mb-1 md:mb-2 text-white">{item.title}</h3>
-                            </div>
-                            <ChevronDown className={`h-5 w-5 text-[#C3FF44] transition-transform duration-300 ${openTimelineItems[index] ? 'rotate-180' : ''}`} />
-                          </CollapsibleTrigger>
-                          <CollapsibleContent className="pt-3 md:pt-4 text-gray-300">
-                            <div className={`overflow-hidden transition-all duration-500 ${openTimelineItems[index] ? 'max-h-40' : 'max-h-0'}`}>
-                              {item.description}
-                            </div>
-                          </CollapsibleContent>
-                        </CardContent>
-                      </Card>
-                    </Collapsible>
-                  </div>
-                  
-                  <div className={`${isMobile ? 'mb-0 mt-0' : 'w-2/12'} flex justify-center`}>
-                    <div 
-                      className="h-10 w-10 md:h-12 md:w-12 rounded-full flex items-center justify-center border-2 border-[#C3FF44] relative cursor-pointer"
+                    <Power 
+                      size={isMobile ? 36 : 48} 
+                      className="text-black" 
                       style={{
-                        backgroundColor: 'black',
-                        boxShadow: '0 0 15px rgba(195, 255, 68, 0.8), 0 0 25px rgba(195, 255, 68, 0.4)',
-                        animation: 'glow-pulse 2s ease-in-out infinite alternate',
+                        filter: 'drop-shadow(0 0 20px rgba(195, 255, 68, 0.8))',
                       }}
-                    >
-                      <Zap className="h-5 w-5 md:h-6 md:w-6 text-[#C3FF44]" />
-                    </div>
+                    />
                   </div>
-                  
-                  {!isMobile && <div className="w-5/12"></div>}
+                  {isMobile && (
+                    <p className="text-[#C3FF44] text-sm mt-2 animate-pulse">
+                      Tap to power up!
+                    </p>
+                  )}
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="mt-6 md:mt-10 mb-12 md:mb-20 flex flex-col items-center justify-center text-center relative z-50">
-          <img 
-            ref={logoRef}
-            src="/brain2.png" 
-            alt="kWattz Brain Logo" 
-            className="w-full md:max-w-[12xl] mx-auto px-2 md:px-0"
-            style={{ 
-              objectFit: 'contain',
-              opacity: logoReached ? 1 : 0.3,
-              transition: 'opacity 0.8s ease-out',
-              filter: 'drop-shadow(0 0 10px rgba(195, 255, 68, 0.4))'
-            }}
-          />
-          
-          {logoReached && !logoClicked && (
-            <div 
-              className="power-button-container mt-4 md:mt-8"
-              style={{ zIndex: 999 }}
-            >
-              <div 
-                className="inline-flex items-center justify-center rounded-full animate-pulse"
-                style={powerButtonStyles}
-                onClick={handlePowerButtonClick}
-              >
-                <Power 
-                  size={isMobile ? 36 : 48} 
-                  className="text-black" 
-                  style={{
-                    filter: 'drop-shadow(0 0 20px rgba(195, 255, 68, 0.8))',
-                  }}
-                />
-              </div>
-              {isMobile && (
-                <p className="text-[#C3FF44] text-sm mt-2 animate-pulse">
-                  Tap to power up!
-                </p>
               )}
-            </div>
-          )}
-        </section>
+            </section>
+          </>
+        )}
       </main>
 
-      <div style={{...animationStyles, ...hiddenElementStyles}}>
-        <Footer />
-      </div>
+      {!showOnlyPowerButton && (
+        <div style={{...animationStyles, ...hiddenElementStyles}}>
+          <Footer />
+        </div>
+      )}
       
       <style>
         {`
