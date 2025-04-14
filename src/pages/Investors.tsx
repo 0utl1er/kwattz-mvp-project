@@ -150,12 +150,19 @@ const Investors = () => {
 
   const powerButtonStyles: React.CSSProperties = {
     backgroundColor: '#C3FF44',
-    boxShadow: '0 0 30px #C3FF44, 0 0 50px rgba(195, 255, 68, 0.6)',
+    boxShadow: '0 0 50px #C3FF44, 0 0 80px rgba(195, 255, 68, 0.6)',
     opacity: logoReached && !logoClicked ? 1 : 0,
     transition: 'all 0.6s ease-in-out',
     transform: 'scale(1)',
     cursor: 'pointer',
     border: '2px solid rgba(195, 255, 68, 0.5)',
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%) scale(1)',
+    zIndex: 9999,
+    padding: '1rem',
+    borderRadius: '9999px',
   };
 
   const timelineItems = [
@@ -321,17 +328,22 @@ const Investors = () => {
           
           {logoReached && !logoClicked && (
             <div 
-              className="absolute top-[calc(100%+20px)] left-1/2 transform -translate-x-1/2 inline-flex items-center justify-center p-4 rounded-full animate-pulse z-50" 
-              style={powerButtonStyles}
-              onClick={handlePowerButtonClick}
+              className="fixed inset-0 flex items-center justify-center pointer-events-none" 
+              style={{ zIndex: 9999 }}
             >
-              <Power 
-                size={32} 
-                className="text-black" 
-                style={{
-                  filter: 'drop-shadow(0 0 15px rgba(195, 255, 68, 0.8))',
-                }}
-              />
+              <div 
+                className="inline-flex items-center justify-center rounded-full animate-pulse"
+                style={powerButtonStyles}
+                onClick={handlePowerButtonClick}
+              >
+                <Power 
+                  size={48} 
+                  className="text-black" 
+                  style={{
+                    filter: 'drop-shadow(0 0 20px rgba(195, 255, 68, 0.8))',
+                  }}
+                />
+              </div>
             </div>
           )}
         </section>
