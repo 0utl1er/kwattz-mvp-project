@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -80,8 +81,9 @@ const About = () => {
                   alt="kWattz Founder" 
                   className="rounded-xl shadow-lg max-w-full md:max-w-md"
                 />
-                <div className="absolute inset-0 bg-[#111F54]/40 rounded-xl" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1EAEDB]/20 to-transparent opacity-70 rounded-xl"></div>
+                {/* Dark blue filter overlay for increased contrast */}
+                <div className="absolute inset-0 bg-[#1A1F2C]/70 mix-blend-multiply rounded-xl" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0EA5E9]/30 to-transparent opacity-70 rounded-xl"></div>
               </div>
             </div>
           </div>
