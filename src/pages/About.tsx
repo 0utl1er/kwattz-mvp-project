@@ -1,14 +1,15 @@
+
 import React from 'react';
 import TopMenu from '../components/layout/TopMenu';
 import Footer from '../components/landing/Footer';
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50">
+    <div className="min-h-screen bg-[#111F54]"> {/* Changed background to dark blue */}
       <TopMenu />
       
       <main className="container mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold text-center mb-8 text-blue-900">About kWattz</h1>
+        <h1 className="text-4xl font-bold text-center mb-8 text-[#C3FF44]">About kWattz</h1>
         
         <div className="flex flex-col lg:flex-row gap-12 items-center mb-16">
           <div className="w-full lg:w-1/2 relative">
@@ -26,16 +27,16 @@ const About = () => {
           </div>
           
           <div className="w-full lg:w-1/2">
-            <h2 className="text-2xl font-semibold mb-4 text-blue-800">Our Mission</h2>
-            <p className="text-lg mb-6">
+            <h2 className="text-2xl font-semibold mb-4 text-[#C3FF44]">Our Mission</h2>
+            <p className="text-lg mb-6 text-white">
               At kWattz, we're on a mission to democratize access to energy insights. 
               We believe that everyone should be able to understand and optimize their 
               energy usage without requiring specialized knowledge or expensive 
               equipment.
             </p>
             
-            <h2 className="text-2xl font-semibold mb-4 text-blue-800">Our Story</h2>
-            <p className="text-lg mb-6">
+            <h2 className="text-2xl font-semibold mb-4 text-[#C3FF44]">Our Story</h2>
+            <p className="text-lg mb-6 text-white">
               Founded in 2023, kWattz began as a solution to a common problem: 
               understanding complex energy bills and finding ways to reduce energy costs. 
               Our team of energy experts and AI specialists came together to create an 
@@ -43,8 +44,8 @@ const About = () => {
               actionable insights.
             </p>
             
-            <h2 className="text-2xl font-semibold mb-4 text-blue-800">Our Approach</h2>
-            <p className="text-lg">
+            <h2 className="text-2xl font-semibold mb-4 text-[#C3FF44]">Our Approach</h2>
+            <p className="text-lg text-white">
               We combine cutting-edge AI technology with deep domain expertise in 
               energy management. Our platform analyzes your energy consumption patterns 
               and provides personalized recommendations to help you save money and 
@@ -53,23 +54,23 @@ const About = () => {
           </div>
         </div>
         
-        <div className="bg-white rounded-xl shadow-md p-8 mb-16">
-          <h2 className="text-3xl font-bold mb-6 text-center text-blue-900">Our Values</h2>
+        <div className="bg-[#111F54]/80 rounded-xl shadow-md p-8 mb-16 border border-[#C3FF44]/20">
+          <h2 className="text-3xl font-bold mb-6 text-center text-[#C3FF44]">Our Values</h2>
           
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
-              <h3 className="text-xl font-semibold mb-3 text-blue-800">Accessibility</h3>
-              <p>Making energy insights available to everyone, regardless of technical background.</p>
+              <h3 className="text-xl font-semibold mb-3 text-[#C3FF44]">Accessibility</h3>
+              <p className="text-white">Making energy insights available to everyone, regardless of technical background.</p>
             </div>
             
             <div className="text-center">
-              <h3 className="text-xl font-semibold mb-3 text-blue-800">Sustainability</h3>
-              <p>Promoting energy efficiency to reduce environmental impact and create a better future.</p>
+              <h3 className="text-xl font-semibold mb-3 text-[#C3FF44]">Sustainability</h3>
+              <p className="text-white">Promoting energy efficiency to reduce environmental impact and create a better future.</p>
             </div>
             
             <div className="text-center">
-              <h3 className="text-xl font-semibold mb-3 text-blue-800">Innovation</h3>
-              <p>Continuously improving our technology to provide the best possible insights and recommendations.</p>
+              <h3 className="text-xl font-semibold mb-3 text-[#C3FF44]">Innovation</h3>
+              <p className="text-white">Continuously improving our technology to provide the best possible insights and recommendations.</p>
             </div>
           </div>
         </div>

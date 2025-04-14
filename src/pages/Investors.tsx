@@ -298,7 +298,9 @@ const Investors = () => {
                             onOpenChange={() => toggleTimelineItem(index)}
                             className={`w-full ${openTimelineItems[index] ? 'shadow-[0_0_30px_rgba(195,255,68,0.4)]' : ''} transition-all duration-500`}
                           >
-                            <Card className={`${pageReveal ? 'bg-[#111F54]/40' : 'bg-black/40'} border-[#C3FF44]/20 overflow-hidden ${openTimelineItems[index] ? 'shadow-[0_0_25px_rgba(195,255,68,0.3)]' : ''} transition-all duration-500 cursor-pointer hover:border-[#C3FF44]/40`}>
+                            <Card 
+                              className={`bg-[#111F54]/40 border-[#C3FF44]/20 overflow-hidden ${openTimelineItems[index] ? 'shadow-[0_0_25px_rgba(195,255,68,0.3)]' : ''} transition-all duration-500 cursor-pointer hover:border-[#C3FF44]/40`}
+                            >
                               <CardContent className="p-4 md:p-6">
                                 <CollapsibleTrigger className="w-full flex items-center justify-between">
                                   <div>
@@ -321,7 +323,7 @@ const Investors = () => {
                           <div 
                             className="h-10 w-10 md:h-12 md:w-12 rounded-full flex items-center justify-center border-2 border-[#C3FF44] relative cursor-pointer"
                             style={{
-                              backgroundColor: 'black',
+                              backgroundColor: '#111F54',
                               boxShadow: '0 0 15px rgba(195, 255, 68, 0.8), 0 0 25px rgba(195, 255, 68, 0.4)',
                               animation: 'glow-pulse 2s ease-in-out infinite alternate',
                             }}
