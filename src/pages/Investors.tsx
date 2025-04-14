@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Mailbox, Zap, ChevronDown, Power } from "lucide-react";
@@ -51,13 +52,6 @@ const Investors = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [logoReached, initialScroll]);
-
-  const handleLogoClick = () => {
-    if (!logoClicked && logoReached) {
-      setLogoClicked(true);
-      startWholePageBlinking();
-    }
-  };
 
   const handlePowerButtonClick = () => {
     if (!logoClicked && logoReached) {
@@ -118,7 +112,7 @@ const Investors = () => {
     filter: wholePageBlinking 
       ? (blinkCount % 2 === 0 ? 'brightness(0.2)' : 'brightness(0)')
       : (wholePageVisible ? 'brightness(1)' : 'brightness(0.05)'),
-    backgroundColor: energized ? '#111F54' : '#111F54',
+    backgroundColor: '#111F54',
   };
 
   const hiddenElementStyles: React.CSSProperties = {
@@ -304,7 +298,7 @@ const Investors = () => {
             ref={logoRef}
             src="/logo-kwattz-final-final-transparent.svg" 
             alt="kWattz Logo" 
-            className="w-full max-w-4xl mx-auto cursor-pointer"
+            className="w-full max-w-4xl mx-auto"
             style={{ 
               maxHeight: '600px', 
               objectFit: 'contain',
@@ -312,7 +306,6 @@ const Investors = () => {
               transition: 'opacity 0.8s ease-out',
               filter: 'drop-shadow(0 0 10px rgba(195, 255, 68, 0.4))'
             }}
-            onClick={handleLogoClick}
           />
           
           {logoReached && !logoClicked && (
