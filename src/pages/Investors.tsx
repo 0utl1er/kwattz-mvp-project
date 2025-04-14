@@ -303,7 +303,7 @@ const Investors = () => {
           )}
         </section>
 
-        <section className="mt-10 mb-20 flex flex-col items-center justify-center text-center relative z-20">
+        <section className="mt-10 mb-20 flex flex-col items-center justify-center text-center relative z-50">
           <img 
             ref={logoRef}
             src="/logo-kwattz-final-final-transparent.svg" 
@@ -321,7 +321,7 @@ const Investors = () => {
           
           {logoReached && !logoClicked && (
             <div 
-              className="mt-6 inline-flex items-center justify-center p-4 rounded-full animate-pulse" 
+              className="absolute top-[calc(100%+20px)] left-1/2 transform -translate-x-1/2 inline-flex items-center justify-center p-4 rounded-full animate-pulse z-50" 
               style={powerButtonStyles}
               onClick={handlePowerButtonClick}
             >
@@ -332,15 +332,6 @@ const Investors = () => {
                   filter: 'drop-shadow(0 0 15px rgba(195, 255, 68, 0.8))',
                 }}
               />
-            </div>
-          )}
-          
-          {logoReached && !logoClicked && (
-            <div className="mt-4 text-[#C3FF44] animate-pulse" 
-                style={{ 
-                  textShadow: '0 0 10px rgba(195, 255, 68, 0.7), 0 0 20px rgba(195, 255, 68, 0.5), 0 0 30px rgba(195, 255, 68, 0.3)'
-                }}>
-              Turn on the power
             </div>
           )}
         </section>
