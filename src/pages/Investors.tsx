@@ -177,7 +177,7 @@ const Investors = () => {
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Power Button - Always visible */}
+      {/* Power Button and Logo Container - Always visible */}
       <div 
         className="power-button-container"
         style={{ 
@@ -187,17 +187,33 @@ const Investors = () => {
           right: 0, 
           bottom: 0, 
           display: showOnlyPowerButton ? 'flex' : 'none', 
+          flexDirection: 'column',
           justifyContent: 'center', 
           alignItems: 'center',
           backgroundColor: 'black',
           zIndex: 9000 
         }}
       >
+        {/* Brain Logo - At the top */}
+        <img 
+          src="/brain2.png" 
+          alt="kWattz Brain Logo" 
+          className="w-full md:w-1/2 mx-auto px-2 md:px-0 mb-10"
+          style={{ 
+            objectFit: 'contain',
+            maxWidth: '400px',
+            marginBottom: '80px'
+          }}
+        />
+        
+        {/* Power Button - Below the logo */}
         <div 
           className="inline-flex items-center justify-center rounded-full animate-pulse"
           style={{
             ...powerButtonStyles,
-            top: '70%',
+            position: 'relative',
+            top: 'auto',
+            transform: 'translateX(-50%)',
           }}
           onClick={handlePowerButtonClick}
         >
@@ -210,7 +226,7 @@ const Investors = () => {
           />
         </div>
         {isMobile && (
-          <p className="text-[#C3FF44] text-sm mt-2 animate-pulse fixed bottom-1/4">
+          <p className="text-[#C3FF44] text-sm mt-2 animate-pulse">
             Tap to power up!
           </p>
         )}
