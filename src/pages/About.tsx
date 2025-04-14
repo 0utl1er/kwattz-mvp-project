@@ -47,14 +47,8 @@ const About = () => {
           <div className="text-white max-w-4xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-center" style={{ color: '#C3FF44' }}>Our Story</h2>
             <p className="mb-4">
-              Founded in 2023, kWattz emerged from a simple observation: most people want to save 
-              energy and reduce their bills, but lack the tools to make informed decisions. Our 
-              founders, with backgrounds in AI, energy systems, and sustainability, came together 
-              to create a solution that makes energy optimization accessible to everyone.
-            </p>
-            <p>
-              Today, kWattz is helping thousands of users across the country take control of their 
-              energy consumption with intelligent insights and actionable recommendations.
+              Founded in 2025, kWattz was born from a simple but powerful observation: Most people want to save energy and lower their bills—but they lack the tools and understanding to make informed decisions.During a Load Management Plan meeting at SDG&E, I had an insight:
+What if we could educate people about how their electric bills actually work—what they’re being charged for—and help them save money in the process? Even better: What if this education also helped reduce strain on the grid and prevented energy waste, creating a win for the customer, the utility, and the planet? Then came the big question: How do we deliver this at scale, in the simplest, most effective way possible? That’s when kWattz became obvious.
             </p>
           </div>
         </section>
