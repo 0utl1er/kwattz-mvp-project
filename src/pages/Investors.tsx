@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Mailbox, Zap, ChevronDown, Power, Menu } from "lucide-react";
@@ -142,14 +141,12 @@ const Investors = () => {
     border: '2px solid rgba(195, 255, 68, 0.5)',
     padding: isMobile ? '0.75rem' : '1rem',
     borderRadius: '9999px',
-    margin: '0 auto',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 'fit-content',
-    position: 'absolute',
-    left: '50%',
+    position: 'fixed',
     top: '50%',
+    left: '50%',
     transform: 'translate(-50%, -50%)',
     zIndex: 9999,
   };
@@ -196,14 +193,9 @@ const Investors = () => {
           flexDirection: 'column' 
         }}
       >
-        {/* Removed the brain2 logo from here, leaving only the power button */}
         <div 
           className="inline-flex items-center justify-center rounded-full animate-pulse"
-          style={{
-            ...powerButtonStyles,
-            position: 'relative',
-            top: 'auto',
-          }}
+          style={powerButtonStyles}
           onClick={handlePowerButtonClick}
         >
           <Power 
@@ -232,7 +224,6 @@ const Investors = () => {
         <main className="container mx-auto px-4 py-6 pt-24">
           {!showOnlyPowerButton && (
             <>
-              {/* Brain2 logo at the top of the page, now smaller */}
               <section className="mb-10 md:mb-16 flex flex-col items-center justify-center">
                 <img 
                   ref={logoRef}
