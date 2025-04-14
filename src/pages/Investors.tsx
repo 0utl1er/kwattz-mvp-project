@@ -177,7 +177,7 @@ const Investors = () => {
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Power Button - Always visible */}
+      {/* Power Button Container - Always visible */}
       <div 
         className="power-button-container"
         style={{ 
@@ -190,14 +190,27 @@ const Investors = () => {
           justifyContent: 'center', 
           alignItems: 'center',
           backgroundColor: 'black',
-          zIndex: 9000 
+          zIndex: 9000,
+          flexDirection: 'column' 
         }}
       >
+        {/* Logo above the power button */}
+        <img 
+          src="/brain2.png" 
+          alt="kWattz Brain Logo" 
+          className="w-full max-w-xl mx-auto mb-8 px-4"
+          style={{ 
+            objectFit: 'contain',
+            filter: 'drop-shadow(0 0 10px rgba(195, 255, 68, 0.4))'
+          }}
+        />
+        
         <div 
           className="inline-flex items-center justify-center rounded-full animate-pulse"
           style={{
             ...powerButtonStyles,
-            top: '70%',
+            position: 'relative',
+            top: 'auto',
           }}
           onClick={handlePowerButtonClick}
         >
@@ -210,7 +223,7 @@ const Investors = () => {
           />
         </div>
         {isMobile && (
-          <p className="text-[#C3FF44] text-sm mt-2 animate-pulse fixed bottom-1/4">
+          <p className="text-[#C3FF44] text-sm mt-2 animate-pulse">
             Tap to power up!
           </p>
         )}
@@ -227,6 +240,22 @@ const Investors = () => {
         <main className="container mx-auto px-4 py-6 pt-24">
           {!showOnlyPowerButton && (
             <>
+              {/* Move the brain logo to the top of the page above the text block */}
+              <section className="mb-10 md:mb-16 flex flex-col items-center justify-center">
+                <img 
+                  ref={logoRef}
+                  src="/brain2.png" 
+                  alt="kWattz Brain Logo" 
+                  className="w-full md:max-w-xl mx-auto px-2 md:px-0"
+                  style={{ 
+                    objectFit: 'contain',
+                    opacity: logoReached ? 1 : 0.3,
+                    transition: 'opacity 0.8s ease-out',
+                    filter: 'drop-shadow(0 0 10px rgba(195, 255, 68, 0.4))'
+                  }}
+                />
+              </section>
+              
               <section className="mb-12 md:mb-20 flex flex-col items-center justify-center text-center" style={hiddenElementStyles}>
                 <div className={`max-w-3xl mx-auto ${pageReveal ? 'bg-[#111F54]/80' : 'bg-black/80'} p-4 md:p-8 rounded-2xl backdrop-blur-sm border border-white/10 shadow-[0_0_30px_rgba(195,255,68,0.15)] hover:shadow-[0_0_40px_rgba(195,255,68,0.25)] transition-all duration-500`}>
                   <p className="text-lg md:text-2xl mb-6">
@@ -329,60 +358,7 @@ const Investors = () => {
                 </div>
               </section>
 
-              <section className="mt-6 md:mt-10 mb-12 md:mb-20 flex flex-col items-center justify-center text-center relative z-50">
-                <img 
-                  ref={logoRef}
-                  src="/brain2.png" 
-                  alt="kWattz Brain Logo" 
-                  className="w-full md:max-w-[12xl] mx-auto px-2 md:px-0"
-                  style={{ 
-                    objectFit: 'contain',
-                    opacity: logoReached ? 1 : 0.3,
-                    transition: 'opacity 0.8s ease-out',
-                    filter: 'drop-shadow(0 0 10px rgba(195, 255, 68, 0.4))'
-                  }}
-                />
-                
-                {(!logoClicked && !showOnlyPowerButton) && (
-                  <div 
-                    className="power-button-container mt-4 md:mt-8"
-                    style={{ zIndex: 999 }}
-                  >
-                    <div 
-                      className="inline-flex items-center justify-center rounded-full animate-pulse"
-                      style={{
-                        backgroundColor: '#C3FF44',
-                        boxShadow: '0 0 50px #C3FF44, 0 0 80px rgba(195, 255, 68, 0.6)',
-                        opacity: 1,
-                        transition: 'all 0.6s ease-in-out',
-                        cursor: 'pointer',
-                        border: '2px solid rgba(195, 255, 68, 0.5)',
-                        padding: isMobile ? '0.75rem' : '1rem',
-                        borderRadius: '9999px',
-                        margin: '0 auto',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        width: 'fit-content',
-                      }}
-                      onClick={handlePowerButtonClick}
-                    >
-                      <Power 
-                        size={isMobile ? 36 : 48} 
-                        className="text-black" 
-                        style={{
-                          filter: 'drop-shadow(0 0 20px rgba(195, 255, 68, 0.8))',
-                        }}
-                      />
-                    </div>
-                    {isMobile && (
-                      <p className="text-[#C3FF44] text-sm mt-2 animate-pulse">
-                        Tap to power up!
-                      </p>
-                    )}
-                  </div>
-                )}
-              </section>
+              {/* Removed duplicate logo section that was here before */}
             </>
           )}
         </main>
