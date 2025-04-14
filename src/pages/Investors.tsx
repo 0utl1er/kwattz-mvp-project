@@ -297,15 +297,6 @@ const Investors = () => {
               ))}
             </div>
           </div>
-          
-          {!logoClicked && (
-            <div className="text-center mt-4 text-[#C3FF44] animate-pulse" 
-                style={{ 
-                  textShadow: '0 0 10px rgba(195, 255, 68, 0.7), 0 0 20px rgba(195, 255, 68, 0.5), 0 0 30px rgba(195, 255, 68, 0.3)'
-                }}>
-              Scroll down to energize the system
-            </div>
-          )}
         </section>
 
         <section className="mt-10 mb-20 flex flex-col items-center justify-center text-center relative z-50">
