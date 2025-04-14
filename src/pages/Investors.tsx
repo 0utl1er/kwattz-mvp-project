@@ -60,7 +60,7 @@ const Investors = () => {
   };
 
   const handlePowerButtonClick = () => {
-    if (!logoClicked && logoReached) {
+    if (!logoClicked) {
       setLogoClicked(true);
       startWholePageBlinking();
     }
@@ -304,7 +304,7 @@ const Investors = () => {
             ref={logoRef}
             src="/logo-kwattz-final-final-transparent.svg" 
             alt="kWattz Logo" 
-            className="w-full max-w-4xl mx-auto cursor-pointer"
+            className="w-full max-w-4xl mx-auto"
             style={{ 
               maxHeight: '600px', 
               objectFit: 'contain',
@@ -312,7 +312,6 @@ const Investors = () => {
               transition: 'opacity 0.8s ease-out',
               filter: 'drop-shadow(0 0 10px rgba(195, 255, 68, 0.4))'
             }}
-            onClick={handleLogoClick}
           />
           
           {logoReached && !logoClicked && (
@@ -321,7 +320,7 @@ const Investors = () => {
               style={{ zIndex: 9999 }}
             >
               <div 
-                className="inline-flex items-center justify-center rounded-full animate-pulse"
+                className="inline-flex items-center justify-center rounded-full animate-pulse cursor-pointer"
                 style={powerButtonStyles}
                 onClick={handlePowerButtonClick}
               >
