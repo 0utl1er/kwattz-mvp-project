@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Mailbox, Zap, ChevronDown, Power } from "lucide-react";
@@ -51,13 +52,6 @@ const Investors = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [logoReached, initialScroll]);
-
-  const handleLogoClick = () => {
-    if (!logoClicked && logoReached) {
-      setLogoClicked(true);
-      startWholePageBlinking();
-    }
-  };
 
   const handlePowerButtonClick = () => {
     if (!logoClicked && logoReached) {
@@ -154,13 +148,13 @@ const Investors = () => {
     transition: 'all 0.6s ease-in-out',
     cursor: 'pointer',
     border: '2px solid rgba(195, 255, 68, 0.5)',
-    position: 'fixed',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    zIndex: 9999,
     padding: '1rem',
     borderRadius: '9999px',
+    margin: '2rem auto 0',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 'fit-content',
   };
 
   const timelineItems = [
@@ -302,23 +296,21 @@ const Investors = () => {
         <section className="mt-10 mb-20 flex flex-col items-center justify-center text-center relative z-50">
           <img 
             ref={logoRef}
-            src="/logo-kwattz-final-final-transparent.svg" 
-            alt="kWattz Logo" 
-            className="w-full max-w-4xl mx-auto cursor-pointer"
+            src="/brain2.png" 
+            alt="kWattz Brain Logo" 
+            className="w-full max-w-md mx-auto"
             style={{ 
-              maxHeight: '600px', 
               objectFit: 'contain',
               opacity: logoReached ? 1 : 0.3,
               transition: 'opacity 0.8s ease-out',
               filter: 'drop-shadow(0 0 10px rgba(195, 255, 68, 0.4))'
             }}
-            onClick={handleLogoClick}
           />
           
           {logoReached && !logoClicked && (
             <div 
-              className="fixed inset-0 flex items-center justify-center pointer-events-none" 
-              style={{ zIndex: 9999 }}
+              className="power-button-container mt-8"
+              style={{ zIndex: 999 }}
             >
               <div 
                 className="inline-flex items-center justify-center rounded-full animate-pulse"
