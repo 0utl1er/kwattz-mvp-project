@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -45,14 +44,13 @@ const KWattzSignup = () => {
     setIsLoading(true);
     
     try {
+      console.log("Form submitted, signing up with:", values.email);
       await signUpWithEmail(values.email, values.password);
       
       toast({
         title: "Account created successfully",
         description: "Welcome to kWattz! Let's start saving on energy.",
       });
-      
-      navigate("/questionnaire");
     } catch (error: any) {
       console.error("Error during signup:", error);
       
@@ -79,6 +77,7 @@ const KWattzSignup = () => {
     setIsGoogleLoading(true);
     
     try {
+      console.log("Initiating Google OAuth login");
       await initiateOAuthLogin('google');
       
       toast({
@@ -101,6 +100,7 @@ const KWattzSignup = () => {
     setIsAppleLoading(true);
     
     try {
+      console.log("Initiating Apple OAuth login");
       await initiateOAuthLogin('apple');
       
       toast({
@@ -121,8 +121,6 @@ const KWattzSignup = () => {
 
   return (
     <div className="min-h-screen bg-[#111F54] flex flex-col">
-      {/* Removed the logo header section */}
-      
       <div className="flex-1 flex justify-center items-center p-4">
         <div className="w-full max-w-md">
           <div className="mb-8">

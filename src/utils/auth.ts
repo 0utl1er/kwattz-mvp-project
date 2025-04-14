@@ -28,10 +28,23 @@ const firebaseConfig = {
   measurementId: "G-Q8Y8VG6TDH"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const auth = getAuth(app);
+// Ensure Firebase is only initialized once
+let app;
+let analytics;
+let auth;
+
+try {
+  // Check if Firebase has already been initialized
+  app = initializeApp(firebaseConfig);
+  analytics = getAnalytics(app);
+  auth = getAuth(app);
+} catch (error) {
+  // If Firebase is already initialized, use the existing instance
+  console.log("Firebase already initialized, using existing instance");
+  app = initializeApp();
+  analytics = getAnalytics(app);
+  auth = getAuth(app);
+}
 
 /**
  * Saves user data to the Azure database after successful authentication
@@ -133,23 +146,41 @@ export const initiateOAuthLogin = (provider: OAuthProvider) => {
 
 // Email password sign in
 export const signInWithEmail = (email: string, password: string) => {
+  console.log("Attempting to sign in with email:", email);
   return signInWithEmailAndPassword(auth, email, password)
     .then(async (result) => {
+      console.log("Email sign-in successful:", result.user.email);
       // Save or update user in Azure DB
       await saveUserToDatabase(result);
       
+      // Redirect to dashboard after successful login
+      window.location.href = '/dashboard';
+      
       return result;
+    })
+    .catch(error => {
+      console.error("Email sign-in error:", error);
+      throw error;
     });
 };
 
 // Email password sign up
 export const signUpWithEmail = (email: string, password: string) => {
+  console.log("Attempting to sign up with email:", email);
   return createUserWithEmailAndPassword(auth, email, password)
     .then(async (result) => {
+      console.log("Email sign-up successful:", result.user.email);
       // Save new user to Azure DB
       await saveUserToDatabase(result);
       
+      // Redirect to questionnaire after successful signup
+      window.location.href = '/questionnaire';
+      
       return result;
+    })
+    .catch(error => {
+      console.error("Email sign-up error:", error);
+      throw error;
     });
 };
 

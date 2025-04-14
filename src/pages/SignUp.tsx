@@ -43,18 +43,15 @@ const SignUp = () => {
     setIsLoading(true);
     
     try {
+      console.log("Form submitted, signing up with:", values.email);
       await signUpWithEmail(values.email, values.password);
       
       setShowSuccess(true);
       
-      setTimeout(() => {
-        toast({
-          title: "Account created successfully",
-          description: "You can now proceed to the questionnaire.",
-        });
-        
-        navigate("/questionnaire");
-      }, 1500);
+      toast({
+        title: "Account created successfully",
+        description: "You can now proceed to the questionnaire.",
+      });
     } catch (error: any) {
       console.error("Error during signup:", error);
       
@@ -80,6 +77,7 @@ const SignUp = () => {
     setIsGoogleLoading(true);
     
     try {
+      console.log("Initiating Google OAuth login");
       await initiateOAuthLogin('google');
       
       toast({
@@ -102,6 +100,7 @@ const SignUp = () => {
     setIsAppleLoading(true);
     
     try {
+      console.log("Initiating Apple OAuth login");
       await initiateOAuthLogin('apple');
       
       toast({
