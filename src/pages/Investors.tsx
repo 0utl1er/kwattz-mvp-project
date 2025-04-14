@@ -119,7 +119,7 @@ const Investors = () => {
     filter: wholePageBlinking 
       ? (blinkCount % 2 === 0 ? 'brightness(0.2)' : 'brightness(0)')
       : (wholePageVisible ? 'brightness(1)' : 'brightness(0.05)'),
-    backgroundColor: energized ? '#111F54' : 'black',
+    backgroundColor: energized ? '#111F54' : '#111F54', // Keep dark blue background consistently
     transition: `filter ${blinkInterval/1000}s ease-in-out, background-color 1s ease-in-out`,
   };
 
