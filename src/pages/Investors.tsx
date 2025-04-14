@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
-import { Mailbox, Zap, ChevronDown } from "lucide-react";
+import { Mailbox, Zap, ChevronDown, Power } from "lucide-react";
 import Footer from '../components/landing/Footer';
 import { useIsMobile } from '../hooks/use-mobile';
 import TopMenu from '../components/layout/TopMenu';
@@ -59,6 +59,14 @@ const Investors = () => {
   }, [logoReached, initialScroll]);
 
   const handleLogoClick = () => {
+    if (!logoClicked && logoReached) {
+      setLogoClicked(true);
+      startWholePageBlinking();
+    }
+  };
+
+  // Handle power button click - same effect as clicking the logo
+  const handlePowerButtonClick = () => {
     if (!logoClicked && logoReached) {
       setLogoClicked(true);
       startWholePageBlinking();
@@ -154,6 +162,16 @@ const Investors = () => {
     opacity: 1,
     filter: 'brightness(1)',
     zIndex: 10,
+  };
+
+  // Power button styles
+  const powerButtonStyles: React.CSSProperties = {
+    backgroundColor: '#9b87f5',
+    boxShadow: '0 0 20px #9b87f5, 0 0 30px rgba(155, 135, 245, 0.6)',
+    opacity: logoReached && !logoClicked ? 1 : 0,
+    transition: 'all 0.6s ease-in-out',
+    transform: 'scale(1)',
+    cursor: 'pointer',
   };
 
   const timelineItems = [
@@ -329,12 +347,30 @@ const Investors = () => {
             }}
             onClick={handleLogoClick}
           />
+          
+          {/* Power button - appears below the logo */}
+          {logoReached && !logoClicked && (
+            <div 
+              className="mt-6 inline-flex items-center justify-center p-4 rounded-full" 
+              style={powerButtonStyles}
+              onClick={handlePowerButtonClick}
+            >
+              <Power 
+                size={32} 
+                className="text-white animate-pulse" 
+                style={{
+                  filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.8))',
+                }}
+              />
+            </div>
+          )}
+          
           {logoReached && !logoClicked && (
             <div className="mt-4 text-[#C3FF44] animate-pulse" 
                 style={{ 
                   textShadow: '0 0 10px rgba(195, 255, 68, 0.7), 0 0 20px rgba(195, 255, 68, 0.5), 0 0 30px rgba(195, 255, 68, 0.3)'
                 }}>
-              Click the logo to energize the system
+              Turn on the power
             </div>
           )}
         </section>
@@ -405,3 +441,4 @@ const Investors = () => {
 };
 
 export default Investors;
+
