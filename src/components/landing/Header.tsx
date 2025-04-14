@@ -2,9 +2,14 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, LightbulbIcon, BadgeDollarSign, BarChart3, Bolt } from "lucide-react";
+import { ArrowDown, BadgeDollarSign, BarChart3, LightbulbIcon } from "lucide-react";
 
 const Header = () => {
+  const scrollToHowItWorks = () => {
+    const section = document.querySelector('#how-it-works');
+    section?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <header className="container mx-auto px-4 py-12 md:py-20">
       <div className="flex flex-col lg:flex-row items-center gap-8">
@@ -17,8 +22,12 @@ const Header = () => {
               Our AI-powered energy advisor helps you understand your electric bills, save money, and make smarter energy decisions.
             </p>
             <div className="pt-4 flex flex-col sm:flex-row gap-4">
-              <Button className="text-[#111F54] text-lg py-6 px-8" style={{ backgroundColor: '#C3FF44' }} asChild>
-                <Link to="/kwattz-signup">Get Started <ArrowRight className="ml-2" /></Link>
+              <Button 
+                className="text-[#111F54] text-lg py-6 px-8" 
+                style={{ backgroundColor: '#C3FF44' }}
+                onClick={scrollToHowItWorks}
+              >
+                Learn More <ArrowDown className="ml-2" />
               </Button>
               <Button 
                 className="text-[#111F54] text-lg py-6 px-8 hover:bg-[#C3FF44]/90" 
