@@ -5,11 +5,11 @@ import { Button } from "@/components/ui/button";
 const suggestions = [
   {
     title: "Analyze my bill",
-    description: "Upload your energy bill for a detailed analysis"
+    description: "What is your energy bill is about"
   },
   {
     title: "Energy saving tips",
-    description: "Get personalized recommendations"
+    description: "Get recommendations"
   },
   {
     title: "Usage patterns",
@@ -36,4 +36,3 @@ const SuggestedActions = ({ onSelect }: { onSelect: (text: string) => void }) =>
 };
 
 export default SuggestedActions;
-
