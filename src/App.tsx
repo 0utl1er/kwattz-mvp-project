@@ -20,6 +20,7 @@ import Blog from "./pages/Blog";
 import FAQ from "./pages/FAQ";
 import Terms from "./pages/Terms";
 import Investors from "./pages/Investors";
+import ChatBot from "./pages/ChatBot";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ const App = () => (
         <Sonner />
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/chat" element={<ChatBot />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/kwattz-signup" element={<KWattzSignup />} />
           <Route path="/login" element={<Login />} />
