@@ -46,7 +46,7 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#091544] text-white">
+    <div className="min-h-screen flex flex-col bg-[#001050] text-white">
       <TopMenu />
       
       <main className="flex-grow pt-24">

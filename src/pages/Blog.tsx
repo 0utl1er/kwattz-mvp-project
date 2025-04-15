@@ -9,7 +9,7 @@ const Blog = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#111F54] text-white">
+    <div className="min-h-screen bg-[#001050] text-white">
       <TopMenu />
       
       <main className="container mx-auto px-4 py-6 pt-24">
