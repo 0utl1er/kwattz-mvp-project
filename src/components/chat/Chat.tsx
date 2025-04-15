@@ -13,47 +13,9 @@ interface Message {
 }
 
 const Chat = () => {
-  const [messages, setMessages] = useState<Message[]>([
+  const [messages] = useState<Message[]>([
     { text: "Hello! I'm kWattz, your AI energy advisor. How can I help you optimize your energy consumption today?", isBot: true }
   ]);
-  const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim()) return;
-
-    const userMessage = input.trim();
-    setInput("");
-    setMessages(prev => [...prev, { text: userMessage, isBot: false }]);
-    setIsLoading(true);
-
-    try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMessage }),
-      });
-
-      if (!response.ok) throw new Error('Failed to get response');
-
-      const data = await response.json();
-      setMessages(prev => [...prev, { text: data.message, isBot: true }]);
-    } catch (error) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to get response from the chatbot. Please try again.",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleSuggestionSelect = (text: string) => {
-    setInput(text);
-  };
 
   return (
     <div className="flex flex-col h-[600px] w-full max-w-4xl mx-auto bg-[#111F54]/90 backdrop-blur-xl rounded-xl border border-[#C3FF44]/20 shadow-2xl relative overflow-hidden">
@@ -66,40 +28,35 @@ const Chat = () => {
           />
         ))}
         {messages.length === 1 && (
-          <SuggestedActions onSelect={handleSuggestionSelect} />
+          <SuggestedActions onSelect={() => {}} />
         )}
       </div>
-      <form onSubmit={handleSubmit} className="p-4 border-t border-[#C3FF44]/20 bg-[#111F54]/95">
+      <div className="p-4 border-t border-[#C3FF44]/20 bg-[#111F54]/95">
         <div className="flex gap-2 items-center">
           <Input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Message kWattz..."
-            disabled={isLoading}
-            className="flex-1 bg-white/5 border-[#C3FF44]/20 text-white placeholder:text-white/50"
+            placeholder="Chat functionality temporarily disabled..."
+            disabled={true}
+            className="flex-1 bg-white/5 border-[#C3FF44]/20 text-white/50"
           />
           <Button 
-            type="submit" 
+            type="button" 
             size="icon"
-            disabled={isLoading}
-            className="bg-[#C3FF44] text-[#111F54] hover:bg-[#C3FF44]/90 h-11 w-11"
+            disabled={true}
+            className="bg-[#C3FF44]/50 text-[#111F54] h-11 w-11"
           >
-            {isLoading ? (
-              <Loader2 className="h-5 w-5 animate-spin" />
-            ) : (
-              <Send className="h-5 w-5" />
-            )}
+            <Send className="h-5 w-5" />
           </Button>
           <Button
             type="button"
             size="icon"
             variant="outline"
-            className="border-[#C3FF44]/20 text-white/70 hover:bg-[#C3FF44]/5 h-11 w-11"
+            disabled={true}
+            className="border-[#C3FF44]/20 text-white/50 h-11 w-11"
           >
             <Mic className="h-5 w-5" />
           </Button>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

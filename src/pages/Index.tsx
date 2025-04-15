@@ -27,7 +27,7 @@ const Index = () => {
           <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#C3FF44]/0 via-[#C3FF44] to-[#C3FF44]/0 animate-[circuit_4s_linear_infinite]" />
         </div>
         <h2 className="text-3xl font-bold text-center mb-8 text-[#C3FF44] relative z-10">
-          Chat with kWattz AI
+          Try kWattz AI
         </h2>
         <Chat />
       </div>
@@ -42,3 +42,4 @@ const Index = () => {
 };
 
 export default Index;
+

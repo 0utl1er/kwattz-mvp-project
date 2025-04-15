@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Bot, User } from 'lucide-react';
+import { User } from 'lucide-react';
 
 interface ChatMessageProps {
   message: string;
@@ -14,7 +14,7 @@ const ChatMessage = ({ message, isBot }: ChatMessageProps) => {
         isBot ? 'bg-[#C3FF44]/10' : 'bg-white/10'
       }`}>
         {isBot ? (
-          <Bot className="h-5 w-5 text-[#C3FF44]" />
+          <img src="/favicon.ico.png" alt="kWattz Bot" className="h-5 w-5" />
         ) : (
           <User className="h-5 w-5 text-white/70" />
         )}
