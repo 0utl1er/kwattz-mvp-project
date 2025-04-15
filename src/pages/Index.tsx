@@ -14,6 +14,9 @@ const Index = () => {
       <TopMenu />
       <Header />
       
+      {/* Benefits Section */}
+      <Benefits />
+
       {/* Chat Section with Circuit Effect */}
       <div id="chat-section" className="container mx-auto px-4 py-12 relative">
         <div className="absolute inset-0 overflow-hidden">
@@ -31,9 +34,7 @@ const Index = () => {
 
       {/* How kWattz Works Section */}
       <HowItWorks />
-
-      {/* Benefits Section */}
-      <Benefits />
+      
       <CTASection />
       <Footer />
     </div>
