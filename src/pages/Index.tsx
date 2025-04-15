@@ -1,19 +1,18 @@
 
 import React from 'react';
 import Header from '../components/landing/Header';
-import HowItWorks from '../components/landing/HowItWorks';
 import Benefits from '../components/landing/Benefits';
 import CTASection from '../components/landing/CTASection';
 import Footer from '../components/landing/Footer';
 import TopMenu from '../components/layout/TopMenu';
 import Chat from '../components/chat/Chat';
+import HowItWorks from '../components/landing/HowItWorks';
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-[#111F54] pt-24">
       <TopMenu />
       <Header />
-      <HowItWorks />
       
       {/* Chat Section with Circuit Effect */}
       <div id="chat-section" className="container mx-auto px-4 py-12 relative">
@@ -30,6 +29,10 @@ const Index = () => {
         <Chat />
       </div>
 
+      {/* How kWattz Works Section */}
+      <HowItWorks />
+
+      {/* Benefits Section */}
       <Benefits />
       <CTASection />
       <Footer />
