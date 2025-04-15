@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Send, Loader2, Mic } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -18,7 +17,7 @@ const Chat = () => {
   ]);
 
   return (
-    <div className="flex flex-col h-[600px] w-full max-w-4xl mx-auto bg-[#111F54]/90 backdrop-blur-xl rounded-xl border border-[#C3FF44]/20 shadow-2xl relative overflow-hidden">
+    <div className="flex flex-col h-[600px] w-full max-w-4xl mx-auto bg-[#091544]/90 backdrop-blur-xl rounded-xl border border-[#C3FF44]/20 shadow-2xl relative overflow-hidden">
       <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-none">
         {messages.map((message, index) => (
           <ChatMessage
@@ -31,7 +30,7 @@ const Chat = () => {
           <SuggestedActions onSelect={() => {}} />
         )}
       </div>
-      <div className="p-4 border-t border-[#C3FF44]/20 bg-[#111F54]/95">
+      <div className="p-4 border-t border-[#C3FF44]/20 bg-[#091544]/95">
         <div className="flex gap-2 items-center">
           <Input
             placeholder="Chat functionality temporarily disabled..."
@@ -62,4 +61,3 @@ const Chat = () => {
 };
 
 export default Chat;
-

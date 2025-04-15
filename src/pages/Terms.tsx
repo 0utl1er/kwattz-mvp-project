@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Footer from "@/components/landing/Footer";
@@ -11,7 +10,7 @@ const Terms = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#111F54] text-white">
+    <div className="min-h-screen flex flex-col bg-[#091544] text-white">
       <TopMenu />
       
       <main className="flex-grow pt-24">

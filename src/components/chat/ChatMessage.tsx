@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { User } from 'lucide-react';
 
@@ -9,7 +8,7 @@ interface ChatMessageProps {
 
 const ChatMessage = ({ message, isBot }: ChatMessageProps) => {
   return (
-    <div className={`flex gap-4 ${isBot ? 'bg-[#111F54]/50' : ''} p-6 rounded-lg transition-colors duration-200`}>
+    <div className={`flex gap-4 ${isBot ? 'bg-[#091544]/50' : ''} p-6 rounded-lg transition-colors duration-200`}>
       <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
         isBot ? 'bg-[#C3FF44]/10' : 'bg-white/10'
       }`}>
@@ -27,4 +26,3 @@ const ChatMessage = ({ message, isBot }: ChatMessageProps) => {
 };
 
 export default ChatMessage;
-

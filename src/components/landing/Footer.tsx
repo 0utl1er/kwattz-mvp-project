@@ -1,11 +1,10 @@
-
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Mail, Linkedin } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#111F54] text-white py-8">
+    <footer className="bg-[#091544] text-white py-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="mb-6 md:mb-0">
@@ -61,7 +60,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Add the keyframes animation to the document */}
         <style dangerouslySetInnerHTML={{ __html: `
           @keyframes neonPulse {
             0%, 100% {

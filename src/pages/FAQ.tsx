@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import Footer from "@/components/landing/Footer";
 import TopMenu from "@/components/layout/TopMenu";
@@ -47,7 +46,7 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#111F54] text-white">
+    <div className="min-h-screen flex flex-col bg-[#091544] text-white">
       <TopMenu />
       
       <main className="flex-grow pt-24">

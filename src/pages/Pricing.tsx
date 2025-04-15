@@ -1,4 +1,3 @@
-
 import React from "react";
 import Footer from "@/components/landing/Footer";
 import TopMenu from "@/components/layout/TopMenu";
@@ -6,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 const Pricing = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-[#111F54] text-white">
+    <div className="min-h-screen flex flex-col bg-[#091544] text-white">
       <TopMenu />
       
       <main className="flex-grow pt-24">
@@ -16,7 +15,7 @@ const Pricing = () => {
               Pricing
             </h1>
             
-            <div className="max-w-3xl mx-auto bg-[#111F54]/90 backdrop-blur-sm p-8 rounded-xl border border-[#C3FF44]/30 shadow-lg">
+            <div className="max-w-3xl mx-auto bg-[#091544]/90 backdrop-blur-sm p-8 rounded-xl border border-[#C3FF44]/30 shadow-lg">
               <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-[#C3FF44]">
                 Currently Free During Our Beta Period
               </h2>
