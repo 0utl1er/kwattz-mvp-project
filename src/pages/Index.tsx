@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Header from '../components/landing/Header';
 import Benefits from '../components/landing/Benefits';
@@ -9,7 +10,7 @@ import HowItWorks from '../components/landing/HowItWorks';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-[#091544] pt-24">
+    <div className="min-h-screen bg-[#001050] pt-24">
       <TopMenu />
       <Header />
       
