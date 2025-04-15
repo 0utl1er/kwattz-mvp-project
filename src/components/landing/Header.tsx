@@ -1,13 +1,11 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import { ArrowDown, BadgeDollarSign, BarChart3, LightbulbIcon } from "lucide-react";
 
 const Header = () => {
-  const scrollToHowItWorks = () => {
-    const section = document.querySelector('#how-it-works');
-    section?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToChat = () => {
+    const chatSection = document.querySelector('#chat-section');
+    chatSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -25,9 +23,9 @@ const Header = () => {
               <Button 
                 className="text-[#111F54] text-lg py-6 px-8" 
                 style={{ backgroundColor: '#C3FF44' }}
-                onClick={scrollToHowItWorks}
+                onClick={scrollToChat}
               >
-                Learn More <ArrowDown className="ml-2" />
+                Try kWattz AI <ArrowDown className="ml-2" />
               </Button>
               <Button 
                 className="text-[#111F54] text-lg py-6 px-8 hover:bg-[#C3FF44]/90" 
