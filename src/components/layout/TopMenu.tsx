@@ -1,15 +1,12 @@
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 
 const TopMenu = () => {
   const location = useLocation();
   
-  // Always use dark blue background for consistency
-  const menuBgColor = 'bg-[#091544]'; 
-  
-  // Use the same logo for all pages
+  const menuBgColor = 'bg-[#001050]'; 
   const logoSrc = '/logo-kwattz-final-final-transparent.svg';
   
   return (
@@ -24,13 +21,19 @@ const TopMenu = () => {
         </Link>
         
         <div className="flex items-center gap-4">
+          <Link 
+            to="/login" 
+            className="text-[#C3FF44] hover:text-[#C3FF44]/90"
+          >
+            Login
+          </Link>
           <Button 
             className="text-[#111F54] text-base md:text-lg py-4 md:py-6 px-5 md:px-8 shadow-[0_0_15px_rgba(195,255,68,0.2)] hover:shadow-[0_0_25px_rgba(195,255,68,0.4)]" 
             style={{ backgroundColor: '#C3FF44' }} 
             asChild
           >
             <Link to="/kwattz-signup">
-              Get Started <ArrowRight className="ml-2 h-4 w-4" />
+              Get Started
             </Link>
           </Button>
         </div>

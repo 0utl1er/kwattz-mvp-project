@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -19,7 +18,7 @@ const Header = () => {
               Take control of your energy bill with AI
             </h1>
             <p className="text-xl text-white md:pr-12 -mt-4">
-              Understand your energy use, avoid expensive hours, and save money — meet kWattz, your personal energy advisor.
+              Your AI energy advisor
             </p>
             <div className="pt-4 flex flex-col sm:flex-row gap-4">
               <Button 
@@ -28,13 +27,6 @@ const Header = () => {
                 onClick={scrollToChat}
               >
                 Try kWattz AI <ArrowDown className="ml-2" />
-              </Button>
-              <Button 
-                className="text-[#111F54] text-lg py-6 px-8 hover:bg-[#C3FF44]/90" 
-                style={{ backgroundColor: '#C3FF44' }} 
-                asChild
-              >
-                <Link to="/login">Login</Link>
               </Button>
             </div>
           </div>
