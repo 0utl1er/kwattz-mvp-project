@@ -1,64 +1,17 @@
-import React, { useState } from 'react';
-import { Send, Loader2, Mic } from 'lucide-react';
+import React from 'react';
+import { Loader2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
 import ChatMessage from './ChatMessage';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-interface Message {
-  text: string;
-  isBot: boolean;
-}
-
-const questions = [
-  "Do you want to reduce home or business energy costs?",
-  "What type of energy bill do you have (electric, gas, both)?",
-  "What is your average monthly energy bill?",
-  "Are you interested in saving energy with specific appliances/EV/Solar?"
-];
-
 const Chat = () => {
-  const [messages, setMessages] = useState<Message[]>([
-    { text: "I'm kWattz, your AI energy advisor. Let's optimize your energy consumption and save money.", isBot: true }
-  ]);
-  const [inputValue, setInputValue] = useState('');
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [isProcessing, setIsProcessing] = useState(false);
-  
   const isMobile = useIsMobile();
-  const { toast } = useToast();
-
-  const handleSendMessage = () => {
-    if (!inputValue.trim()) return;
-
-    // Add user message
-    setMessages(prev => [...prev, { text: inputValue, isBot: false }]);
-    setIsProcessing(true);
-
-    // Simulate bot response
-    setTimeout(() => {
-      if (currentQuestion < questions.length) {
-        setMessages(prev => [...prev, { text: questions[currentQuestion], isBot: true }]);
-        setCurrentQuestion(prev => prev + 1);
-      } else {
-        setMessages(prev => [...prev, { 
-          text: "Based on our conversation, I can help you save on your energy bills. To get a detailed analysis and personalized recommendations, please sign up for a free account.", 
-          isBot: true 
-        }]);
-      }
-      setIsProcessing(false);
-    }, 1000);
-
-    setInputValue('');
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  };
+  const messages = [
+    { text: "Do you want to reduce home or business energy costs?", isBot: true },
+    { text: "What is your average monthly energy bill?", isBot: true },
+    { text: "Want to understand your energy bill?", isBot: true }
+  ];
 
   return (
     <div className="flex flex-col h-[80vh] md:h-[600px] w-full max-w-4xl mx-auto bg-[#0f1c4b] backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden">
@@ -84,29 +37,21 @@ const Chat = () => {
             isBot={message.isBot}
           />
         ))}
-        {isProcessing && (
-          <div className="flex items-center gap-2 text-white/50 p-2">
-            <Loader2 className="h-4 w-4 animate-spin" />
-            <span>kWattz is thinking...</span>
-          </div>
-        )}
       </div>
       <div className="p-4 border-t border-[#C3FF44]/10 bg-[#001050]">
         <div className="flex gap-2 items-center">
           <Input
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder="Type your message..."
-            className="flex-1 bg-white/5 border-[#C3FF44]/10 text-white"
+            value="Chat functionality temporarily disabled"
+            disabled
+            className="flex-1 bg-white/5 border-[#C3FF44]/10 text-[#d9d9d9]"
           />
           <Button 
-            onClick={handleSendMessage}
+            disabled
             type="button" 
             size="icon"
-            className="bg-[#C3FF44] text-[#001050] hover:bg-[#C3FF44]/90 h-10 w-10"
+            className="bg-[#C3FF44]/50 text-[#001050] h-10 w-10"
           >
-            <Send className="h-5 w-5" />
+            <Loader2 className="h-5 w-5 animate-spin" />
           </Button>
         </div>
       </div>
