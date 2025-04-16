@@ -8,7 +8,7 @@ import Chat from '../components/chat/Chat';
 
 const NewLanding = () => {
   return (
-    <div className="min-h-screen bg-[#001050] pt-24">
+    <div className="min-h-screen bg-[#001050]">
       <TopMenu />
       <Header />
       
@@ -23,45 +23,26 @@ const NewLanding = () => {
         </div>
 
         <div id="chat-section" className="relative">
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute inset-0 bg-[#C3FF44]/5 animate-pulse" />
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#C3FF44]/0 via-[#C3FF44] to-[#C3FF44]/0 animate-[circuit_4s_linear_infinite]" />
-            <div className="absolute bottom-0 right-0 w-1 h-full bg-gradient-to-b from-[#C3FF44]/0 via-[#C3FF44] to-[#C3FF44]/0 animate-[circuit_4s_linear_infinite]" />
-            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#C3FF44]/0 via-[#C3FF44] to-[#C3FF44]/0 animate-[circuit_4s_linear_infinite]" />
-            <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#C3FF44]/0 via-[#C3FF44] to-[#C3FF44]/0 animate-[circuit_4s_linear_infinite]" />
+          <div className="absolute inset-0">
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#C3FF44]/0 via-[#C3FF44]/20 to-[#C3FF44]/0">
+              <div className="absolute inset-0 animate-[pulse_3s_ease-in-out_infinite]" />
+            </div>
+            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#C3FF44]/0 via-[#C3FF44]/20 to-[#C3FF44]/0">
+              <div className="absolute inset-0 animate-[pulse_3s_ease-in-out_infinite]" />
+            </div>
+            <div className="absolute top-0 left-0 w-[1px] h-full bg-gradient-to-b from-[#C3FF44]/0 via-[#C3FF44]/20 to-[#C3FF44]/0">
+              <div className="absolute inset-0 animate-[pulse_3s_ease-in-out_infinite]" />
+            </div>
+            <div className="absolute top-0 right-0 w-[1px] h-full bg-gradient-to-b from-[#C3FF44]/0 via-[#C3FF44]/20 to-[#C3FF44]/0">
+              <div className="absolute inset-0 animate-[pulse_3s_ease-in-out_infinite]" />
+            </div>
           </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-4 md:mb-8 relative z-10 neon-text">
-            Try kWattz AI
-          </h2>
           <Chat />
         </div>
       </section>
       
       <CTASection />
       <Footer />
-
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes neon-flash {
-          0%, 100% {
-            text-shadow: 
-              0 0 10px rgba(195, 255, 68, 0.6), 
-              0 0 20px rgba(255, 255, 0, 0.4);
-            color: #C3FF44;
-          }
-          50% {
-            text-shadow: 
-              0 0 20px rgba(195, 255, 68, 1), 
-              0 0 40px rgba(255, 255, 0, 0.8), 
-              0 0 60px rgba(195, 255, 68, 0.6);
-            color: #FFFF00;
-          }
-        }
-
-        .neon-text {
-          animation: neon-flash 4s infinite ease-in-out;
-          font-weight: bold;
-        }
-      `}} />
     </div>
   );
 };

@@ -1,5 +1,5 @@
+
 import React from 'react';
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, BadgeDollarSign, BarChart3, LightbulbIcon } from "lucide-react";
 
@@ -26,14 +26,14 @@ const Header = () => {
                 style={{ backgroundColor: '#C3FF44' }}
                 onClick={scrollToChat}
               >
-                Try kWattz AI <ArrowDown className="ml-2" />
+                Get Started <ArrowDown className="ml-2" />
               </Button>
             </div>
           </div>
         </div>
         <div className="flex-1 flex justify-center">
-          <div className="w-full max-w-md bg-white/10 rounded-2xl backdrop-blur-lg p-6 border border-white/20">
-            <div className="bg-[#C3FF44]/20 rounded-xl p-4 mb-4">
+          <div className="w-full max-w-md backdrop-blur-sm bg-white/5 rounded-2xl p-6 border border-[#C3FF44]/10">
+            <div className="bg-[#C3FF44]/10 rounded-xl p-4 mb-4">
               <h3 className="text-xl font-semibold" style={{ color: '#C3FF44' }}>Your Energy Advisor</h3>
               <p className="text-white">
                 Upload your electric bill and our AI will analyze your usage patterns and provide personalized recommendations.
@@ -41,19 +41,19 @@ const Header = () => {
             </div>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
-                <div className="bg-[#C3FF44]/20 p-2 rounded-full">
+                <div className="bg-[#C3FF44]/10 p-2 rounded-full">
                   <LightbulbIcon className="h-5 w-5" style={{ color: '#C3FF44' }} />
                 </div>
                 <p className="text-white">Understand your energy consumption</p>
               </div>
               <div className="flex items-center gap-3">
-                <div className="bg-[#C3FF44]/20 p-2 rounded-full">
+                <div className="bg-[#C3FF44]/10 p-2 rounded-full">
                   <BadgeDollarSign className="h-5 w-5" style={{ color: '#C3FF44' }} />
                 </div>
                 <p className="text-white">Save money on your electric bills</p>
               </div>
               <div className="flex items-center gap-3">
-                <div className="bg-[#C3FF44]/20 p-2 rounded-full">
+                <div className="bg-[#C3FF44]/10 p-2 rounded-full">
                   <BarChart3 className="h-5 w-5" style={{ color: '#C3FF44' }} />
                 </div>
                 <p className="text-white">Track your progress over time</p>

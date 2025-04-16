@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Send, Loader2, Mic } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -62,7 +61,7 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex flex-col h-[80vh] md:h-[600px] w-full max-w-4xl mx-auto bg-[#001050]/90 backdrop-blur-xl rounded-xl border border-[#C3FF44]/20 shadow-2xl relative overflow-hidden">
+    <div className="flex flex-col h-[80vh] md:h-[600px] w-full max-w-4xl mx-auto bg-[#001050]/90 backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden">
       <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-none">
         {messages.map((message, index) => (
           <ChatMessage
@@ -78,14 +77,14 @@ const Chat = () => {
           </div>
         )}
       </div>
-      <div className="p-4 border-t border-[#C3FF44]/20 bg-[#001050]/95">
+      <div className="p-4 border-t border-[#C3FF44]/10 bg-[#001050]">
         <div className="flex gap-2 items-center">
           <Input
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="Type your message..."
-            className="flex-1 bg-white/5 border-[#C3FF44]/20 text-white"
+            className="flex-1 bg-white/5 border-[#C3FF44]/10 text-white"
           />
           <Button 
             onClick={handleSendMessage}
