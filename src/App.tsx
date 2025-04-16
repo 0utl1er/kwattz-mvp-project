@@ -1,10 +1,11 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UnderDevelopmentBanner from "./components/layout/UnderDevelopmentBanner";
-import Index from "./pages/Index";
+import Solutions from "./pages/Solutions";
 import NewLanding from "./pages/NewLanding";
 import SignUp from "./pages/SignUp";
 import KWattzSignup from "./pages/KWattzSignup";
@@ -33,7 +34,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<NewLanding />} />
           <Route path="/chat" element={<ChatBot />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/kwattz-signup" element={<KWattzSignup />} />
@@ -49,6 +50,7 @@ const App = () => (
           <Route path="/faq" element={<FAQ />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/investors" element={<Investors />} />
+          <Route path="/solutions" element={<Solutions />} />
           <Route path="/new" element={<NewLanding />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

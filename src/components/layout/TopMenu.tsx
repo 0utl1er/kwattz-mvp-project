@@ -33,7 +33,7 @@ const TopMenu = () => {
             asChild
           >
             <Link to="/kwattz-signup">
-              Try kWattz AI
+              Get Started
             </Link>
           </Button>
         </div>
