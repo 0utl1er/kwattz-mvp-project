@@ -21,7 +21,7 @@ const Chat = () => {
   const isMobile = useIsMobile();
 
   return (
-    <div className="flex flex-col h-[85vh] md:h-[600px] w-full max-w-4xl mx-auto bg-[#001050]/90 backdrop-blur-xl rounded-xl border border-[#C3FF44]/20 shadow-2xl relative overflow-hidden">
+    <div className="flex flex-col h-[80vh] md:h-[600px] w-full max-w-4xl mx-auto bg-[#001050]/90 backdrop-blur-xl rounded-xl border border-[#C3FF44]/20 shadow-2xl relative overflow-hidden">
       <div className="flex-1 overflow-y-auto p-2 md:p-4 space-y-2 md:space-y-4 scrollbar-none">
         {messages.map((message, index) => (
           <ChatMessage

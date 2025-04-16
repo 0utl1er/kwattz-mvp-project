@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Header from '../components/landing/Header';
 import Benefits from '../components/landing/Benefits';
@@ -13,8 +14,6 @@ const Index = () => {
       <TopMenu />
       <Header />
       
-      <Benefits />
-
       <div id="chat-section" className="container mx-auto px-4 py-6 md:py-12 relative">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 bg-[#C3FF44]/5 animate-pulse" />
@@ -28,7 +27,8 @@ const Index = () => {
         </h2>
         <Chat />
       </div>
-
+      
+      <Benefits />
       <HowItWorks />
       <CTASection />
       <Footer />
