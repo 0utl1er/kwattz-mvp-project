@@ -8,7 +8,7 @@ import Chat from '../components/chat/Chat';
 
 const NewLanding = () => {
   return (
-    <div className="min-h-screen bg-[#001050]">
+    <div className="min-h-screen bg-[#091544]">
       <TopMenu />
       <Header />
       
@@ -22,21 +22,7 @@ const NewLanding = () => {
           </p>
         </div>
 
-        <div id="chat-section" className="relative">
-          <div className="absolute inset-0">
-            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#C3FF44]/0 via-[#C3FF44]/20 to-[#C3FF44]/0">
-              <div className="absolute inset-0 animate-[pulse_3s_ease-in-out_infinite]" />
-            </div>
-            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#C3FF44]/0 via-[#C3FF44]/20 to-[#C3FF44]/0">
-              <div className="absolute inset-0 animate-[pulse_3s_ease-in-out_infinite]" />
-            </div>
-            <div className="absolute top-0 left-0 w-[1px] h-full bg-gradient-to-b from-[#C3FF44]/0 via-[#C3FF44]/20 to-[#C3FF44]/0">
-              <div className="absolute inset-0 animate-[pulse_3s_ease-in-out_infinite]" />
-            </div>
-            <div className="absolute top-0 right-0 w-[1px] h-full bg-gradient-to-b from-[#C3FF44]/0 via-[#C3FF44]/20 to-[#C3FF44]/0">
-              <div className="absolute inset-0 animate-[pulse_3s_ease-in-out_infinite]" />
-            </div>
-          </div>
+        <div id="chat-section">
           <Chat />
         </div>
       </section>

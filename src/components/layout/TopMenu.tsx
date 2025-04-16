@@ -6,17 +6,17 @@ import { Button } from "@/components/ui/button";
 const TopMenu = () => {
   const location = useLocation();
   
-  const menuBgColor = 'bg-[#001050]'; 
+  const menuBgColor = 'bg-[#091544]'; 
   const logoSrc = '/logo-kwattz-final-final-transparent.svg';
   
   return (
     <div className={`fixed top-0 left-0 right-0 ${menuBgColor} shadow-md z-50`}>
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+      <div className="container mx-auto px-4 py-2 flex justify-between items-center">
         <Link to="/" className="flex items-center">
           <img 
             src={logoSrc}
             alt="kWattz" 
-            className="h-16 md:h-20" 
+            className="h-12 md:h-16" 
           />
         </Link>
         
@@ -33,7 +33,7 @@ const TopMenu = () => {
             asChild
           >
             <Link to="/kwattz-signup">
-              Get Started
+              Try kWattz AI
             </Link>
           </Button>
         </div>

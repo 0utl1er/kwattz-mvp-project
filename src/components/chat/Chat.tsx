@@ -61,7 +61,21 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex flex-col h-[80vh] md:h-[600px] w-full max-w-4xl mx-auto bg-[#001050]/90 backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden">
+    <div className="flex flex-col h-[80vh] md:h-[600px] w-full max-w-4xl mx-auto bg-[#091544] backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden">
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#C3FF44]/0 via-[#C3FF44]/10 to-[#C3FF44]/0">
+          <div className="absolute inset-0 animate-[pulse_4s_ease-in-out_infinite]" />
+        </div>
+        <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#C3FF44]/0 via-[#C3FF44]/10 to-[#C3FF44]/0">
+          <div className="absolute inset-0 animate-[pulse_4s_ease-in-out_infinite]" />
+        </div>
+        <div className="absolute top-0 left-0 w-[1px] h-full bg-gradient-to-b from-[#C3FF44]/0 via-[#C3FF44]/10 to-[#C3FF44]/0">
+          <div className="absolute inset-0 animate-[pulse_4s_ease-in-out_infinite]" />
+        </div>
+        <div className="absolute top-0 right-0 w-[1px] h-full bg-gradient-to-b from-[#C3FF44]/0 via-[#C3FF44]/10 to-[#C3FF44]/0">
+          <div className="absolute inset-0 animate-[pulse_4s_ease-in-out_infinite]" />
+        </div>
+      </div>
       <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-none">
         {messages.map((message, index) => (
           <ChatMessage

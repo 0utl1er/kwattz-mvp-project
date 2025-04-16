@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { ArrowDown, BadgeDollarSign, BarChart3, LightbulbIcon } from "lucide-react";
+import { BadgeDollarSign, BarChart3, LightbulbIcon } from "lucide-react";
 
 const Header = () => {
   const scrollToChat = () => {
@@ -18,7 +18,7 @@ const Header = () => {
               Take control of your energy bill with AI
             </h1>
             <p className="text-xl text-white md:pr-12 -mt-4">
-              Your AI energy advisor
+              Understand your energy use, avoid expensive hours, and save money — meet kWattz, your personal energy advisor.
             </p>
             <div className="pt-4 flex flex-col sm:flex-row gap-4">
               <Button 
@@ -26,7 +26,7 @@ const Header = () => {
                 style={{ backgroundColor: '#C3FF44' }}
                 onClick={scrollToChat}
               >
-                Get Started <ArrowDown className="ml-2" />
+                Try kWattz AI
               </Button>
             </div>
           </div>
