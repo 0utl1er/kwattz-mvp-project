@@ -10,11 +10,11 @@ const Header = () => {
   };
 
   return (
-    <header className="container mx-auto px-4 py-12 md:py-20">
+    <header className="container mx-auto px-4 pt-32 pb-12 md:py-20">
       <div className="flex flex-col lg:flex-row items-center gap-8">
         <div className="flex-1">
           <div className="space-y-4">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold flex items-center gap-2" style={{ color: '#C3FF44' }}>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold flex items-center gap-2" style={{ color: '#d7ff64' }}>
               Take control of your energy bill with AI
             </h1>
             <p className="text-xl text-white md:pr-12 -mt-4">
@@ -22,8 +22,8 @@ const Header = () => {
             </p>
             <div className="pt-4 flex flex-col sm:flex-row gap-4">
               <Button 
-                className="text-[#111F54] text-lg py-6 px-8" 
-                style={{ backgroundColor: '#C3FF44' }}
+                className="text-[#0f1c4b] text-lg py-6 px-8" 
+                style={{ backgroundColor: '#d7ff64' }}
                 onClick={scrollToChat}
               >
                 Try kWattz AI

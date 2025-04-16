@@ -1,11 +1,10 @@
-
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Mail, Linkedin } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#091544] text-white py-8">
+    <footer className="bg-[#0f1c4b] text-white py-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="mb-6 md:mb-0">
@@ -84,7 +83,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-white/20 mt-8 pt-8 text-center md:text-left md:flex justify-between items-center">
-          <p>&copy; {new Date().getFullYear()} kWattz. All rights reserved.</p>
+          <p style={{ color: '#d9d9d9' }}>&copy; {new Date().getFullYear()} kWattz. All rights reserved.</p>
           <div className="mt-4 md:mt-0">
             <ul className="flex justify-center md:justify-end space-x-6">
               <li>

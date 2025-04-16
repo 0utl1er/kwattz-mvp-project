@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Send, Loader2, Mic } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -61,7 +61,7 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex flex-col h-[80vh] md:h-[600px] w-full max-w-4xl mx-auto bg-[#091544] backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden">
+    <div className="flex flex-col h-[80vh] md:h-[600px] w-full max-w-4xl mx-auto bg-[#0f1c4b] backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#C3FF44]/0 via-[#C3FF44]/10 to-[#C3FF44]/0">
           <div className="absolute inset-0 animate-[pulse_4s_ease-in-out_infinite]" />

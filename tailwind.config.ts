@@ -90,12 +90,23 @@ export default {
 					'0%': { opacity: '0' },
 					'50%': { opacity: '1' },
 					'100%': { opacity: '0' }
-				}
+				},
+				gradient: {
+          "0%, 100%": {
+            backgroundSize: "200% 200%",
+            backgroundPosition: "left center",
+          },
+          "50%": {
+            backgroundSize: "200% 200%",
+            backgroundPosition: "right center",
+          },
+        },
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'circuit': 'circuit 4s linear infinite'
+				'circuit': 'circuit 4s linear infinite',
+				gradient: "gradient 3s ease infinite",
 			}
 		}
 	},
