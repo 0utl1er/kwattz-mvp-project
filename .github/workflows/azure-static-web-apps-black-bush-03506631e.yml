@@ -36,14 +36,15 @@ jobs:
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BLACK_BUSH_03506631E }}
+          azure_static_web_apps_api_token: ${78deb6c4db56f6bda29247f09e1eb6ef30af311a0218fbd2e0c5f2015a37550006-fb78fb25-d1b6-442a-8671-42af4278c6b501e013003506631e }}
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "/kwattz-mvp-project" # App source code path
           api_location: "" # Api source code path - optional
-          output_location: "build" # Built app content directory - optional
+          output_location: "."
           github_id_token: ${{ steps.idtoken.outputs.result }}
+        
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
