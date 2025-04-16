@@ -20,7 +20,7 @@ const questions = [
 
 const Chat = () => {
   const [messages, setMessages] = useState<Message[]>([
-    { text: "Hello! I'm kWattz, your AI energy advisor. How can I help you optimize your energy consumption today?", isBot: true }
+    { text: "I'm kWattz, your AI energy advisor. Let's optimize your energy consumption and save money.", isBot: true }
   ]);
   const [inputValue, setInputValue] = useState('');
   const [currentQuestion, setCurrentQuestion] = useState(0);
