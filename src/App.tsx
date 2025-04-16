@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UnderDevelopmentBanner from "./components/layout/UnderDevelopmentBanner";
 import Index from "./pages/Index";
+import NewLanding from "./pages/NewLanding";
 import SignUp from "./pages/SignUp";
 import KWattzSignup from "./pages/KWattzSignup";
 import Login from "./pages/Login";
@@ -48,6 +49,7 @@ const App = () => (
           <Route path="/faq" element={<FAQ />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/investors" element={<Investors />} />
+          <Route path="/new" element={<NewLanding />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </TooltipProvider>
