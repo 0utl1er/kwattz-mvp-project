@@ -18,7 +18,7 @@ const NewLanding = () => {
             Unlock Personalized Energy Insights
             <div className="absolute inset-0 blur-lg opacity-20 bg-gradient-to-r from-[#d7ff64] via-[#e2ff8a] to-[#d7ff64] animate-pulse" />
           </h2>
-          <p className="text-xl text-white/90 mb-8">
+          <p className="text-[#d9d9d9] text-xl mb-8">
             Get answers to your energy questions and learn how to save money with our AI advisor.
           </p>
         </div>

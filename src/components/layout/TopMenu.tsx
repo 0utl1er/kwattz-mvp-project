@@ -23,13 +23,13 @@ const TopMenu = () => {
         <div className="flex items-center gap-4">
           <Link 
             to="/login" 
-            className="text-[#C3FF44] hover:text-[#C3FF44]/90"
+            className="text-[#d7ff64] hover:text-[#d7ff64]/90"
           >
             Login
           </Link>
           <Button 
-            className="text-[#111F54] text-base md:text-lg py-4 md:py-6 px-5 md:px-8 shadow-[0_0_15px_rgba(195,255,68,0.2)] hover:shadow-[0_0_25px_rgba(195,255,68,0.4)]" 
-            style={{ backgroundColor: '#C3FF44' }} 
+            className="text-[#0f1c4b] text-base md:text-lg py-4 md:py-6 px-5 md:px-8 shadow-[0_0_15px_rgba(195,255,68,0.2)] hover:shadow-[0_0_25px_rgba(195,255,68,0.4)]" 
+            style={{ backgroundColor: '#d7ff64' }} 
             asChild
           >
             <Link to="/kwattz-signup">

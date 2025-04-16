@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { BadgeDollarSign, BarChart3, LightbulbIcon } from "lucide-react";
@@ -17,7 +16,7 @@ const Header = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold flex items-center gap-2" style={{ color: '#d7ff64' }}>
               Take control of your energy bill with AI
             </h1>
-            <p className="text-xl text-white md:pr-12 -mt-4">
+            <p className="text-[#d9d9d9] text-xl md:pr-12 -mt-4">
               Understand your energy use, avoid expensive hours, and save money — meet kWattz, your personal energy advisor.
             </p>
             <div className="pt-4 flex flex-col sm:flex-row gap-4">
