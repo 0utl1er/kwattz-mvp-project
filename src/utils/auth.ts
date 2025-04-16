@@ -1,4 +1,3 @@
-
 // Import Firebase modules
 import { initializeApp } from 'firebase/app';
 import { 
@@ -170,16 +169,75 @@ export const signUpWithEmail = (email: string, password: string) => {
   return createUserWithEmailAndPassword(auth, email, password)
     .then(async (result) => {
       console.log("Email sign-up successful:", result.user.email);
-      // Save new user to Azure DB
-      await saveUserToDatabase(result);
       
-      // Redirect to questionnaire after successful signup
-      window.location.href = '/questionnaire';
-      
-      return result;
+      try {
+        // Save new user to Azure DB with extended profile data
+        await saveUserToDatabase({
+          email: result.user.email || '',
+          firebaseUid: result.user.uid,
+          createdAt: Date.now(),
+          lastLogin: Date.now(),
+          provider: 'email',
+        });
+        
+        // Store auth state in localStorage
+        localStorage.setItem('authToken', await result.user.getIdToken());
+        localStorage.setItem('userEmail', result.user.email || '');
+        localStorage.setItem('userId', result.user.uid);
+        localStorage.setItem('authProvider', 'email');
+        
+        // Show success message
+        toast({
+          title: "Account created successfully",
+          description: "Welcome to kWattz! Let's start saving on energy.",
+        });
+        
+        // Redirect to questionnaire
+        window.location.href = '/questionnaire';
+        
+        return result;
+      } catch (dbError) {
+        console.error("Error saving user to database:", dbError);
+        toast({
+          title: "Account created but profile setup failed",
+          description: "Please try logging in again.",
+          variant: "destructive",
+        });
+        throw dbError;
+      }
     })
     .catch(error => {
       console.error("Email sign-up error:", error);
+      
+      let errorMessage = "There was an error creating your account. Please try again.";
+      
+      // Enhanced error messages
+      switch(error.code) {
+        case "auth/email-already-in-use":
+          errorMessage = "This email is already registered. Please try logging in instead.";
+          break;
+        case "auth/invalid-email":
+          errorMessage = "Please enter a valid email address.";
+          break;
+        case "auth/operation-not-allowed":
+          errorMessage = "Email/password accounts are not enabled. Please contact support.";
+          break;
+        case "auth/weak-password":
+          errorMessage = "Please choose a stronger password (at least 8 characters).";
+          break;
+        case "auth/network-request-failed":
+          errorMessage = "Network error. Please check your connection and try again.";
+          break;
+        default:
+          errorMessage = `Sign up failed: ${error.message}`;
+      }
+      
+      toast({
+        title: "Sign up failed",
+        description: errorMessage,
+        variant: "destructive",
+      });
+      
       throw error;
     });
 };
