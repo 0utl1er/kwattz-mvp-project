@@ -10,15 +10,11 @@ import HowItWorks from '../components/landing/HowItWorks';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-[#111F54] pt-24">
+    <div className="min-h-screen bg-[#001050] pt-24">
       <TopMenu />
       <Header />
       
-      {/* Benefits Section */}
-      <Benefits />
-
-      {/* Chat Section with Circuit Effect */}
-      <div id="chat-section" className="container mx-auto px-4 py-12 relative">
+      <div id="chat-section" className="container mx-auto px-4 py-6 md:py-12 relative">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 bg-[#C3FF44]/5 animate-pulse" />
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#C3FF44]/0 via-[#C3FF44] to-[#C3FF44]/0 animate-[circuit_4s_linear_infinite]" />
@@ -26,15 +22,14 @@ const Index = () => {
           <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#C3FF44]/0 via-[#C3FF44] to-[#C3FF44]/0 animate-[circuit_4s_linear_infinite]" />
           <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#C3FF44]/0 via-[#C3FF44] to-[#C3FF44]/0 animate-[circuit_4s_linear_infinite]" />
         </div>
-        <h2 className="text-3xl font-bold text-center mb-8 relative z-10 neon-text">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-4 md:mb-8 relative z-10 neon-text">
           Try kWattz AI
         </h2>
         <Chat />
       </div>
-
-      {/* How kWattz Works Section */}
-      <HowItWorks />
       
+      <Benefits />
+      <HowItWorks />
       <CTASection />
       <Footer />
 
@@ -65,4 +60,3 @@ const Index = () => {
 };
 
 export default Index;
-

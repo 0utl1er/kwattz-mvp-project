@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Calculator, LightbulbIcon, Shield } from "lucide-react";
 import Card from './Card';
@@ -23,7 +22,7 @@ const Benefits = () => {
   ];
 
   return (
-    <section className="py-16 bg-[#111F54]">
+    <section className="py-16 bg-[#091544]">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12" style={{ color: '#C3FF44' }}>Why Choose kWattz</h2>
         <div className="grid md:grid-cols-3 gap-8">

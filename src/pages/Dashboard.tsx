@@ -1,11 +1,10 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, BarChart2, Calendar, Lightbulb, Settings } from "lucide-react";
 
 const Dashboard = () => {
   return (
-    <div className="min-h-screen bg-[#111F54] flex flex-col p-4">
+    <div className="min-h-screen bg-[#001050] flex flex-col p-4">
       <div className="max-w-7xl w-full mx-auto">
         <header className="flex justify-between items-center mb-8">
           <h1 className="text-2xl md:text-3xl font-bold text-[#C3FF44]">Energy Dashboard</h1>

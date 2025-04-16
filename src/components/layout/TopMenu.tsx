@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -8,7 +7,7 @@ const TopMenu = () => {
   const location = useLocation();
   
   // Always use dark blue background for consistency
-  const menuBgColor = 'bg-[#111F54]'; 
+  const menuBgColor = 'bg-[#091544]'; 
   
   // Use the same logo for all pages
   const logoSrc = '/logo-kwattz-final-final-transparent.svg';
