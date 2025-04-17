@@ -1,68 +1,57 @@
-# In: ./swa-db-connections/schema.graphql
-
-# Type corresponding to 'users' container
 type User @model {
-  id: ID!       # Corresponds to Cosmos DB 'id'
-  # Add other fields from your 'users' container documents
+  id: ID!
   userId: String
   name: String
   email: String
+  usageLogs: [UsageLog] @relationship(fields: ["id"], references: ["userId"]) # Explicitly define the relationship
+  utilities: [Utility] @relationship(fields: ["id"], references: ["userId"])
+  deviceProfiles: [DeviceProfile] @relationship(fields: ["id"], references: ["userId"])
+  aiFeedback: [AiFeedback] @relationship(fields: ["id"], references: ["userId"])
 }
 
-# Type corresponding to 'usage_logs' container
 type UsageLog @model {
   id: ID!
-  # Add other fields from your 'usage_logs' container documents
-  timestamp: String # Consider GraphQLDateTime scalar if needed
+  timestamp: String
   deviceId: String
-  userId: String
+  userId: String! # Make this non-nullable to enforce the relationship
   usageKwh: Float
 }
 
-# Type corresponding to 'utilities' container
 type Utility @model {
-    id: ID!
-    # Add other fields
-    providerName: String
-    accountNumber: String
-    userId: String
+  id: ID!
+  providerName: String
+  accountNumber: String
+  userId: String!
 }
 
-# Type corresponding to 'device_profiles' container
 type DeviceProfile @model {
-    id: ID!
-    # Add other fields
-    userId: String
-    deviceName: String
-    category: String
-    wattage: Int
+  id: ID!
+  deviceName: String
+  category: String
+  wattage: Int
+  userId: String!
 }
 
-# Type corresponding to 'ai_feedback_loop' container
 type AiFeedback @model {
-    id: ID!
-    # Add other fields
-    userId: String
-    suggestionId: String
-    feedbackText: String
-    rating: Int
+  id: ID!
+  feedbackText: String
+  rating: Int
+  userId: String!
+  suggestionId: String
 }
 
-# Type corresponding to 'energy_education' container
 type EnergyEducation @model {
-    id: ID!
-    # Add other fields
-    topic: String
-    contentUrl: String
-    difficulty: String
+  id: ID!
+  topic: String
+  contentUrl: String
+  difficulty: String
 }
 
 # --- Optional: Define specific Queries/Mutations if needed ---
-# If the default @model queries/mutations aren't enough (e.g., custom filters),
-# you can define them explicitly.
-# type Query {
-#   findUsersByName(name: String): [User]
-# }
-# type Mutation {
-#  updateUserEmail(id: ID!, newEmail: String!): User
-# }
+type Query {
+  findUsersByName(name: String!): [User] # Example with non-nullable argument
+}
+
+type Mutation {
+  updateUserEmail(id: ID!, newEmail: String!): User # Example with non-nullable arguments
+}
