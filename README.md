@@ -1,5 +1,5 @@
 
-# Front End Kwattz - lovable + my editions 
+Welcome to kWattz AI baby steps!
 
 ## Project info
 
@@ -68,8 +68,4 @@ This project is built with:
 
 For issues related to Firebase Authentication, please check the [Firebase Troubleshooting Documentation](./src/docs/FIREBASE_TROUBLESHOOTING.md).
 
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
 
