@@ -31,7 +31,7 @@ export default defineConfig(({ mode }: { mode: string }) => ({
   },
   build: {
     sourcemap: true,
-    minify: 'terser',
+    minify: "terser" as const,
     target: 'es2020',
   },
 }));
