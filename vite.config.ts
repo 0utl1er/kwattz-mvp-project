@@ -26,4 +26,12 @@ export default defineConfig(({ mode }: { mode: string }) => ({
     // Add this to support import.meta.env in TypeScript
     'import.meta.env': JSON.stringify(process.env),
   },
+  optimizeDeps: {
+    exclude: [], // Add any packages that should be excluded from optimization if needed
+  },
+  build: {
+    sourcemap: true,
+    minify: 'terser',
+    target: 'es2020',
+  },
 }));
