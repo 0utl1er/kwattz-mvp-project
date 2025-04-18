@@ -3,9 +3,9 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 
 const Header = () => {
-  const scrollToChat = () => {
-    const chatSection = document.querySelector('#chat-section');
-    chatSection?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToAuth = () => {
+    const authSection = document.querySelector('#auth-section');
+    authSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -23,7 +23,7 @@ const Header = () => {
               <Button 
                 className="text-[#0f1c4b] text-lg py-6 px-8" 
                 style={{ backgroundColor: '#d7ff64' }}
-                onClick={scrollToChat}
+                onClick={scrollToAuth}
               >
                 Try kWattz AI
               </Button>
@@ -36,4 +36,3 @@ const Header = () => {
 };
 
 export default Header;
-
