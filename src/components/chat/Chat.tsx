@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Loader2, Send } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -17,11 +16,6 @@ const Chat = () => {
     if (chatInputRef.current) {
       chatInputRef.current.focus();
     }
-
-    setMessages([
-      { text: "Welcome! How can I help you?", isBot: true },
-      { text: "Please select an option or type your question...", isBot: true }
-    ]);
   }, []);
 
   const handleUserInput = (event) => {
@@ -62,7 +56,7 @@ const Chat = () => {
             isBot={message.isBot}
           />
         ))}
-        {messages.length === 2 && (
+        {messages.length === 0 && (
           <div className="mt-4">
             <SuggestedActions onSelect={handleSuggestedAction} />
           </div>
