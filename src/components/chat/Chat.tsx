@@ -1,26 +1,26 @@
+
 import React, { useState, useRef, useEffect } from 'react';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Send } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import ChatMessage from './ChatMessage';
+import SuggestedActions from './SuggestedActions';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const Chat = () => {
   const isMobile = useIsMobile();
-  const [messages, setMessages] = useState([]); // Use state for messages
+  const [messages, setMessages] = useState([]); 
   const [inputText, setInputText] = useState('');
-  const chatInputRef = useRef(null); // Ref for input focus
+  const chatInputRef = useRef(null);
 
   useEffect(() => {
-    // Focus the input field on initial load
     if (chatInputRef.current) {
       chatInputRef.current.focus();
     }
 
-    // Example: Load initial bot messages (replace with your actual logic)
     setMessages([
       { text: "Welcome! How can I help you?", isBot: true },
-      { text: "Please type your question...", isBot: true }
+      { text: "Please select an option or type your question...", isBot: true }
     ]);
   }, []);
 
@@ -28,23 +28,32 @@ const Chat = () => {
     setInputText(event.target.value);
   };
 
+  const handleSuggestedAction = (text) => {
+    setMessages(prevMessages => [...prevMessages, { text, isBot: false }]);
+    
+    // Simulate bot response (replace with actual AI call)
+    setTimeout(() => {
+      const botResponse = `I'll help you with: ${text}. (AI response would go here)`;
+      setMessages(prevMessages => [...prevMessages, { text: botResponse, isBot: true }]);
+    }, 1000);
+  };
+
   const sendMessage = () => {
     const message = inputText.trim();
     if (message) {
       setMessages(prevMessages => [...prevMessages, { text: message, isBot: false }]);
-      setInputText(''); // Clear input
+      setInputText('');
 
       // Simulate bot response (replace with actual AI call)
       setTimeout(() => {
         const botResponse = `You said: ${message}. (AI response would go here)`;
         setMessages(prevMessages => [...prevMessages, { text: botResponse, isBot: true }]);
-      }, 1000); // Simulate delay
+      }, 1000);
     }
   };
 
   return (
     <div className="flex flex-col h-[80vh] md:h-[600px] w-full max-w-4xl mx-auto bg-[#0f1c4b] backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden">
-      {/* ... (Your existing gradient border code) ... */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-none">
         {messages.map((message, index) => (
           <ChatMessage
@@ -53,6 +62,11 @@ const Chat = () => {
             isBot={message.isBot}
           />
         ))}
+        {messages.length === 2 && (
+          <div className="mt-4">
+            <SuggestedActions onSelect={handleSuggestedAction} />
+          </div>
+        )}
       </div>
       <div className="p-4 border-t border-[#C3FF44]/10 bg-[#001050]">
         <div className="flex gap-2 items-center">
@@ -70,7 +84,7 @@ const Chat = () => {
             size="icon"
             className="bg-[#C3FF44]/50 text-[#001050] h-10 w-10"
           >
-            <Loader2 className="h-5 w-5 animate-spin" />
+            <Send className="h-5 w-5" />
           </Button>
         </div>
       </div>
