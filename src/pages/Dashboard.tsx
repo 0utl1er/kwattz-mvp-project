@@ -25,6 +25,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const auth = getAuth();
   const [user, setUser] = useState(auth.currentUser);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -38,6 +39,7 @@ const Dashboard = () => {
       } else {
         setUser(currentUser);
       }
+      setLoading(false);
     });
 
     return () => unsubscribe();
@@ -57,7 +59,24 @@ const Dashboard = () => {
     }
   };
 
-  if (!user) return null;
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#001050] flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#C3FF44]"></div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-[#001050] flex items-center justify-center flex-col">
+        <p className="text-white text-lg mb-4">You must be logged in to view this page</p>
+        <Button onClick={() => navigate('/')} className="bg-[#C3FF44] text-[#001050] hover:bg-[#C3FF44]/90">
+          Go to Login
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#001050] flex">
@@ -117,11 +136,11 @@ const Dashboard = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 rounded-full bg-gradient-to-r from-[#C3FF44] to-[#001050] flex items-center justify-center text-white">
-                {user.email?.[0].toUpperCase() || 'U'}
+                {user?.email?.[0].toUpperCase() || 'U'}
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-white truncate">
-                  {user.email || 'User'}
+                  {user?.email || 'User'}
                 </p>
               </div>
             </div>

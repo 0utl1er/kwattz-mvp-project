@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -23,7 +24,7 @@ import Terms from "./pages/Terms";
 import Investors from "./pages/Investors";
 import ChatBot from "./pages/ChatBot";
 import { Suspense } from 'react';
-import { Dashboard as LazyDashboard, Settings, Chat } from './utils/lazy';
+import { Settings, Chat } from './utils/lazy';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 
 const queryClient = new QueryClient();
@@ -43,7 +44,7 @@ const App = () => (
             <Route path="/kwattz-signup" element={<KWattzSignup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/questionnaire" element={<EnergyQuestionnaire />} />
-            <Route path="/dashboard" element={<LazyDashboard />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/about" element={<About />} />
             <Route path="/pricing" element={<Pricing />} />
