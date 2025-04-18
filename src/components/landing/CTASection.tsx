@@ -11,10 +11,11 @@ const CTASection = () => {
 
   const handleGoogleLogin = async () => {
     try {
+      console.log("Initiating Google login from CTA section");
       await initiateOAuthLogin('google');
-      // Redirect is handled in the auth provider
+      // Redirect happens in initiateOAuthLogin function
     } catch (error: any) {
-      console.error("Google login error:", error);
+      console.error("Google login error in CTA section:", error);
       toast({
         title: "Login failed",
         description: "Could not sign in with Google. Please try again.",
