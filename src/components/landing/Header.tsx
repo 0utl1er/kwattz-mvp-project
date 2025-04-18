@@ -17,7 +17,7 @@ const Header = () => {
               Take control of your energy bill with AI
             </h1>
             <p className="text-[#d9d9d9] text-xl md:pr-12 -mt-4">
-              Understand your energy use, avoid expensive hours, and save money — meet kWattz, your personal energy advisor.
+              Understand your energy use, avoid expensive hours, and save money — meet kWattz, your personal AI energy expert.
             </p>
             <div className="pt-4 flex flex-col sm:flex-row gap-4">
               <Button 
