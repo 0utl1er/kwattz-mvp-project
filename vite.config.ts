@@ -1,4 +1,3 @@
-
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -20,7 +19,7 @@ export default defineConfig(({ mode }: { mode: string }) => ({
   },
   build: {
     sourcemap: true,
-    minify: "terser" as const,
+    minify: 'terser',
     target: 'es2020',
     rollupOptions: {
       output: {
