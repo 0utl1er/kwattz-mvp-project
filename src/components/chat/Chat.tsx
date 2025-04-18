@@ -1,88 +1,164 @@
+
 import React, { useState, useRef, useEffect } from 'react';
-import { Loader2, Send } from 'lucide-react';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import ChatMessage from './ChatMessage';
+import { Loader2 } from 'lucide-react';
+import { ChatContainer } from "@/components/ui/chat-container";
+import { ChatInput } from "@/components/ui/chat-input";
+import { ChatMessage } from "@/components/ui/chat-message";
 import SuggestedActions from './SuggestedActions';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+
+// Initial questions the bot will ask
+const initialQuestions = [
+  "Do you want to reduce home or business energy costs?",
+  "What type of energy bill do you have (electric, gas, both)?",
+  "What is your average monthly energy bill?",
+  "Are you interested in saving energy with specific appliances/EV/Solar?"
+];
+
+interface Message {
+  text: string;
+  isBot: boolean;
+}
 
 const Chat = () => {
   const isMobile = useIsMobile();
-  const [messages, setMessages] = useState([]); 
+  const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');
-  const chatInputRef = useRef(null);
+  const [loading, setLoading] = useState(false);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [questionFlowComplete, setQuestionFlowComplete] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  
+  // Function to scroll to bottom of chat
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
+  // Effect to scroll to bottom on new messages
   useEffect(() => {
-    if (chatInputRef.current) {
-      chatInputRef.current.focus();
+    scrollToBottom();
+  }, [messages]);
+
+  // Initial bot message
+  useEffect(() => {
+    if (messages.length === 0) {
+      setMessages([
+        { 
+          text: "Hi there! I'm kWattz, your AI energy advisor. I can help you save money on your energy bills. Let me ask you a few questions to get started.", 
+          isBot: true 
+        },
+        {
+          text: initialQuestions[0],
+          isBot: true
+        }
+      ]);
     }
   }, []);
 
-  const handleUserInput = (event) => {
-    setInputText(event.target.value);
-  };
+  const processUserMessage = async (message: string) => {
+    // Add user message to chat
+    setMessages(prevMessages => [...prevMessages, { text: message, isBot: false }]);
+    setInputText('');
+    setLoading(true);
 
-  const handleSuggestedAction = (text) => {
-    setMessages(prevMessages => [...prevMessages, { text, isBot: false }]);
+    // Simulate processing delay
+    await new Promise(resolve => setTimeout(resolve, 800));
+
+    // Check if we're in the question flow
+    if (currentQuestionIndex < initialQuestions.length - 1) {
+      // Move to next question
+      const nextIndex = currentQuestionIndex + 1;
+      setCurrentQuestionIndex(nextIndex);
+      setMessages(prev => [...prev, { text: initialQuestions[nextIndex], isBot: true }]);
+    } else if (!questionFlowComplete) {
+      // End of questionnaire
+      setQuestionFlowComplete(true);
+      setMessages(prev => [
+        ...prev, 
+        { 
+          text: "Thank you for sharing that information! To provide you with tailored guidance and a complete energy saving analysis, I'll need to review your energy bill. Would you like to sign up to upload your bill?", 
+          isBot: true 
+        }
+      ]);
+    } else {
+      // This would connect to the OpenAI GPT API in production
+      // Currently using a placeholder response
+      const botResponse = await mockOpenAIResponse(message);
+      setMessages(prev => [...prev, { text: botResponse, isBot: true }]);
+    }
     
-    // Simulate bot response (replace with actual AI call)
-    setTimeout(() => {
-      const botResponse = `I'll help you with: ${text}. (AI response would go here)`;
-      setMessages(prevMessages => [...prevMessages, { text: botResponse, isBot: true }]);
-    }, 1000);
+    setLoading(false);
   };
 
-  const sendMessage = () => {
-    const message = inputText.trim();
-    if (message) {
-      setMessages(prevMessages => [...prevMessages, { text: message, isBot: false }]);
-      setInputText('');
+  // Mock function that would be replaced with actual OpenAI API call
+  const mockOpenAIResponse = async (message: string) => {
+    // This function would be replaced with an actual API call to OpenAI
+    // Example of how the API integration would work:
+    /*
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message }),
+    });
+    const data = await response.json();
+    return data.message;
+    */
+    
+    // For now, return a placeholder message
+    return "To proceed with a detailed analysis of your energy usage and get personalized recommendations, please sign up or log in. I'll be able to analyze your bills and provide specific guidance for your situation.";
+  };
 
-      // Simulate bot response (replace with actual AI call)
-      setTimeout(() => {
-        const botResponse = `You said: ${message}. (AI response would go here)`;
-        setMessages(prevMessages => [...prevMessages, { text: botResponse, isBot: true }]);
-      }, 1000);
+  const handleSuggestedAction = (text: string) => {
+    processUserMessage(text);
+  };
+
+  const handleSendMessage = () => {
+    if (inputText.trim()) {
+      processUserMessage(inputText.trim());
     }
   };
 
   return (
-    <div className="flex flex-col h-[80vh] md:h-[600px] w-full max-w-4xl mx-auto bg-[#0f1c4b] backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden">
+    <ChatContainer>
       <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-none">
         {messages.map((message, index) => (
           <ChatMessage
             key={index}
             message={message.text}
-            isBot={message.isBot}
+            isUser={!message.isBot}
           />
         ))}
-        {messages.length === 0 && (
-          <div className="mt-4">
-            <SuggestedActions onSelect={handleSuggestedAction} />
+        
+        {loading && (
+          <div className="flex justify-center items-center p-4">
+            <Loader2 className="h-6 w-6 animate-spin text-[#C3FF44]" />
           </div>
         )}
+        
+        {questionFlowComplete && messages[messages.length - 1]?.isBot && (
+          <div className="flex justify-center mt-6">
+            <Button className="bg-[#C3FF44] text-[#0f1c4b] hover:bg-[#A4D633]" asChild>
+              <Link to="/signup">Sign Up / Log In</Link>
+            </Button>
+          </div>
+        )}
+        
+        <div ref={messagesEndRef} />
       </div>
+      
       <div className="p-4 border-t border-[#C3FF44]/10 bg-[#001050]">
-        <div className="flex gap-2 items-center">
-          <Input
-            value={inputText}
-            onChange={handleUserInput}
-            onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-            ref={chatInputRef}
-            placeholder="Type your message..."
-            className="flex-1 bg-white/5 border-[#C3FF44]/10 text-[#d9d9d9]"
-          />
-          <Button
-            type="button"
-            onClick={sendMessage}
-            size="icon"
-            className="bg-[#C3FF44]/50 text-[#001050] h-10 w-10"
-          >
-            <Send className="h-5 w-5" />
-          </Button>
-        </div>
+        <ChatInput
+          value={inputText}
+          onChange={setInputText}
+          onSend={handleSendMessage}
+          disabled={loading}
+        />
       </div>
-    </div>
+    </ChatContainer>
   );
 };
 
