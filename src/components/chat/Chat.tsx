@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Loader2, Send } from 'lucide-react';
+import { Send } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import ChatMessage from './ChatMessage';
@@ -17,11 +17,6 @@ const Chat = () => {
     if (chatInputRef.current) {
       chatInputRef.current.focus();
     }
-
-    setMessages([
-      { text: "Welcome! How can I help you?", isBot: true },
-      { text: "Please select an option or type your question...", isBot: true }
-    ]);
   }, []);
 
   const handleUserInput = (event) => {
@@ -55,6 +50,12 @@ const Chat = () => {
   return (
     <div className="flex flex-col h-[80vh] md:h-[600px] w-full max-w-4xl mx-auto bg-[#0f1c4b] backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden">
       <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-none">
+        {messages.length === 0 && (
+          <div className="mt-4">
+            <SuggestedActions onSelect={handleSuggestedAction} />
+          </div>
+        )}
+        
         {messages.map((message, index) => (
           <ChatMessage
             key={index}
@@ -62,11 +63,6 @@ const Chat = () => {
             isBot={message.isBot}
           />
         ))}
-        {messages.length === 2 && (
-          <div className="mt-4">
-            <SuggestedActions onSelect={handleSuggestedAction} />
-          </div>
-        )}
       </div>
       <div className="p-4 border-t border-[#C3FF44]/10 bg-[#001050]">
         <div className="flex gap-2 items-center">
