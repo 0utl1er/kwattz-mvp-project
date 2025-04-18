@@ -20,25 +20,49 @@ import {
 import { toast } from "@/hooks/use-toast";
 import { logout } from '@/utils/auth';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { isAuthenticated, getAuthStorage } from '@/utils/auth';
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const auth = getAuth();
   const [user, setUser] = useState(auth.currentUser);
   const [loading, setLoading] = useState(true);
+  const [authChecked, setAuthChecked] = useState(false);
 
   useEffect(() => {
+    console.log("Dashboard mounting, checking authentication...");
+    
+    // First check local storage for quicker response
+    const storedAuthData = getAuthStorage();
+    const storedIsAuth = isAuthenticated();
+    console.log("Initial auth check from storage:", storedIsAuth, storedAuthData);
+    
+    // Listen to Firebase auth state changes for more secure verification
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (!currentUser) {
-        toast({
-          title: "Access Denied",
-          description: "Please log in to access the dashboard",
-          variant: "destructive",
-        });
-        navigate('/');
-      } else {
+      console.log("Auth state changed:", currentUser?.email);
+      setAuthChecked(true);
+      
+      if (currentUser) {
+        console.log("User is authenticated:", currentUser.email);
         setUser(currentUser);
+      } else {
+        console.log("No authenticated user found in Firebase");
+        // Check if we have stored auth data even though Firebase doesn't recognize it
+        if (storedIsAuth) {
+          console.log("Found stored auth data, treating as authenticated");
+          // We still have stored auth data, so we can show the dashboard
+          // This helps with page refreshes and temporary Firebase connection issues
+        } else {
+          console.log("No stored auth data, redirecting to login");
+          toast({
+            title: "Access Denied",
+            description: "Please log in to access the dashboard",
+            variant: "destructive",
+          });
+          navigate('/login');
+        }
       }
+      
       setLoading(false);
     });
 
@@ -48,7 +72,7 @@ const Dashboard = () => {
   const handleLogout = async () => {
     try {
       await logout();
-      navigate('/');
+      navigate('/login');
     } catch (error) {
       console.error("Logout error:", error);
       toast({
@@ -59,6 +83,7 @@ const Dashboard = () => {
     }
   };
 
+  // Always show dashboard during initial loading to prevent flashing
   if (loading) {
     return (
       <div className="min-h-screen bg-[#001050] flex items-center justify-center">
@@ -67,16 +92,22 @@ const Dashboard = () => {
     );
   }
 
-  if (!user) {
+  // For quick development access, bypass auth check when needed
+  // const bypassAuth = true; 
+  // if (!user && !bypassAuth) {
+  if (!user && !isAuthenticated()) {
     return (
       <div className="min-h-screen bg-[#001050] flex items-center justify-center flex-col">
         <p className="text-white text-lg mb-4">You must be logged in to view this page</p>
-        <Button onClick={() => navigate('/')} className="bg-[#C3FF44] text-[#001050] hover:bg-[#C3FF44]/90">
+        <Button onClick={() => navigate('/login')} className="bg-[#C3FF44] text-[#001050] hover:bg-[#C3FF44]/90">
           Go to Login
         </Button>
       </div>
     );
   }
+
+  // Get user data either from Firebase or localStorage
+  const userData = user || { email: getAuthStorage().email || 'User' };
 
   return (
     <div className="min-h-screen bg-[#001050] flex">
@@ -136,11 +167,11 @@ const Dashboard = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 rounded-full bg-gradient-to-r from-[#C3FF44] to-[#001050] flex items-center justify-center text-white">
-                {user?.email?.[0].toUpperCase() || 'U'}
+                {userData?.email?.[0]?.toUpperCase() || 'U'}
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-white truncate">
-                  {user?.email || 'User'}
+                  {userData?.email || 'User'}
                 </p>
               </div>
             </div>
