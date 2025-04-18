@@ -16,7 +16,7 @@ const Footer = () => {
               </span>
             </h3>
             <p className="max-w-md mt-0 text-sm">
-              Your AI energy advisor that helps you to understand and optimize your energy usage.
+              Your AI energy expert that helps you to understand and optimize your energy usage.
             </p>
             <p className="mt-1 text-[#C3FF44]">
               <a 
