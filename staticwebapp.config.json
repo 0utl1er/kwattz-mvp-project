@@ -7,7 +7,10 @@
     ".json": "text/json"
   },
   "globalHeaders": {
-    "content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'"
+    "content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'",
+    "cache-control": "must-revalidate, max-age=86400",
+    "x-frame-options": "DENY",
+    "x-content-type-options": "nosniff"
   },
   "routes": [
     {
@@ -15,5 +18,10 @@
       "methods": ["GET", "POST"],
       "rewrite": "/api/index"
     }
-  ]
+  ],
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/404.html"
+    }
+  }
 }
