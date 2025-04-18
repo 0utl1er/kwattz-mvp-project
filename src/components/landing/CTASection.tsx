@@ -22,7 +22,7 @@ const CTASection = () => {
             >
               <Link to="/login" className="flex items-center justify-center">
                 <GmailIcon className="mr-2 h-5 w-5" />
-                Continue with Gmail
+                Continue with Google
               </Link>
             </Button>
             
