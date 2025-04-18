@@ -7,25 +7,20 @@ const firebaseConfig = {
   apiKey: "AIzaSyBl0J04D0ncDNdMu3cV6QR9uTzp3VTgduI",
   authDomain: "kwattz-ai.firebaseapp.com",
   projectId: "kwattz-ai",
-  storageBucket: "kwattz-ai.firebasestorage.app",
+  storageBucket: "kwattz-ai.appspot.com",
   messagingSenderId: "1096282636985",
   appId: "1:1096282636985:web:34be43fa96ee72fd66d168",
   measurementId: "G-Q8Y8VG6TDH"
 };
 
-let app;
-let analytics;
-let auth;
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 try {
-  app = initializeApp(firebaseConfig);
-  analytics = getAnalytics(app);
-  auth = getAuth(app);
+  const analytics = getAnalytics(app);
 } catch (error) {
-  console.log("Firebase already initialized, using existing instance");
-  app = initializeApp();
-  analytics = getAnalytics(app);
-  auth = getAuth(app);
+  console.log("Analytics not initialized:", error);
 }
 
 export { auth };
