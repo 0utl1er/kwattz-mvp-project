@@ -22,6 +22,9 @@ import FAQ from "./pages/FAQ";
 import Terms from "./pages/Terms";
 import Investors from "./pages/Investors";
 import ChatBot from "./pages/ChatBot";
+import { Suspense } from 'react';
+import { Dashboard as LazyDashboard, Settings, Chat } from './utils/lazy';
+import { LoadingSpinner } from '@/components/ui/loading-spinner';
 
 const queryClient = new QueryClient();
 
@@ -32,27 +35,31 @@ const App = () => (
         <UnderDevelopmentBanner />
         <Toaster />
         <Sonner />
-        <Routes>
-          <Route path="/" element={<NewLanding />} />
-          <Route path="/chat" element={<ChatBot />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/kwattz-signup" element={<KWattzSignup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/questionnaire" element={<EnergyQuestionnaire />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/why-kwattz" element={<WhyKWattz />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/investors" element={<Investors />} />
-          <Route path="/solutions" element={<Solutions />} />
-          <Route path="/new" element={<NewLanding />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Suspense fallback={<LoadingSpinner />}>
+          <Routes>
+            <Route path="/" element={<NewLanding />} />
+            <Route path="/chat" element={<ChatBot />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/kwattz-signup" element={<KWattzSignup />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/questionnaire" element={<EnergyQuestionnaire />} />
+            <Route path="/dashboard" element={<LazyDashboard />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/why-kwattz" element={<WhyKWattz />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/investors" element={<Investors />} />
+            <Route path="/solutions" element={<Solutions />} />
+            <Route path="/new" element={<NewLanding />} />
+            <Route path="*" element={<NotFound />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/chat" element={<Chat />} />
+          </Routes>
+        </Suspense>
       </TooltipProvider>
     </QueryClientProvider>
   </BrowserRouter>
