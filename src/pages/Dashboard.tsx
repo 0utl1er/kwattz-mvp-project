@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { Button } from "@/components/ui/button";
@@ -24,16 +24,19 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 const Dashboard = () => {
   const navigate = useNavigate();
   const auth = getAuth();
+  const [user, setUser] = useState(auth.currentUser);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (!user) {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (!currentUser) {
         toast({
           title: "Access Denied",
           description: "Please log in to access the dashboard",
           variant: "destructive",
         });
         navigate('/');
+      } else {
+        setUser(currentUser);
       }
     });
 
@@ -53,6 +56,8 @@ const Dashboard = () => {
       });
     }
   };
+
+  if (!user) return null;
 
   return (
     <div className="min-h-screen bg-[#001050] flex">
@@ -112,11 +117,11 @@ const Dashboard = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 rounded-full bg-gradient-to-r from-[#C3FF44] to-[#001050] flex items-center justify-center text-white">
-                {auth.currentUser?.email?.[0].toUpperCase() || 'U'}
+                {user.email?.[0].toUpperCase() || 'U'}
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-white truncate">
-                  {auth.currentUser?.email || 'User'}
+                  {user.email || 'User'}
                 </p>
               </div>
             </div>
