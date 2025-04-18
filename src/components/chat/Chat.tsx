@@ -106,7 +106,7 @@ const Chat = () => {
       
       <div className="p-4 border-t border-[#C3FF44]/10 bg-[#001050]">
         <div className="flex gap-2 items-center relative">
-          <div className="flex-1 relative group">
+          <div className="flex-1 relative">
             <Input
               value={inputText}
               onChange={handleUserInput}
@@ -116,9 +116,6 @@ const Chat = () => {
               className="flex-1 bg-white/5 border-[#C3FF44]/10 text-[#d9d9d9] relative z-10"
               disabled={!isAuthorized}
             />
-            {/* Energy effect */}
-            <div className="absolute -inset-[1px] bg-gradient-to-r from-[#C3FF44]/0 via-[#C3FF44]/50 to-[#C3FF44]/0 rounded-lg opacity-0 group-hover:opacity-100 animate-pulse z-0" />
-            <div className="absolute -inset-[1px] bg-[#C3FF44]/10 rounded-lg blur-sm group-hover:blur-md transition-all duration-500 z-0" />
           </div>
           
           <Button
@@ -133,7 +130,6 @@ const Chat = () => {
             ) : (
               <ShieldAlert className="h-5 w-5" />
             )}
-            <div className="absolute -inset-[1px] bg-[#C3FF44]/20 rounded-lg blur-sm group-hover:blur-md transition-all duration-500 z-0" />
           </Button>
         </div>
       </div>
