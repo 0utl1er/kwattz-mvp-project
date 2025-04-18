@@ -2,6 +2,8 @@ import {
   GoogleAuthProvider, 
   OAuthProvider as FirebaseOAuthProvider,
   signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut
@@ -12,81 +14,112 @@ import { saveUserToAzureDB, getUserByEmailFromAzureDB } from '../azure-db';
 import { OAuthProvider } from './auth-types';
 import { toast } from "@/hooks/use-toast";
 
-export const initiateOAuthLogin = (provider: OAuthProvider) => {
+export const initiateOAuthLogin = async (provider: OAuthProvider) => {
   console.log(`Initiating ${provider} login...`);
   
-  const authProvider = provider === 'google' 
-    ? new GoogleAuthProvider()
-    : new FirebaseOAuthProvider('apple.com');
-  
-  // Add scopes for Google provider
-  if (provider === 'google') {
-    const googleProvider = authProvider as GoogleAuthProvider;
-    googleProvider.addScope('email');
-    googleProvider.addScope('profile');
-  }
+  try {
+    const authProvider = provider === 'google' 
+      ? new GoogleAuthProvider()
+      : new FirebaseOAuthProvider('apple.com');
+    
+    // Add scopes for Google provider
+    if (provider === 'google') {
+      const googleProvider = authProvider as GoogleAuthProvider;
+      googleProvider.addScope('email');
+      googleProvider.addScope('profile');
+      googleProvider.setCustomParameters({
+        prompt: 'select_account'
+      });
+    }
 
-  return signInWithPopup(auth, authProvider)
-    .then(async (result) => {
-      try {
-        console.log(`${provider} login successful:`, result.user.email);
-        
-        // Get the token
-        const token = await result.user.getIdToken();
-        console.log("User token obtained:", token ? "Yes" : "No");
-        
-        // Save user to database and local storage
-        await saveUserToDatabase(result);
-        
-        // Show success toast
-        toast({
-          title: "Login successful",
-          description: `You're now logged in with ${provider}!`,
-        });
-        
-        // Directly navigate to dashboard using window.location
-        console.log("Redirecting to dashboard...");
-        setTimeout(() => {
-          window.location.href = '/dashboard';
-        }, 500);
-        
-        return result;
-      } catch (error) {
-        console.error(`Error after successful ${provider} authentication:`, error);
-        toast({
-          title: "Authentication error",
-          description: "There was a problem completing your login. Please try again.",
-          variant: "destructive",
-        });
-        // Still try to redirect even if DB save fails
-        setTimeout(() => {
-          window.location.href = '/dashboard';
-        }, 500);
-        return result;
-      }
-    })
-    .catch((error) => {
-      console.error(`${provider} sign-in error:`, error);
-      let errorMessage = "Could not authenticate. Please try again.";
+    console.log(`Using popup for ${provider} authentication`);
+    const result = await signInWithPopup(auth, authProvider);
+    console.log(`${provider} login successful:`, result.user.email);
+    
+    try {
+      // Get the token
+      const token = await result.user.getIdToken();
+      console.log("User token obtained:", token ? "Yes (length: " + token.length + ")" : "No");
       
-      if (error.code === "auth/popup-closed-by-user") {
-        errorMessage = "You closed the login popup. Please try again.";
-      } else if (error.code === "auth/popup-blocked") {
-        errorMessage = "Popup was blocked by your browser. Please allow popups for this site.";
-      } else if (error.code === "auth/cancelled-popup-request") {
-        errorMessage = "Multiple popup requests were made. Please try again.";
-      } else if (error.code === "auth/network-request-failed") {
-        errorMessage = "Network error. Please check your connection and try again.";
-      }
+      // Save user to database and local storage
+      await saveUserToDatabase(result);
       
+      // Show success toast
       toast({
-        title: `${provider} login failed`,
-        description: errorMessage,
-        variant: "destructive",
+        title: "Login successful",
+        description: `You're now logged in with ${provider}!`,
       });
       
+      // Navigate to dashboard
+      console.log("Redirecting to dashboard...");
+      window.location.href = '/dashboard';
+      
+      return result;
+    } catch (error) {
+      console.error(`Error after successful ${provider} authentication:`, error);
+      toast({
+        title: "Authentication error",
+        description: "There was a problem completing your login. Please try again.",
+        variant: "destructive",
+      });
       throw error;
+    }
+  } catch (error: any) {
+    console.error(`${provider} sign-in error:`, error);
+    let errorMessage = "Could not authenticate. Please try again.";
+    
+    if (error.code === "auth/popup-closed-by-user") {
+      errorMessage = "You closed the login popup. Please try again.";
+    } else if (error.code === "auth/popup-blocked") {
+      errorMessage = "Popup was blocked by your browser. Please allow popups for this site.";
+      // Try redirect as fallback
+      try {
+        const authProvider = provider === 'google' 
+          ? new GoogleAuthProvider()
+          : new FirebaseOAuthProvider('apple.com');
+        console.log("Popup blocked, trying redirect method instead");
+        await signInWithRedirect(auth, authProvider);
+        return; // This will redirect, so we won't execute the code after this
+      } catch (redirectError) {
+        console.error("Redirect also failed:", redirectError);
+        errorMessage = "Both popup and redirect auth methods failed. Please check your browser settings.";
+      }
+    } else if (error.code === "auth/cancelled-popup-request") {
+      errorMessage = "Multiple popup requests were made. Please try again.";
+    } else if (error.code === "auth/network-request-failed") {
+      errorMessage = "Network error. Please check your connection and try again.";
+    } else if (error.code === "auth/unauthorized-domain") {
+      errorMessage = "This domain is not authorized for authentication. Please contact support.";
+      console.error("Unauthorized domain error. Current domain:", window.location.hostname);
+    }
+    
+    toast({
+      title: `${provider} login failed`,
+      description: errorMessage,
+      variant: "destructive",
     });
+    
+    throw error;
+  }
+};
+
+export const checkRedirectResult = async () => {
+  try {
+    const result = await getRedirectResult(auth);
+    if (result) {
+      console.log("Redirect result received:", result.user.email);
+      await saveUserToDatabase(result);
+      
+      toast({
+        title: "Login successful",
+        description: "You're now logged in!",
+      });
+      
+      window.location.href = '/dashboard';
+    }
+  } catch (error) {
+    console.error("Error checking redirect result:", error);
+  }
 };
 
 export const signInWithEmail = (email: string, password: string) => {
@@ -207,7 +240,7 @@ export const saveUserToDatabase = async (userCredential: any) => {
     // Always save to local storage for authentication
     console.log("Saving authentication data to local storage");
     const token = await user.getIdToken();
-    console.log("Token obtained:", token ? "Yes (length: " + token.length + ")" : "No");
+    console.log("Token obtained for storage:", token ? "Yes (length: " + token.length + ")" : "No");
     
     await setAuthStorage({
       token: token,

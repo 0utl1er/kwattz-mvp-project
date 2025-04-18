@@ -1,6 +1,6 @@
 
 import { initializeApp } from 'firebase/app';
-import { getAuth, connectAuthEmulator } from 'firebase/auth';
+import { getAuth, connectAuthEmulator, inMemoryPersistence, setPersistence } from 'firebase/auth';
 import { getAnalytics } from "firebase/analytics";
 
 // Firebase configuration
@@ -19,6 +19,15 @@ console.log("Initializing Firebase with configuration:", Object.keys(firebaseCon
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+// Set persistence to ensure tokens are properly stored
+setPersistence(auth, inMemoryPersistence)
+  .then(() => {
+    console.log("Firebase persistence set to inMemoryPersistence");
+  })
+  .catch((error) => {
+    console.error("Error setting persistence:", error);
+  });
+
 // For testing in development, uncomment to use Firebase Auth Emulator
 // if (window.location.hostname === "localhost") {
 //   connectAuthEmulator(auth, "http://127.0.0.1:9099");
@@ -34,8 +43,5 @@ try {
 }
 
 console.log("Firebase Auth initialized successfully");
-
-// Update auth persistence settings if needed
-// For example: setPersistence(auth, browserLocalPersistence);
 
 export { auth };

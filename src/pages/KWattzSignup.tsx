@@ -1,15 +1,15 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { toast } from "@/hooks/use-toast";
-import { initiateOAuthLogin, signUpWithEmail } from "@/utils/auth";
+import { initiateOAuthLogin, signUpWithEmail, checkRedirectResult } from "@/utils/auth";
 
 const signUpSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
@@ -29,7 +29,11 @@ const KWattzSignup = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [isAppleLoading, setIsAppleLoading] = useState(false);
-  const navigate = useNavigate();
+  
+  // Check for redirect result on mount
+  useEffect(() => {
+    checkRedirectResult().catch(console.error);
+  }, []);
   
   const form = useForm<SignUpFormValues>({
     resolver: zodResolver(signUpSchema),
@@ -84,7 +88,7 @@ const KWattzSignup = () => {
     setIsGoogleLoading(true);
     
     try {
-      console.log("Initiating Google OAuth login");
+      console.log("Initiating Google OAuth login from signup page");
       await initiateOAuthLogin('google');
       
       // The redirect is now handled in the initiateOAuthLogin function
@@ -249,7 +253,12 @@ const KWattzSignup = () => {
                   style={{ backgroundColor: '#C3FF44' }}
                   disabled={isLoading}
                 >
-                  {isLoading ? "Creating Account..." : "Create My kWattz Account"}
+                  {isLoading ? (
+                    <div className="flex items-center justify-center">
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Creating Account...
+                    </div>
+                  ) : "Create My kWattz Account"}
                 </Button>
 
                 <div className="relative my-4">

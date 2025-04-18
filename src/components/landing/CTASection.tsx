@@ -1,14 +1,12 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Mail } from 'lucide-react';
 import { initiateOAuthLogin } from "@/utils/auth";
 import { toast } from "@/hooks/use-toast";
 
 const CTASection = () => {
-  const navigate = useNavigate();
-
   const handleGoogleLogin = async () => {
     try {
       console.log("Initiating Google login from CTA section");

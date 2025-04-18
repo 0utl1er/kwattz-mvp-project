@@ -6,17 +6,27 @@ export const setAuthStorage = async (data: AuthStorageData) => {
     email: data.email,
     userId: data.userId,
     provider: data.provider,
-    hasToken: !!data.token
+    hasToken: !!data.token,
+    tokenLength: data.token ? data.token.length : 0
   });
   
   try {
+    // First clear any existing data to prevent conflicts
+    await clearAuthStorage();
+    
+    // Then set the new values
     localStorage.setItem('authToken', data.token);
     localStorage.setItem('userEmail', data.email);
     localStorage.setItem('userId', data.userId);
     localStorage.setItem('authProvider', data.provider);
     localStorage.setItem('lastLogin', new Date().toISOString());
     
-    console.log("Auth storage set successfully");
+    // Verify the data was set correctly
+    const token = localStorage.getItem('authToken');
+    console.log("Auth storage set successfully", {
+      tokenStored: !!token,
+      tokenLength: token ? token.length : 0
+    });
     return true;
   } catch (error) {
     console.error("Error setting auth storage:", error);
@@ -55,6 +65,7 @@ export const getAuthStorage = () => {
       userId: storage.userId,
       provider: storage.provider,
       hasToken: !!storage.token,
+      tokenLength: storage.token ? storage.token.length : 0,
       lastLogin: storage.lastLogin
     });
     
@@ -75,7 +86,10 @@ export const isAuthenticated = (): boolean => {
   try {
     const token = localStorage.getItem('authToken');
     const isAuth = !!token;
-    console.log("Is authenticated check:", isAuth);
+    console.log("Is authenticated check:", {
+      isAuth,
+      tokenLength: token ? token.length : 0
+    });
     
     if (isAuth) {
       // Check if token exists and has some length
