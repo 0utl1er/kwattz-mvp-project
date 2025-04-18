@@ -1,6 +1,6 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { BadgeDollarSign, BarChart3, LightbulbIcon } from "lucide-react";
 
 const Header = () => {
   const scrollToChat = () => {
@@ -30,39 +30,10 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <div className="flex-1 flex justify-center">
-          <div className="w-full max-w-md backdrop-blur-sm bg-white/5 rounded-2xl p-6 border border-[#C3FF44]/10">
-            <div className="bg-[#C3FF44]/10 rounded-xl p-4 mb-4">
-              <h3 className="text-xl font-semibold" style={{ color: '#C3FF44' }}>Your Energy Advisor</h3>
-              <p className="text-white">
-                Upload your electric bill and our AI will analyze your usage patterns and provide personalized recommendations.
-              </p>
-            </div>
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="bg-[#C3FF44]/10 p-2 rounded-full">
-                  <LightbulbIcon className="h-5 w-5" style={{ color: '#C3FF44' }} />
-                </div>
-                <p className="text-white">Understand your energy consumption</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="bg-[#C3FF44]/10 p-2 rounded-full">
-                  <BadgeDollarSign className="h-5 w-5" style={{ color: '#C3FF44' }} />
-                </div>
-                <p className="text-white">Save money on your electric bills</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="bg-[#C3FF44]/10 p-2 rounded-full">
-                  <BarChart3 className="h-5 w-5" style={{ color: '#C3FF44' }} />
-                </div>
-                <p className="text-white">Track your progress over time</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </header>
   );
 };
 
 export default Header;
+
