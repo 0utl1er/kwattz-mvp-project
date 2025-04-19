@@ -1,40 +1,34 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Mail } from 'lucide-react';
-import { initiateOAuthLogin } from "@/utils/auth";
 import { toast } from "@/hooks/use-toast";
 
 const CTASection = () => {
-  const handleGoogleLogin = async () => {
-    try {
-      console.log("Initiating Google login from CTA section");
-      await initiateOAuthLogin('google');
-      // Redirect happens in initiateOAuthLogin function
-    } catch (error: any) {
-      console.error("Google login error in CTA section:", error);
-      toast({
-        title: "Login failed",
-        description: "Could not sign in with Google. Please try again.",
-        variant: "destructive",
-      });
-    }
+  const handleClick = () => {
+    toast({
+      title: "Site Locked",
+      description: "The site is currently under maintenance. Please check back later.",
+      variant: "destructive",
+    });
   };
 
   return (
     <section id="auth-section" className="py-16 bg-[#091544] border-y border-white/10">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#C3FF44' }}>Ready to Start Saving?</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#C3FF44' }}>Site Under Maintenance</h2>
         <p className="text-xl mb-8 max-w-2xl mx-auto text-white">
-          Join Us!
+          We are currently performing maintenance. Please check back later.
         </p>
         
         <div className="max-w-md mx-auto bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
           <div className="space-y-4">
             <Button 
               variant="outline" 
-              className="w-full py-6 text-white border-white/20 bg-white/5 hover:bg-white/10 hover:border-[#C3FF44]/50 transition-all duration-200"
-              onClick={handleGoogleLogin}
+              className="w-full py-6 text-white/50 border-white/20 bg-white/5 cursor-not-allowed opacity-50"
+              disabled={true}
+              onClick={handleClick}
             >
               <div className="flex items-center justify-center">
                 <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
@@ -58,25 +52,19 @@ const CTASection = () => {
             
             <Button 
               variant="outline"
-              className="w-full py-6 text-white border-white/20 bg-white/5 hover:bg-white/10 hover:border-[#C3FF44]/50 transition-all duration-200"
-              asChild
+              className="w-full py-6 text-white/50 border-white/20 bg-white/5 cursor-not-allowed opacity-50"
+              disabled={true}
+              onClick={handleClick}
             >
-              <Link to="/kwattz-signup" className="flex items-center justify-center">
+              <div className="flex items-center justify-center">
                 <Mail className="mr-2 h-5 w-5" />
                 Continue with Email
-              </Link>
+              </div>
             </Button>
           </div>
           
           <p className="mt-6 text-sm text-white/60 px-2">
-            By continuing, you agree to kWattz's{' '}
-            <Link to="/privacy-policy" className="text-[#C3FF44] hover:text-[#C3FF44]/80 underline">
-              Privacy Policy
-            </Link>{' '}
-            and{' '}
-            <Link to="/terms" className="text-[#C3FF44] hover:text-[#C3FF44]/80 underline">
-              Terms & Conditions
-            </Link>
+            Site is currently under maintenance
           </p>
         </div>
       </div>

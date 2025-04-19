@@ -14,21 +14,18 @@ interface ChatInputProps {
 export function ChatInput({ value, onChange, onSend, disabled }: ChatInputProps) {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (value.trim() && !disabled) {
-      onSend();
-    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="flex gap-2">
       <Input
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
+        value="Site is currently under maintenance"
+        onChange={() => {}}
         placeholder="Type your message..."
-        className="flex-1"
-        disabled={disabled}
+        className="flex-1 bg-gray-100"
+        disabled={true}
       />
-      <Button type="submit" disabled={disabled || !value.trim()}>
+      <Button type="submit" disabled={true}>
         <Send className="h-4 w-4" />
       </Button>
     </form>
