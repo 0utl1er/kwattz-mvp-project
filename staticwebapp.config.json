@@ -7,40 +7,25 @@
     ".json": "text/json"
   },
   "globalHeaders": {
-    // **Keep your improved security headers here** (CSP without unsafe-inline/eval, HSTS, etc.)
-    "content-security-policy": "default-src 'self' https: your-api-endpoint.azurewebsites.net; connect-src 'self' your-api-endpoint.azurewebsites.net; object-src 'none'; script-src 'self'; style-src 'self'", // Example of a better CSP
-    "cache-control": "no-cache, no-store, must-revalidate", // Good for dev lockdown
+    "content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'",
+    "cache-control": "must-revalidate, max-age=86400",
     "x-frame-options": "DENY",
-    "x-content-type-options": "nosniff",
-    "Strict-Transport-Security": "max-age=31536000; includeSubDomains" // Add this!
-    // Add Referrer-Policy etc.
+    "x-content-type-options": "nosniff"
   },
   "routes": [
-    {
-       "route": "/login", // Your login/landing page (if needed before auth)
-       "allowedRoles": ["anonymous", "authenticated"] // Allow anyone here
-    },
     {
       "route": "/api/*",
       "methods": ["GET", "POST"],
       "rewrite": "/api/index"
-      // **Important:** Enforce role check INSIDE your API function for sensitive operations
     },
     {
-      "route": "/*", // Rest of the site
-      "allowedRoles": ["investor"] // ONLY allow users with the 'investor' role
+      "route": "/*",
+      "allowedRoles": ["authenticated"]
     }
   ],
   "responseOverrides": {
     "404": {
       "rewrite": "/404.html"
-    },
-    "403": { // Add a custom page for Forbidden access
-       "rewrite": "/403.html" // Explain they need an invite/specific role
-    },
-     "401": { // Add a custom page for Unauthorized (not logged in)
-       "rewrite": "/.auth/login/github" // Example: Redirect to GitHub login
-       // Or rewrite to a custom login page explaining how to request access
-     }
+    }
   }
 }
