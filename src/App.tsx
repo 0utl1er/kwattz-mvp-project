@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -10,6 +9,7 @@ import NewLanding from "./pages/NewLanding";
 import SignUp from "./pages/SignUp";
 import KWattzSignup from "./pages/KWattzSignup";
 import Login from "./pages/Login";
+import EnergyQuestionnaire from "./pages/EnergyQuestionnaire";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -25,39 +25,35 @@ import ChatBot from "./pages/ChatBot";
 import { Suspense } from 'react';
 import { Settings, Chat } from './utils/lazy';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
-import { ProtectedRoute } from './components/layout/ProtectedRoute';
+import ProtectedRoute from './components/ProtectedRoute';
 import Landing from './pages/Landing';
-import { AuthProvider } from './contexts/auth';
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <BrowserRouter>
-    <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <UnderDevelopmentBanner />
-          <Toaster />
-          <Sonner />
-          <Suspense fallback={<LoadingSpinner />}>
-            <Routes>
-              <Route path="/" element={<Landing />} />
-              <Route path="/dashboard" element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              } />
-              <Route path="/settings" element={
-                <ProtectedRoute>
-                  <Settings />
-                </ProtectedRoute>
-              } />
-              <Route path="/login" element={<Login />} />
-            </Routes>
-          </Suspense>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <UnderDevelopmentBanner />
+        <Toaster />
+        <Sonner />
+        <Suspense fallback={<LoadingSpinner />}>
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/dashboard" element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/settings" element={
+              <ProtectedRoute>
+                <Settings />
+              </ProtectedRoute>
+            } />
+          </Routes>
+        </Suspense>
+      </TooltipProvider>
+    </QueryClientProvider>
   </BrowserRouter>
 );
 
