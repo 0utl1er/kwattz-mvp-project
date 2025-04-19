@@ -10,7 +10,7 @@ import { Suspense } from 'react';
 import { Settings } from './utils/lazy';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import ProtectedRoute from "./components/ProtectedRoute";
-import Landing from './pages/Landing';
+import Landing from "./pages/Landing";
 
 const queryClient = new QueryClient();
 
