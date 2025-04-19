@@ -25,7 +25,7 @@ import ChatBot from "./pages/ChatBot";
 import { Suspense } from 'react';
 import { Settings, Chat } from './utils/lazy';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './components/layout/ProtectedRoute';
 import Landing from './pages/Landing';
 
 const queryClient = new QueryClient();
