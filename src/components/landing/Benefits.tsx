@@ -6,18 +6,18 @@ const Benefits = () => {
   const benefits = [
     {
       icon: <Calculator className="h-8 w-8" />,
-      title: "AI-Powered Analysis",
-      description: "Our AI technology reads and analyzes your electric bills to identify saving opportunities."
+      title: "Start",
+      description: "Sing in to get started"
     },
     {
       icon: <LightbulbIcon className="h-8 w-8" />,
-      title: "Personalized Education",
+      title: "Upload your electric bill",
       description: "Learn how electric bills work and receive tailored advice for your specific situation."
     },
     {
       icon: <Shield className="h-8 w-8" />,
-      title: "Ongoing Monitoring",
-      description: "Subscribe to have your energy usage continuously monitored and receive regular insights."
+      title: "...... ",
+      description: "......"
     }
   ];
 
