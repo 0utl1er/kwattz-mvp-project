@@ -8,4 +8,4 @@ Access to the codebase is available **only to approved parties** (e.g., investor
 
 If you're an investor or partner and would like access, please contact us at info@kwattz.com
 
-All rights reserved © kWattz, 2025.
+All rights reserved © kWattz⚡2025 
