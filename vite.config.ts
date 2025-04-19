@@ -1,3 +1,4 @@
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
@@ -13,5 +14,8 @@ export default defineConfig({
     sourcemap: true,
     minify: 'terser',
     target: 'es2020',
+  },
+  server: {
+    port: 8080
   }
 });
