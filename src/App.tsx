@@ -11,33 +11,36 @@ import { Settings } from './utils/lazy';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import ProtectedRoute from "./components/ProtectedRoute";
 import Landing from "./pages/Landing";
+import { AuthProvider } from "./contexts/auth";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <BrowserRouter>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <UnderDevelopmentBanner />
-        <Toaster />
-        <Sonner />
-        <Suspense fallback={<LoadingSpinner />}>
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/dashboard" element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            } />
-            <Route path="/settings" element={
-              <ProtectedRoute>
-                <Settings />
-              </ProtectedRoute>
-            } />
-          </Routes>
-        </Suspense>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <AuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <UnderDevelopmentBanner />
+          <Toaster />
+          <Sonner />
+          <Suspense fallback={<LoadingSpinner />}>
+            <Routes>
+              <Route path="/" element={<Landing />} />
+              <Route path="/dashboard" element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/settings" element={
+                <ProtectedRoute>
+                  <Settings />
+                </ProtectedRoute>
+              } />
+            </Routes>
+          </Suspense>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </AuthProvider>
   </BrowserRouter>
 );
 

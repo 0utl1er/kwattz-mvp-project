@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/auth';
 import { Button } from '@/components/ui/button';
+import { initiateOAuthLogin } from '@/utils/auth';
 
 export function SignIn() {
   const { user } = useAuth();
@@ -12,13 +13,10 @@ export function SignIn() {
   const handleSignIn = async () => {
     try {
       setIsLoading(true);
-      // Note: signIn functionality would normally be here
-      // but it's not available in the current auth context
-      // Navigation is handled by AuthProvider
+      await initiateOAuthLogin('google');
+      // Navigation is handled by AuthProvider after successful sign-in
     } catch (error) {
       console.error('Sign in failed:', error);
-      // Handle error appropriately
-    } finally {
       setIsLoading(false);
     }
   };

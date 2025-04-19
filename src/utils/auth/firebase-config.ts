@@ -1,23 +1,9 @@
 
-import { initializeApp } from 'firebase/app';
-import { getAuth, connectAuthEmulator, inMemoryPersistence, setPersistence } from 'firebase/auth';
-import { getAnalytics } from "firebase/analytics";
+// Import the auth directly from our main firebaseConfig.ts file
+import { auth } from '../../lib/firebaseConfig';
+import { setPersistence, inMemoryPersistence } from 'firebase/auth';
 
-// Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyBl0J04D0ncDNdMu3cV6QR9uTzp3VTgduI",
-  authDomain: "kwattz-ai.firebaseapp.com",
-  projectId: "kwattz-ai",
-  storageBucket: "kwattz-ai.appspot.com",
-  messagingSenderId: "1096282636985",
-  appId: "1:1096282636985:web:34be43fa96ee72fd66d168",
-  measurementId: "G-Q8Y8VG6TDH"
-};
-
-// Initialize Firebase
-console.log("Initializing Firebase with configuration:", Object.keys(firebaseConfig).join(', '));
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+console.log("Using already initialized Firebase instance");
 
 // Set persistence to ensure tokens are properly stored
 setPersistence(auth, inMemoryPersistence)
@@ -33,15 +19,5 @@ setPersistence(auth, inMemoryPersistence)
 //   connectAuthEmulator(auth, "http://127.0.0.1:9099");
 //   console.log("Using Firebase Auth Emulator");
 // }
-
-// Initialize analytics if possible
-try {
-  const analytics = getAnalytics(app);
-  console.log("Firebase Analytics initialized successfully");
-} catch (error) {
-  console.log("Analytics not initialized. This may be expected in some environments:", error);
-}
-
-console.log("Firebase Auth initialized successfully");
 
 export { auth };
