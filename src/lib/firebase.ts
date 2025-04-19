@@ -1,8 +1,7 @@
 
-import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, setDoc, serverTimestamp } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from './firebaseConfig';
+import { auth } from './firebaseConfig';
 
 // Update user profile without questionnaire
 export async function updateUserProfile(userId: string, data: UserProfile) {
@@ -20,3 +19,5 @@ interface UserProfile {
   photoURL?: string;
   [key: string]: any;
 }
+
+export { auth };
