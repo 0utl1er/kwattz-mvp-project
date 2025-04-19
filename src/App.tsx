@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -26,6 +25,8 @@ import ChatBot from "./pages/ChatBot";
 import { Suspense } from 'react';
 import { Settings, Chat } from './utils/lazy';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
+import ProtectedRoute from './components/ProtectedRoute';
+import Landing from './pages/Landing';
 
 const queryClient = new QueryClient();
 
@@ -38,27 +39,17 @@ const App = () => (
         <Sonner />
         <Suspense fallback={<LoadingSpinner />}>
           <Routes>
-            <Route path="/" element={<NewLanding />} />
-            <Route path="/chat" element={<ChatBot />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/kwattz-signup" element={<KWattzSignup />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/questionnaire" element={<EnergyQuestionnaire />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/why-kwattz" element={<WhyKWattz />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/investors" element={<Investors />} />
-            <Route path="/solutions" element={<Solutions />} />
-            <Route path="/new" element={<NewLanding />} />
-            <Route path="*" element={<NotFound />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/chat" element={<Chat />} />
+            <Route path="/" element={<Landing />} />
+            <Route path="/dashboard" element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/settings" element={
+              <ProtectedRoute>
+                <Settings />
+              </ProtectedRoute>
+            } />
           </Routes>
         </Suspense>
       </TooltipProvider>
